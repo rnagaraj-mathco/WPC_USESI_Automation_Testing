@@ -66,7 +66,7 @@ public class CPA_BranchCustomerSelectionSteps {
 	@Then("the user selects customers from the plot and dropdown, clicks Save Customers, and is redirected to the Peer Selection screen")
 	public void the_user_selects_customers_from_the_plot_and_dropdown_clicks_save_customers_and_is_redirected_to_the_peer_selection_screen()throws IOException, InterruptedException {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		cpa_branchCustomerSelections.CustomerSelectionPlot();
 	}
 	
 
