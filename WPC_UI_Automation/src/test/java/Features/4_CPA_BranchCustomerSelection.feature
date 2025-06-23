@@ -2,7 +2,7 @@
 Feature: Lands on the Branch/Customer Selection where the user should be able to select the branch(s) based on the metric and 
          other filters from the geographical map and select customer for the peer selection
          
-#	@BranchSelectionMap
+  #Branch Selection - Map
   #Scenario: Verify that the user can select a branch from the geographical map
     #Given the user is on the Branch/Customer Selection screen
     #Then the user clicks on filters and selects options based on requirements
@@ -12,7 +12,7 @@ Feature: Lands on the Branch/Customer Selection where the user should be able to
     #And the user clicks the Analyze button, which redirects to the Customer Selection dialog screen
     #Then the user selects customers from the plot and dropdown, clicks Save Customers, and is redirected to the Peer Selection screen
 
-  @BranchSelectionDropdown
+  #Branch Selection Dropdown
   Scenario: Verify that the user can select a branch using the Select Branch dropdown
     Given the user is on the Branch/Customer Selection screen
     #Then the user clicks on filters and selects options based on requirements

@@ -1,12 +1,12 @@
 @CustomerPeerAnalysis_Overview
 Feature: Land on the Overview screen of the Customer Peer Analysis and perform actions on starting new peer analysis button, saved customer peer selections and saved sensitivity simulation scenario table
 
-  @StartNewPeerAnalysisButton
+  #Start New Peer Analysis Button
   Scenario: Verify whether the user is able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection sub tab under the Selections tab
     Given user is on the Overview page of the Customer Peer Analysis
     Then user should be able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection sub tab
     
-  @SavedCustomerPeerSelections
+  #Saved Customer Peer Selections
 	Scenario: Verify that the user can interact with the Saved Customer Peer Selection table and perform various actions
 	  Given user is on the Overview page of the Customer Peer Analysis
 	  Then user should be able to search for a keyword in the Saved Customer Peer Selection table
@@ -18,7 +18,7 @@ Feature: Land on the Overview screen of the Customer Peer Analysis and perform a
 	  When user clicks the download icon of a record in the Saved Customer Peer Selection table, the corresponding Peer Selection should be downloaded as an Excel file
 #	  Then user should be able to interact with the Rows per page dropdown of the Saved Customer Peer Selection table and select a value, which updates the visible records
 
-	@SavedSensitivitySimulationScenario
+  #Saved Sensitivity Simulation Scenario
 	Scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
 	  Given user is on the Overview page of the Customer Peer Analysis
 	  Then user should be able to search for a keyword in the Saved Sensitivity Simulation Scenario table

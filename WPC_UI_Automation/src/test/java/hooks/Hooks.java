@@ -24,7 +24,7 @@ public class Hooks {
         driver = DriverFactory.getDriver();
         pageManager = new PageObjectManager(driver);
 
-        if (scenario.getSourceTagNames().contains("@CustomerPeerAnalysis_PeerSelection")) { //add @Dashboard,@CustomerPeerAnalysis_Overview,@CustomerPeerAnalysis_BranchCustomerSelection,@CustomerPeerAnalysis_PeerSelection to run that code
+        if (scenario.getSourceTagNames().contains("@Dashboard")) { //add @Dashboard,@CustomerPeerAnalysis_Overview,@CustomerPeerAnalysis_BranchCustomerSelection,@CustomerPeerAnalysis_PeerSelection to run that code
             // Auto-login only for Dashboard, CustomerPeerAnalysisOverview scenarios
             LoginPage loginPage = pageManager.getLoginPage();
             loginPage.navigateTo();
