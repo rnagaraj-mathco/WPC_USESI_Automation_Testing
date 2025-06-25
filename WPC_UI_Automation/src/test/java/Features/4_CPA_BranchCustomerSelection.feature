@@ -1,11 +1,11 @@
 @CustomerPeerAnalysis_BranchCustomerSelection
-Feature: Lands on the Branch/Customer Selection where the user should be able to select the branch(s) based on the metric and 
+Feature: Lands on the Branch/Customer Selection where the user should be able to select the branch(es) based on the metric and 
          other filters from the geographical map and select customer for the peer selection
          
   #Branch Selection - Map
   #Scenario: Verify that the user can select a branch from the geographical map
     #Given the user is on the Branch/Customer Selection screen
-    #Then the user clicks on filters and selects options based on requirements
+    #Then the user clicks on Filters and selects options based on requirements
     #And the user selects a metric from the metrics dropdown
     #And the user should be able to zoom in and out of the map using the + and - icons on the zoom slider
     #When the map is updated, the user clicks on bubbles to highlight branches on the geographical map

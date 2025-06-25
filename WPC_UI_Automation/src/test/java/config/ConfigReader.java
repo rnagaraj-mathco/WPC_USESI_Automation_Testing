@@ -5,30 +5,35 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    private static Properties properties = new Properties();
+	private static Properties properties = new Properties();
 
-    static {
-        try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
-            properties.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String getAppUrl() {
-        return properties.getProperty("baseUrl");
-    }
-
-    public static String getBrowser() {
-        return properties.getProperty("browser");
-    }
-    
-    public static String dashboardUrl() {
-		return properties.getProperty("dashboardUrl");
+	static {
+		try (FileInputStream fis = new FileInputStream("src/test/resources/config.properties")) {
+			properties.load(fis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-    public static String getProperty(String key) {
-        return properties.getProperty(key);
-    }
+
+	public static String getAppUrl() {
+		return properties.getProperty("baseUrl");
+	}
+
+	public static String getBrowser() {
+		return properties.getProperty("browser");
+	}
+
+	public static String getUserName() {
+		return properties.getProperty("logged.in.username");
+	}
+
+	public static String homeScreenUrl() {
+		return properties.getProperty("homeScreenUrl");
+	}
+
+	public static String getProperty(String key) {
+		return properties.getProperty(key);
+	}
 
 	public static String customerOverview() {
 		return properties.getProperty("customerOverview");
@@ -53,11 +58,9 @@ public class ConfigReader {
 	public static String cpa_peerSelection() {
 		return properties.getProperty("cpa_peerSelection");
 	}
+
 	public static String cpa_ScenarioImapct() {
 		return properties.getProperty("cpa_ScenarioImapct");
 	}
-	
-
-	
 
 }
