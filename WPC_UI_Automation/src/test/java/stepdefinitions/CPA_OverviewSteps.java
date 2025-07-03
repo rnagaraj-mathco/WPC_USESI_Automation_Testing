@@ -92,9 +92,10 @@ public class CPA_OverviewSteps {
 	// Saved Customer Peer Selections - Search and Select the Peer Selection record
 	// from table
 	@Then("the user should be able to search for a record and select it in the Saved Customer Peer Selection table")
-	public void the_user_should_be_able_to_search_for_a_record_and_select_it_in_the_saved_customer_peer_selection_table() {
+	public void the_user_should_be_able_to_search_for_a_record_and_select_it_in_the_saved_customer_peer_selection_table()
+			throws IOException, InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		cpa_overviewPage.searchForRecord_SCP();
 	}
 
 	// Saved Sensitivity Simulation Scenario - Selecting a Sensitivity Simulation
@@ -152,9 +153,10 @@ public class CPA_OverviewSteps {
 	// Saved Sensitivity Simulation Scenario - Search and Select the Peer Selection
 	// record --- Pending
 	@Then("the user should be able to search for a record and select it in the Saved Sensitivity Simulation Scenario table")
-	public void the_user_should_be_able_to_search_for_a_record_and_select_it_in_the_saved_sensitivity_simulation_scenario_table() {
+	public void the_user_should_be_able_to_search_for_a_record_and_select_it_in_the_saved_sensitivity_simulation_scenario_table()
+			throws IOException, InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		cpa_overviewPage.searchForRecord_SSS();
 	}
 
 }

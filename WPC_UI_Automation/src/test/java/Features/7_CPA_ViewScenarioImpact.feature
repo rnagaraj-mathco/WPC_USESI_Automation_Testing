@@ -18,3 +18,7 @@ Feature: Land on the View Scenario Impact Screen where the user should be able t
    
 # Ask Ranjith about the chart name, validating the KPI values and Chart Values. Or WHat all the possible 
 # validation can be done in this screen (Name we can validate)
+
+# the metrics above the profit (post tier 1) is Total tier 1
+# the metrics b/w profit (post tier 1) to profit (post tier 1-2) is of the Cost to serve
+# the metrics b/w Tier 3 costs - Enterprise profit is of Enterprise profit
