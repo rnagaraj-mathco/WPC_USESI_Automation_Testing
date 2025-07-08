@@ -24,7 +24,7 @@ public class HomePage {
 	// Gets the Driver Status
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // ✅ wait initialized once
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(100)); // ✅ wait initialized once
 	}
 
 	private WebElement waitForElement(By locator) {

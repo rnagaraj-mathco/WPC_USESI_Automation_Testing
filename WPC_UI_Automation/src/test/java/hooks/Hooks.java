@@ -23,7 +23,7 @@ public class Hooks {
 		driver = DriverFactory.getDriver();
 		pageManager = new PageObjectManager(driver);
 
-		if (scenario.getSourceTagNames().contains("@CustomerPeerAnalysis_PeerSelection")) { // add
+		if (scenario.getSourceTagNames().contains("@CustomerPeerAnalysis_BranchCustomerSelection")) { // add
 			// @Home,@CustomerPeerAnalysis_Overview,@CustomerPeerAnalysis_BranchCustomerSelection,@CustomerPeerAnalysis_PeerSelection
 			// to run that code
 			// Auto-login only for Dashboard, CustomerPeerAnalysisOverview scenarios
@@ -32,6 +32,15 @@ public class Hooks {
 			loginPage.loginTo();
 			loginPage.loginBtn();
 		}
+//		if (scenario.getSourceTagNames().stream()
+//				.anyMatch(tag -> tag.equalsIgnoreCase("@Home") || tag.equalsIgnoreCase("@CustomerPeerAnalysis_Overview")
+//						|| tag.equalsIgnoreCase("@CustomerPeerAnalysis_BranchCustomerSelection")
+//						|| tag.equalsIgnoreCase("@CustomerPeerAnalysis_PeerSelection"))) {
+//			LoginPage loginPage = pageManager.getLoginPage();
+//			loginPage.navigateTo();
+//			loginPage.loginTo();
+//			loginPage.loginBtn();
+//		}
 
 	}
 

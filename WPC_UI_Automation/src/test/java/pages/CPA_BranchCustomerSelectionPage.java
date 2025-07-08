@@ -22,11 +22,13 @@ import config.ConfigReader;
 public class CPA_BranchCustomerSelectionPage {
 	WebDriver driver;
 	WebDriverWait wait;
+	Actions actions;
 
 	// gets driver status
 	public CPA_BranchCustomerSelectionPage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(100)); // ✅ wait initialized once
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // ✅ wait initialized once
+		actions = new Actions(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -50,16 +52,20 @@ public class CPA_BranchCustomerSelectionPage {
 			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div/fieldset/div/label[3]/span[1]/span[1]/input");
 	// Filters- Regions - 02 options
 	By CPA_Filters_Regions_12 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[1]/label[8]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[8]/span[2]/div[1]/span[1]");
 	// Filters- Order Channel (Branch, CDC)
 	By CPA_Filters_OrderChannel = By.xpath(
 			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[1]/div/div[1]/div/div/div/div/div[1]/div/div[8]/div");
 	// Filters - Order Channel - All option as it un-checks all other options
 	By CPA_Filters_OrderChannel_Branch_All = By.xpath(
-			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div/fieldset/div/label[1]/span[1]/span[1]/input");
-	// Fitler- Order Channel - Branch
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[1]/span[2]/div[1]/span[1]");
+	// Filter- Order Channel - Branch
 	By CPA_Filters_OrderChannel_Branch = By.xpath(
-			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div/fieldset/div/label[2]/span[1]/span[1]/input");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[2]/span[2]/div[1]/span[1]");
+	// Filters - Apply button
+	By CPA_Filters_ApplyBtn = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]/span[1]");
+
 	// Select Metric - Dropdown
 	By CPA_SelectMetric_Dropdown = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]");
@@ -138,6 +144,13 @@ public class CPA_BranchCustomerSelectionPage {
 
 	// This is to click on Filters and select options as per needed
 	public void FiltersTo() throws IOException, InterruptedException {
+		// Get initial map bubble count BEFORE applying filters
+		List<WebElement> bubblesBeforeFilter = driver.findElements(By.xpath(
+				"//*[name()='g' and contains(@class, 'scattergeo')]//*[name()='path' and contains(@class, 'point') and not(@display='none')]"));
+		int initialBubbleCount = bubblesBeforeFilter.size();
+		// 🔽 ADD THIS: Logging pre-filter bubbles
+//		logBubbleDetails(bubblesBeforeFilter, "bubbles_before_filter.csv");
+		System.out.println("--- Bubble count before applying filters: " + initialBubbleCount);
 		// Xpath for the Filters button
 		WebElement FiltersCustomerPeerSelections = waitForElement(CPA_Filters);
 		FiltersCustomerPeerSelections.click();
@@ -146,10 +159,11 @@ public class CPA_BranchCustomerSelectionPage {
 		// Xpath for the Filters Regions options
 		WebElement FitlersRegionsCustomerPeerSelections = waitForElement(CPA_Filters_Regions);
 		FitlersRegionsCustomerPeerSelections.click();
-		System.out.println("--- The Filters button - Region option is clicked");
+		System.out.println("--- Filters - Region option is clicked");
+		Thread.sleep(7000);
 		// Specifying the regions options
 		// For Region-02
-		// waitForElement(CPA_Filters_Regions_02);
+//		waitForElement(CPA_Filters_Regions_02);
 		// For Region-12
 		WebElement FiltersRegions_12 = waitForElement(CPA_Filters_Regions_12);
 		Thread.sleep(3000);
@@ -158,10 +172,8 @@ public class CPA_BranchCustomerSelectionPage {
 		Thread.sleep(7000);
 		// Xpath for the Order channel options
 		WebElement FiltersOrderChannelCustomerPeerSelections = waitForElement(CPA_Filters_OrderChannel);
-		// Scrolls to the Order Channel
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight",
-				FiltersOrderChannelCustomerPeerSelections);
-
+		// This will navigate to the Order Channel Filter
+		actions.moveToElement(FiltersOrderChannelCustomerPeerSelections).perform();
 		FiltersOrderChannelCustomerPeerSelections.click();
 		System.out.println("--- The Filters button - Order Channel option is clicked");
 		Thread.sleep(2000);
@@ -169,20 +181,135 @@ public class CPA_BranchCustomerSelectionPage {
 		WebElement FilterOrderChannel_All = waitForElement(CPA_Filters_OrderChannel_Branch_All);
 		FilterOrderChannel_All.click();
 		System.out.println("--- The Filters button - Order Channel - All option is clicked");
-		Thread.sleep(3000);
+		waitForElement(CPA_Filters_OrderChannel_Branch_All);
+		Thread.sleep(5000);
 		// For the Order Channel - Branch option selection
 		WebElement FilterOrderChannel_Branch = waitForElement(CPA_Filters_OrderChannel_Branch);
 		FilterOrderChannel_Branch.click();
 		System.out.println("--- The Filters button - Order Channel - Branch option is clicked");
+		waitForElement(CPA_Filters_OrderChannel_Branch);
+		Thread.sleep(5000);
+		// Click the Apply button
+		WebElement Filters_ApplyBtn = waitForElement(CPA_Filters_ApplyBtn);
+		Filters_ApplyBtn.click();
+		System.out.println("--- Filters: Apply button is clicked and the entire screen is loaded with new filter");
 		Thread.sleep(3000);
+		waitForElement(CPA_GeographicalMap);
+
 		// Screenshot of the Filter - Regions - Options
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
 		File screenshotPath = new File(
 				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Filters_Options.png");
 		FileHandler.copy(sourcefile, screenshotPath);
+		// Get bubble count AFTER applying filters
+		List<WebElement> bubblesAfterFilter = driver.findElements(By.xpath(
+				"//*[name()='g' and contains(@class, 'scattergeo')]//*[name()='path' and contains(@class, 'point') and not(@display='none')]"));
+		int postBubbleCount = bubblesAfterFilter.size();
+		System.out.println("--- Bubble count after applying filters: " + postBubbleCount);
+		// 🔽 ADD THIS: Logging post-filter bubbles
+//		logBubbleDetails(bubblesAfterFilter, "bubbles_after_filter.csv");
+
+		// Compare counts
+		if (postBubbleCount == 0) {
+			throw new AssertionError(
+					"--- Map did not update or no bubbles found after filter. Please verify the filters.");
+		}
+		if (initialBubbleCount == postBubbleCount) {
+			throw new AssertionError(
+					"--- Filter application did not affect map bubbles. Both counts are same: " + postBubbleCount);
+		}
+
+		System.out.println("--- Filter applied successfully and map updated with new bubbles.");
 
 	}
+
+//	private void logBubbleDetails(List<WebElement> bubbles, String fileName) {
+//		try {
+//			FileWriter writer = new FileWriter("src/test/resources/debug/" + fileName);
+//			writer.write("Index,d,fill,transform,tooltip\n");
+//			int i = 1;
+//			for (WebElement bubble : bubbles) {
+//				writer.write(i + "," + "\"" + safeAttr(bubble, "d") + "\"," + "\"" + safeAttr(bubble, "fill") + "\","
+//						+ "\"" + safeAttr(bubble, "transform") + "\"," + "\"" + safeAttr(bubble, "aria-label")
+//						+ "\"\n");
+//				i++;
+//			}
+//			writer.close();
+//			System.out.println("--- Bubble log written to: " + fileName);
+//		} catch (IOException e) {
+//			System.err.println("Error writing bubble debug log: " + e.getMessage());
+//		}
+//	}
+
+	// Safely get attributes without null issues
+//	private String safeAttr(WebElement element, String attr) {
+//		String val = element.getAttribute(attr);
+//		return val == null ? "" : val.replace("\"", "'");
+//	}
+
+//	public void FiltersTo() throws IOException, InterruptedException {
+//		// Step 1: Get initial map bubble count BEFORE applying filters
+//		List<WebElement> bubblesBeforeFilter = driver.findElements(By.xpath(
+//				"//*[name()='g' and contains(@class, 'scattergeo')]//*[name()='path' and contains(@class, 'point') and not(@display='none')]"));
+//		int initialBubbleCount = bubblesBeforeFilter.size();
+//		System.out.println("--- Bubble count before applying filters: " + initialBubbleCount);
+//
+//		// Step 2: Click Filters
+//		waitForElement(CPA_Filters).click();
+//		System.out.println("--- Clicked Filters");
+//		Thread.sleep(2000);
+//
+//		// Step 3: Select Region
+//		waitForElement(CPA_Filters_Regions).click();
+//		System.out.println("--- Clicked Region filter");
+//		Thread.sleep(2000);
+//		waitForElement(CPA_Filters_Regions_12).click();
+//		System.out.println("--- Selected Region 12");
+//
+//		// Step 4: Select Order Channel - Branch
+//		WebElement orderChannel = waitForElement(CPA_Filters_OrderChannel);
+//		actions.moveToElement(orderChannel).click().perform();
+//		System.out.println("--- Clicked Order Channel");
+//		Thread.sleep(2000);
+//
+//		waitForElement(CPA_Filters_OrderChannel_Branch_All).click(); // Uncheck all
+//		System.out.println("--- Deselected All options");
+//
+//		waitForElement(CPA_Filters_OrderChannel_Branch).click(); // Select Branch
+//		System.out.println("--- Selected Branch");
+//
+//		// Step 5: Click Apply
+//		waitForElement(CPA_Filters_ApplyBtn).click();
+//		System.out.println("--- Clicked Apply");
+//		Thread.sleep(5000); // Allow map to load new bubbles
+//
+//		waitForElement(CPA_GeographicalMap);
+//
+//		// Step 6: Get bubble count AFTER applying filters
+//		List<WebElement> bubblesAfterFilter = driver.findElements(By.xpath(
+//				"//*[name()='g' and contains(@class, 'scattergeo')]//*[name()='path' and contains(@class, 'point') and not(@display='none')]"));
+//		int postBubbleCount = bubblesAfterFilter.size();
+//		System.out.println("--- Bubble count after applying filters: " + postBubbleCount);
+//
+//		// Step 7: Compare counts
+//		if (postBubbleCount == 0) {
+//			throw new AssertionError("--- Map did not update or no bubbles found after filter. Please verify filters.");
+//		}
+//		if (initialBubbleCount == postBubbleCount) {
+//			throw new AssertionError(
+//					"--- Filter application did not affect map bubbles. Both counts are same: " + postBubbleCount);
+//		}
+//
+//		System.out.println("--- Filter applied successfully and map updated with new bubbles.");
+//
+//		// Step 8: Screenshot for documentation
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Filters_Options.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+//	}
 
 	// Select Metric - dropdown
 	public void SelectMetric() throws IOException, InterruptedException {

@@ -100,21 +100,21 @@ public class CPA_PeerSelectionSteps {
 	}
 
 	@Then("the user should be able to click on the Select Peers Dropdown and choose the desired peers count")
-	public void the_user_should_be_able_to_click_on_the_select_peers_dropdown_and_choose_the_desired_peers_count() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_click_on_the_select_peers_dropdown_and_choose_the_desired_peers_count()
+			throws IOException, InterruptedException {
+		cpa_peerSelections.selectPeersDropdown();
 	}
 
 	@Then("the user should be able to search for a keyword in the Select Comparative Peer Group table")
-	public void the_user_should_be_able_to_search_for_a_keyword_in_the_select_comparative_peer_group_table() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_search_for_a_keyword_in_the_select_comparative_peer_group_table()
+			throws IOException, InterruptedException {
+		cpa_peerSelections.searchForKeyword_SCPG(); // SCPG is the table name
 	}
 
 	@Then("the user should be able to click on the download icon present in the Select Comparative Peer Group table header, which downloads the table records as an Excel file")
-	public void the_user_should_be_able_to_click_on_the_download_icon_present_in_the_select_comparative_peer_group_table_header_which_downloads_the_table_records_as_an_excel_file() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_click_on_the_download_icon_present_in_the_select_comparative_peer_group_table_header_which_downloads_the_table_records_as_an_excel_file()
+			throws IOException, InterruptedException {
+		cpa_peerSelections.downloadIcon_SCPG();
 	}
 
 	@Then("the user should be able to zoom in and zoom out of the Select Comparative Peer Group table using the + and - icons")
@@ -130,38 +130,38 @@ public class CPA_PeerSelectionSteps {
 	}
 
 	@Then("the user should be able to select the peers by clicking on the checkbox of each peer record")
-	public void the_user_should_be_able_to_select_the_peers_by_clicking_on_the_checkbox_of_each_peer_record() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_select_the_peers_by_clicking_on_the_checkbox_of_each_peer_record()
+			throws IOException, InterruptedException {
+//		cpa_peerSelections.selectPeers();
 	}
 
 	@Then("the user should be able to deselect the peers by clicking on the checkbox of each peer record")
-	public void the_user_should_be_able_to_deselect_the_peers_by_clicking_on_the_checkbox_of_each_peer_record() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_deselect_the_peers_by_clicking_on_the_checkbox_of_each_peer_record()
+			throws IOException, InterruptedException {
+//		cpa_peerSelections.deselectPeers();
 	}
 
 	@Then("the user should be able to search for the peers records and select the peers")
-	public void the_user_should_be_able_to_search_for_the_peers_records_and_select_the_peers() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_search_for_the_peers_records_and_select_the_peers()
+			throws IOException, InterruptedException {
+//		cpa_peerSelections.searchAndSelectPeers();
 	}
 
 	@Then("the user should be able to search for the peers records and deselect the peers")
-	public void the_user_should_be_able_to_search_for_the_peers_records_and_deselect_the_peers() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_search_for_the_peers_records_and_deselect_the_peers()
+			throws IOException, InterruptedException {
+//		cpa_peerSelections.searchAndDeSelectPeers();
 	}
 
 	@Then("the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections")
-	public void the_user_should_be_able_to_click_on_the_compare_peers_button_which_then_opens_up_the_dialog_box_to_enter_the_name_and_save_the_peer_selections() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_click_on_the_compare_peers_button_which_then_opens_up_the_dialog_box_to_enter_the_name_and_save_the_peer_selections()
+			throws IOException, InterruptedException {
+		cpa_peerSelections.comparePeersBtn();
 	}
 
 	@Then("the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version")
-	public void the_user_should_be_able_to_click_on_the_reset_button_which_then_resets_the_peer_selections_and_updates_the_table_to_older_version() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_click_on_the_reset_button_which_then_resets_the_peer_selections_and_updates_the_table_to_older_version()
+			throws IOException, InterruptedException {
+//		cpa_peerSelections.resetBtn();
 	}
 }
