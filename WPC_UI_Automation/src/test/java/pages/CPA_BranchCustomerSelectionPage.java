@@ -55,17 +55,16 @@ public class CPA_BranchCustomerSelectionPage {
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[8]/span[2]/div[1]/span[1]");
 	// Filters- Order Channel (Branch, CDC)
 	By CPA_Filters_OrderChannel = By.xpath(
-			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[1]/div/div[1]/div/div/div/div/div[1]/div/div[8]/div");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[8]/div[1]/span[1]");
 	// Filters - Order Channel - All option as it un-checks all other options
-	By CPA_Filters_OrderChannel_Branch_All = By.xpath(
+	By CPA_Filters_OrderChannel_All = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[1]/span[2]/div[1]/span[1]");
 	// Filter- Order Channel - Branch
 	By CPA_Filters_OrderChannel_Branch = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[2]/span[2]/div[1]/span[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[2]/span[2]/div[1]");
 	// Filters - Apply button
 	By CPA_Filters_ApplyBtn = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]/span[1]");
-
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]");
 	// Select Metric - Dropdown
 	By CPA_SelectMetric_Dropdown = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]");
@@ -173,26 +172,27 @@ public class CPA_BranchCustomerSelectionPage {
 		// Xpath for the Order channel options
 		WebElement FiltersOrderChannelCustomerPeerSelections = waitForElement(CPA_Filters_OrderChannel);
 		// This will navigate to the Order Channel Filter
-		actions.moveToElement(FiltersOrderChannelCustomerPeerSelections).perform();
-		FiltersOrderChannelCustomerPeerSelections.click();
+		actions.moveToElement(FiltersOrderChannelCustomerPeerSelections).click().perform();
+//		FiltersOrderChannelCustomerPeerSelections.click();
 		System.out.println("--- The Filters button - Order Channel option is clicked");
 		Thread.sleep(2000);
 		// Un-checking the ALL option so the user can select other options
-		WebElement FilterOrderChannel_All = waitForElement(CPA_Filters_OrderChannel_Branch_All);
+		WebElement FilterOrderChannel_All = waitForElement(CPA_Filters_OrderChannel_All);
 		FilterOrderChannel_All.click();
-		System.out.println("--- The Filters button - Order Channel - All option is clicked");
-		waitForElement(CPA_Filters_OrderChannel_Branch_All);
+		System.out.println("--- The Filters button - Order Channel - All option is Unchecked");
+		waitForElement(CPA_Filters_OrderChannel_All);
 		Thread.sleep(5000);
 		// For the Order Channel - Branch option selection
 		WebElement FilterOrderChannel_Branch = waitForElement(CPA_Filters_OrderChannel_Branch);
 		FilterOrderChannel_Branch.click();
 		System.out.println("--- The Filters button - Order Channel - Branch option is clicked");
-		waitForElement(CPA_Filters_OrderChannel_Branch);
-		Thread.sleep(5000);
+//		waitForElement(CPA_Filters_OrderChannel_Branch);
+		Thread.sleep(9000);
+//		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("jss1267")));
 		// Click the Apply button
 		WebElement Filters_ApplyBtn = waitForElement(CPA_Filters_ApplyBtn);
 		Filters_ApplyBtn.click();
-		System.out.println("--- Filters: Apply button is clicked and the entire screen is loaded with new filter");
+		System.out.println("--- Filters: Apply button is clicked and the screen is loaded with new filters");
 		Thread.sleep(3000);
 		waitForElement(CPA_GeographicalMap);
 

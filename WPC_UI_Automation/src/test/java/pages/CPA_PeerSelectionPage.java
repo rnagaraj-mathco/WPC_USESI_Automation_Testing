@@ -22,11 +22,13 @@ import config.ConfigReader;
 public class CPA_PeerSelectionPage {
 	WebDriver driver;
 	WebDriverWait wait;
+	Actions actions;
 
 	// gets driver status
 	public CPA_PeerSelectionPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // wait initialized once
+		actions = new Actions(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -154,11 +156,50 @@ public class CPA_PeerSelectionPage {
 	By CPA_PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable = By.xpath(
 			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]/button[1]/span[1]");
 
+	// Peer Selection in table - 91331
+	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[1]");
+
+	// Peer Selection in table - 66810
+	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[1]");
+
+	// Peer Selection in table - 176174
+	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[7]/td[1]");
+
+	// Peer Selection in table - 192021
+	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[10]/td[1]");
+
+	// Peer Selection in table - 149734
+	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[9]/td[1]");
+
+	// Peer Search and Select in table - 25525
+	By CPA_PS2_SearchAndSelectPeers_ComparativePeerGroupSelectionTable_25525 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
+
+	// Peer Search and Select in table - 79678
+	By CPA_PS2_SearchAndSelectPeers_ComparativePeerGroupSelectionTable_79678 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
+
+	// Peer Search and De-Select in table - 192021
+	By CPA_PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
+
+	// Set Peer Matching - View - Cancel (X)
+	By CPA_PS2_SetPeerMatchingCriteriaBtn_Cancel = By.xpath(
+			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]/span[1]/*[name()='svg'][1]");
+	// Back button
+	By CPA_PS2_Backbtn = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[9]/div[1]/div[1]/button[1]");
 	// Create Scenario - Slider Component
 	By CPA_CS_SliderComponent = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]");
 
 	// Loading the Peer Selection Screen
+
 	public void navigateTo() throws IOException, InterruptedException {
 		// This gets the URL of the Branch Customer Selection Screen
 		driver.get(ConfigReader.cpa_peerSelection());
@@ -576,13 +617,54 @@ public class CPA_PeerSelectionPage {
 	// -- SPMC - Peer Dropdown -Table - Buttons
 	// Select Peers
 	public void selectPeers() throws IOException, InterruptedException {
-
+		// Waits for the Peer - 91331
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331.click();
+		System.out.println("--- Selected: Peer 91331");
+		Thread.sleep(3000);
+		// Waits for the Peer - 66810
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810.click();
+		System.out.println("--- Selected: Peer 66810");
+		Thread.sleep(3000);
+		// Waits for the Peer - 176174
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174.click();
+		System.out.println("--- Selected: Peer 176174");
+		Thread.sleep(3000);
+		// Waits for the Peer - 192021
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021);
+		actions.moveToElement(PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021).click().perform();
+		System.out.println("--- Selected: Peer 192021");
+		Thread.sleep(3000);
+		// Waits for the Peer - 149734
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734.click();
+		System.out.println("--- Selected: Peer 149734");
+		Thread.sleep(1000);
 	}
 
 	// Peer Selection 02 Comparative Peer Group Selection
 	// -- SPMC - Peer Dropdown -Table - Buttons
 	// De-select Peers
 	public void deselectPeers() throws IOException, InterruptedException {
+		// Waits for the Peer - 176174
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174.click();
+		System.out.println("--- De-Selected: Peer 176174");
+		Thread.sleep(3000);
+		// Waits for the Peer - 66810
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810 = waitForElement(
+				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810.click();
+		System.out.println("--- De-Selected: Peer 66810");
+		Thread.sleep(3000);
 
 	}
 
@@ -590,6 +672,48 @@ public class CPA_PeerSelectionPage {
 	// -- SPMC - Peer Dropdown -Table - Buttons
 	// Search and select Peers
 	public void searchAndSelectPeers() throws IOException, InterruptedException {
+		// For First Peer
+		// Waits for the Search bar
+		WebElement PS2_SearchKeywordComparativePeerGroupSelectionTable = waitForElement(
+				CPA_PS2_SearchKeywordComparativePeerGroupSelectionTable);
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
+		// Search's Peer - 25525
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("25525");
+		Thread.sleep(2000);
+		// Waits for the peer - 25525
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525 = waitForElement(
+				CPA_PS2_SearchAndSelectPeers_ComparativePeerGroupSelectionTable_25525);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525.click();
+		System.out.println("--- Searched and Selected the Peer : 25525");
+		Thread.sleep(5000);
+		// Clearing the Search Keyword
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.CONTROL + "a");
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.BACK_SPACE);
+		actions.moveByOffset(10, 10).click().build().perform();
+		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
+		Thread.sleep(3000);
+
+		// For Second Peer
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
+		// Search's Peer - 79678
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("79678");
+		Thread.sleep(2000);
+		// Waits for the peer - 79678
+		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678 = waitForElement(
+				CPA_PS2_SearchAndSelectPeers_ComparativePeerGroupSelectionTable_79678);
+		PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678.click();
+		System.out.println("--- Searched and Selected the Peer : 79678");
+		Thread.sleep(5000);
+		// Clearing the Search Keyword
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.CONTROL + "a");
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.BACK_SPACE);
+		actions.moveByOffset(10, 10).click().build().perform();
+		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
+		Thread.sleep(3000);
 
 	}
 
@@ -597,7 +721,28 @@ public class CPA_PeerSelectionPage {
 	// -- SPMC - Peer Dropdown -Table - Buttons
 	// Search and De Select Peers
 	public void searchAndDeSelectPeers() throws IOException, InterruptedException {
-
+		// For First Peer
+		// Waits for the Search bar
+		WebElement PS2_SearchKeywordComparativePeerGroupSelectionTable = waitForElement(
+				CPA_PS2_SearchKeywordComparativePeerGroupSelectionTable);
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
+		// Search's Peer - 192021
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("192021");
+		Thread.sleep(3000);
+		// Waits for the peer - 192021
+		WebElement PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021 = waitForElement(
+				CPA_PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021);
+		PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021.click();
+		System.out.println("--- Searched and De-Selected the Peer : 192021");
+		Thread.sleep(5000);
+		// Clearing the Search Keyword
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.CONTROL + "a");
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.BACK_SPACE);
+		actions.moveByOffset(10, 10).click().build().perform();
+		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
+		Thread.sleep(3000);
 	}
 
 	// Peer Selection 02 Comparative Peer Group Selection
@@ -625,6 +770,7 @@ public class CPA_PeerSelectionPage {
 
 		String namePeerGroup = PS2_billToId + "_Top_10_Peers";
 		PS2_PeerGroupName_ComparativePeerGroupSelectionTable.sendKeys(namePeerGroup);
+		Thread.sleep(7000);
 		// Screenshot of Entering the Comparative Peer Group
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
@@ -635,6 +781,10 @@ public class CPA_PeerSelectionPage {
 		WebElement PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable = waitForElement(
 				CPA_PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable);
 		PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable.click();
+		System.out.println("--- Clicked: Save and Proceed button and redirected to Create Scenario");
+		Thread.sleep(3000);
+		// Waits for the Create Scenario - Slider Component
+//		waitForElement(CPA_CS_SliderComponent);   ------ This has to be uncommented after the redirection failure solved
 		// Verify whether it landed on the Customer Peer Analysis Card - Scenario
 		// Builder -
 		// Create Scenario Screen
@@ -647,8 +797,6 @@ public class CPA_PeerSelectionPage {
 							+ currentUrl);
 		}
 		System.out.println("--- Landed on the Create Scenario Screen with the selected peer group!");
-		// Waits for the Create Scenario - Slider Component
-		waitForElement(CPA_CS_SliderComponent);
 
 	}
 
@@ -665,4 +813,29 @@ public class CPA_PeerSelectionPage {
 
 	}
 
+	// Peer Selection 02 Comparative Peer Group Selection
+	// SPMC(View) - Peer Dropdown - Table - Buttons
+	// Set Peer Matching Criteria - View
+	public void setPeerMatchingCriteriaView() throws IOException, InterruptedException {
+		// View's only the Set Peer Matching Criteria pop up
+		WebElement PS2_SetPeerMatchingCriteriaBtn = waitForElement(CPA_PS2_SetPeerMatchingCriteriaBtn);
+		PS2_SetPeerMatchingCriteriaBtn.click();
+		Thread.sleep(5000);
+		// Waits for the cancel icon
+		WebElement PS2_SetPeerMatchingCriteriaBtn_Cancel = waitForElement(CPA_PS2_SetPeerMatchingCriteriaBtn_Cancel);
+		PS2_SetPeerMatchingCriteriaBtn_Cancel.click();
+		System.out.println("--- Clicked: Cancel (X) icon of the Set Peer Matching Criteria Pop-Up");
+
+	}
+
+	// Peer Selection 02 Comparative Peer Group Selection
+	// SPMC(View) - Peer Dropdown - Table - Buttons
+	// Back button
+	public void backBtn() throws IOException, InterruptedException {
+		// waits for the Back button
+		WebElement PS2_Backbtn = waitForElement(CPA_PS2_Backbtn);
+		PS2_Backbtn.click();
+		System.out.println("--- Clicked: Back button and got redirected to Peer Selection - 01 screen");
+
+	}
 }

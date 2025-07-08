@@ -19,6 +19,8 @@ public class CPA_PeerSelectionSteps {
 	ConfigReader configReader = new ConfigReader();
 	CPA_PeerSelectionPage cpa_peerSelections = new CPA_PeerSelectionPage(driver);
 
+	// Peer Selection: 01 Scenario
+
 	@Given("the user is on the Peer Selection page of the Customer Peer Analysis")
 	public void the_user_is_on_the_peer_selection_page_of_the_customer_peer_analysis()
 			throws IOException, InterruptedException {
@@ -132,25 +134,25 @@ public class CPA_PeerSelectionSteps {
 	@Then("the user should be able to select the peers by clicking on the checkbox of each peer record")
 	public void the_user_should_be_able_to_select_the_peers_by_clicking_on_the_checkbox_of_each_peer_record()
 			throws IOException, InterruptedException {
-//		cpa_peerSelections.selectPeers();
+		cpa_peerSelections.selectPeers();
 	}
 
 	@Then("the user should be able to deselect the peers by clicking on the checkbox of each peer record")
 	public void the_user_should_be_able_to_deselect_the_peers_by_clicking_on_the_checkbox_of_each_peer_record()
 			throws IOException, InterruptedException {
-//		cpa_peerSelections.deselectPeers();
+		cpa_peerSelections.deselectPeers();
 	}
 
 	@Then("the user should be able to search for the peers records and select the peers")
 	public void the_user_should_be_able_to_search_for_the_peers_records_and_select_the_peers()
 			throws IOException, InterruptedException {
-//		cpa_peerSelections.searchAndSelectPeers();
+		cpa_peerSelections.searchAndSelectPeers();
 	}
 
 	@Then("the user should be able to search for the peers records and deselect the peers")
 	public void the_user_should_be_able_to_search_for_the_peers_records_and_deselect_the_peers()
 			throws IOException, InterruptedException {
-//		cpa_peerSelections.searchAndDeSelectPeers();
+		cpa_peerSelections.searchAndDeSelectPeers();
 	}
 
 	@Then("the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections")
@@ -164,4 +166,17 @@ public class CPA_PeerSelectionSteps {
 			throws IOException, InterruptedException {
 //		cpa_peerSelections.resetBtn();
 	}
+
+	@Then("the user is on the Peer Selection - Comparative Peer Group Selection screen, where the user should be able to click on the Set Peer Matching Criteria button and view the threshold value and the model selected")
+	public void the_user_is_on_the_peer_selection_comparative_peer_group_selection_screen_where_the_user_should_be_able_to_click_on_the_set_peer_matching_criteria_button_and_view_the_threshold_value_and_the_model_selected()
+			throws IOException, InterruptedException {
+		cpa_peerSelections.setPeerMatchingCriteriaView();
+	}
+
+	@Then("the user should be able to click on the Back button which then redirects the user to the Peer Selection - Target Customer Selection Screen")
+	public void the_user_should_be_able_to_click_on_the_back_button_which_then_redirects_the_user_to_the_peer_selection_target_customer_selection_screen()
+			throws IOException, InterruptedException {
+		cpa_peerSelections.backBtn();
+	}
+
 }
