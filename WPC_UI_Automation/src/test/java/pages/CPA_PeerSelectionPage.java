@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -95,7 +97,7 @@ public class CPA_PeerSelectionPage {
 	// Set Peer Matching Criteria - Select Model Dropdown -
 	// Selecting Options:Existing Model
 	By CPA_PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options = By
-			.xpath("/html/body/div[6]/div[3]/ul/li[1]/div");
+			.xpath("/html[1]/body[1]/div[6]/div[3]/ul[1]/li[1]/div[1]/div[1]/span[1]");
 
 	// Set Peer Matching Criteria - Set Threshold value -
 	// Setting value to 40
@@ -114,6 +116,9 @@ public class CPA_PeerSelectionPage {
 	// Extracts all the values from the Similarity score column
 	By CPA_PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_SimilarityScoreColumnValues = By.xpath(
 			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[3]/div/div/div/div/div/div/div[3]/div/div/div[1]/form/div/div[6]/div/div/div/div[3]/table/tbody/tr[1]/td[4]");
+	// Paginations - next button
+	By CPA_PS2_nextButton = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/button[2]");
 
 	// Set Peer Matching Criteria
 	// Extracting the model type from the table's 2nd row
@@ -124,9 +129,9 @@ public class CPA_PeerSelectionPage {
 	By CPA_PS2_SelectPeersDropdown = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]");
 
-	// Select Peers Dropdown - Options - Top 10
+	// Select Peers Dropdown - Options - Top 25
 	By CPA_PS2_SelectPeersDropdown_Options = By
-			.xpath("/html[1]/body[1]/div[5]/div[3]/ul[1]/li[2]/div[1]/div[1]/span[1]");
+			.xpath("/html[1]/body[1]/div[5]/div[3]/ul[1]/li[3]/div[1]/div[1]/span[1]");
 
 	// Search Keyword
 	By CPA_PS2_SearchKeywordComparativePeerGroupSelectionTable = By.xpath(
@@ -461,10 +466,7 @@ public class CPA_PeerSelectionPage {
 	// Peer Selection 02 Comparative Peer Group Selection
 	// -- SPMC - Peer Dropdown -Table - Buttons
 	// Set Peer Matching Criteria Button
-	// Peer Selection 02 Comparative Peer Group Selection
-	// -- SPMC - Peer Dropdown -Table - Buttons
-	// Peer Selection 02 Comparative Peer Group Selection
-	// -- SPMC - Peer Dropdown -Table - Buttons
+
 	public void setPeerMatchingCriteria() throws IOException, InterruptedException {
 
 		// Set Peer Matching Criteria
@@ -477,12 +479,23 @@ public class CPA_PeerSelectionPage {
 		PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown.click();
 		Thread.sleep(3000);
 		System.out.println("--- Clicked: Select Model Dropdown");
+
 		// Select Model - Dropdown - Options
 		WebElement PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options = waitForElement(
 				CPA_PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options);
+		String selectedModel = PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options.getText().trim();
 		PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options.click();
 		Thread.sleep(3000);
-		System.out.println("--- Clicked: Select Model Dropdown Options: Existing Model");
+		System.out.println("--- Clicked: Select Model Dropdown Options: " + selectedModel);
+		// Maps dropdown model options to the model options present in the table
+		String expectedModelText;
+		if (selectedModel.equalsIgnoreCase("Existing Model")) {
+			expectedModelText = "Existing Similarity Model";
+		} else if (selectedModel.equalsIgnoreCase("Enhanced Model")) {
+			expectedModelText = "Enhanced Similarity Model";
+		} else {
+			throw new IllegalArgumentException("--- Unknown model selected: " + selectedModel);
+		}
 		// Set Threshold Value
 		WebElement PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue = waitForElement(
 				CPA_PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue);
@@ -493,7 +506,6 @@ public class CPA_PeerSelectionPage {
 		Thread.sleep(3000);
 		// Enter the Threshold value as 40
 		PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue.sendKeys("40");
-		System.out.println("--- Entered: Threshold value");
 
 		// Take screenshot
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -511,9 +523,6 @@ public class CPA_PeerSelectionPage {
 		Double enteredThresholdValue = Double.parseDouble(
 				(PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_AfterValue).getAttribute("value").trim());
 		System.out.println("---The Entered Threshold value is:" + enteredThresholdValue);
-		// Extracts the Type of Model from the table row
-		WebElement PS2_SetPeerMatchingCriteriaBtn_ExtractTypeOfModel = waitForElement(
-				CPA_PS2_SetPeerMatchingCriteriaBtn_ExtractTypeOfModel);
 
 		// Apply button
 		WebElement PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_ApplyBtn = waitForElement(
@@ -523,32 +532,64 @@ public class CPA_PeerSelectionPage {
 		Thread.sleep(6000);
 		// Waits for the Comparative Peer Group Selection table
 		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
+		// Validates the similarity score and the model in the table
 
-		// Locates all the cells of Similarity Score Column
-		List<WebElement> similarityScore = driver.findElements(By.xpath("//table/tbody/tr"));
-		// Stores the values to an array
 		List<Double> scoreValues = new ArrayList<>();
-		for (WebElement cell : similarityScore) {
-			String values = cell.findElement(By.xpath("td[4]")).getText().trim();
+		boolean mismatchFound = false;
 
-			if (!values.isEmpty()) {
+		while (true) {
+			List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+
+			for (WebElement row : rows) {
 				try {
-					scoreValues.add(Double.parseDouble(values));
-				} catch (NumberFormatException e) {
-					System.out.println("---Invalid number in cell of the Similarity Score column: " + values);
+					// Similarity score
+					String scoreText = row.findElement(By.xpath("td[4]")).getText().trim();
+					if (!scoreText.isEmpty()) {
+						scoreValues.add(Double.parseDouble(scoreText));
+					}
+
+					// Model type
+					String modelText = row.findElement(By.xpath("td[17]")).getText().trim();
+					if (!modelText.equalsIgnoreCase(expectedModelText)) {
+						System.out.println(
+								"--- Model mismatch - Expected: " + expectedModelText + ", Found: " + modelText);
+						mismatchFound = true;
+					}
+
+				} catch (Exception e) {
+					System.out.println("--- Skipped row due to error: " + e.getMessage());
 				}
 			}
+
+			WebElement nextButton = driver.findElement(CPA_PS2_nextButton);
+			String isDisabled = nextButton.getAttribute("disabled");
+			if (isDisabled != null && (isDisabled.equals("true") || isDisabled.equals("disabled"))) {
+				break;
+			}
+			nextButton.click();
+			Thread.sleep(2000);
 		}
-		// Find the minimum value in the column
+		// Waits for the Type of Model column from the table row
+		WebElement PS2_SetPeerMatchingCriteriaBtn_ExtractTypeOfModel = waitForElement(
+				CPA_PS2_SetPeerMatchingCriteriaBtn_ExtractTypeOfModel);
+
+		actions.moveToElement(PS2_SetPeerMatchingCriteriaBtn_ExtractTypeOfModel).perform();
+
+		// Similarity score assertion
 		double minValue = scoreValues.stream().min(Double::compareTo).orElse(Double.MAX_VALUE);
-		// Validating with Assertion
 		if (enteredThresholdValue > minValue) {
-			throw new AssertionError(
-					"Threshold value " + enteredThresholdValue + " is greater than minimum column value " + minValue);
+			throw new AssertionError("--- Then entered Threshold value is " + enteredThresholdValue
+					+ " which is greater than minimum score: " + minValue);
 		} else {
-			System.out.println(
-					"--- The Similarity Score of the Comparative Peer Group Selection table is updated as per the given Threshold value  "
-							+ enteredThresholdValue + " <= " + minValue);
+			System.out.println("--- The entered Threshold value is : " + enteredThresholdValue
+					+ " which is lesser than than the minimum value (" + minValue + ") of the similarity score column");
+		}
+
+		// Model assertion
+		if (mismatchFound) {
+			throw new AssertionError("--- Some rows did not match the selected model: " + expectedModelText);
+		} else {
+			System.out.println("--- All rows matched the selected model: " + expectedModelText);
 		}
 
 	}
@@ -556,28 +597,108 @@ public class CPA_PeerSelectionPage {
 	// Peer Selection 02 Comparative Peer Group Selection
 	// -- SPMC - Peer Dropdown -Table - Buttons
 	// Select Peers Dropdown
+//	public void selectPeersDropdown() throws IOException, InterruptedException {
+//		// Select Peers Dropdown
+//		WebElement PS2_SelectPeersDropdown = waitForElement(CPA_PS2_SelectPeersDropdown);
+//		PS2_SelectPeersDropdown.click();
+//		System.out.println("--- Clicked: Select Peers Dropdown");
+//
+//		// Select Peers Dropdown - Options - Top 10
+//		WebElement PS2_SelectPeersDropdown_Options = waitForElement(CPA_PS2_SelectPeersDropdown_Options);
+//		String dropDownOptionValue = PS2_SelectPeersDropdown_Options.getText().trim();
+//		PS2_SelectPeersDropdown_Options.click();
+//		System.out.println("--- Clicked: Select Peers Dropdown Option: Top 10");
+//		// Storing the option value for validation
+////		String dropDownOptionValue = PS2_SelectPeersDropdown_Options.getText().trim();
+//		// This is used to come out of the dropdown overlay effect
+//		new Actions(driver).moveByOffset(10, 10).click().build().perform();
+//
+//		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
+//		Thread.sleep(4000);
+//		// Locates all the cells of checkbox column
+//		List<WebElement> checkboxes = driver.findElements(By.xpath("//table/tbody/tr[position()>1]//td[1]"));
+//		System.out.println("--- Total checkboxes found: " + checkboxes.size());
+//
+//	}
 	public void selectPeersDropdown() throws IOException, InterruptedException {
-		// Select Peers Dropdown
+		// Open the dropdown
 		WebElement PS2_SelectPeersDropdown = waitForElement(CPA_PS2_SelectPeersDropdown);
 		PS2_SelectPeersDropdown.click();
 		System.out.println("--- Clicked: Select Peers Dropdown");
 
-		// Select Peers Dropdown - Options - Top 10
+		// Select dropdown option
 		WebElement PS2_SelectPeersDropdown_Options = waitForElement(CPA_PS2_SelectPeersDropdown_Options);
-		String dropDownOptionValue = PS2_SelectPeersDropdown_Options.getText().trim();
+		String optionText = PS2_SelectPeersDropdown_Options.getText().trim(); // Top 5, Top 10, etc.
 		PS2_SelectPeersDropdown_Options.click();
-		System.out.println("--- Clicked: Select Peers Dropdown Option: Top 10");
-		// Storing the option value for validation
-//		String dropDownOptionValue = PS2_SelectPeersDropdown_Options.getText().trim();
-		// This is used to come out of the dropdown overlay effect
+		System.out.println("--- Clicked: Select Peers Option: " + optionText);
+
+		// Dismiss dropdown overlay and wait for table
 		new Actions(driver).moveByOffset(10, 10).click().build().perform();
-
 		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
-		Thread.sleep(4000);
-		// Locates all the cells of checkbox column
-		List<WebElement> checkboxes = driver.findElements(By.xpath("//table/tbody/tr[position()>1]//td[1]"));
-		System.out.println("--- Total checkboxes found: " + checkboxes.size());
+		Thread.sleep(3000);
 
+		// Parse expected count
+		int expectedCheckedCount;
+		if (optionText.equalsIgnoreCase("Select All")) {
+			expectedCheckedCount = Integer.MAX_VALUE;
+		} else {
+			Matcher matcher = Pattern.compile("\\d+").matcher(optionText);
+			expectedCheckedCount = matcher.find() ? Integer.parseInt(matcher.group()) : 0;
+		}
+
+		int checkedCount = 0;
+		List<String> checkedBillToIds = new ArrayList<>();
+
+		// Loop across pages of the table
+		while (true) {
+			List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+
+			for (int i = 0; i < rows.size(); i++) {
+				WebElement row = rows.get(i);
+
+				// Try finding checkbox inside row
+				List<WebElement> checkboxes = row.findElements(By.xpath("td[1]//input[@type='checkbox']"));
+				if (checkboxes.isEmpty())
+					continue; // No checkbox (maybe header or empty row)
+
+				WebElement checkbox = checkboxes.get(0);
+				boolean isChecked = checkbox.getAttribute("checked") != null;
+
+				if (isChecked) {
+					checkedCount++;
+					// Get BILL TO ID value (2nd column)
+					String billToId = row.findElement(By.xpath("td[2]")).getText().trim();
+					checkedBillToIds.add(billToId);
+
+					if (checkedCount > expectedCheckedCount) {
+						throw new AssertionError("--- More checkboxes checked than expected: " + checkedCount);
+					}
+				} else if (checkedCount < expectedCheckedCount) {
+					// If we are still within expected top N and it’s unchecked, that’s an error
+					throw new AssertionError("--- Row " + (i + 1) + " should be checked but is not.");
+				}
+
+				if (checkedCount == expectedCheckedCount) {
+					break; // Done checking required peers
+				}
+			}
+
+			if (checkedCount == expectedCheckedCount)
+				break; // Stop if reached required count
+
+			// Move to next page if available
+			WebElement nextButton = driver.findElement(CPA_PS2_nextButton);
+			String disabled = nextButton.getAttribute("disabled");
+			if (disabled != null && (disabled.equals("true") || disabled.equals("disabled")))
+				break;
+
+			nextButton.click();
+			Thread.sleep(2000);
+		}
+
+		// Final result validation
+		System.out.println("--- Checked Peer Count: " + checkedCount);
+		System.out.println("---  Checked BILL TO IDs for " + optionText + ": " + checkedBillToIds);
 	}
 
 	// Peer Selection 02 Comparative Peer Group Selection
@@ -684,8 +805,14 @@ public class CPA_PeerSelectionPage {
 		// Waits for the peer - 25525
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525 = waitForElement(
 				CPA_PS2_SearchAndSelectPeers_ComparativePeerGroupSelectionTable_25525);
-		PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525.click();
-		System.out.println("--- Searched and Selected the Peer : 25525");
+
+		// Check whether the Peer is checked or not
+		if (!PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525.isSelected()) {
+			PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525.click();
+			System.out.println("--- Searched and Selected the Peer : 25525");
+		} else {
+			System.out.println("--- Peer 25525 already selected. Skipping click.");
+		}
 		Thread.sleep(5000);
 		// Clearing the Search Keyword
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
@@ -704,8 +831,13 @@ public class CPA_PeerSelectionPage {
 		// Waits for the peer - 79678
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678 = waitForElement(
 				CPA_PS2_SearchAndSelectPeers_ComparativePeerGroupSelectionTable_79678);
-		PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678.click();
-		System.out.println("--- Searched and Selected the Peer : 79678");
+		// Check whether the Peer is checked or not
+		if (!PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678.isSelected()) {
+			PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678.click();
+			System.out.println("--- Searched and Selected the Peer : 79678");
+		} else {
+			System.out.println("✔️ Peer 79678 already selected. Skipping click.");
+		}
 		Thread.sleep(5000);
 		// Clearing the Search Keyword
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
