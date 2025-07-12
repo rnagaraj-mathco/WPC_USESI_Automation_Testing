@@ -181,13 +181,13 @@ public class CPA_BranchCustomerSelectionPage {
 		FilterOrderChannel_All.click();
 		System.out.println("--- The Filters button - Order Channel - All option is Unchecked");
 		waitForElement(CPA_Filters_OrderChannel_All);
-		Thread.sleep(5000);
+		Thread.sleep(9000);
 		// For the Order Channel - Branch option selection
 		WebElement FilterOrderChannel_Branch = waitForElement(CPA_Filters_OrderChannel_Branch);
 		FilterOrderChannel_Branch.click();
 		System.out.println("--- The Filters button - Order Channel - Branch option is clicked");
-//		waitForElement(CPA_Filters_OrderChannel_Branch);
-		Thread.sleep(9000);
+		waitForElement(CPA_Filters_OrderChannel_Branch);
+
 //		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("jss1267")));
 		// Click the Apply button
 		WebElement Filters_ApplyBtn = waitForElement(CPA_Filters_ApplyBtn);

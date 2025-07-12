@@ -63,4 +63,28 @@ public class ConfigReader {
 		return properties.getProperty("cpa_ScenarioImapct");
 	}
 
+	public static String arca_overview() {
+		return properties.getProperty("arca_overview");
+	}
+
+	public static String arca_customerAnalysis() {
+		return properties.getProperty("arca_customerAnalysis");
+	}
+
+	public static String arca_filterCustomerAndProductCombinations() {
+		return properties.getProperty("arca_filterCustomerAndProductCombinations");
+	}
+
+	public static String arca_customerSelection() {
+		return properties.getProperty("arca_customerSelection");
+	}
+
+	public static String arca_profitBridge() {
+		return properties.getProperty("arca_profitBridge");
+	}
+
+	public static String arca_createScenario() {
+		return properties.getProperty("arca_createScenario");
+	}
+
 }

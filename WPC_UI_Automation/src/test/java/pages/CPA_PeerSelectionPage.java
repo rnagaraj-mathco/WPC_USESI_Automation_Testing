@@ -129,9 +129,8 @@ public class CPA_PeerSelectionPage {
 	By CPA_PS2_SelectPeersDropdown = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]");
 
-	// Select Peers Dropdown - Options - Top 25
-	By CPA_PS2_SelectPeersDropdown_Options = By
-			.xpath("/html[1]/body[1]/div[5]/div[3]/ul[1]/li[3]/div[1]/div[1]/span[1]");
+	// Select Peers Dropdown - Options - Top 5
+	By CPA_PS2_SelectPeersDropdown_Options = By.xpath("/html[1]/body[1]/div[5]/div[3]/ul[1]/li[1]/div[1]");
 
 	// Search Keyword
 	By CPA_PS2_SearchKeywordComparativePeerGroupSelectionTable = By.xpath(
@@ -163,7 +162,7 @@ public class CPA_PeerSelectionPage {
 
 	// Peer Selection in table - 91331
 	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[15]/td[1]");
 
 	// Peer Selection in table - 66810
 	By CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810 = By.xpath(
@@ -795,11 +794,13 @@ public class CPA_PeerSelectionPage {
 	public void searchAndSelectPeers() throws IOException, InterruptedException {
 		// For First Peer
 		// Waits for the Search bar
+		actions.moveByOffset(10, 10).click().build().perform();
 		WebElement PS2_SearchKeywordComparativePeerGroupSelectionTable = waitForElement(
 				CPA_PS2_SearchKeywordComparativePeerGroupSelectionTable);
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
 		// Search's Peer - 25525
+		Thread.sleep(3000);
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("25525");
 		Thread.sleep(2000);
 		// Waits for the peer - 25525

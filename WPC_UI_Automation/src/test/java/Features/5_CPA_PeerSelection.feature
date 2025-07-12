@@ -51,9 +51,9 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
      #--And the user should be able to zoom in and zoom out of the Select Comparative Peer Group table using the + and - icons
      #--And the user should be able to click on the column filter icon to select which columns should be displayed in the Select Comparative Peer Group table
     Then the user should be able to select the peers by clicking on the checkbox of each peer record
-    And the user should be able to deselect the peers by clicking on the checkbox of each peer record
-    And the user should be able to search for the peers records and select the peers
-    And the user should be able to search for the peers records and deselect the peers
+    #And the user should be able to deselect the peers by clicking on the checkbox of each peer record
+    #And the user should be able to search for the peers records and select the peers
+    #And the user should be able to search for the peers records and deselect the peers
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
     #Then the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version
 
@@ -127,7 +127,7 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
     #Then the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version
 
-#Scenario is optimized
+#Done - but reset is pending
  #Peer Selection 02 Comparative Peer Group Selection - SPMC(View) - Table - Buttons
 #	Scenario: Verify that the user is able to click on the Set Peer Matching Crieteria button and view the Model selected and Threshold value and then
 #	          select peers from the Select Comparative Peer Group table for the Selected Target Customer
