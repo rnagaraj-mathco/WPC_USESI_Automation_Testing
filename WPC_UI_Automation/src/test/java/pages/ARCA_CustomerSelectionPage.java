@@ -1,0 +1,324 @@
+package pages;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import config.ConfigReader;
+
+public class ARCA_CustomerSelectionPage {
+	WebDriver driver;
+	WebDriverWait wait;
+	Actions actions;
+
+	// gets driver status
+	public ARCA_CustomerSelectionPage(WebDriver driver) {
+		this.driver = driver;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // wait initialized once
+		actions = new Actions(driver);
+	}
+
+	// Waits for the specified element by locator
+	private WebElement waitForElement(By locator) {
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+
+	// Locators
+	// xpath of the Customer Selection - Select One Customer for Simulation table
+	By arca_cs_tableSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]");
+
+	// xpath of the Customer Selection - SOC Pagination
+	By arca_cs_tableNextPaginationSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/button[2]");
+
+	// xpath of the Select Customer Button - SOC
+	By arca_cs_selectCustomerBtnSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/button[1]");
+
+	// xpath of the Back button - SOC
+	By arca_cs_backBtnSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/button[1]");
+
+	// xpath of the Search bar - SOC
+	By arca_cs_searchBarSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]");
+
+	// xpath of the record to search - SOC
+	By arca_cs_searchRecordSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[2]");
+
+	// xpath of the download icon - SOC
+	By arca_cs_downloadIconSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/button[1]");
+
+	// xpath of the radio button of the SOC - Table first row
+	By arca_cs_tableFirstRowRadioSOC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
+
+	// xpath of to extract the customer Id only if radio button is selected - SOC
+	// Table first row
+	By arca_cs_customerIdSOC = By.xpath(
+			"//table[contains(@class,'MuiTable-root')]//tbody/tr[.//span[contains(@class,'Mui-checked')]]/td[2]");
+
+	// xpath of the Tree Map
+	By arca_fcp_treeMap = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]");
+
+	// Select Root Cause Products for Simulation table - SRCP
+	// xpath of the table - SRCP
+	By arca_cs_tableSRCP = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]");
+
+	// xpath of the Save and Analyze - SRCP
+	By arca_cs_saveAndAnalyzeBtnSRCP = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[8]/div[1]/button[1]");
+
+	// xpath of the Back button - SRCP
+	By arca_cs_backBtnSRCP = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[7]/div[1]/div[1]/button[1]");
+
+	// xpath of the Reset button - SRCP
+	By arca_cs_resetBtnSRCP = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/button[1]");
+
+	// xpath of the Save and Analyze - SRCP - PopUp
+	By arca_cs_PopUpSRCP = By.xpath("/html[1]/body[1]/div[5]/div[3]/div[1]");
+
+	// xpath of the Save and Analyze - SRCP - PopUp - Close Icon
+	By arca_cs_PopUpCancelSRCP = By.xpath(
+			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]/span[1]/*[name()='svg'][1]/*[name()='path'][4]");
+
+	// xpath of the Save and Analyze - SRCP - PopUp - Error Message
+	By arca_cs_PopUpErrorSRCP = By
+			.xpath("/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/h4[1]");
+
+	// xpath of the Select All row checkbox - SRCP
+	By arca_cs_selectAllCheckboxSRCP = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/thead[1]/tr[1]/th[1]/div[1]/div[1]/div[1]/span[1]/span[1]/input[1]");
+
+	// xpath of the Header checkbox -SRCP
+	By arca_cs_headerCheckboxSRCP = By.xpath("//thead//input[@type='checkbox']");
+
+	// xpath of the row checkbox - SRCP
+	By arca_cs_rowCheckboxesSRCP = By.xpath("//tbody//input[@type='checkbox']");
+
+	// xpath of the next button - SRCP
+	By arca_cs_nextPaginationSRCP = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/button[2]");
+
+	// Navigating to the Customer Selection Screen
+	public void navigateTo() throws IOException, InterruptedException {
+		// This gets the URL of the Customer Selection screen
+		driver.get(ConfigReader.arca_customerSelection());
+		// waits for the Single One Customer for Simulation table
+		waitForElement(arca_cs_tableSOC);
+		System.out.println("=> The Customer Selection screen is loaded with Select One Customer for Simulation table");
+		Thread.sleep(5000);
+		// Take screenshot after the page is fully ready
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+		File screenshotPath = new File(
+				"src/test/resources/screenshots/AutoRootCauseAnalysis/CustomerSelections/CustomerSelectionScreen.png");
+		FileHandler.copy(sourcefile, screenshotPath);
+		// Verify whether it landed on the Auto Root Cause Analysis - Customer Selection
+		// - Customer Selection
+		String currentUrl = driver.getCurrentUrl();
+		String expectedUrl = ConfigReader.arca_customerSelection();
+
+		if (!currentUrl.equalsIgnoreCase(expectedUrl)) {
+			throw new AssertionError(
+					"=> Unexpected Redirection and landed on wrong screen - The Current URL you're on: " + currentUrl);
+		}
+		System.out.println("=> Successfully!, Landed on Customer Selection Screen");
+
+	}
+
+	// Select One Customer for Simulation table
+	// Clicks the Select Customer without selection
+	public void selectCustomerBtnWithoutSelection() throws IOException, InterruptedException {
+		// waits for the Select Customer button
+		WebElement cs_selectCustomerBtnSOC = waitForElement(arca_cs_selectCustomerBtnSOC);
+		cs_selectCustomerBtnSOC.click();
+		System.out.println(
+				"=> The Select Customer Button was clicked without selecting a record in Select One Customer for Simulation table, an error message popped");
+		Thread.sleep(5000);
+		waitForElement(arca_cs_tableSOC);
+	}
+
+	// Search for keyword in the Select One Customer for Simulation
+	public void selectForKeywordSOC() throws IOException, InterruptedException {
+		// waits for the Search bar of SOC table
+		WebElement cs_searchBarSOC = waitForElement(arca_cs_searchBarSOC);
+		cs_searchBarSOC.click();
+		cs_searchBarSOC.clear();
+		// Waits for the First row table customer Id
+		WebElement cs_searchRecordSOC = waitForElement(arca_cs_searchRecordSOC);
+		String searchRecordSOC = cs_searchRecordSOC.getText().trim();
+		cs_searchBarSOC.sendKeys(searchRecordSOC);
+		System.out.println(
+				"=> Searched the Customer and Product Combination record of the Customer ID: " + searchRecordSOC);
+		Thread.sleep(5000);
+		// Take screenshot after the keyword is searched
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+		File screenshotPath = new File(
+				"src/test/resources/screenshots/AutoRootCauseAnalysis/CustomerSelections/SearchKeywordSOC.png");
+		FileHandler.copy(sourcefile, screenshotPath);
+
+		// Clearing the Search Keyword
+		cs_searchBarSOC.click();
+		cs_searchBarSOC.sendKeys(Keys.CONTROL + "a");
+		cs_searchBarSOC.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(2000);
+	}
+
+	// Clicks the download icon of the Select One Customer for Simulation
+	public void downloadIconSOC() throws IOException, InterruptedException {
+		// waits for the SOC - Download Icon
+		WebElement cs_downloadIconSOC = waitForElement(arca_cs_downloadIconSOC);
+		cs_downloadIconSOC.click();
+		Thread.sleep(3000);
+		System.out.println(
+				"=> The download icon of Select One Customer for Simulation table is clicked and downloaded the table records as an excel file");
+		waitForElement(arca_cs_tableSOC);
+	}
+
+	// Selects the customer from the Select One Customer for Simulation
+	public void selectCustomerSOC() throws IOException, InterruptedException {
+		// waits for the SOC table first row radio button
+		WebElement cs_tableFirstRowRadioSOC = waitForElement(arca_cs_tableFirstRowRadioSOC);
+		cs_tableFirstRowRadioSOC.click();
+		waitForElement(arca_cs_tableSOC);
+		System.out.println("=> Selected the record of Select One Customer for Simulation table");
+		Thread.sleep(2000);
+		WebElement cs_customerIdSOC = waitForElement(arca_cs_customerIdSOC);
+		String cs_customerId_SOC = cs_customerIdSOC.getText().trim();
+		System.out.println("=> The record of BILL To ID: " + cs_customerId_SOC + " is selected");
+
+	}
+
+	// Pagination action on the Select One Customer for Simulation
+	public void paginationSOC() throws IOException, InterruptedException {
+	}
+
+	// Cicks on the Select customer button after selecting the record in Select One
+	// Customer for Simulation table
+	public void selectCustomerBtnWithSelection() throws IOException, InterruptedException {
+		// waits for the Select Customer button
+		WebElement cs_selectCustomerBtnSOC = waitForElement(arca_cs_selectCustomerBtnSOC);
+		cs_selectCustomerBtnSOC.click();
+		System.out.println(
+				"=> The Select Customer Button of Select One Customer for Simulation table was clicked which then loads the Select Root Cause Products for Simulation table");
+		Thread.sleep(3000);
+		waitForElement(arca_cs_tableSRCP);
+
+	}
+
+	// Clicks the Back button of the Select One Customer for Simulation
+	public void backBtnSOC() throws IOException, InterruptedException {
+		// waits for the SOC - Back button
+		WebElement cs_backBtnSOC = waitForElement(arca_cs_backBtnSOC);
+		cs_backBtnSOC.click();
+		System.out.println(
+				"=> The Back button of the Select One Customer for Simulation table was clicked and redirected to the Filter Customer and Product Combinations screens");
+		Thread.sleep(2000);
+		waitForElement(arca_fcp_treeMap);
+		// Redirecting to Customer Selection screen
+		driver.get(ConfigReader.arca_customerSelection());
+		System.out.println("=> Navigated back to the Customer Selection screen");
+		Thread.sleep(3000);
+		waitForElement(arca_cs_tableSOC);
+
+	}
+
+	// Interacts with Select One Customer for Simulation by zoom in and zoom out
+	public void zoomOperationSOC() throws IOException, InterruptedException {
+	}
+
+	// Interacts with Select One Customer for Simulation column by column filters
+	// icon
+	public void columnFiterOperationSOC() throws IOException, InterruptedException {
+	}
+
+	// Search and Selects the record of the Select One Customer for Simulation
+	public void searchAndSelectRecordSOC() throws IOException, InterruptedException {
+		// waits for the Search bar of SOC table
+		WebElement cs_searchBarSOC = waitForElement(arca_cs_searchBarSOC);
+		cs_searchBarSOC.click();
+		cs_searchBarSOC.clear();
+		// Waits for the First row table customer Id
+		WebElement cs_searchRecordSOC = waitForElement(arca_cs_searchRecordSOC);
+		String searchRecordSOC = cs_searchRecordSOC.getText().trim();
+		cs_searchBarSOC.sendKeys(searchRecordSOC);
+		System.out.println(
+				"=> Searched the Customer and Product Combination record of the Customer ID: " + searchRecordSOC);
+		Thread.sleep(5000);
+		// Click the radio button corresponding to the searched record
+		// Assumption: table row where td[2] = Customer ID, and td[1] has radio button
+		String radioXPath = "//table//tr[td[2][normalize-space()='" + searchRecordSOC
+				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
+		WebElement radioButton = waitForElement(By.xpath(radioXPath));
+		actions.moveToElement(radioButton).click().perform();
+		System.out.println("=> Selected the searched record of the Customer ID: " + searchRecordSOC);
+		Thread.sleep(3000);
+		// Clearing the Search Keyword
+		// Clearing the Search Keyword
+		cs_searchBarSOC.click();
+		cs_searchBarSOC.sendKeys(Keys.CONTROL + "a");
+		cs_searchBarSOC.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(2000);
+		// Waits for the Saved Scenario Simulation Table
+		waitForElement(arca_cs_tableSOC);
+	}
+
+	// Select Root Cause Product for Simulation table
+	public void saveAndAnalyzeBtnSRCP() throws IOException, InterruptedException {
+		// waits for the Save and Analyze button - SRCP
+		WebElement cs_saveAndAnalyzeBtnSRCP = waitForElement(arca_cs_saveAndAnalyzeBtnSRCP);
+		cs_saveAndAnalyzeBtnSRCP.click();
+		// waits for the Save and Analyze button - SRCP - Error Message
+		waitForElement(arca_cs_PopUpErrorSRCP);
+		// waits for the Save and Analyze button - SRCP - PopUp - Cancel
+		WebElement cs_PopUpCancelSRCP = waitForElement(arca_cs_PopUpCancelSRCP);
+		cs_PopUpCancelSRCP.click();
+		// waits for the SRCP table
+		waitForElement(arca_cs_tableSRCP);
+		Thread.sleep(200);
+	}// arca_cs_backBtnSRCP
+
+	// Click on the Back button of SRCP
+	public void backBtnSRCP() throws IOException, InterruptedException {
+		// waits for the SRCP - Back button
+		WebElement cs_backBtnSRCP = waitForElement(arca_cs_backBtnSRCP);
+		cs_backBtnSRCP.click();
+		// waits for the SOC Table
+		waitForElement(arca_cs_tableSOC);
+		selectCustomerSOC();
+		Thread.sleep(3000);
+		selectCustomerBtnWithSelection();
+		Thread.sleep(3000);
+		waitForElement(arca_cs_tableSRCP);
+	}
+
+	// Clicks the Select All checkbox in the SRCP table header
+	public void selectAllCheckboxSRCP() throws IOException, InterruptedException {
+		// waits for the SRCP - Select All Checkbox
+		WebElement cs_selectAllCheckboxSRCP = waitForElement(arca_cs_selectAllCheckboxSRCP);
+		cs_selectAllCheckboxSRCP.click();
+		waitForElement(arca_cs_tableSRCP);
+
+		// VALIDATION IS PENDING
+	}
+}

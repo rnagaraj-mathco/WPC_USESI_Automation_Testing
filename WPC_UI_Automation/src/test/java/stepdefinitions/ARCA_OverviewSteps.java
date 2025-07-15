@@ -95,6 +95,18 @@ public class ARCA_OverviewSteps {
 		throw new io.cucumber.java.PendingException();
 	}
 
+	@Given("the user should be able to zoom in and zoom out of the Saved Customer Product Combinations table using the + and - icons")
+	public void the_user_should_be_able_to_zoom_in_and_zoom_out_of_the_saved_customer_product_combinations_table_using_the_and_icons() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("the user should be able to click on the column filter icon to select which columns should be displayed in the Saved Customer Product Combinations table")
+	public void the_user_should_be_able_to_click_on_the_column_filter_icon_to_select_which_columns_should_be_displayed_in_the_saved_customer_product_combinations_table() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
 	// Saved Customer Product Combinations table - Search and Select a record from
 	// the table
 	@Then("the user should be able to search for a record and select it in the Saved Customer Product Combinations table")
@@ -148,6 +160,18 @@ public class ARCA_OverviewSteps {
 
 	@Then("the user should be able to interact with the Rows per page dropdown of the Saved Scenario Simulations table to select a value, which updates the number of visible records")
 	public void the_user_should_be_able_to_interact_with_the_rows_per_page_dropdown_of_the_saved_scenario_simulations_table_to_select_a_value_which_updates_the_number_of_visible_records() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("the user should be able to zoom in and zoom out of the Saved Scenario Simulations table using the + and - icons")
+	public void the_user_should_be_able_to_zoom_in_and_zoom_out_of_the_saved_scenario_simulations_table_using_the_and_icons() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("the user should be able to click on the column filter icon to select which columns should be displayed in the Saved Scenario Simulations table")
+	public void the_user_should_be_able_to_click_on_the_column_filter_icon_to_select_which_columns_should_be_displayed_in_the_saved_scenario_simulations_table() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}

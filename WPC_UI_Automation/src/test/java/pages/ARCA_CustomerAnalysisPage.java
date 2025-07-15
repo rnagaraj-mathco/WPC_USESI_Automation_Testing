@@ -111,10 +111,6 @@ public class ARCA_CustomerAnalysisPage {
 	By arca_ca_resetBtn = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/button[1]/span[1]");
 
-	// xpath of the Tree Map
-	By arca_fcpTreeMap = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]");
-
 	// xpath of the Save Combination of Filter Customer and Product Combination
 	// screen
 	By arca_fcp_saveCombination = By.xpath(
@@ -336,7 +332,7 @@ public class ARCA_CustomerAnalysisPage {
 		actions.moveToElement(ca_saveCustomerBtn).click().perform();
 		Thread.sleep(1000);
 		System.out.println("=> The Save Customers Button is clicked");
-		waitForElement(arca_fcpTreeMap);
+		waitForElement(arca_fcp_treeMap);
 		waitForElement(arca_fcp_saveCombination);
 		Thread.sleep(2000);
 

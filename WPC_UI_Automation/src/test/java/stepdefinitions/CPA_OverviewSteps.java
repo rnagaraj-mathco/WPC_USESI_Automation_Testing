@@ -41,7 +41,7 @@ public class CPA_OverviewSteps {
 	@Then("the user should be able to search for a keyword in the Saved Customer Peer Selection table")
 	public void the_user_should_be_able_to_search_for_a_keyword_in_the_saved_customer_peer_selection_table()
 			throws IOException, InterruptedException {
-		cpa_overviewPage.searchForKeyword_SCP();
+		cpa_overviewPage.searchForKeywordSCPS();
 	}
 
 	@Then("the user should be able to click on the Create Sensitivity Scenario button and get redirected to the Create Scenario screen only if one record from the Saved Customer Peer Selection table is selected")
@@ -54,15 +54,13 @@ public class CPA_OverviewSteps {
 	public void the_user_clicks_on_the_create_sensitivity_scenario_button_without_selecting_any_records_an_error_message_should_be_displayed()
 			throws IOException, InterruptedException {
 		cpa_overviewPage.createSensitivityScenarioBtnWithoutSelection();
-//	    if (!cpa_overviewPage.isErrorMessageVisible()) {
-//            throw new AssertionError("Error message not shown when the Create Sensitivity Scenario Button is clicked without selecting the record.");
-//        }
+
 	}
 
 	@When("the user should be able to click on the Edit button of any record of the Saved Customer Peer Selection table, which then redirects to the Peer Selection screen")
 	public void the_user_should_be_able_to_click_on_the_edit_button_of_any_record_of_the_saved_customer_peer_selection_table_which_then_redirects_to_the_peer_selection_screen()
 			throws IOException, InterruptedException {
-		cpa_overviewPage.editButtonPeerSelections();
+		cpa_overviewPage.editButtonSCPS();
 	}
 
 	@When("the user clicks on the delete dropdown of the Saved Customer Peer Selection table, then should get options and if the Delete is selected then that record should get deleted after clicking on the delete icon")
@@ -95,7 +93,7 @@ public class CPA_OverviewSteps {
 	public void the_user_should_be_able_to_search_for_a_record_and_select_it_in_the_saved_customer_peer_selection_table()
 			throws IOException, InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
-		cpa_overviewPage.searchForRecord_SCP();
+		cpa_overviewPage.searchForRecordSCPS();
 	}
 
 	// Saved Sensitivity Simulation Scenario - Selecting a Sensitivity Simulation
@@ -105,7 +103,7 @@ public class CPA_OverviewSteps {
 	public void the_user_should_be_able_to_search_for_a_keyword_in_the_saved_sensitivity_simulation_scenario_table()
 			throws IOException, InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
-		cpa_overviewPage.searchForKeyword_SSS();
+		cpa_overviewPage.searchForKeywordSSS();
 	}
 
 	@Then("the user should be able to click on the View Impact button and get redirected to the View Scenario Impact screen only if any one record from the Saved Sensitivity Simulation scenario table is selected")
@@ -156,7 +154,7 @@ public class CPA_OverviewSteps {
 	public void the_user_should_be_able_to_search_for_a_record_and_select_it_in_the_saved_sensitivity_simulation_scenario_table()
 			throws IOException, InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
-		cpa_overviewPage.searchForRecord_SSS();
+		cpa_overviewPage.searchForRecordSSS();
 	}
 
 }

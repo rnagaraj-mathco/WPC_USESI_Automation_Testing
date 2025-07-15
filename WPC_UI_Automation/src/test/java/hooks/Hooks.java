@@ -23,10 +23,10 @@ public class Hooks {
 		driver = DriverFactory.getDriver();
 		pageManager = new PageObjectManager(driver);
 
-		if (scenario.getSourceTagNames().contains("@AutoRootCauseAnalysis_CustomerAnalysis")) { // add
-			// @Home,@CustomerPeerAnalysis_Overview,@CustomerPeerAnalysis_BranchCustomerSelection,@CustomerPeerAnalysis_PeerSelection,
-			// @AutoRootCauseAnalysis_Overview,@AutoRootCauseAnalysis_CustomerAnalysis
-			// to run that code
+		if (scenario.getSourceTagNames().contains("@CPA_BranchCustomerSelection")) { // add
+			// @Home,@CPA_Overview,@CPA_BranchCustomerSelection,@CustomerPeerAnalysis_PeerSelection,
+			// @AutoRootCauseAnalysis_Overview,@AutoRootCauseAnalysis_CustomerAnalysis,@ARCA_FilterCustomerProductCombinations
+			// @ARCA_CustomerSelection, @AutoRootCauseAnalysis_ProfitBridge
 			// Auto-login only for Dashboard, CustomerPeerAnalysisOverview scenarios
 			LoginPage loginPage = pageManager.getLoginPage();
 			loginPage.navigateTo();

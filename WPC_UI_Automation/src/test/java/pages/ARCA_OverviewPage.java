@@ -339,7 +339,7 @@ public class ARCA_OverviewPage {
 		WebElement createNewScenrioBtnSCPC = waitForElement(arca_createNewScenrioBtnSCPC);
 		createNewScenrioBtnSCPC.click();
 		System.out.println(
-				"=> The Create New Scenario button was clicked without selecting a record which throws an error message");
+				"=> The Create New Scenario button was clicked without selecting a record which throwed an error message");
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);

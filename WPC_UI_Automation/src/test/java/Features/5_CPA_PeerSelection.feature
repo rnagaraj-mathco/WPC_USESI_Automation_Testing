@@ -31,7 +31,7 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
     #And the user should be able to click the Back button, which then redirects to the Branch/Customer Selection page
      #--Then user should be able to interact with the Rows per page dropdown of the Select Target Customer for Peer Matching table and select a value, which updates the visible records
 
-#DONE -But Reset is pending
+#DONE -But Reset is pending for that try to use select all checkbox in the table header
 
  #Peer Selection 02 Comparative Peer Group Selection -- SPMC - Peer Dropdown - Table - Buttons
 	Scenario: Verify that the user is able to select the peers by clicking on the Select Peer Matching Criteria button and 
