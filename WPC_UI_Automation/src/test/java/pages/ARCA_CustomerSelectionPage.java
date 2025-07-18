@@ -3,6 +3,8 @@ package pages;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -106,7 +108,14 @@ public class ARCA_CustomerSelectionPage {
 
 	// xpath of the Select All row checkbox - SRCP
 	By arca_cs_selectAllCheckboxSRCP = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/thead[1]/tr[1]/th[1]/div[1]/div[1]/div[1]/span[1]/span[1]/input[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/thead[1]/tr[1]/th[1]/div[1]/div[1]/div[1]");
+// xpath for selecting the commodity value:01
+	By arca_cs_selectCommodityValue01 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
+
+	// xpath for selecting the commodity value:01
+	By arca_cs_selectCommodityValue02 = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
 
 	// xpath of the Header checkbox -SRCP
 	By arca_cs_headerCheckboxSRCP = By.xpath("//thead//input[@type='checkbox']");
@@ -318,7 +327,71 @@ public class ARCA_CustomerSelectionPage {
 		WebElement cs_selectAllCheckboxSRCP = waitForElement(arca_cs_selectAllCheckboxSRCP);
 		cs_selectAllCheckboxSRCP.click();
 		waitForElement(arca_cs_tableSRCP);
+		Thread.sleep(1000);
 
-		// VALIDATION IS PENDING
 	}
+
+	// Clicks the Select All checkbox in the SRCP table header
+	public void resetBtnSRCP() throws IOException, InterruptedException {
+		// waits for the SRCP - Select All Checkbox
+		WebElement cs_resetBtnSRCP = waitForElement(arca_cs_resetBtnSRCP);
+		cs_resetBtnSRCP.click();
+		waitForElement(arca_cs_tableSRCP);
+		Thread.sleep(1000);
+
+	}
+
+	// Locate the row
+	private List<WebElement> getAllRows() {
+		return driver.findElements(By.xpath("//table//tbody/tr"));
+	}
+
+	// Extract Commodity Code (Customer ID) from 2nd column
+	private String getCommodityCode(WebElement row) {
+		return row.findElement(By.xpath("td[2]")).getText().trim();
+	}
+
+	// Extract checkbox from 1st column
+	private WebElement getCheckbox(WebElement row) {
+		return row.findElement(By.xpath(".//input[@type='checkbox']"));
+	}
+
+	// List to check
+	List<String> idsToCheck = Arrays.asList("01230", "15100", "23151");
+
+	// IDs to uncheck
+	List<String> idsToUncheck = Arrays.asList("27100", "23151");
+
+	// Selects the commodity code from SRCP table
+	public void selectCommoditySRCP() throws IOException, InterruptedException {
+
+		for (WebElement row : getAllRows()) {
+			String code = getCommodityCode(row);
+			WebElement checkbox = getCheckbox(row);
+
+			if (idsToCheck.contains(code) && !checkbox.isSelected()) {
+				checkbox.click();
+				System.out.println("=> The Selected Commodity Code are: " + code);
+			}
+		}
+	}
+
+	// Uncheck the commodity code
+	public void deSelectCommoditySRCP() throws IOException, InterruptedException {
+
+		for (WebElement row : getAllRows()) {
+			String code = getCommodityCode(row);
+			WebElement checkbox = getCheckbox(row);
+
+			if (idsToUncheck.contains(code) && checkbox.isSelected()) {
+				checkbox.click();
+				System.out.println("=> The Deslected Commodity Code are: " + code);
+			}
+		}
+	}
+
+	// Clicks on Save and Analyze button arca_cs_saveAndAnalyzeBtnSRCP
+	public void saveBtnSRCP() throws IOException, InterruptedException {
+	}
+
 }

@@ -6,8 +6,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -282,34 +284,81 @@ public class ARCA_CustomerAnalysisPage {
 	By plotDots = By.cssSelector("g.scatterlayer g.trace path.point");
 	By tooltipSelector = By.cssSelector("g.hovertext");
 
-	public void customerSelectionPlot() throws IOException, InterruptedException {
-		System.out.println("=> Starting Plotly Dot Selection and Hover");
+	public List<String> rootCauseCustomerSelectionPlot() throws IOException, InterruptedException {
 
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(plotDots));
-		List<WebElement> dots = driver.findElements(plotDots);
+		// ✅ Provide your target customer IDs (only numbers)
+		List<String> targetCustomerIds = Arrays.asList("48927", "99308", "46777", "87327", "318794"); // Example: One or
+																										// more
+		List<String> clickedIds = new ArrayList<>();
 
-		if (dots.size() == 0) {
-			throw new AssertionError("=> No customer dots found in the Plotly graph.");
+		// ✅ Locate all scatter plot dots (SVG <path class="point">)
+		List<WebElement> scatterDots = driver.findElements(By.xpath("//*[name()='path' and contains(@class,'point')]"));
+		System.out.println("=> The Total customers present for the selected branch(es) are: " + scatterDots.size());
+
+		for (WebElement dot : scatterDots) {
+			try {
+				// ✅ Hover on the dot
+				actions.moveToElement(dot).perform();
+				Thread.sleep(800); // Let tooltip show
+
+				// ✅ Extract tooltip text from Plotly hoverlayer
+				List<WebElement> tooltipElements = driver
+						.findElements(By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']"));
+
+				String tooltip = tooltipElements.stream().map(WebElement::getText).collect(Collectors.joining(" "))
+						.trim();
+
+				// ✅ Extract numeric ID (first number only)
+				String extractedId = tooltip.replaceAll("[^0-9]", " ").trim().split(" ")[0];
+
+				if (!extractedId.isEmpty() && targetCustomerIds.contains(extractedId)
+						&& !clickedIds.contains(extractedId)) {
+
+					System.out.println("=> The Customer ID matched: " + extractedId);
+					clickedIds.add(extractedId);
+
+					// ✅ Try native click first
+					try {
+						if (targetCustomerIds.size() > 1) {
+							actions.keyDown(Keys.CONTROL).click(dot).keyUp(Keys.CONTROL).build().perform();
+						} else {
+							dot.click();
+						}
+					} catch (Exception e) {
+//							System.out.println("⚠ Native click failed. Using JavaScript click.");
+
+						// ✅ Fallback to JS click
+						String jsClickScript = "var ev = new MouseEvent('click', {"
+								+ "bubbles: true, cancelable: true, view: window, ctrlKey: arguments[1] });"
+								+ "arguments[0].dispatchEvent(ev);";
+
+						((JavascriptExecutor) driver).executeScript(jsClickScript, dot, targetCustomerIds.size() > 1);
+					}
+
+					Thread.sleep(700); // allow click effect
+
+					// ✅ Stop loop if all IDs matched
+					if (clickedIds.containsAll(targetCustomerIds)) {
+						System.out.println("=> All the target Customer IDs are clicked. Ending iteration.");
+						break;
+					}
+				}
+
+			} catch (Exception e) {
+//					System.out.println("⚠ Error hovering/clicking: " + e.getMessage());
+			}
 		}
 
-		List<String> selectedBillToIds = new ArrayList<>();
-		for (WebElement dot : dots) {
-			actions.moveToElement(dot).perform();
-			Thread.sleep(500); // Let tooltip load
-
-			WebElement tooltip = wait.until(ExpectedConditions.visibilityOfElementLocated(tooltipSelector));
-			String tooltipText = tooltip.getText();
-
-			// Extract BILL TO ID from tooltip
-			String billToId = Arrays.stream(tooltipText.split("\n"))
-					.filter(line -> line.trim().startsWith("BILL TO ID")).map(line -> line.split(":")[1].trim())
-					.findFirst().orElse("UNKNOWN");
-
-			selectedBillToIds.add(billToId);
-			System.out.println("=> Selected: " + billToId);
+		// ✅ Final Result
+		if (clickedIds.isEmpty()) {
+			System.out.println("=> No matching Customer IDs were clicked on the scatter plot.");
+		} else {
+			System.out.println("=> The Final clicked Customer IDs:");
+			clickedIds.forEach(id -> System.out.println(" - " + id));
 		}
+		Thread.sleep(2000);
+		return clickedIds;
 
-		System.out.println("=> Total selected BILL TO IDs: " + selectedBillToIds.size());
 	}
 
 	// Select All Customers selection
@@ -318,7 +367,7 @@ public class ARCA_CustomerAnalysisPage {
 		WebElement ca_rootCauseCustomerPlotSelectAllCheckboxes = waitForElement(
 				arca_ca_rootCauseCustomerPlotSelectAllCheckboxes);
 		ca_rootCauseCustomerPlotSelectAllCheckboxes.click();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		waitForElement(arca_ca_rootCauseCustomerPlot);
 		System.out.println(
 				"=> The Select All Customers option is selected and all the customers in plot are got selected");
@@ -347,16 +396,22 @@ public class ARCA_CustomerAnalysisPage {
 		System.out.println(
 				"=> Successfully landed on Customer Selection - Filter Customer and Product Combinations screen");
 		waitForElement(arca_fcp_treeMap);
+		driver.navigate().back();
 	}
 
 	// Reset Btn
 	public void resetBtn() throws IOException, InterruptedException {
 		// Waits for the Save Customers Button
+		waitForElement(arca_ca_rootCauseCustomerPlot);
+		selectAllCustomersCheckBox();
+		Thread.sleep(5000);
+		waitForElement(arca_ca_rootCauseCustomerPlot);
 		WebElement ca_resetBtn = waitForElement(arca_ca_resetBtn);
 		actions.moveToElement(ca_resetBtn).click().perform();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		System.out.println("=> The Reset Button is clicked and the plot is reverted to its previous state");
 		waitForElement(arca_ca_rootCauseCustomerPlot);
+
 	}
 
 }

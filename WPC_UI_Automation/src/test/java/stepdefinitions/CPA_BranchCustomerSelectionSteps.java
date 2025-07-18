@@ -66,11 +66,26 @@ public class CPA_BranchCustomerSelectionSteps {
 		cpa_branchCustomerSelections.clickAnalyze();
 	}
 
-	@Then("the user selects customers from the plot and dropdown, clicks Save Customers, and is redirected to the Peer Selection screen")
-	public void the_user_selects_customers_from_the_plot_and_dropdown_clicks_save_customers_and_is_redirected_to_the_peer_selection_screen()
+	@Then("the user selects customers from the dropdown, clicks Save Customers, and is redirected to the Peer Selection screen")
+	public void the_user_selects_customers_from_the_dropdown_clicks_save_customers_and_is_redirected_to_the_peer_selection_screen()
+			throws IOException, InterruptedException {
+		// Write code here that turns the phrase above into concrete actions
+		cpa_branchCustomerSelections.customerSelectionDropdown();
+	}
+
+	@Then("the user selects customers from the scatter plot, clicks Save Customers, and is redirected to the Peer Selection screen")
+	public void the_user_selects_customers_from_the_scatter_plot_clicks_save_customers_and_is_redirected_to_the_peer_selection_screen()
 			throws IOException, InterruptedException {
 		// Write code here that turns the phrase above into concrete actions
 		cpa_branchCustomerSelections.customerSelectionPlot();
+	}
+
+	// customer selection from both dropdown and scatter plot
+	@Then("the user selects customers from the both the dropdown and scatter plot, clicks Save Customers, and is redirected to the Peer Selection screen")
+	public void the_user_selects_customers_from_both_the_dropdown_and_scatter_plot_clicks_save_customers_and_is_redirected_to_the_peer_selection_screen()
+			throws IOException, InterruptedException {
+		// Write code here that turns the phrase above into concrete actions
+		cpa_branchCustomerSelections.customerSelectionDropdownPlot();
 	}
 
 }

@@ -1,4 +1,4 @@
-@CustomerPeerAnalysis_PeerSelection
+@CPA_PeerSelection
 Feature: Land on the Peer Selection screen where the user should be able to select a customer from the set of customers chosen on the 
          Branch/Customer Selection screen, and then select peers for the Selected Target Customer based on threshold and similarity model.
 #DONE
@@ -38,23 +38,23 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
 	          select peers from the dropdown and also select from the Select Comparative Peer Group table for the Selected Target Customer
 		Given the user is on the Peer Selection page of the Customer Peer Analysis
     #Then the user should be able to search for a keyword in the Select Target Customer for Peer Matching table
-    #And the user should be able to click on the Download icon present in the Select Target Customer for Peer Matching table header, which downloads the table records as an Excel file
+    And the user should be able to click on the Download icon present in the Select Target Customer for Peer Matching table header, which downloads the table records as an Excel file
     #--And the user should be able to zoom in and zoom out of the Select Target Customer for Peer Matching table using the + and - icons
     #--And the user should be able to click on the column filter icon to select which columns should be displayed in the Select Target Customer for Peer Matching table
-    #When the user clicks on the Select Customer button without selecting any records, an error message should be displayed
+    When the user clicks on the Select Customer button without selecting any records, an error message should be displayed
     And the user should be able to select a customer record from the Select Target Customer for Peer Matching table and click the Select Customer button, which redirects to the Peers Selection screen only if one record is selected
     #SPMC - Peer Dropdown - Table - Buttons
     Then the user is on the Peer Selection - Comparative Peer Group Selection screen, where the user should be able to click on the Set Peer Matching Criteria button to enter threshold values and select a similarity model
     Then the user should be able to click on the Select Peers Dropdown and choose the desired peers count 
-    #And the user should be able to search for a keyword in the Select Comparative Peer Group table 
-    #And the user should be able to click on the download icon present in the Select Comparative Peer Group table header, which downloads the table records as an Excel file
+    And the user should be able to search for a keyword in the Select Comparative Peer Group table 
+    And the user should be able to click on the download icon present in the Select Comparative Peer Group table header, which downloads the table records as an Excel file
      #--And the user should be able to zoom in and zoom out of the Select Comparative Peer Group table using the + and - icons
      #--And the user should be able to click on the column filter icon to select which columns should be displayed in the Select Comparative Peer Group table
     Then the user should be able to select the peers by clicking on the checkbox of each peer record
-    #And the user should be able to deselect the peers by clicking on the checkbox of each peer record
-    #And the user should be able to search for the peers records and select the peers
-    #And the user should be able to search for the peers records and deselect the peers
-    #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
+    And the user should be able to deselect the peers by clicking on the checkbox of each peer record
+    And the user should be able to search for the peers records and select the peers
+    And the user should be able to search for the peers records and deselect the peers
+    Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
     #Then the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version
 
 #DONE - But Reset is pending

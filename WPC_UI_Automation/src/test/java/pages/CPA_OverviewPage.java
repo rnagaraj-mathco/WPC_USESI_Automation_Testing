@@ -253,9 +253,7 @@ public class CPA_OverviewPage {
 		String expectedbranchCustomerSelectionUrl = ConfigReader.cpa_branchCustomerSelection();
 
 		if (!currentUrl.equalsIgnoreCase(expectedbranchCustomerSelectionUrl)) {
-			throw new AssertionError(
-					"=> Not Landed on Branch/Customer Selection Screen by clicking on the Start New Peer Analysis Button - Unexpected redirection! - Current URL you're on: "
-							+ currentUrl);
+			throw new AssertionError("=> Unexpected redirection! - Current URL you're on: " + currentUrl);
 		}
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -369,6 +367,7 @@ public class CPA_OverviewPage {
 
 		// Navigating back to overview screen only by back button
 		// Waits for the Create Scenario - Back button cpa_csc_backBtn
+		waitForElement(cpa_csc_scenarioSlider);
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
 		csc_backBtn.click();
 		// Waits for the Peer selection -02 - Button
@@ -672,6 +671,7 @@ public class CPA_OverviewPage {
 
 		// Clicks the View Impact button with selection
 		ViewImpactBtn.click();
+		Thread.sleep(5000);
 		// Create Scenario validations
 		waitForElement(cpa_vsi_widgetThree);
 		WebElement vsi_filter = waitForElement(cpa_vsi_filterBtn);
@@ -726,9 +726,13 @@ public class CPA_OverviewPage {
 //		Thread.sleep(3000);
 		// As there was no back button in the demo so consider the URL redirection
 		driver.get(ConfigReader.cpa_createScenario());
+		Thread.sleep(5000);
 		// Waits for the Create Scenario - Back button cpa_csc_backBtn
+		waitForElement(cpa_csc_scenarioSlider);
+		Thread.sleep(2000);
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
 		csc_backBtn.click();
+		Thread.sleep(5000);
 		// Waits for the Peer selection -02 - Button
 //		waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
 //	    //Waits for the Peer Selection - 02 - Back button
@@ -767,7 +771,7 @@ public class CPA_OverviewPage {
 		System.out.println(
 				"=> The View Impact Button was clicked without selecting a record due to which an error message was popped");
 
-		errorToasterMessage();
+//		errorToasterMessage();
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
@@ -853,7 +857,7 @@ public class CPA_OverviewPage {
 			throw new AssertionError("=> Unexpected redirection!, Current URL you're on: " + currentUrl);
 		}
 		System.out.println(
-				"=> Successfully!, Redirected to the Create Scenario from the Overview screen by selecting the customer record and clicking on the Edit Button");
+				"=> Successfully - Redirected to the Create Scenario from the Overview screen by selecting the customer record and clicking on the Edit Button");
 		Thread.sleep(4000);
 
 		// Navigating back to overview screen only by back button

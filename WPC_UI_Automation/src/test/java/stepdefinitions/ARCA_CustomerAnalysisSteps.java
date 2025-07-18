@@ -33,7 +33,7 @@ public class ARCA_CustomerAnalysisSteps {
 	@Then("the user should be able to Select Customers from the Root Cause Customers for the Selected Cost Metric plot")
 	public void the_user_should_be_able_to_select_customers_from_the_root_cause_customers_for_the_selected_cost_metric_plot()
 			throws IOException, InterruptedException {
-		arca_customerAnalysisPage.customerSelectionPlot();
+		arca_customerAnalysisPage.rootCauseCustomerSelectionPlot();
 	}
 
 	@Then("the user should click on the Save Customers button which then saves the selection and redirects to the Filter Customer and Product Combinations screen")

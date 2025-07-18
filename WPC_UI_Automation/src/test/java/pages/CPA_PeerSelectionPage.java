@@ -202,6 +202,9 @@ public class CPA_PeerSelectionPage {
 	By CPA_CS_SliderComponent = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]");
 
+	By cpa_csc_scenarioSlider = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]");
+
 	// Loading the Peer Selection Screen
 
 	public void navigateTo() throws IOException, InterruptedException {
@@ -209,8 +212,8 @@ public class CPA_PeerSelectionPage {
 		driver.get(ConfigReader.cpa_peerSelection());
 		// Function waits till the Entire Overview Screen is getting loaded
 		waitForElement(CPA_PS1_SelectTargetCustomerTable);
-		System.out.println(
-				"--- Loaded the Peer Selection -01 Screen where Target customer will be selected for Peer Matching");
+//		System.out.println(
+//				"--- Loaded the Peer Selection -01 Screen where Target customer will be selected for Peer Matching");
 		Thread.sleep(2000);
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -223,9 +226,7 @@ public class CPA_PeerSelectionPage {
 		String currentUrl = driver.getCurrentUrl();
 		String expectedPeerSelectionUrl = ConfigReader.cpa_peerSelection();
 		if (!currentUrl.equalsIgnoreCase(expectedPeerSelectionUrl)) {
-			throw new AssertionError(
-					"--- Not Landed on the Peer Selection Screen --- Unexpected redirection :( !Current URL you're on: "
-							+ currentUrl);
+			throw new AssertionError("=> Unexpected Redirection and landed on wrong screen " + currentUrl);
 		}
 
 	}
@@ -237,8 +238,8 @@ public class CPA_PeerSelectionPage {
 				CPA_PS1_SearchKeywordSelectTargetCustomerTable);
 		PS1_SearchKeywordSelectTargetCustomerTable.click();
 		PS1_SearchKeywordSelectTargetCustomerTable.clear();
-		PS1_SearchKeywordSelectTargetCustomerTable.sendKeys("Nagaraj");
-		System.out.println("--- Searched: Keyword search was done");
+		PS1_SearchKeywordSelectTargetCustomerTable.sendKeys("135763");
+//		System.out.println("--- Searched: Keyword search was done");
 		Thread.sleep(5000);
 		// Take screenshot after the keyword is searched
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -252,7 +253,7 @@ public class CPA_PeerSelectionPage {
 		PS1_SearchKeywordSelectTargetCustomerTable.sendKeys(Keys.CONTROL + "a");
 		PS1_SearchKeywordSelectTargetCustomerTable.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(2000);
-		System.out.println("--- Searched: Keyword search has been cleared from the search field");
+//		System.out.println("--- Searched: Keyword search has been cleared from the search field");
 
 	}
 
@@ -268,16 +269,16 @@ public class CPA_PeerSelectionPage {
 		WebElement PS1_SelectCustomerBtn = waitForElement(CPA_PS1_SelectCustomerBtn);
 		// Extracts the BILL To ID of the first row
 		String PS1_billToId = PS1_SelectTargetCustomerTableFirstRow_BillTOId.getText().trim();
-		System.out.println(
-				"--- The Selected Target Customer BILL To ID in Select Target Customer table is:" + PS1_billToId);
+//		System.out.println(
+//				"--- The Selected Target Customer BILL To ID in Select Target Customer table is:" + PS1_billToId);
 		// Clicks the First row record
 		PS1_SelectTargetCustomerTableFirstRow.click();
-		System.out.println("--- Clicked: Select Target Customer for Peer Matching Table first row");
+//		System.out.println("--- Clicked: Select Target Customer for Peer Matching Table first row");
 		Thread.sleep(5000);
 
 		// Clicks the Select Customer button
 		PS1_SelectCustomerBtn.click();
-		System.out.println("--- Clicked: Select Customer Button");
+//		System.out.println("--- Clicked: Select Customer Button");
 
 		// Waits till the Comparative Peer Group Selection table gets loaded in the Peer
 		// Selection - 02
@@ -296,25 +297,23 @@ public class CPA_PeerSelectionPage {
 				CPA_PS2_ComparativePeerGroupSelectionTableFirstRow_BillToId);
 		// Extracts the BILL To ID from the first row
 		String PS2_billToId = PS2_ComparativePeerGroupSelectionTableFirstRow_BillToId.getText().trim();
-		System.out.println("--- The Selected Target Customer BILL To ID in Comparative Peer Group Selection table is:"
+		System.out.println("=> The Selected Target Customer BILL To ID in Comparative Peer Group Selection table is:"
 				+ PS2_billToId);
 
 		// Comparing both the BILL To ID's
 		if (!PS1_billToId.equals(PS2_billToId)) {
-			throw new AssertionError("--- BILL To ID mismatch: Select Target Customer table = " + PS1_billToId
+			throw new AssertionError("=> There is BILL To ID mismatch: Select Target Customer table = " + PS1_billToId
 					+ ", Comparative Peer Group table = " + PS2_billToId);
 		}
 		System.out.println(
-				" --- The BILL To ID's matches and ensures the same record passed to the Peer Selection -02 screen");
+				" => The BILL To ID's matches and ensures the same record passed to the Peer Selection -02 screen");
 
 		// Verify whether it landed on the Customer Peer Analysis Card - Selections -
 		// Peer Selection
 		String currentUrl = driver.getCurrentUrl();
 		String expectedPeerSelectionUrl = ConfigReader.cpa_peerSelection();
 		if (!currentUrl.equalsIgnoreCase(expectedPeerSelectionUrl)) {
-			throw new AssertionError(
-					"--- Not Landed on the Peer Selection Screen --- Unexpected redirection :( !Current URL you're on: "
-							+ currentUrl);
+			throw new AssertionError("=> Unexpected Redirection and landed on wrong screen " + currentUrl);
 		}
 
 		Thread.sleep(1000);
@@ -327,7 +326,7 @@ public class CPA_PeerSelectionPage {
 		WebElement PS1_SelectCustomerBtn = waitForElement(CPA_PS1_SelectCustomerBtn);
 		// Clicks the Create Sensitivity Scenario button
 		PS1_SelectCustomerBtn.click();
-		System.out.println("--- Clicked: Select Customer Button without selecting a record");
+//		System.out.println("--- Clicked: Select Customer Button without selecting a record");
 		Thread.sleep(5000);
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -344,7 +343,7 @@ public class CPA_PeerSelectionPage {
 		WebElement PS1_DownloadBtn_SelectTargetCustomerTable = waitForElement(
 				CPA_PS1_DownloadBtn_SelectTargetCustomerTable);
 		PS1_DownloadBtn_SelectTargetCustomerTable.click();
-		System.out.println("--- Clicked - Download Button of the Select Target Customer for Peer Matching table");
+//		System.out.println("=> The Download Button of the Select Target Customer for Peer Matching table was clicked");
 		Thread.sleep(5000);
 
 	}
@@ -356,7 +355,7 @@ public class CPA_PeerSelectionPage {
 		Thread.sleep(1000);
 		PS2_BackBtn.click();
 		System.out.println(
-				"--- Clicked - Back Button of Peer Selection - 02 and got redirected to the Peer Selection - 01");
+				"=> The Back Button of Peer Selection - 02 was clicked and redirected to the Peer Selection - 01");
 		// Waits till the table gets loaded
 		waitForElement(CPA_PS1_SelectTargetCustomerTable);
 		Thread.sleep(3000);
@@ -370,7 +369,7 @@ public class CPA_PeerSelectionPage {
 		WebElement PS1_BackBtn = waitForElement(CPA_PS1_BackBtn);
 		PS1_BackBtn.click();
 		System.out.println(
-				"--- Clicked - Back Button of Peer Selection - 01 and got redirected to the Branch/Customer Selection Screen");
+				"=> The Back Button of the Peer Selection - 01 was clickd and redirected to the Branch/Customer Selection Screen");
 		waitForElement(CPA_GeographicalMap);
 		Thread.sleep(5000);
 
@@ -389,14 +388,14 @@ public class CPA_PeerSelectionPage {
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("105097");
-		System.out.println("--- Searched the Target Customer Record: Customer ID 105097");
+//		System.out.println("--- Searched the Target Customer Record: Customer ID 105097");
 		Thread.sleep(5000);
 		// waits for the searched record
 		WebElement PS1_SearchedRecord_SelectTargetCustomerTable = waitForElement(
 				CPA_PS1_SearchedRecord_SelectTargetCustomerTable);
 
 		PS1_SearchedRecord_SelectTargetCustomerTable.click();
-		System.out.println("--- Selected the Searched Target Customer Record: Customer ID 105097");
+//		System.out.println("--- Selected the Searched Target Customer Record: Customer ID 105097");
 		// Take screenshot after the keyword is searched
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
@@ -408,17 +407,17 @@ public class CPA_PeerSelectionPage {
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.CONTROL + "a");
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(2000);
-		System.out.println("--- Searched record has been cleared from the search field");
+//		System.out.println("--- Searched record has been cleared from the search field");
 		// Extracts the BILL To ID of the first row
 		String PS1_billToId_record = PS1_SearchedRecordBillToId_SelectTargetCustomerTable.getText().trim();
-		System.out.println("--- The Selected Target Customer BILL To ID in Select Target Customer table is:"
-				+ PS1_billToId_record);
+		System.out.println(
+				"=> The Selected Target Customer BILL To ID in Select Target Customer table is:" + PS1_billToId_record);
 
 		// waits for the Select Customer button to get load
 		WebElement PS1_SelectCustomerBtn = waitForElement(CPA_PS1_SelectCustomerBtn);
 		// Clicks the Select Customer button with selection
 		PS1_SelectCustomerBtn.click();
-		System.out.println("--- Clicked: Select Customer Button");
+//		System.out.println("--- Clicked: Select Customer Button");
 		// Waits till the Comparative Peer Group Selection table gets loaded in the Peer
 		// Selection - 02
 		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
@@ -429,24 +428,24 @@ public class CPA_PeerSelectionPage {
 				CPA_PS2_ComparativePeerGroupSelectionTableFirstRow_BillToId);
 		// Extracts the BILL To ID from the first row
 		String PS2_billToId_record = PS2_ComparativePeerGroupSelectionTableFirstRow_BillToId.getText().trim();
-		System.out.println("--- The Selected Target Customer BILL To ID in Comparative Peer Group Selection table is:"
+		System.out.println("=> The Selected Target Customer BILL To ID in Comparative Peer Group Selection table is:"
 				+ PS2_billToId_record);
 
 		// Comparing both the BILL To ID's
 		if (!PS1_billToId_record.equals(PS2_billToId_record)) {
-			throw new AssertionError("--- BILL To ID mismatch: Select Target Customer table = " + PS1_billToId_record
-					+ ", Comparative Peer Group table = " + PS2_billToId_record);
+			throw new AssertionError("=> There is a BILL To ID mismatch: Select Target Customer table = "
+					+ PS1_billToId_record + ", Comparative Peer Group table = " + PS2_billToId_record);
 		}
 		System.out.println(
-				" --- The BILL To ID's matches and ensures the same record passed to the Peer Selection -02 screen");
+				" => The BILL To ID's matches and ensures the same record passed to the Peer Selection -02 screen");
 
 		// Clicking Back button of Peer Selection - 02 for redirection to Peer Selection
 		// - 01
 		WebElement PS2_BackBtn = waitForElement(CPA_PS2_BackBtn);
 		Thread.sleep(3000);
 		PS2_BackBtn.click();
-		System.out.println(
-				"--- Clicked - Back Button of Peer Selection - 02 and got redirected to the Peer Selection - 01");
+//		System.out.println(
+//				"--- Clicked - Back Button of Peer Selection - 02 and got redirected to the Peer Selection - 01");
 		// Waits till the table gets loaded
 		waitForElement(CPA_PS1_SelectTargetCustomerTable);
 
@@ -455,9 +454,7 @@ public class CPA_PeerSelectionPage {
 		String currentUrl = driver.getCurrentUrl();
 		String expectedPeerSelectionUrl = ConfigReader.cpa_peerSelection();
 		if (!currentUrl.equalsIgnoreCase(expectedPeerSelectionUrl)) {
-			throw new AssertionError(
-					"--- Not Landed on the Peer Selection Screen --- Unexpected redirection :( !Current URL you're on: "
-							+ currentUrl);
+			throw new AssertionError("=> Unexpected Redirection and landed on wrong screen" + currentUrl);
 		}
 		Thread.sleep(4000);
 	}
@@ -477,7 +474,7 @@ public class CPA_PeerSelectionPage {
 				CPA_PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown);
 		PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown.click();
 		Thread.sleep(3000);
-		System.out.println("--- Clicked: Select Model Dropdown");
+//		System.out.println("--- Clicked: Select Model Dropdown");
 
 		// Select Model - Dropdown - Options
 		WebElement PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options = waitForElement(
@@ -485,7 +482,7 @@ public class CPA_PeerSelectionPage {
 		String selectedModel = PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options.getText().trim();
 		PS2_SetPeerMatchingCriteriaBtn_SelectModelDropdown_Options.click();
 		Thread.sleep(3000);
-		System.out.println("--- Clicked: Select Model Dropdown Options: " + selectedModel);
+//		System.out.println("--- Clicked: Select Model Dropdown Options: " + selectedModel);
 		// Maps dropdown model options to the model options present in the table
 		String expectedModelText;
 		if (selectedModel.equalsIgnoreCase("Existing Model")) {
@@ -493,7 +490,7 @@ public class CPA_PeerSelectionPage {
 		} else if (selectedModel.equalsIgnoreCase("Enhanced Model")) {
 			expectedModelText = "Enhanced Similarity Model";
 		} else {
-			throw new IllegalArgumentException("--- Unknown model selected: " + selectedModel);
+			throw new IllegalArgumentException("=> Unknown model selected: " + selectedModel);
 		}
 		// Set Threshold Value
 		WebElement PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue = waitForElement(
@@ -521,13 +518,13 @@ public class CPA_PeerSelectionPage {
 		// As we are comparing the numerical so we use Double datatype
 		Double enteredThresholdValue = Double.parseDouble(
 				(PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_AfterValue).getAttribute("value").trim());
-		System.out.println("---The Entered Threshold value is:" + enteredThresholdValue);
+		System.out.println("=> The Entered Threshold value is:" + enteredThresholdValue);
 
 		// Apply button
 		WebElement PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_ApplyBtn = waitForElement(
 				CPA_PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_ApplyBtn);
 		PS2_SetPeerMatchingCriteriaBtn_SetThresholdValue_ApplyBtn.click();
-		System.out.println("--- Clicked: Apply button which then updates the table");
+//		System.out.println("--- Clicked: Apply button which then updates the table");
 		Thread.sleep(6000);
 		// Waits for the Comparative Peer Group Selection table
 		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
@@ -550,13 +547,13 @@ public class CPA_PeerSelectionPage {
 					// Model type
 					String modelText = row.findElement(By.xpath("td[17]")).getText().trim();
 					if (!modelText.equalsIgnoreCase(expectedModelText)) {
-						System.out.println(
-								"--- Model mismatch - Expected: " + expectedModelText + ", Found: " + modelText);
+						System.out.println("=> There is a Model mismatch - Expected: " + expectedModelText + ", Found: "
+								+ modelText);
 						mismatchFound = true;
 					}
 
 				} catch (Exception e) {
-					System.out.println("--- Skipped row due to error: " + e.getMessage());
+					System.out.println("=>  Skipped row due to error: " + e.getMessage());
 				}
 			}
 
@@ -577,18 +574,18 @@ public class CPA_PeerSelectionPage {
 		// Similarity score assertion
 		double minValue = scoreValues.stream().min(Double::compareTo).orElse(Double.MAX_VALUE);
 		if (enteredThresholdValue > minValue) {
-			throw new AssertionError("--- Then entered Threshold value is " + enteredThresholdValue
+			throw new AssertionError("=> Then entered Threshold value is " + enteredThresholdValue
 					+ " which is greater than minimum score: " + minValue);
 		} else {
-			System.out.println("--- The entered Threshold value is : " + enteredThresholdValue
+			System.out.println("=> The entered Threshold value is : " + enteredThresholdValue
 					+ " which is lesser than than the minimum value (" + minValue + ") of the similarity score column");
 		}
 
 		// Model assertion
 		if (mismatchFound) {
-			throw new AssertionError("--- Some rows did not match the selected model: " + expectedModelText);
+			throw new AssertionError("=> Some rows did not match with selected model: " + expectedModelText);
 		} else {
-			System.out.println("--- All rows matched the selected model: " + expectedModelText);
+			System.out.println("=> All the rows of table matched with the selected model: " + expectedModelText);
 		}
 
 	}
@@ -623,13 +620,13 @@ public class CPA_PeerSelectionPage {
 		// Open the dropdown
 		WebElement PS2_SelectPeersDropdown = waitForElement(CPA_PS2_SelectPeersDropdown);
 		PS2_SelectPeersDropdown.click();
-		System.out.println("--- Clicked: Select Peers Dropdown");
+//		System.out.println("--- Clicked: Select Peers Dropdown");
 
 		// Select dropdown option
 		WebElement PS2_SelectPeersDropdown_Options = waitForElement(CPA_PS2_SelectPeersDropdown_Options);
 		String optionText = PS2_SelectPeersDropdown_Options.getText().trim(); // Top 5, Top 10, etc.
 		PS2_SelectPeersDropdown_Options.click();
-		System.out.println("--- Clicked: Select Peers Option: " + optionText);
+		System.out.println("=> The Selected Peers Option is: " + optionText);
 
 		// Dismiss dropdown overlay and wait for table
 		new Actions(driver).moveByOffset(10, 10).click().build().perform();
@@ -670,11 +667,11 @@ public class CPA_PeerSelectionPage {
 					checkedBillToIds.add(billToId);
 
 					if (checkedCount > expectedCheckedCount) {
-						throw new AssertionError("--- More checkboxes checked than expected: " + checkedCount);
+						throw new AssertionError("=> More checkboxes checked than expected: " + checkedCount);
 					}
 				} else if (checkedCount < expectedCheckedCount) {
 					// If we are still within expected top N and it’s unchecked, that’s an error
-					throw new AssertionError("--- Row " + (i + 1) + " should be checked but is not.");
+					throw new AssertionError("=> Row " + (i + 1) + " should be checked but is not.");
 				}
 
 				if (checkedCount == expectedCheckedCount) {
@@ -696,8 +693,8 @@ public class CPA_PeerSelectionPage {
 		}
 
 		// Final result validation
-		System.out.println("--- Checked Peer Count: " + checkedCount);
-		System.out.println("---  Checked BILL TO IDs for " + optionText + ": " + checkedBillToIds);
+//		System.out.println("=> The selected Peer Count is : " + checkedCount);
+//		System.out.println("=> The BILL TO IDs checked for for " + optionText + ": " + checkedBillToIds);
 	}
 
 	// Peer Selection 02 Comparative Peer Group Selection
@@ -708,8 +705,8 @@ public class CPA_PeerSelectionPage {
 				CPA_PS2_SearchKeywordComparativePeerGroupSelectionTable);
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
-		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("Nagaraj");
-		System.out.println("--- Searched: Keyword search was done");
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("105097");
+//		System.out.println("--- Searched: Keyword search was done");
 		Thread.sleep(5000);
 
 		// Clearing the Search Keyword
@@ -717,7 +714,7 @@ public class CPA_PeerSelectionPage {
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.CONTROL + "a");
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys(Keys.BACK_SPACE);
 		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
-		System.out.println("--- Searched: Keyword search has been cleared from the search field");
+//		System.out.println("--- Searched: Keyword search has been cleared from the search field");
 
 	}
 
@@ -729,7 +726,7 @@ public class CPA_PeerSelectionPage {
 		WebElement PS2_DownloadBtn_ComparativePeerGroupSelectionTable = waitForElement(
 				CPA_PS2_DownloadBtn_ComparativePeerGroupSelectionTable);
 		PS2_DownloadBtn_ComparativePeerGroupSelectionTable.click();
-		System.out.println("--- Clicked: Download Icon of the Comparative Peer Group Selection Table");
+//		System.out.println("=> The Download Icon of the Comparative Peer Group Selection Table was clicked");
 		Thread.sleep(2000);
 	}
 
@@ -738,34 +735,46 @@ public class CPA_PeerSelectionPage {
 	// Select Peers
 	public void selectPeers() throws IOException, InterruptedException {
 		// Waits for the Peer - 91331
+		List<String> selectedPeersID = new ArrayList<>();
+
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331);
+		String PS2_SelectPeersID01 = PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331.getText();
+		selectedPeersID.add(PS2_SelectPeersID01);
 		PS2_SelectPeers_ComparativePeerGroupSelectionTable_91331.click();
-		System.out.println("--- Selected: Peer 91331");
+//		System.out.println("--- Selected: Peer 91331");
 		Thread.sleep(3000);
 		// Waits for the Peer - 66810
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810);
+		String PS2_SelectPeersID02 = PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810.getText();
+		selectedPeersID.add(PS2_SelectPeersID02);
 		PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810.click();
-		System.out.println("--- Selected: Peer 66810");
+//		System.out.println("--- Selected: Peer 66810");
 		Thread.sleep(3000);
 		// Waits for the Peer - 176174
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174);
+		String PS2_SelectPeersID03 = PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174.getText();
+		selectedPeersID.add(PS2_SelectPeersID03);
 		PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174.click();
-		System.out.println("--- Selected: Peer 176174");
+//		System.out.println("--- Selected: Peer 176174");
 		Thread.sleep(3000);
 		// Waits for the Peer - 192021
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021);
+		String PS2_SelectPeersID04 = PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021.getText();
+		selectedPeersID.add(PS2_SelectPeersID04);
 		actions.moveToElement(PS2_SelectPeers_ComparativePeerGroupSelectionTable_192021).click().perform();
-		System.out.println("--- Selected: Peer 192021");
+//		System.out.println("--- Selected: Peer 192021");
 		Thread.sleep(3000);
 		// Waits for the Peer - 149734
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734);
+		String PS2_SelectPeersID05 = PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734.getText();
+		selectedPeersID.add(PS2_SelectPeersID05);
 		PS2_SelectPeers_ComparativePeerGroupSelectionTable_149734.click();
-		System.out.println("--- Selected: Peer 149734");
+//		System.out.println("=> The Peers Selected by click are: " + selectedPeersID);
 		Thread.sleep(1000);
 	}
 
@@ -777,13 +786,13 @@ public class CPA_PeerSelectionPage {
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174);
 		PS2_SelectPeers_ComparativePeerGroupSelectionTable_176174.click();
-		System.out.println("--- De-Selected: Peer 176174");
+//		System.out.println("--- De-Selected: Peer 176174");
 		Thread.sleep(3000);
 		// Waits for the Peer - 66810
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810 = waitForElement(
 				CPA_PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810);
 		PS2_SelectPeers_ComparativePeerGroupSelectionTable_66810.click();
-		System.out.println("--- De-Selected: Peer 66810");
+//		System.out.println("--- De-Selected: Peer 66810");
 		Thread.sleep(3000);
 
 	}
@@ -801,7 +810,7 @@ public class CPA_PeerSelectionPage {
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
 		// Search's Peer - 25525
 		Thread.sleep(3000);
-		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("25525");
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("176671");
 		Thread.sleep(2000);
 		// Waits for the peer - 25525
 		WebElement PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525 = waitForElement(
@@ -810,9 +819,9 @@ public class CPA_PeerSelectionPage {
 		// Check whether the Peer is checked or not
 		if (!PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525.isSelected()) {
 			PS2_SelectPeers_ComparativePeerGroupSelectionTable_25525.click();
-			System.out.println("--- Searched and Selected the Peer : 25525");
+//			System.out.println("--- Searched and Selected the Peer : 25525");
 		} else {
-			System.out.println("--- Peer 25525 already selected. Skipping click.");
+//			System.out.println("--- Peer 25525 already selected. Skipping click.");
 		}
 		Thread.sleep(5000);
 		// Clearing the Search Keyword
@@ -835,9 +844,9 @@ public class CPA_PeerSelectionPage {
 		// Check whether the Peer is checked or not
 		if (!PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678.isSelected()) {
 			PS2_SelectPeers_ComparativePeerGroupSelectionTable_79678.click();
-			System.out.println("--- Searched and Selected the Peer : 79678");
+//			System.out.println("--- Searched and Selected the Peer : 79678");
 		} else {
-			System.out.println("✔️ Peer 79678 already selected. Skipping click.");
+//			System.out.println("✔️ Peer 79678 already selected. Skipping click.");
 		}
 		Thread.sleep(5000);
 		// Clearing the Search Keyword
@@ -861,13 +870,13 @@ public class CPA_PeerSelectionPage {
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.clear();
 		// Search's Peer - 192021
-		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("192021");
+		PS2_SearchKeywordComparativePeerGroupSelectionTable.sendKeys("176671");
 		Thread.sleep(3000);
 		// Waits for the peer - 192021
 		WebElement PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021 = waitForElement(
 				CPA_PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021);
 		PS2_SearchAndDeselectPeer_ComparativePeerGroupSelectionTable_192021.click();
-		System.out.println("--- Searched and De-Selected the Peer : 192021");
+//		System.out.println("--- Searched and De-Selected the Peer : 1776671");
 		Thread.sleep(5000);
 		// Clearing the Search Keyword
 		PS2_SearchKeywordComparativePeerGroupSelectionTable.click();
@@ -886,7 +895,7 @@ public class CPA_PeerSelectionPage {
 		WebElement PS2_ComparePeersBtn_ComparativePeerGroupSelectionTable = waitForElement(
 				CPA_PS2_ComparePeersBtn_ComparativePeerGroupSelectionTable);
 		PS2_ComparePeersBtn_ComparativePeerGroupSelectionTable.click();
-		System.out.println("--- Clicked: Compare Peers Button");
+		System.out.println("=> The Compare Peers Button was clicked");
 		// Pop - Up
 		// Waits for the Enter the Name input field
 		WebElement PS2_PeerGroupName_ComparativePeerGroupSelectionTable = waitForElement(
@@ -898,10 +907,10 @@ public class CPA_PeerSelectionPage {
 				CPA_PS2_ComparativePeerGroupSelectionTableFirstRow_BillToId);
 		// Extracts the BILL To ID from the first row
 		String PS2_billToId = PS2_ComparativePeerGroupSelectionTableFirstRow_BillToId.getText().trim();
-		System.out.println("--- The Selected Target Customer BILL To ID in Comparative Peer Group Selection table is:"
+		System.out.println("=> The Selected Target Customer BILL To ID in Comparative Peer Group Selection table is:"
 				+ PS2_billToId);
 
-		String namePeerGroup = PS2_billToId + "_Top_10_Peers";
+		String namePeerGroup = PS2_billToId + "_Top_05_Customzied_PeersCombination";
 		PS2_PeerGroupName_ComparativePeerGroupSelectionTable.sendKeys(namePeerGroup);
 		Thread.sleep(7000);
 		// Screenshot of Entering the Comparative Peer Group
@@ -914,7 +923,8 @@ public class CPA_PeerSelectionPage {
 		WebElement PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable = waitForElement(
 				CPA_PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable);
 		PS2_SaveAndProceedBtn_ComparativePeerGroupSelectionTable.click();
-		System.out.println("--- Clicked: Save and Proceed button and redirected to Create Scenario");
+		System.out.println("=> The Save and Proceed button was clicked and redirected to Create Scenario screen");
+		waitForElement(cpa_csc_scenarioSlider);
 		Thread.sleep(3000);
 		// Waits for the Create Scenario - Slider Component
 //		waitForElement(CPA_CS_SliderComponent);   ------ This has to be uncommented after the redirection failure solved
@@ -925,11 +935,9 @@ public class CPA_PeerSelectionPage {
 		String expectedCreateScenarioUrl = ConfigReader.cpa_createScenario();
 
 		if (!currentUrl.equalsIgnoreCase(expectedCreateScenarioUrl)) {
-			throw new AssertionError(
-					"--- Not Landed on Create Scenario Screen even after naming the comparative peer group --- Unexpected redirection :( !Current URL you're on: "
-							+ currentUrl);
+			throw new AssertionError("=> Unexpected Redirection and landed on wrong screen" + currentUrl);
 		}
-		System.out.println("--- Landed on the Create Scenario Screen with the selected peer group!");
+		System.out.println("=> Successfully, Landed on the Create Scenario Screen with the selected peer group!");
 
 	}
 
@@ -941,7 +949,7 @@ public class CPA_PeerSelectionPage {
 		WebElement PS2_ResetBtn_ComparativePeerGroupSelectionTable = waitForElement(
 				CPA_PS2_ResetBtn_ComparativePeerGroupSelectionTable);
 		PS2_ResetBtn_ComparativePeerGroupSelectionTable.click();
-		System.out.println("--- Clicked: Reset Button");
+//		System.out.println("--- Clicked: Reset Button");
 		waitForElement(CPA_PS2_ComparativePeerGroupSelectionTable);
 
 	}
@@ -957,7 +965,7 @@ public class CPA_PeerSelectionPage {
 		// Waits for the cancel icon
 		WebElement PS2_SetPeerMatchingCriteriaBtn_Cancel = waitForElement(CPA_PS2_SetPeerMatchingCriteriaBtn_Cancel);
 		PS2_SetPeerMatchingCriteriaBtn_Cancel.click();
-		System.out.println("--- Clicked: Cancel (X) icon of the Set Peer Matching Criteria Pop-Up");
+		System.out.println("The Cancel (X) icon of the Set Peer Matching Criteria Pop-Up was clicked");
 
 	}
 
@@ -968,7 +976,7 @@ public class CPA_PeerSelectionPage {
 		// waits for the Back button
 		WebElement PS2_Backbtn = waitForElement(CPA_PS2_Backbtn);
 		PS2_Backbtn.click();
-		System.out.println("--- Clicked: Back button and got redirected to Peer Selection - 01 screen");
+		System.out.println("=> The Back button is clicked and got redirected to Peer Selection - 01 screen");
 
 	}
 }

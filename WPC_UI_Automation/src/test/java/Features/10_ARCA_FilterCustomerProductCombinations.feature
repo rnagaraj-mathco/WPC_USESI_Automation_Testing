@@ -13,14 +13,14 @@ Feature: Land on the Filter Customer and Product Combinations screen where the u
    #Then the user clicks on the Save Combination button, which redirects to the Customer Selection screen with the selected customer details
  
  #Selecting the Customer and Commodity code by interacting with tree map
- #Scenario: Verify that the user is able to select the customer and corresponding commodity codes from the tree map
-  #Given the user is on the Filter Customer and Product Combinations screen
-  #When the user clicks the Save Combination button without selecting any customers or commodity codes from the tree map, an error message should be displayed
-  #Then the user should be able to click on the Select All Customer checkbox, which selects all tiles in the tree map
-  #Then the user should be able to click on individual customer tiles, after which the selection of all tiles and the Select All checkbox options should be unchecked
-  #Then the user should be able to click on the tiles in the Commodity Code section to either select or deselect the desired commodities
-  #Then the user clicks on the Customer Details button, which opens a select customers for analysis dialog box containing all selected customer details
-  #Then the user clicks on the Save Combination button, which redirects to the Customer Selection screen with the selected customer details
+ Scenario: Verify that the user is able to select the customer and corresponding commodity codes from the tree map
+  Given the user is on the Filter Customer and Product Combinations screen
+  When the user clicks the Save Combination button without selecting any customers or commodity codes from the tree map, an error message should be displayed
+  Then the user should be able to click on the Select All Customer checkbox, which selects all tiles in the tree map
+  Then the user should be able to click on individual customer tiles, after which the selection of all tiles and the Select All checkbox options should be unchecked
+  Then the user should be able to click on the tiles in the Commodity Code section to either select or deselect the desired commodities
+  Then the user clicks on the Customer Details button, which opens a select customers for analysis dialog box containing all selected customer details
+  Then the user clicks on the Save Combination button, which redirects to the Customer Selection screen with the selected customer details
 
 #Done - But facing issue in the flow where if ccustomer are selected and also searched and selected but the selected one are not reflecting in map
 				#due to which the scenario is failing

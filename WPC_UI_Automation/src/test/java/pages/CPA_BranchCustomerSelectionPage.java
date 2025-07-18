@@ -111,8 +111,7 @@ public class CPA_BranchCustomerSelectionPage {
 	By cpa_bc_customerSelectionPlotSaveCustomersBtn = By.xpath(
 			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/button[1]/span[1]");
 	// Peer Selection - Table row path
-	By cpa_ps_TableRow = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[2]/div[1]");
+	By cpa_ps_TableRow = By.xpath("//table//tr/td[contains(@class, 'MuiTableCell-root')][2]");
 	private int bubbleCountInit;
 
 	// Navigating to the Branch/Customer screen
@@ -291,7 +290,7 @@ public class CPA_BranchCustomerSelectionPage {
 	// Branch selection from the Geographical Map
 	public void selectBranchMap() throws IOException, InterruptedException {
 		// ✅ Target branches to find and click
-		List<String> targetBranches = Arrays.asList("NEHA", "DANB");
+		List<String> targetBranches = Arrays.asList("TORR", "DANB");
 
 		// ✅ Store only branches actually found and clicked
 		List<String> clickedBranches = new ArrayList<>();
@@ -332,6 +331,7 @@ public class CPA_BranchCustomerSelectionPage {
 //					System.out.println("=> The branches are found & clicked: " + target);
 					actions.keyDown(Keys.CONTROL).click(point).keyUp(Keys.CONTROL).build().perform();
 					clickedBranches.add(target);
+					Thread.sleep(3000);
 					break;
 				}
 			}
@@ -414,13 +414,13 @@ public class CPA_BranchCustomerSelectionPage {
 	}
 
 	// Selects Customers from the Dropdown and Plot
-	public void customerSelectionPlot() throws IOException, InterruptedException {
+	public void customerSelectionDropdown() throws IOException, InterruptedException {
 		// To store the BILL TO ID's
 		List<String> selectedBillToID = new ArrayList<>();
 		// Customer Selection Plot - Dropdown
 		WebElement CustomerSelectionPlot_Dropdown = waitForElement(cpa_bc_customerSelectionPlotDropdown);
 		CustomerSelectionPlot_Dropdown.click();
-		System.out.println("=> The Customer Selection Dropdown was clicked");
+//		System.out.println("=> The Customer Selection Dropdown was clicked");
 		Thread.sleep(2000);
 		// CustomerSelectionPlot_Dropdown_Options_100966
 		WebElement CustomerSelectionPlot_Dropdown_Options_100966 = waitForElement(
@@ -482,7 +482,292 @@ public class CPA_BranchCustomerSelectionPage {
 		Thread.sleep(8000);
 		// Stored BILL To ID's
 		System.out.println(
-				"=> The Select Branch Dropdown was clicked and the selected customers are: " + selectedBillToID);
+				"=> The Select Customers Dropdown was clicked and the selected customers are: " + selectedBillToID);
+		// Verify whether it landed on the Customer Peer Analysis Card - Selections -
+		// Peer Selection Screen
+		String currentUrl = driver.getCurrentUrl();
+		String expectedPeerSelectionUrl = ConfigReader.cpa_peerSelection();
+
+		if (!currentUrl.equalsIgnoreCase(expectedPeerSelectionUrl)) {
+			throw new AssertionError("=> Unexpected redirection, Current URL you're on: " + currentUrl);
+		}
+
+		// Extract BILL TO IDs from Peer Selection table
+		List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+		List<String> billToIds = new ArrayList<>();
+
+		for (WebElement row : rows) {
+			String billToId = row.findElement(By.xpath("td[2]")).getText().trim();
+			billToIds.add(billToId);
+		}
+
+		System.out.println(
+				"=> The Extracted BILL TO ID's from Peer Selection - Select Target Customer for Simulation table are: "
+						+ billToIds);
+
+		// Compare both the list
+		for (String id : selectedBillToID) {
+			if (!billToIds.contains(id)) {
+				throw new AssertionError("=> Unfortunately the BILL TO ID " + id
+						+ " is missing in the Peer Selection - Select Target Customer for Simulation table");
+			}
+		}
+
+		System.out.println(
+				"=> Hurray!, All selected customers from the plot are present in the Peer Selection - Select Target Customer for Simulation table");
+	}
+
+//	public void customerSelectionFromPlot() throws InterruptedException {
+	// ✅ Target branches to find and click
+//		List<String> targetCustomers = Arrays.asList("101066", "105097");
+//
+//		// ✅ Store only branches actually found and clicked
+//		List<String> clickedCustomers = new ArrayList<>();
+//
+//		waitForElement(cpa_bc_customerSelectionPlot);
+//
+//		// Get total bubbles count once
+//		int totalCustomers = driver.findElements(By.xpath(
+//				"//*[name()='g' and contains(@class, 'scattergeo')]//*[name()='path' and contains(@class, 'point') and not(@display='none')]"))
+//				.size();
+//
+//		System.out.println("Total bubbles found: " + totalCustomers);
+//
+//		for (int i = 0; i < totalCustomers; i++) {
+//			// ✅ Re-fetch bubbles inside the loop to avoid stale references
+//			List<WebElement> freshPoints = driver.findElements(By.xpath(
+//					"//*[name()='g' and contains(@class, 'scattergeo')]//*[name()='path' and contains(@class, 'point') and not(@display='none')]"));
+//
+//			// Edge case: if bubble disappeared or DOM changed
+//			if (i >= freshPoints.size())
+//				break;
+//
+//			WebElement point = freshPoints.get(i);
+//
+//			// Hover
+//			actions.moveToElement(point).perform();
+//			Thread.sleep(500); // Let tooltip show
+//
+//			// Extract tooltip text
+//			List<WebElement> hoverTexts = driver
+//					.findElements(By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']"));
+//
+//			String tooltip = hoverTexts.stream().map(WebElement::getText).collect(Collectors.joining(" ")).trim();
+//
+//			// ✅ Search target branches inside the tooltip
+//			for (String target : targetCustomers) {
+//				if (tooltip.toLowerCase().contains(target.toLowerCase())) {
+//					System.out.println("=> The Customers are found & clicked: " + target);
+//					actions.keyDown(Keys.CONTROL).click(point).keyUp(Keys.CONTROL).build().perform();
+//					clickedCustomers.add(target);
+//					break;
+//				}
+//			}
+//		}
+//
+//		// Final report
+//		System.out.println("=> The list of Branches clicked on the map are: ");
+//		for (String b : clickedCustomers) {
+//			System.out.println(" - " + b);
+//		}
+//		waitForElement(cpa_bc_customerSelectionPlot);
+//		Thread.sleep(3000); // Optional wait after all clicks}
+
+	// Customer selected from the scatter plot
+	// Customer selected from the scatter plot
+	List<String> selectedBillToID = new ArrayList<>();
+
+	public void customerSelectionPlot() throws IOException, InterruptedException {
+		// ✅ Provide your target customer IDs (only numbers)
+		List<String> targetCustomerIds = Arrays.asList("101342"); // Example
+		List<String> clickedIds = new ArrayList<>();
+
+		// ✅ Locate all scatter plot dots
+		List<WebElement> scatterDots = driver.findElements(By.xpath("//*[name()='path' and contains(@class,'point')]"));
+		System.out.println("=> The Total customers present for the selected branch(es) are: " + scatterDots.size());
+
+		for (WebElement dot : scatterDots) {
+			try {
+				// ✅ Hover over the dot to reveal tooltip
+				actions.moveToElement(dot).perform();
+				Thread.sleep(800);
+
+				// ✅ Extract tooltip content
+				List<WebElement> tooltipElements = driver
+						.findElements(By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']"));
+				String tooltip = tooltipElements.stream().map(WebElement::getText).collect(Collectors.joining(" "))
+						.trim();
+
+				// ✅ Extract only numeric ID (first number only)
+				String extractedId = tooltip.replaceAll("[^0-9]", " ").trim().split(" ")[0];
+
+				// ✅ Match against target IDs
+				if (!extractedId.isEmpty() && targetCustomerIds.contains(extractedId)
+						&& !clickedIds.contains(extractedId)) {
+					System.out.println("=> The Customer ID matched: " + extractedId);
+					clickedIds.add(extractedId);
+
+					// ✅ Try native click
+					try {
+						if (targetCustomerIds.size() > 1) {
+							actions.keyDown(Keys.CONTROL).click(dot).keyUp(Keys.CONTROL).build().perform();
+						} else {
+							dot.click();
+						}
+					} catch (Exception e) {
+						// ✅ Fallback to JS click if native fails
+						String jsClickScript = "var ev = new MouseEvent('click', { bubbles: true, cancelable: true, view: window, ctrlKey: arguments[1] }); arguments[0].dispatchEvent(ev);";
+						((JavascriptExecutor) driver).executeScript(jsClickScript, dot, targetCustomerIds.size() > 1);
+					}
+
+					// ✅ Highlight clicked dot
+					((JavascriptExecutor) driver).executeScript(
+							"arguments[0].setAttribute('stroke','black'); arguments[0].setAttribute('stroke-width','3');",
+							dot);
+
+					Thread.sleep(700); // Allow effect
+
+					// ✅ Early exit if all targets matched
+					if (clickedIds.size() == targetCustomerIds.size()) {
+						System.out.println("=> All the target Customer IDs are clicked. Ending iteration.");
+						break;
+					}
+				}
+
+			} catch (Exception e) {
+				// You can log hover/click issues here if needed
+			}
+		}
+
+		// ✅ Final output
+		if (clickedIds.isEmpty()) {
+			System.out.println("=> No matching Customer IDs were clicked on the scatter plot.");
+		} else {
+			System.out.println("=> The Final clicked Customer IDs:");
+			clickedIds.forEach(id -> System.out.println(" - " + id));
+		}
+
+		WebElement CustomerSelectionPlot_SaveCustomersBtn = waitForElement(
+				cpa_bc_customerSelectionPlotSaveCustomersBtn);
+		CustomerSelectionPlot_SaveCustomersBtn.click();
+		waitForElement(cpa_ps_TableRow);
+		Thread.sleep(8000);
+		// Stored BILL To ID's
+		System.out.println(
+				"=> The Select Customers Dropdown was clicked and the selected customers are: " + selectedBillToID);
+		// Verify whether it landed on the Customer Peer Analysis Card - Selections -
+		// Peer Selection Screen
+		String currentUrl = driver.getCurrentUrl();
+		String expectedPeerSelectionUrl = ConfigReader.cpa_peerSelection();
+
+		if (!currentUrl.equalsIgnoreCase(expectedPeerSelectionUrl)) {
+			throw new AssertionError("=> Unexpected redirection, Current URL you're on: " + currentUrl);
+		}
+
+		// Extract BILL TO IDs from Peer Selection table
+		List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+		List<String> billToIds = new ArrayList<>();
+
+		for (WebElement row : rows) {
+			String billToId = row.findElement(By.xpath("td[2]")).getText().trim();
+			billToIds.add(billToId);
+		}
+
+		System.out.println(
+				"=> The Extracted BILL TO ID's from Peer Selection - Select Target Customer for Simulation table are: "
+						+ billToIds);
+
+		// Compare both the list
+		for (String id : selectedBillToID) {
+			if (!billToIds.contains(id)) {
+				throw new AssertionError("=> Unfortunately the BILL TO ID " + id
+						+ " is missing in the Peer Selection - Select Target Customer for Simulation table");
+			}
+		}
+
+		System.out.println(
+				"=> Hurray!, All selected customers from the plot are present in the Peer Selection - Select Target Customer for Simulation table");
+
+		Thread.sleep(2000);
+//	return clickedIds;
+
+	}
+
+	public void customerSelectionDropdownPlot() throws IOException, InterruptedException {
+		// To store the BILL TO ID's
+//		List<String> selectedBillToID = new ArrayList<>();
+//		List<String> plotSelectedIds = customerSelectionPlot();
+
+		// Customer Selection Plot - Dropdown
+		WebElement CustomerSelectionPlot_Dropdown = waitForElement(cpa_bc_customerSelectionPlotDropdown);
+		CustomerSelectionPlot_Dropdown.click();
+//		System.out.println("=> The Customer Selection Dropdown was clicked");
+		Thread.sleep(2000);
+		// CustomerSelectionPlot_Dropdown_Options_100966
+		WebElement CustomerSelectionPlot_Dropdown_Options_100966 = waitForElement(
+				cpa_bc_customerSelectionPlotDropdownOptions01);
+		// Stores the BILL To ID - 100966
+		selectedBillToID.add(CustomerSelectionPlot_Dropdown_Options_100966.getText().split("_")[0]); // Extracts only
+																										// the BILL To
+																										// ID from the
+																										// entire
+																										// customer name
+		CustomerSelectionPlot_Dropdown_Options_100966.click();
+		Thread.sleep(3000);
+		// CustomerSelectionPlot_Dropdown_Options_129932
+		WebElement CustomerSelectionPlot_Dropdown_Options_129932 = waitForElement(
+				cpa_bc_customerSelectionPlotDropdownOptions02);
+		// Stores the BILL To ID - 129932
+		selectedBillToID.add(CustomerSelectionPlot_Dropdown_Options_129932.getText().split("_")[0]);
+		CustomerSelectionPlot_Dropdown_Options_129932.click();
+		Thread.sleep(3000);
+		// CustomerSelectionPlot_Dropdown_Options_138999
+		WebElement CustomerSelectionPlot_Dropdown_Options_138999 = waitForElement(
+				cpa_bc_customerSelectionPlotDropdownOptions03);
+		// Stores the BILL To ID - 138999
+		selectedBillToID.add(CustomerSelectionPlot_Dropdown_Options_138999.getText().split("_")[0]);
+		CustomerSelectionPlot_Dropdown_Options_138999.click();
+		Thread.sleep(3000);
+		// CustomerSelectionPlot_SearchBar
+		WebElement CustomerSelectionPlot_Searchbar = waitForElement(cpa_bc_customerSelectionPlotSearchbar);
+		CustomerSelectionPlot_Searchbar.click();
+		CustomerSelectionPlot_Searchbar.clear();
+		// Searching the Customer by Customer ID 105097
+		CustomerSelectionPlot_Searchbar.sendKeys("105097");
+		Thread.sleep(3000);
+		WebElement CustomerSelectionPlot_Searchbar_Options_105097 = waitForElement(
+				cpa_bc_customerSelectionPlotSearchbarValue);
+		// Stores the BILL To ID - 105097
+		selectedBillToID.add(CustomerSelectionPlot_Searchbar_Options_105097.getText().split("_")[0]);
+		CustomerSelectionPlot_Searchbar_Options_105097.click();
+
+		Thread.sleep(4000);
+		CustomerSelectionPlot_Searchbar.clear();
+		Thread.sleep(5000);
+		// This is used to come out of the dropdown overlay effect and click the next
+		// locators
+		Actions actions = new Actions(driver);
+		actions.moveByOffset(10, 10).click().build().perform();
+		Thread.sleep(3000);
+		// calls the function for selecting customer from scatter plot
+//		customerSelectionPlot();
+		// add the customer from plots
+//		selectedBillToID.addAll(plotSelectedIds);
+		// Screenshot of the Customer Selection Plot Options
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+		File screenshotPath = new File(
+				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
+		FileHandler.copy(sourcefile, screenshotPath);
+		// CustomerSelectionPlot_SaveCustomersBtn
+		WebElement CustomerSelectionPlot_SaveCustomersBtn = waitForElement(
+				cpa_bc_customerSelectionPlotSaveCustomersBtn);
+		CustomerSelectionPlot_SaveCustomersBtn.click();
+		waitForElement(cpa_ps_TableRow);
+		Thread.sleep(8000);
+		// Stored BILL To ID's
+		System.out.println(
+				"=> The Select Customers Dropdown was clicked and the selected customers are: " + selectedBillToID);
 		// Verify whether it landed on the Customer Peer Analysis Card - Selections -
 		// Peer Selection Screen
 		String currentUrl = driver.getCurrentUrl();

@@ -114,21 +114,21 @@ public class ARCA_CustomerSelectionSteps {
 	}
 
 	@When("the user clicks on the Reset button then all the selected commodity codes should be cleared and the Select Root Cause Product for Simulation table should rever to its previous state")
-	public void the_user_clicks_on_the_reset_button_then_all_the_selected_commodity_codes_should_be_cleared_and_the_select_root_cause_product_for_simulation_table_should_rever_to_its_previous_state() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_clicks_on_the_reset_button_then_all_the_selected_commodity_codes_should_be_cleared_and_the_select_root_cause_product_for_simulation_table_should_rever_to_its_previous_state()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.resetBtnSRCP();
 	}
 
 	@Then("the user should be able to select the commodity codes from Select Root Cause Product for Simulation table")
-	public void the_user_should_be_able_to_select_the_commodity_codes_from_select_root_cause_product_for_simulation_table() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_select_the_commodity_codes_from_select_root_cause_product_for_simulation_table()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.selectCommoditySRCP();
 	}
 
 	@Then("the user should be able to deselect the commodity codes from Select Root Cause Product for Simulation table")
-	public void the_user_should_be_able_to_deselect_the_commodity_codes_from_select_root_cause_product_for_simulation_table() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_deselect_the_commodity_codes_from_select_root_cause_product_for_simulation_table()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.deSelectCommoditySRCP();
 	}
 
 	@Then("the user should be able to clicks on the Save and Analyze button of Select Root Cause Product for Simulation table then the Save and Proceed dialog screen should appear")
