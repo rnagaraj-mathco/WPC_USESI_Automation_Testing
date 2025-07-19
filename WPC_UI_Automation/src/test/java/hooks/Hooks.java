@@ -23,9 +23,9 @@ public class Hooks {
 		driver = DriverFactory.getDriver();
 		pageManager = new PageObjectManager(driver);
 
-		if (scenario.getSourceTagNames().contains("@ARCA_ProfitBridge")) { // add
+		if (scenario.getSourceTagNames().contains("@CPA_CreateScenario")) { // add
 			// @Home,@CPA_Overview, @CPA_BranchCustomerSelection, @CPA_PeerSelection,
-
+			// @CPA_CreateScenario
 			// @ARCA_Overview,@ARCA_CustomerAnalysis,@ARCA_FilterCustomerProductCombinations
 			// @ARCA_CustomerSelection, @ARCA_ProfitBridge
 			// Auto-login only for Dashboard, CustomerPeerAnalysisOverview scenarios

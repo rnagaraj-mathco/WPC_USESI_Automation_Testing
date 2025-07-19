@@ -1,5 +1,7 @@
 package stepdefinitions;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 
 import DriverManager.DriverFactory;
@@ -18,25 +20,24 @@ public class CPA_ViewScenarioImpactSteps {
 	CPA_ViewScenarioImpactPage cpa_viewScenarioImpact = new CPA_ViewScenarioImpactPage(driver);
 
 	@Given("the user is on the View Scenario Impact screen")
-	public void the_user_is_on_the_view_scenario_impact_screen() {
+	public void the_user_is_on_the_view_scenario_impact_screen() throws IOException, InterruptedException {
+		cpa_viewScenarioImpact.navigateTo();
+	}
+
+	@Then("the user should be able to click on the Back button, which then redirects to the Create Scenario screen")
+	public void the_user_should_be_able_to_click_on_the_back_button_which_then_redirects_to_the_create_scenario_screen() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@Then("the user should be able to open the Filters and select a previously created customer + saved scenario name, which should then load on the screen")
-	public void the_user_should_be_able_to_open_the_filters_and_select_a_previously_created_customer_saved_scenario_name_which_should_then_load_on_the_screen() {
+	@When("the user clicks on the After button,the chart is displayed shoul be displayed with simulated values")
+	public void the_user_clicks_on_the_after_button_the_chart_is_displayed_shoul_be_displayed_with_simulated_values() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@When("the user clicks on the After button, the chart should update with the new simulated values")
-	public void the_user_clicks_on_the_after_button_the_chart_should_update_with_the_new_simulated_values() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@When("the user clicks on the Comparison button, which should display the table showing differences between the default and simulated scenario values")
-	public void the_user_clicks_on_the_comparison_button_which_should_display_the_table_showing_differences_between_the_default_and_simulated_scenario_values() {
+	@When("the user clicks on the Comparison button, which should display a table showing the differences between the default and simulated scenario values")
+	public void the_user_clicks_on_the_comparison_button_which_should_display_a_table_showing_the_differences_between_the_default_and_simulated_scenario_values() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}
@@ -59,26 +60,20 @@ public class CPA_ViewScenarioImpactSteps {
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@Then("the user should be able to click on the column filter icon to select which columns should be displayed in the Comparison table")
-	public void the_user_should_be_able_to_click_on_the_column_filter_icon_to_select_which_columns_should_be_displayed_in_the_comparison_table() {
+	@Then("the user should be able to click the column filter icon to select which columns should be displayed in the Comparison table")
+	public void the_user_should_be_able_to_click_the_column_filter_icon_to_select_which_columns_should_be_displayed_in_the_comparison_table() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@When("the user clicks on the Back button, the chart should update with the default simulated values")
-	public void the_user_clicks_on_the_back_button_the_chart_should_update_with_the_default_simulated_values() {
+	@When("the user clicks the Back button, the chart should update with the default scenario values")
+	public void the_user_clicks_the_back_button_the_chart_should_update_with_the_default_scenario_values() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@Then("the user should be able to click on the Back button which then redirects the user to the Create Scenario screen")
-	public void the_user_should_be_able_to_click_on_the_back_button_which_then_redirects_the_user_to_the_create_scenario_screen() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Then("the user should be able to click on the Reset button which then redirects the the user to the Branch\\/Customer Selection screen")
-	public void the_user_should_be_able_to_click_on_the_reset_button_which_then_redirects_the_the_user_to_the_branch_customer_selection_screen() {
+	@When("the user should be able to click on the Reset button, which redirects the the user to the Branch\\/Customer Selection screen")
+	public void the_user_should_be_able_to_click_on_the_reset_button_which_redirects_the_the_user_to_the_branch_customer_selection_screen() {
 		// Write code here that turns the phrase above into concrete actions
 		throw new io.cucumber.java.PendingException();
 	}

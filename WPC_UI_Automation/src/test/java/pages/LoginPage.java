@@ -77,12 +77,12 @@ public class LoginPage {
 		// Entering Credentials manually
 		WebElement usernameField = waitForElement(username);
 		usernameField.clear();
-		usernameField.sendKeys("nagaraj.r@mathco.com");
+		usernameField.sendKeys(ConfigReader.userEmailId());
 		Thread.sleep(1000);
 
 		WebElement passwordField = waitForElement(password);
 		passwordField.clear();
-		passwordField.sendKeys("Nagaraj@Mathco3004");
+		passwordField.sendKeys(ConfigReader.password());
 		Thread.sleep(1000);
 	}
 

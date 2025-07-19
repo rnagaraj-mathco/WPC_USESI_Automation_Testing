@@ -35,6 +35,14 @@ public class ConfigReader {
 		return properties.getProperty(key);
 	}
 
+	public static String userEmailId() {
+		return properties.getProperty("emailid");
+	}
+
+	public static String password() {
+		return properties.getProperty("password");
+	}
+
 	public static String customerOverview() {
 		return properties.getProperty("customerOverview");
 	}
