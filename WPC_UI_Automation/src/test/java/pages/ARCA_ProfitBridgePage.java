@@ -118,7 +118,7 @@ public class ARCA_ProfitBridgePage {
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
 		File screenshotPath = new File(
-				"src/test/resources/screenshots/AutoRootCauseAnalysis/ScenarioBuilder/ProfitBridgeScreen.png");
+				"src/test/resources/screenshots/AutoRootCauseAnalysis/ScenarioBuilder/ProfitBridge/ProfitBridgeScreen.png");
 		FileHandler.copy(sourcefile, screenshotPath);
 		// Verify whether it landed on the Auto Root Cause Analysis - Scenario Builder -
 		// Profit Bridge

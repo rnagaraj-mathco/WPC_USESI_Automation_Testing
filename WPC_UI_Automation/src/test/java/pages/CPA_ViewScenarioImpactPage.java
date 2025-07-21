@@ -31,7 +31,7 @@ public class CPA_ViewScenarioImpactPage {
 	}
 
 	// Locators
-	// Loads the Create Scenario screen
+	// Loads the View Impact screen
 	public void navigateTo() throws IOException, InterruptedException {
 		// This gets the URL of the Overview screen
 		driver.get(ConfigReader.cpa_createScenario());
