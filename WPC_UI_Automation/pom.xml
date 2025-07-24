@@ -15,6 +15,8 @@
 	
 
     <dependencies>
+   
+    
         <!-- Selenium WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -26,7 +28,12 @@
   <artifactId>slf4j-simple</artifactId>
   <version>2.0.12</version>
 </dependency>
-
+ <!-- Extent Report -->
+<dependency>
+    <groupId>tech.grasshopper</groupId>
+    <artifactId>extentreports-cucumber7-adapter</artifactId>
+    <version>1.9.0</version>
+</dependency>
 
         <!-- Cucumber Java -->
         <dependency>
@@ -64,13 +71,8 @@
             <artifactId>cucumber-reporting</artifactId>
             <version>5.7.3</version>
         </dependency>
-        <!-- Extent Report -->
-        <dependency>
-    <groupId>com.aventstack</groupId>
-    <artifactId>extentreports</artifactId>
-    <version>5.0.9</version>
-</dependency>
-
+       
+    
 
 <dependency>
 <groupId>io.rest-assured</groupId>

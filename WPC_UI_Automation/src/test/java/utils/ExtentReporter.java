@@ -14,16 +14,26 @@ public class ExtentReporter {
 
 	public static ExtentReports getInstance() {
 		if (extent == null) {
-			String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-			reportFolderPath = "reports/Report_" + timestamp + "/";
+			// ✅ Use safe timestamp format (avoid "/" — not allowed in folder names)
+			String timestamp = new SimpleDateFormat("MMdd_HHmmss").format(new Date());
+
+			// ✅ Custom report name prefix + timestamp
+			String folderName = "WPC_USESI_Report_" + timestamp;
+			reportFolderPath = "reports/" + folderName + "/";
+
 			ExtentSparkReporter spark = new ExtentSparkReporter(reportFolderPath + "ExtentReport.html");
 
 			spark.config().setTheme(Theme.DARK);
-			spark.config().setReportName("WPC- US ELECTRICALS INC - AUTOMATION REPORT");
+			spark.config().setReportName("WPC - US ELECTRICALS INC - AUTOMATION TESTING REPORT");
 			spark.config().setDocumentTitle("Execution Report");
 
 			extent = new ExtentReports();
 			extent.attachReporter(spark);
+
+			// Optional: system info
+			extent.setSystemInfo("Executed By", System.getProperty("user.name"));
+			extent.setSystemInfo("Environment", "QA");
+			extent.setSystemInfo("OS", System.getProperty("os.name"));
 		}
 		return extent;
 	}

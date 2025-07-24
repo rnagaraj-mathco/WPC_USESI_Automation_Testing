@@ -24,22 +24,26 @@ public class LoginSteps {
 
 	@Given("the user is on the login page")
 	public void the_user_is_on_the_login_page() throws IOException {
+//		Hooks.logStep("the user is on the login page");
 		loginPage.navigateTo();
 	}
 
 	@When("the user enters the credentials")
 	public void the_user_enters_the_credentials() throws InterruptedException {
+//		Hooks.logStep("the user enters the credentials");
 		loginPage.loginTo();
 	}
 
 	@When("the user click on the Login button")
 	public void the_user_click_on_the_login_button() throws IOException, InterruptedException {
+//		Hooks.logStep("the user click on the Login button");
 		loginPage.loginBtn();
 	}
 
 	@Then("user lands on the homescreen and validate the logged-in user")
 	public void user_lands_on_the_homescreen_and_validate_the_logged_in_user()
 			throws InterruptedException, IOException {
+//		Hooks.logStep("user lands on the homescreen and validate the logged-in user");
 		loginPage.landingURL();
 	}
 
@@ -49,6 +53,7 @@ public class LoginSteps {
 	@When("the user enters invalid credentials")
 	public void the_user_enters_invalid_credentials() throws IOException, InterruptedException {
 		System.out.println(" --- For the Invalid Credentials Scenario ---");
+//		Hooks.logStep("the user enters invalid credentials");
 		loginPage.enterInvalidCredentials();
 	}
 
@@ -57,6 +62,7 @@ public class LoginSteps {
 	@Then("the user should remain on the login page")
 	public void the_user_should_remain_on_the_login_page() throws IOException {
 		loginPage.invalidLoginPageStay();
+//		Hooks.logStep("the user should remain on the login page");
 		System.out.println("No login happended due to Invalid Credentials");
 	}
 

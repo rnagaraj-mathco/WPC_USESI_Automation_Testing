@@ -710,7 +710,7 @@ public class CPA_OverviewPage {
 		// Verify whether it landed on the Customer Peer Analysis Card - Scenario
 		// Builder - Create Scenario
 		String currentUrl = driver.getCurrentUrl();
-		String expectedCreateScenarioUrl = ConfigReader.cpa_ScenarioImapct();
+		String expectedCreateScenarioUrl = ConfigReader.cpa_viewScenarioImapct();
 
 		if (!currentUrl.equalsIgnoreCase(expectedCreateScenarioUrl)) {
 			throw new AssertionError("=> Unexpected redirection!, Current URL you're on: " + currentUrl);

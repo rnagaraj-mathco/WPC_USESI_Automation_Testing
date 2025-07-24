@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -280,85 +281,113 @@ public class ARCA_CustomerAnalysisPage {
 	}
 
 	// Locators
-
 	By plotDots = By.cssSelector("g.scatterlayer g.trace path.point");
-	By tooltipSelector = By.cssSelector("g.hovertext");
+	By tooltipText = By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']");
 
-	public List<String> rootCauseCustomerSelectionPlot() throws IOException, InterruptedException {
-
-		// ✅ Provide your target customer IDs (only numbers)
-		List<String> targetCustomerIds = Arrays.asList("48927", "99308", "46777", "87327", "318794"); // Example: One or
-																										// more
+	public List<String> rootCauseCustomerSelectionPlot() throws IOException {
+		List<String> targetCustomerIds = Arrays.asList("98322", "194293", "40555", "46777", "87327");
 		List<String> clickedIds = new ArrayList<>();
+		System.out
+				.println("=> Target Customer ID's to select from the Root Cause Customer for the Selected Cost Metric: "
+						+ targetCustomerIds);
 
-		// ✅ Locate all scatter plot dots (SVG <path class="point">)
-		List<WebElement> scatterDots = driver.findElements(By.xpath("//*[name()='path' and contains(@class,'point')]"));
-		System.out.println("=> The Total customers present for the selected branch(es) are: " + scatterDots.size());
+		for (String targetId : targetCustomerIds) {
+			boolean found = false;
+			int retries = 0;
 
-		for (WebElement dot : scatterDots) {
-			try {
-				// ✅ Hover on the dot
-				actions.moveToElement(dot).perform();
-				Thread.sleep(800); // Let tooltip show
+			while (!found && retries < 3) {
+				retries++;
 
-				// ✅ Extract tooltip text from Plotly hoverlayer
-				List<WebElement> tooltipElements = driver
-						.findElements(By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']"));
+				List<WebElement> scatterDots = driver
+						.findElements(By.xpath("//*[name()='path' and contains(@class,'point')]"));
 
-				String tooltip = tooltipElements.stream().map(WebElement::getText).collect(Collectors.joining(" "))
-						.trim();
-
-				// ✅ Extract numeric ID (first number only)
-				String extractedId = tooltip.replaceAll("[^0-9]", " ").trim().split(" ")[0];
-
-				if (!extractedId.isEmpty() && targetCustomerIds.contains(extractedId)
-						&& !clickedIds.contains(extractedId)) {
-
-					System.out.println("=> The Customer ID matched: " + extractedId);
-					clickedIds.add(extractedId);
-
-					// ✅ Try native click first
+				for (int i = 0; i < scatterDots.size(); i++) {
 					try {
-						if (targetCustomerIds.size() > 1) {
-							actions.keyDown(Keys.CONTROL).click(dot).keyUp(Keys.CONTROL).build().perform();
-						} else {
-							dot.click();
+						scatterDots = driver.findElements(By.xpath("//*[name()='path' and contains(@class,'point')]"));
+						WebElement dot = scatterDots.get(i);
+
+						// Enhanced hover and activation for ALL dots
+						new Actions(driver).moveToElement(dot, 1, 1).moveByOffset(2, 2).perform();
+
+						// Dispatch mouseenter and mousemove to activate Plotly
+						String activateDotScript = "var ev1 = new MouseEvent('mouseenter', { bubbles:true });"
+								+ "var ev2 = new MouseEvent('mousemove', { bubbles:true });"
+								+ "arguments[0].dispatchEvent(ev1);" + "arguments[0].dispatchEvent(ev2);";
+						((JavascriptExecutor) driver).executeScript(activateDotScript, dot);
+
+						Thread.sleep(30); // small pause to allow tooltip to render
+
+						// Fast polling for tooltip
+						String extractedId = "";
+						long startTime = System.currentTimeMillis();
+						while (System.currentTimeMillis() - startTime < 800) {
+							List<WebElement> tooltipElements = driver.findElements(tooltipText);
+							if (!tooltipElements.isEmpty()) {
+								String tooltipTextCombined = tooltipElements.stream().map(WebElement::getText)
+										.collect(Collectors.joining(" ")).trim();
+								if (!tooltipTextCombined.isEmpty()) {
+									extractedId = tooltipTextCombined.replaceAll("[^0-9]", " ").trim().split(" ")[0];
+									break;
+								}
+							}
 						}
+
+						if (!extractedId.isEmpty() && extractedId.equals(targetId)
+								&& !clickedIds.contains(extractedId)) {
+							System.out.println("=> The Customer ID: " + extractedId + " is matched and clicked");
+
+							try {
+								if (clickedIds.isEmpty()) {
+									// Fallback to JS click
+									String jsClickScript = "var ev = new MouseEvent('click', {"
+											+ "bubbles: true, cancelable: true, view: window, ctrlKey: arguments[1] });"
+											+ "arguments[0].dispatchEvent(ev);";
+
+									((JavascriptExecutor) driver).executeScript(jsClickScript, dot,
+											!clickedIds.isEmpty());
+
+								} else {
+									actions.keyDown(Keys.CONTROL).click(dot).keyUp(Keys.CONTROL).build().perform(); // ctrl+click
+								}
+							} catch (Exception e) {
+								// Fallback to JS click
+								String jsClickScript = "var ev = new MouseEvent('click', {"
+										+ "bubbles: true, cancelable: true, view: window, ctrlKey: arguments[1] });"
+										+ "arguments[0].dispatchEvent(ev);";
+
+								((JavascriptExecutor) driver).executeScript(jsClickScript, dot, !clickedIds.isEmpty());
+							}
+
+							clickedIds.add(extractedId); // ✅ add only after click
+//						             Thread.sleep(50); // Let click register
+							found = true;
+							break; // Go to next targetId
+						}
+
+					} catch (StaleElementReferenceException se) {
+						System.out.println("=>ERROR: Dot became stale & will re-fetch dots");
+						break; // Retry from outer loop
 					} catch (Exception e) {
-//							System.out.println("⚠ Native click failed. Using JavaScript click.");
-
-						// ✅ Fallback to JS click
-						String jsClickScript = "var ev = new MouseEvent('click', {"
-								+ "bubbles: true, cancelable: true, view: window, ctrlKey: arguments[1] });"
-								+ "arguments[0].dispatchEvent(ev);";
-
-						((JavascriptExecutor) driver).executeScript(jsClickScript, dot, targetCustomerIds.size() > 1);
-					}
-
-					Thread.sleep(700); // allow click effect
-
-					// ✅ Stop loop if all IDs matched
-					if (clickedIds.containsAll(targetCustomerIds)) {
-						System.out.println("=> All the target Customer IDs are clicked. Ending iteration.");
-						break;
+						// Optionally log or skip
 					}
 				}
+			}
 
-			} catch (Exception e) {
-//					System.out.println("⚠ Error hovering/clicking: " + e.getMessage());
+			if (!found) {
+				System.out.println(
+						"=> Could not find the dot for Customer ID: " + targetId + " after " + retries + " retries.");
 			}
 		}
 
-		// ✅ Final Result
+		// ✅ Summary
 		if (clickedIds.isEmpty()) {
-			System.out.println("=> No matching Customer IDs were clicked on the scatter plot.");
+			System.out.println("=> No matching Customer IDs were clicked.");
 		} else {
-			System.out.println("=> The Final clicked Customer IDs:");
+			System.out.println("=> The Final clicked Customer IDs are:");
 			clickedIds.forEach(id -> System.out.println(" - " + id));
 		}
-		Thread.sleep(2000);
-		return clickedIds;
 
+		return clickedIds;
 	}
 
 	// Select All Customers selection
@@ -367,7 +396,7 @@ public class ARCA_CustomerAnalysisPage {
 		WebElement ca_rootCauseCustomerPlotSelectAllCheckboxes = waitForElement(
 				arca_ca_rootCauseCustomerPlotSelectAllCheckboxes);
 		ca_rootCauseCustomerPlotSelectAllCheckboxes.click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		waitForElement(arca_ca_rootCauseCustomerPlot);
 		System.out.println(
 				"=> The Select All Customers option is selected and all the customers in plot are got selected");
@@ -402,9 +431,6 @@ public class ARCA_CustomerAnalysisPage {
 	// Reset Btn
 	public void resetBtn() throws IOException, InterruptedException {
 		// Waits for the Save Customers Button
-		waitForElement(arca_ca_rootCauseCustomerPlot);
-		selectAllCustomersCheckBox();
-		Thread.sleep(5000);
 		waitForElement(arca_ca_rootCauseCustomerPlot);
 		WebElement ca_resetBtn = waitForElement(arca_ca_resetBtn);
 		actions.moveToElement(ca_resetBtn).click().perform();

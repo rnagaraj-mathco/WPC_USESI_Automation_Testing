@@ -136,4 +136,80 @@ public class ARCA_CreateScenarioSteps {
 		arca_createScenarioPage.enterFlatValueWithSelectingEPOC();
 	}
 
+	// --->Create Scenario -Enforce Per Return Surcharge (EPRS)
+	@When("the user enters both the %Sales and Flat$ value without selecting the Enforce Per Return Surcharge Simulation and click on Create Scenario button, then the scenario should not be created")
+	public void the_user_enters_both_the_sales_and_flat$_value_without_selecting_the_enforce_per_return_surcharge_simulation_and_click_on_create_scenario_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.enterBothValueEPRS();
+	}
+
+	@Then("the user should be able to select the Enforce Per Return Surcharge simulation and enter both the %Sales and Flat$ value, and click on Create Scenario button, then the scenario should not be created")
+	public void the_user_should_be_able_to_select_the_enforce_per_return_surcharge_simulation_and_enter_both_the_sales_and_flat$_value_and_click_on_create_scenario_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.selectAndenterBothValueEPRS();
+	}
+
+	@When("the user enters the %Sales value without selecting the Enforce Per Return Surcharge Simulation and click on the Create Scenario button, then the scenario should not be created")
+	public void the_user_enters_the_sales_value_without_selecting_the_enforce_per_return_surcharge_simulation_and_click_on_the_create_scenario_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.enterSalesValueWithoutSelectingEPRS();
+	}
+
+	@Then("the user should be able to select the Enforce Per Return Surcharge simulation and enter the %Sales value, click on the Create Scenario button, then the scenario should be created")
+	public void the_user_should_be_able_to_select_the_enforce_per_order_return_surcharge_simulation_and_enter_the_sales_value_click_on_the_create_scenario_button_then_the_scenario_should_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.enterSalesValueWithSelectingEPRS();
+	}
+
+	@When("the user enters the Flat$ value without selecting the Enforce Per Return Surcharge Simulation and click on Create Scenario button, then the scenario should not be created")
+	public void the_user_enters_the_flat$_value_without_selecting_the_enforce_per_return_surcharge_simulation_and_click_on_create_scenario_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.enterFlatValueWithoutSelectingEPRS();
+	}
+
+	@Then("the user should be able to select the Enfore Per Return Surcharge simulation and enter the Flat$ value, click on the Create Scenario button, then the scenario should be created")
+	public void the_user_should_be_able_to_select_the_enfore_per_order_return_surcharge_simulation_and_enter_the_flat$_value_click_on_the_create_scenario_button_then_the_scenario_should_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.enterFlatValueWithSelectingEPRS();
+	}
+
+	// --->Create Scenario - Simulation using Eliminate System Pricing Overrides
+	// Surcharge
+	@When("the user toggles the Eliminate System Pricing Overrides Surcharge without selecting it and clicks on create sceanrio button, then the scenario should not be created")
+	public void the_user_toggles_the_eliminate_system_pricing_overrides_surcharge_without_selecting_it_and_clicks_on_create_sceanrio_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.togglesESPO();
+	}
+
+	@When("the user selects the Eliminate System Pricing Overrides Surcharge without toggling it and clicks on create sceanrio button, then the scenario should not be created")
+	public void the_user_selects_the_eliminate_system_pricing_overrides_surcharge_without_toggling_it_and_clicks_on_create_sceanrio_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.selectsESPO();
+	}
+
+	@Then("the user selects and toggles the Eliminate System Pricing Overrides Surcharge, and clicks on create sceanrio button, then the scenario should be created")
+	public void the_user_selects_and_toggles_the_eliminate_system_pricing_overrides_surcharge_and_clicks_on_create_sceanrio_button_then_the_scenario_should_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.selectsAndTogglesESPO();
+	}
+
+	// --->Create Scenario - Simulation using Move To A New Customer Price Class
+	@When("the user clicks on the dropdown of Move To A New Customer Price Class and selects a price class without selecting it, and clicks on create sceanrio button, then the scenario should not be created")
+	public void the_user_clicks_on_the_dropdown_of_move_to_a_new_customer_price_class_and_selects_a_price_class_without_selecting_it_and_clicks_on_create_sceanrio_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.dropdownMNCPC();
+	}
+
+	@When("the user clicks selects the Move To A New Customer Price Class but does not select a price class from the dropdown, and clicks on create sceanrio button, then the scenario should not be created")
+	public void the_user_clicks_selects_the_move_to_a_new_customer_price_class_but_does_not_select_a_price_class_from_the_dropdown_and_clicks_on_create_sceanrio_button_then_the_scenario_should_not_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.selectMNCPC();
+	}
+
+	@Then("the user selects the Move To A New Customer Price Class and selects a price class from the dropdown, and clicks on create sceanrio button, then the scenario should be created")
+	public void the_user_selects_the_move_to_a_new_customer_price_class_and_selects_a_price_class_from_the_dropdown_and_clicks_on_create_sceanrio_button_then_the_scenario_should_be_created()
+			throws IOException, InterruptedException {
+		arca_createScenarioPage.selectAndDropdownMNCPC();
+	}
+
 }

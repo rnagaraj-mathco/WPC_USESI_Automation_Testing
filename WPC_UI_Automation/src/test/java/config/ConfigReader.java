@@ -67,8 +67,8 @@ public class ConfigReader {
 		return properties.getProperty("cpa_peerSelection");
 	}
 
-	public static String cpa_ScenarioImapct() {
-		return properties.getProperty("cpa_ScenarioImapct");
+	public static String cpa_viewScenarioImapct() {
+		return properties.getProperty("cpa_viewScenarioImapct");
 	}
 
 	public static String arca_overview() {
