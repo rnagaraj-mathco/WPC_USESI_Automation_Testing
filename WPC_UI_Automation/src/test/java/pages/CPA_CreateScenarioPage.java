@@ -155,13 +155,13 @@ public class CPA_CreateScenarioPage {
 	// xpath of the Inbound Frieght - Customer Average
 	// The position starts from 9 and can mention till last dot of the component
 	By cpa_csc_inboundFrieghtCustomerAverageSSCS = By.xpath(
-			"(//div[contains(@class,'MuiBox-root') and contains(@class,'jss')]   //span[contains(@class,'MuiSlider-root')]/span)[9]");
+			"(//div[contains(@class,'MuiBox-root') and contains(@class,'jss')]//span[contains(@class,'MuiSlider-root')]/span)[9]");
 
 	// xpath of the Inbound Frieght - Peer Average
 	// The position starts from 4 for this metric and next metric starts from 8
 	// (multiples of 4)
 	By cpa_csc_inboundFrieghtPeerAverageSSCS = By.xpath(
-			"(//div[contains(@class, 'MuiBox-root') and contains(@style, 'cursor: pointer') and contains(@style, 'translate')])[4]");
+			"(//div[contains(@class, 'MuiBox-root') and contains(@style, 'cursor: pointer') and contains(@style, 'translate')])[10]");
 
 	// Entering the Numeric Values to Order Handling costs (OHC)
 	// xpath of the inputfied
@@ -179,6 +179,26 @@ public class CPA_CreateScenarioPage {
 	// xpath of the View Scenario Impact - All three widgets
 	By cpa_vsi_allThreewidgets = By
 			.xpath("/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div");
+
+	// xapth of the Filters btn
+	By cpa_vsi_filters = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/header[1]/div[1]/div[1]/button[1]");
+
+	// xpath of the Filters - Customer + Scenario Name
+	By cpa_vsi_filtersCustomerScenarioOption = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]");
+
+	// xpath of the Filters - Customer + Scenario Name - Value 01
+	By cpa_vsi_filterOptionValue01 = By.xpath(
+			"//label[contains(@class, 'MuiFormControlLabel-root')]//input[@type='radio' and @checked]/ancestor::label");
+
+	// xpath of the Filters - Cancel btn
+	By cpa_vsi_filtersCancelBtn = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]");
+
+	// xpath of the chart component
+	By cpa_vsi_chartComponent = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]");
 
 	// Loads the Create Scenario screen
 	public void navigateTo() throws IOException, InterruptedException {
@@ -265,14 +285,14 @@ public class CPA_CreateScenarioPage {
 		Thread.sleep(2000);
 		// waits for the Filter - Options - Value01
 
-		WebElement csc_filterCustomerPeerGroupOptionValue02 = waitForElement(
-				cpa_csc_filterCustomerPeerGroupOptionValue02);
-		csc_filterCustomerPeerGroupOptionValue02.click();
-		String filterCustomerPeerGroupOptionValue02 = csc_filterCustomerPeerGroupOptionValue02.getText().trim();
+//		WebElement csc_filterCustomerPeerGroupOptionValue02 = waitForElement(
+//				cpa_csc_filterCustomerPeerGroupOptionValue02);
+//		csc_filterCustomerPeerGroupOptionValue02.click();
+//		String filterCustomerPeerGroupOptionValue02 = csc_filterCustomerPeerGroupOptionValue02.getText().trim();
 		// clicks on the apply button
 		WebElement csc_filterApplyBtn = waitForElement(cpa_csc_filterApplyBtn);
 		csc_filterApplyBtn.click();
-		System.out.println("=> The Customer + Peer Group Name: " + filterCustomerPeerGroupOptionValue02
+		System.out.println("=> The Customer + Peer Group Name: " + filterCustomerPeerGroupOptionValue01
 				+ " was clicked and slider is loaded to simulate the scenario");
 		waitForElement(cpa_csc_scenarioSlider);
 		Thread.sleep(3000);
@@ -298,7 +318,7 @@ public class CPA_CreateScenarioPage {
 
 	}
 
-	private String customerId;
+	private String customerId, customerDetails;
 
 	// clicks on the back button
 	public void backBtn() throws IOException, InterruptedException {
@@ -306,7 +326,7 @@ public class CPA_CreateScenarioPage {
 		// 01 - Defined bcz to test this step separately
 //		filtersOptionValue01();
 
-		String customerDetails = filterCustomerPeerGroupOptionValue01.split("\\+")[0].trim();
+		this.customerDetails = filterCustomerPeerGroupOptionValue01.split("\\+")[0].trim();
 		this.customerId = customerDetails.split("_")[0].trim();
 		// waits for the back button
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
@@ -327,6 +347,7 @@ public class CPA_CreateScenarioPage {
 //		System.out.println(
 //				"=> The Customer ID  matched and confirms that the redirection is of the same customer records");
 		// redirecting to the create scenario screen for now
+		Thread.sleep(3000);
 		driver.get(ConfigReader.cpa_createScenario());
 		Thread.sleep(2000);
 
@@ -415,7 +436,6 @@ public class CPA_CreateScenarioPage {
 		// Start Simulating Here - Cost To Serve (SSCS) -
 		// waits for the Inbound Frieght - Customer Average
 		WebElement csc_inboundFrieghtCustomerAverageSSCS = waitForElement(cpa_csc_inboundFrieghtCustomerAverageSSCS);
-		Thread.sleep(1000);
 		// -10,0 is used to hover only on the customer average as normal hover was
 		// failing due to overlap of the peer average
 		// clickAndHold() is used to move the dot by specified vlaue
@@ -486,23 +506,60 @@ public class CPA_CreateScenarioPage {
 		Thread.sleep(3000);
 	}
 
+	private String scenarioName, vsi_customerDetails;
+
 	// Enter the scenario name and clicks the Save and Show Impact
 	public void saveAndShowImpactBtnWithName() throws IOException, InterruptedException {
 		// waits for the input field of scenario name
 		WebElement csc_enterScenarioName = waitForElement(cpa_csc_enterScenarioName);
 		csc_enterScenarioName.click();
 		csc_enterScenarioName.clear();
-		String scenarioName = customerId + "_Scenario";
+		this.scenarioName = customerId + "_Scenario";
 		csc_enterScenarioName.sendKeys(scenarioName);
 		Thread.sleep(1000);
+		// Customer + Scenario concatenation
+		String csc_cutsomerAndScenarioName = customerDetails + scenarioName;
 //		waitForElement(cpa_csc_scenarioSlider);
 		// waits for the Save and Show Impact button
 		WebElement csc_saveAndShowImpactBtn = waitForElement(cpa_csc_saveAndShowImpactBtn);
 		csc_saveAndShowImpactBtn.click();
-		Thread.sleep(2000);
-		successMessage();
-//		waitForElement(cpa_vsi_allThreewidgets);
-		Thread.sleep(1000);
-
+//		successMessage();
+		// waiting for the component loading
+		try {
+			waitForElement(cpa_vsi_allThreewidgets);
+			waitForElement(cpa_vsi_chartComponent);
+		} catch (Exception e) {
+			waitForElement(cpa_vsi_allThreewidgets);
+			waitForElement(cpa_vsi_chartComponent);
+		}
+		waitForElement(cpa_vsi_allThreewidgets);
+		// Validating the Customer + Scenario name in the View Scenario Impact screen
+		WebElement vsi_filters = waitForElement(cpa_vsi_filters);
+		vsi_filters.click();
+		// Filters - Customer + Scenario Name
+		WebElement vsi_filtersCustomerScenarioOption = waitForElement(cpa_vsi_filtersCustomerScenarioOption);
+		vsi_filtersCustomerScenarioOption.click();
+		// waits for the Filters - Customer + Scenario Name - Value 01
+		WebElement vsi_filterOptionValue01 = waitForElement(cpa_vsi_filterOptionValue01);
+		// extracts the value 01 for the validation
+		this.vsi_customerDetails = vsi_filterOptionValue01.getText().trim();
+		// validates the filter value
+		if (!csc_cutsomerAndScenarioName.equalsIgnoreCase(vsi_customerDetails)) {
+			throw new AssertionError("=> Mismatch in the Customer + Scenario Name | View Scenario Impact = ["
+					+ vsi_customerDetails + "] vs Create Scenario  = [" + csc_cutsomerAndScenarioName + "]");
+		}
+		System.out.println(
+				"=> The Customer + Scenario name is matched, which means the View Scenario Impact is loaded with the created scenario");
+		// waits for the Filters - Cancel button
+		WebElement vsi_filtersCancelBtn = waitForElement(cpa_vsi_filtersCancelBtn);
+		vsi_filtersCancelBtn.click();
+		try {
+			waitForElement(cpa_vsi_allThreewidgets);
+			waitForElement(cpa_vsi_chartComponent);
+		} catch (Exception e) {
+			waitForElement(cpa_vsi_allThreewidgets);
+			waitForElement(cpa_vsi_chartComponent);
+		}
 	}
+
 }

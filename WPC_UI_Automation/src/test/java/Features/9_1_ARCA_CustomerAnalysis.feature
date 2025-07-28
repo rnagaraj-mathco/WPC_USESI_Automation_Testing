@@ -1,6 +1,7 @@
 @ARCA_CustomerAnalysis
 Feature: Land on the Customer Analysis screen where the user should be able to interact with filters and select the customer from the plot
 
+#DONE - Checked!
 #Selecting customer from plot is pending
  #Selecting Customer from plot based on the Filter operations
  Scenario: Verify that the user is able to interact with filters and select customers from the plot and save the selection

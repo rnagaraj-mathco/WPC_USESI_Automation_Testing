@@ -66,17 +66,16 @@ public class ARCA_CustomerAnalysisPage {
 	By arca_ca_filterCustomerPriceClass = By.xpath(
 			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/div/div/div[1]/div[1]/div/div[4]/div");
 
-	// xpath of the Filter - Customer Price Class - Value_01 (BUILDR)
-	By arca_ca_filterCustomerPriceClassValue1 = By.xpath(
-			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div/fieldset/div[2]/label[3]/span[2]");
+	// xpath of the Filter - Customer Price Class - All
+	By arca_ca_filterCustomerPriceClassValueAll = By.xpath("//label[.//div/span[normalize-space(text())='All']]");
+	// xpath of the Filter - Customer Price Class - Value_01 (CASHE1)
+	By arca_ca_filterCustomerPriceClassValue1 = By.xpath("//label[.//div/span[normalize-space(text())='CASHE1']]");
 
-	// xpath of the Filter - Customer Price Class - Value_02 (CASHNE)
-	By arca_ca_filterCustomerPriceClassValue2 = By.xpath(
-			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div/fieldset/div[2]/label[8]/span[2]/div/span");
+	// xpath of the Filter - Customer Price Class - Value_02 (CUSTM1)
+	By arca_ca_filterCustomerPriceClassValue2 = By.xpath("//label[.//div/span[normalize-space(text())='CUSTM1']]");
 
-	// xpath of the Filter - Customer Price Class - Value_03 (WW84)
-	By arca_ca_filterCustomerPriceClassValue3 = By.xpath(
-			"/html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/div/div/div[2]/div[1]/div/fieldset/div[2]/label[27]/span[2]/div/span");
+	// xpath of the Filter - Customer Price Class - Value_03 (NATACC)
+	By arca_ca_filterCustomerPriceClassValue3 = By.xpath("//label[.//div/span[normalize-space(text())='NATACC']]");
 
 	// xpath of the Filter - Product Type
 	By arca_ca_filterProductType = By.xpath(
@@ -87,6 +86,9 @@ public class ARCA_CustomerAnalysisPage {
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[1]/div[1]/div[1]/div[1]/input[1]");
 
 	// xpath of the Filter - Product Type - Value_01
+//	By arca_ca_filterProductTypeValue1 = By.xpath(
+//			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[2]/span[2]/div[1]/span[1]");
+
 	By arca_ca_filterProductTypeValue1 = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[2]/span[2]/div[1]/span[1]");
 
@@ -211,6 +213,12 @@ public class ARCA_CustomerAnalysisPage {
 		Thread.sleep(4000);
 		// Waits for the Filter - Customer Price Class - Value1
 		List<String> selectedCustomerPriceClassValues = new ArrayList<>();
+		// waits for the Filter - Customer Price Class - Value - All
+		WebElement ca_filterCustomerPriceClassValueAll = waitForElement(arca_ca_filterCustomerPriceClassValueAll);
+		ca_filterCustomerPriceClassValueAll.click();
+		waitForElement(arca_ca_filterApplyButton);
+		Thread.sleep(4000);
+
 		WebElement ca_filterCustomerPriceClassValue1 = waitForElement(arca_ca_filterCustomerPriceClassValue1);
 		selectedCustomerPriceClassValues.add(ca_filterCustomerPriceClassValue1.getText());
 		ca_filterCustomerPriceClassValue1.click();
@@ -285,7 +293,7 @@ public class ARCA_CustomerAnalysisPage {
 	By tooltipText = By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']");
 
 	public List<String> rootCauseCustomerSelectionPlot() throws IOException {
-		List<String> targetCustomerIds = Arrays.asList("98322", "194293", "40555", "46777", "87327");
+		List<String> targetCustomerIds = Arrays.asList("143140", "37435", "48614", "67311", "427567");
 		List<String> clickedIds = new ArrayList<>();
 		System.out
 				.println("=> Target Customer ID's to select from the Root Cause Customer for the Selected Cost Metric: "

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
@@ -138,6 +139,10 @@ public class ARCA_OverviewPage {
 	By arca_downloadIconSCPC = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/div[1]/button[1]");
 
+	// xpath of the delete icon - error message
+	By arca_errorMessageDeleteIconSCPC = By.xpath(
+			"//h4[normalize-space()='Please update at least one scenario dropdown value before clicking the Delete button to proceed with record deletion.')]");
+
 	// xpath of the delete dropdown - SCPC
 	By arca_deleteDropdownSCPC = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[7]/div[1]/div[1]/div[1]/div[1]/span[1]");
@@ -211,6 +216,8 @@ public class ARCA_OverviewPage {
 
 	// xpath of the scenario name present in the View Impact - Pop UP
 	By arca_scenarioNamePopUpSSS = By.xpath("//h4[starts-with(normalize-space(.), 'Scenario Name:')]");
+
+	By arca_errorCancel = By.xpath("/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/button[1]/span[1]/*[name()='svg'][1]");
 
 	// Navigating to the Overview Screen
 	public void navigateTo() throws IOException, InterruptedException {
@@ -505,31 +512,57 @@ public class ARCA_OverviewPage {
 	// delete option in the dropdown
 
 	public void deleteIconSCPC() throws IOException, InterruptedException {
+		waitForElement(arca_savedCustomerProductCombinationsTable);
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSCPC = waitForElement(arca_deleteIconSCPC);
 		deleteIconSCPC.click();
+		// Error message validation
+//		errorMessageDelete();
+		Thread.sleep(100);
+		WebElement errorCancel = waitForElement(arca_errorCancel);
+		errorCancel.click();
 		System.out.println(
 				"=> Clicked the Delete Icon of Saved Customer Product Combinations table without setting to delete option in the dropdown");
-		waitForElement(arca_downloadIconSCPC);
-		Thread.sleep(3000);
 
+		try {
+			waitForElement(arca_savedCustomerProductCombinationsTable);
+			waitForElement(arca_downloadIconSCPC);
+		} catch (Exception e) {
+			waitForElement(arca_savedCustomerProductCombinationsTable);
+			waitForElement(arca_downloadIconSCPC);
+		}
+//		Thread.sleep(3000);
 		// Take screenshot of the delete icon selection
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
 		File screenshotPath = new File(
 				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteIcon_SavedCustomerProductCombinationstable.png");
 		FileHandler.copy(sourcefile, screenshotPath);
+	}
 
+	public void errorMessageDelete() {
+		WebElement errorMessageDeleteIconSCPC = waitForElement(arca_errorMessageDeleteIconSCPC);
+		String actualMsg = errorMessageDeleteIconSCPC.getText();
+		String expectedMsg = "Please update at least one scenario dropdown value before clicking the Delete button to proceed with record deletion.";
+		Assert.assertEquals(
+				"=> The Error Toaster message validation for the Create Sensitivity Scenario button has failed!",
+				expectedMsg, actualMsg);
 	}
 
 	// Download Icon of Saved Customer Product Combinations table
 	public void downloadIconSCPC() throws IOException, InterruptedException {
+		waitForElement(arca_savedCustomerProductCombinationsTable);
 		// Waits for Download Icon and clicks it
 		WebElement downloadIconSCPC = waitForElement(arca_downloadIconSCPC);
 		downloadIconSCPC.click();
 		System.out.println("=> Clicked the Download Icon of Saved Customer Product Combinations table");
-		waitForElement(arca_savedCustomerProductCombinationsTable);
-		Thread.sleep(2000);
+		try {
+			waitForElement(arca_savedCustomerProductCombinationsTable);
+		} catch (Exception e) {
+			waitForElement(arca_savedCustomerProductCombinationsTable);
+		}
+
+//		Thread.sleep(2000);
 		// Take screenshot of the delete icon selection
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
@@ -795,9 +828,16 @@ public class ARCA_OverviewPage {
 		deleteIconSSS.click();
 		System.out.println(
 				"=> Clicked the Delete Icon of Saved Scenario Simulations table without setting to delete option in the dropdown");
-		waitForElement(arca_downloadIconSSS);
-		Thread.sleep(3000);
-
+		Thread.sleep(1000);
+		WebElement errorCancel = waitForElement(arca_errorCancel);
+		errorCancel.click();
+		try {
+			waitForElement(arca_savedScenarioSimulationsTable);
+			waitForElement(arca_downloadIconSSS);
+		} catch (Exception e) {
+			waitForElement(arca_savedScenarioSimulationsTable);
+			waitForElement(arca_downloadIconSSS);
+		}
 		// Take screenshot of the delete icon selection
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
@@ -809,6 +849,7 @@ public class ARCA_OverviewPage {
 
 	// Download Icon of Saved Scenario Simulations table
 	public void downloadIconSSS() throws IOException, InterruptedException {
+		waitForElement(arca_savedScenarioSimulationsTable);
 		// Waits for Download Icon and clicks it
 		WebElement downloadIconSSS = waitForElement(arca_downloadIconSSS);
 		downloadIconSSS.click();

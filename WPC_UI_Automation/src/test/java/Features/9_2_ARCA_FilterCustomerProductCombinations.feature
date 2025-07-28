@@ -1,7 +1,7 @@
 @ARCA_FilterCustomerProductCombinations
 Feature: Land on the Filter Customer and Product Combinations screen where the user should be able to select customers and their associated commodity codes
 
-#DONE ---Extracting the customer id from tree map and validating is pending 
+#DONE - Checked! ---Extracting the customer id from tree map and validating is pending 
   #Selecting the customer and commodity codes using the "Select All" options
   #Scenario: Verify that the user is able to click on the Select All Customer or Select All Commodity Codes checkbox, which then selects all tiles in the tree map
    #Given the user is on the Filter Customer and Product Combinations screen
@@ -11,7 +11,8 @@ Feature: Land on the Filter Customer and Product Combinations screen where the u
    #When the user clicks on the Select All Commodity Codes checkbox, which selects all tiles in the tree map
    #Then the user clicks on the Customer Details button, which opens a select customers for analysis dialog box containing all selected customer details
    #Then the user clicks on the Save Combination button, which redirects to the Customer Selection screen with the selected customer details
- 
+ #
+ #DONE - Checked!
  #Selecting the Customer and Commodity code by interacting with tree map
  Scenario: Verify that the user is able to select the customer and corresponding commodity codes from the tree map
   Given the user is on the Filter Customer and Product Combinations screen

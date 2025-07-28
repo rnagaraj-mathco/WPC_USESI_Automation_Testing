@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -48,6 +49,10 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	By arca_fcp_saveCombinationBtn = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[8]/div[1]/div[1]/button[1]");
 
+	// xpath of the Error message - Save combination without selection
+	By arca_fcp_errorSaveCombinationBtn = By
+			.xpath("//h4[contains(text(),'⚠️ No customer-product combination selected.')]");
+
 // xpath of the Select All Customers checkbox
 	By arca_fcp_selectAllCustomersCheckbox = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/p[1]/div[1]/fieldset[1]/label[1]");
@@ -74,28 +79,23 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]/span[1]/*[name()='svg'][1]");
 
 	// xpath of clicked customer tile 01 - ctm: customer tree map (31445)
-	By arca_fcp_ctm_customerTile1 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][9]/*[name()='rect'][1]");
+	By arca_fcp_ctm_customerTile1 = By.xpath("(//div//*[name()='svg']/*[name()='g'])[1]");
 
 	// xpath of clicked customer tile 02 - ctm: customer tree map (312619)
-	By arca_fcp_ctm_customerTile2 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][35]/*[name()='rect'][1]");
+	By arca_fcp_ctm_customerTile2 = By.xpath("(//div//*[name()='svg']/*[name()='g'])[2]");
 
 	// xpath of clicked customer tile 03 - ctm: customer tree map (313226)
-	By arca_fcp_ctm_customerTile3 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][55]/*[name()='rect'][1]");
+	By arca_fcp_ctm_customerTile3 = By.xpath("(//div//*[name()='svg']/*[name()='g'])[3]");
 
-	// xpath of commodity code tile 01: (51200)
-	By arca_fcp_ctm_commodityCodeTile1 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][9]/*[name()='rect'][1]");
+	// xpath of commodity code tile 01: (01230)
+
+	By arca_fcp_ctm_commodityCodeTile1 = By.xpath("(//div//*[name()='svg']/*[name()='g'])[5]");
 
 	// xpath of commodity code tile 02: (15300)
-	By arca_fcp_ctm_commodityCodeTile2 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][6]/*[name()='rect'][1]");
+	By arca_fcp_ctm_commodityCodeTile2 = By.xpath("(//div//*[name()='svg']/*[name()='g'])[6]");
 
 	// xpath of commodity code tile 03: (32112)
-	By arca_fcp_ctm_commodityCodeTile3 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][19]/*[name()='rect'][1]");
+	By arca_fcp_ctm_commodityCodeTile3 = By.xpath("(//div//*[name()='svg']/*[name()='g'])[7]");
 
 	// View Root Cause Analysis table - VRCA
 	// xpath of root cause customer details
@@ -135,7 +135,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 
 	// xpath of the checkbox of VRCA table for selecting the customer - 01
 	By arca_cs_tableVRCACheckbox1 = By.xpath(
-			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[1]/div[1]");
+			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[1]/div[1]");
 
 	// xpath of the checkbox of VRCA table for selecting the customer - 02
 	By arca_cs_tableVRCACheckbox2 = By.xpath(
@@ -162,7 +162,11 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		// This gets the URL of the Filter Customer and Product Combinations screen
 		driver.get(ConfigReader.arca_filterCustomerAndProductCombinations());
 		// waits till the Root Cause Customers for the Selected Cost Metric
-		waitForElement(arca_fcp_treeMap);
+		try {
+			waitForElement(arca_fcp_treeMap);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_treeMap);
+		}
 		waitForElement(arca_fcp_saveCombinationBtn);
 		System.out.println(
 				"=> The Filter Customer and Product Combination screen is loaded with the Tree map based on the customers selected");
@@ -190,10 +194,27 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		// waits for the save combination button
 		WebElement fcp_saveCombinationBtn = waitForElement(arca_fcp_saveCombinationBtn);
 		fcp_saveCombinationBtn.click();
-		Thread.sleep(2000);
-		waitForElement(arca_fcp_treeMap);
 		System.out.println(
 				"=> The Save Combination button was clicked without selecting any customers or commodity codes, which displayed an error message.");
+		errorMessage();
+		try {
+			waitForElement(arca_fcp_treeMap);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_treeMap);
+		}
+		waitForElement(arca_fcp_treeMap);
+		waitForElement(arca_fcp_saveCombinationBtn);
+
+	}
+
+	// Save combination without Selection - Error message
+	public void errorMessage() {
+		WebElement errorToasterMessage = waitForElement(arca_fcp_errorSaveCombinationBtn);
+		String actualMsg = errorToasterMessage.getText();
+		String expectedMsg = "⚠️ No customer-product combination selected.";
+		Assert.assertEquals(
+				"=> The Error Toaster message validation for the Create Sensitivity Scenario button has failed!",
+				expectedMsg, actualMsg);
 	}
 
 	// Clicks the Select All Customer checkbox
@@ -203,9 +224,13 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		fcp_selectAllCustomersCheckbox.click();
 		System.out.println(
 				"=> The Select All Customer checkbox was clicked which then selected the entire customers in the tree map");
+		Thread.sleep(2000);
 		// Waits for the Tree Map updation
-		waitForElement(arca_fcp_treeMap);
-		Thread.sleep(1000);
+		try {
+			waitForElement(arca_fcp_treeMap);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_treeMap);
+		}
 	}
 
 	// Clicks the Reset Button
@@ -214,13 +239,18 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		WebElement fcp_resetBtn = waitForElement(arca_fcp_resetBtn);
 		fcp_resetBtn.click();
 		System.out.println("=> The Reset button was clicked which restored the tree map to its previous state");
+		Thread.sleep(2000);
 		// Waits for the Tree Map updation
-		waitForElement(arca_fcp_treeMap);
-		Thread.sleep(1000);
+		try {
+			waitForElement(arca_fcp_treeMap);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_treeMap);
+		}
 	}
 
 	// Clicks the Select All Commodity checkbox
 	public void selectAllCommodityCode() throws IOException, InterruptedException {
+		waitForElement(arca_fcp_treeMap);
 		// Waits for the Select All Commodity Code checkbox
 		WebElement fcp_selectAllCommodityCodeCheckbox = waitForElement(arca_fcp_selectAllCommodityCodeCheckbox);
 		fcp_selectAllCommodityCodeCheckbox.click();
@@ -293,7 +323,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		System.out.println("=> Clicked the download icon of the View Root Cause Analysis table");
 		Thread.sleep(3000);
 
-		// Loop through pages
+		// Loop through pages and search for the checked customer record
 		while (true) {
 			List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
 
@@ -532,6 +562,11 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 
 	// Click on customer details button and select the customers
 	public void customerDetailsBtnSelectCustomers() throws IOException, InterruptedException {
+		try {
+			waitForElement(arca_fcp_treeMap);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_treeMap);
+		}
 		// Open Customer Details popup
 		WebElement fcp_customerDetailsBtn = waitForElement(arca_fcp_customerDetailsBtn);
 		fcp_customerDetailsBtn.click();
@@ -547,7 +582,12 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		// Waits for the checkbox of the customer: 01
 		WebElement cs_tableVRCACheckbox3 = waitForElement(arca_cs_tableVRCACheckbox3);
 		cs_tableVRCACheckbox3.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
+		try {
+			waitForElement(arca_fcp_treeMap);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_treeMap);
+		}
 
 	}
 

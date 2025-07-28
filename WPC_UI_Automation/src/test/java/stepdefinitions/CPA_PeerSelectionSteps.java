@@ -65,8 +65,8 @@ public class CPA_PeerSelectionSteps {
 		cpa_peerSelections.tableRecordsDownload();
 	}
 
-	@Given("the user should be able to click the Back button, which then redirects to the Peer Selection - Select Target Customer for Peer Matching page")
-	public void the_user_should_be_able_to_click_the_back_button_which_then_redirects_to_the_peer_selection_select_target_customer_for_peer_matching_page()
+	@Given("the user should be able to click the Back button, which then redirects to the Peer Selection - Select Target Customer for Peer Matching screen")
+	public void the_user_should_be_able_to_click_the_back_button_which_then_redirects_to_the_peer_selection_select_target_customer_for_peer_matching_screen()
 			throws IOException, InterruptedException {
 		cpa_peerSelections.redirectionToPeerSelection_01_Screen();
 	}
@@ -164,7 +164,7 @@ public class CPA_PeerSelectionSteps {
 	@Then("the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version")
 	public void the_user_should_be_able_to_click_on_the_reset_button_which_then_resets_the_peer_selections_and_updates_the_table_to_older_version()
 			throws IOException, InterruptedException {
-//		cpa_peerSelections.resetBtn();
+		cpa_peerSelections.resetBtn();
 	}
 
 	@Then("the user is on the Peer Selection - Comparative Peer Group Selection screen, where the user should be able to click on the Set Peer Matching Criteria button and view the threshold value and the model selected")

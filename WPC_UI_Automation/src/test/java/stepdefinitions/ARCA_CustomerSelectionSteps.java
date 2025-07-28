@@ -95,11 +95,6 @@ public class ARCA_CustomerSelectionSteps {
 
 	// Select Root Cause Product for Simulation table
 	// Select and Deselect the commodity code for the selected customer
-	@When("the user clicks on the Save and Analyze button of Select Root Cause Product for Simulation table without selecting any commodity code then a Save and Proceed dialog screen appears with a warning message")
-	public void the_user_clicks_on_the_save_and_analyze_button_of_select_root_cause_product_for_simulation_table_without_selecting_any_commodity_code_then_a_save_and_proceed_dialog_screen_appears_with_a_warning_message()
-			throws IOException, InterruptedException {
-		arca_customerSelectionPage.saveAndAnalyzeBtnSRCP();
-	}
 
 	@When("the user clicks on the Back button of Select Root Cause Product for Simulation table then the screen should reload to the previous state displaying only Select Root Cause Products for Simulation table")
 	public void the_user_clicks_on_the_back_button_of_select_root_cause_product_for_simulation_table_then_the_screen_should_reload_to_the_previous_state_displaying_only_select_root_cause_products_for_simulation_table()
@@ -131,16 +126,10 @@ public class ARCA_CustomerSelectionSteps {
 		arca_customerSelectionPage.deSelectCommoditySRCP();
 	}
 
-	@Then("the user should be able to clicks on the Save and Analyze button of Select Root Cause Product for Simulation table then the Save and Proceed dialog screen should appear")
-	public void the_user_should_be_able_to_clicks_on_the_save_and_analyze_button_of_select_root_cause_product_for_simulation_table_then_the_save_and_proceed_dialog_screen_should_appear() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Then("the user should be able to enter the name for the combination in the Save and Proceed dialog screen and click on the Proceed button then the user should be redirected to the Profit Bridge screen")
-	public void the_user_should_be_able_to_enter_the_name_for_the_combination_in_the_save_and_proceed_dialog_screen_and_click_on_the_proceed_button_then_the_user_should_be_redirected_to_the_profit_bridge_screen() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	@Then("the user should be able to click on the Save and Analyze button of Select Root Cause Product for Simulation table which opens a popup, and then enter the combination name, then click on the Proceed button which redirects to the profit bridge screen")
+	public void the_user_should_be_able_to_clicks_on_the_save_and_analyze_button_of_select_root_cause_product_for_simulation_table_which_opens_a_popup_and_then_enter_the_combination_name_then_click_on_the_Proceed_button_which_redirects_to_the_profit_bridge_screen()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.saveAndAnalyzeBtnSRCP();
 	}
 
 	@Then("the user should be able to zoom in and zoom out of the Select Root Cause Product for Simulation table using the + and - icons")
@@ -156,9 +145,9 @@ public class ARCA_CustomerSelectionSteps {
 	}
 
 	@Then("the user clicks on the download icon present in the Select Root Cause Product for Simulation table header, then the entire table records should be downloaded as an excel file")
-	public void the_user_clicks_on_the_download_icon_present_in_the_select_root_cause_product_for_simulation_table_header_then_the_entire_table_records_should_be_downloaded_as_an_excel_file() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_clicks_on_the_download_icon_present_in_the_select_root_cause_product_for_simulation_table_header_then_the_entire_table_records_should_be_downloaded_as_an_excel_file()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.downloadIconSRCP();
 	}
 
 	@Then("user should be able to interact with the Rows per page dropdown of the Select Root Cause Product for Simulation table and select a value, which updates the visible records")
@@ -169,14 +158,20 @@ public class ARCA_CustomerSelectionSteps {
 
 	// Search, Select and Deselect the commodity code for the selected customer
 	@Then("the user should be able to search for the commodity codes record and select the commodity code")
-	public void the_user_should_be_able_to_search_for_the_commodity_codes_record_and_select_the_commodity_code() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_search_for_the_commodity_codes_record_and_select_the_commodity_code()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.searchAndSelectSRCP();
 	}
 
 	@Then("the user should be able to search for the commodity codes record and deselect the commodity code")
-	public void the_user_should_be_able_to_search_for_the_commodity_codes_record_and_deselect_the_commodity_code() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void the_user_should_be_able_to_search_for_the_commodity_codes_record_and_deselect_the_commodity_code()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.searchAndDeSelectSRCP();
+	}
+
+	@When("the user clicks on the Save and Analyze button of Select Root Cause Product for Simulation table without selecting any commodity code then a Save and Proceed dialog screen appears with a warning message")
+	public void the_user_clicks_on_the_save_and_analyze_button_of_select_root_cause_product_for_simulation_table_without_selecting_any_commodity_code_then_a_save_and_proceed_dialog_screen_appears_with_a_warning_message()
+			throws IOException, InterruptedException {
+		arca_customerSelectionPage.saveAndAnalyzeBtnWithoutSelectionSRCP();
 	}
 }
