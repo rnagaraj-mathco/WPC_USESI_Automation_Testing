@@ -59,7 +59,7 @@ public class ARCA_CustomerSelectionPage {
 
 	// xpath of the record to search - SOC
 	By arca_cs_searchRecordSOC = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[2]");
 
 	// xpath of the download icon - SOC
 	By arca_cs_downloadIconSOC = By.xpath(
@@ -254,6 +254,8 @@ public class ARCA_CustomerSelectionPage {
 		waitForElement(arca_cs_tableSOC);
 	}
 
+	public String cs_customerId_SOC;
+
 	// Selects the customer from the Select One Customer for Simulation
 	public void selectCustomerSOC() throws IOException, InterruptedException {
 		// waits for the SOC table first row radio button
@@ -263,7 +265,7 @@ public class ARCA_CustomerSelectionPage {
 		System.out.println("=> Selected the record of Select One Customer for Simulation table");
 		Thread.sleep(2000);
 		WebElement cs_customerIdSOC = waitForElement(arca_cs_customerIdSOC);
-		String cs_customerId_SOC = cs_customerIdSOC.getText().trim();
+		this.cs_customerId_SOC = cs_customerIdSOC.getText().trim();
 		System.out.println("=> The record of BILL To ID: " + cs_customerId_SOC + " is selected");
 
 	}
@@ -319,7 +321,7 @@ public class ARCA_CustomerSelectionPage {
 		cs_searchBarSOC.clear();
 		// Waits for the First row table customer Id
 		WebElement cs_searchRecordSOC = waitForElement(arca_cs_searchRecordSOC);
-		String searchRecordSOC = cs_searchRecordSOC.getText().trim();
+		searchRecordSOC = cs_searchRecordSOC.getText().trim();
 		cs_searchBarSOC.sendKeys(searchRecordSOC);
 		System.out.println(
 				"=> Searched the Customer and Product Combination record of the Customer ID: " + searchRecordSOC);
@@ -363,7 +365,7 @@ public class ARCA_CustomerSelectionPage {
 		cs_saveAndAnalyzeBtnSRCP.click();
 		// waits for the name input field
 		WebElement cs_nameInputSaveSRCP = waitForElement(arca_cs_nameInputSaveSRCP);
-		cs_nameInputSaveSRCP.sendKeys(searchRecordSOC + "_CommodityCodeCombination");
+		cs_nameInputSaveSRCP.sendKeys(cs_customerId_SOC + "_CommodityCodeCombination");
 		// waits for the Save and Analyze button - SRCP - Error Message
 //		waitForElement(arca_cs_PopUpErrorSRCP);
 //		// waits for the Save and Analyze button - SRCP - PopUp - Cancel

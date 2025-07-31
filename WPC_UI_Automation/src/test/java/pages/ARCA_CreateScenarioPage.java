@@ -485,18 +485,23 @@ public class ARCA_CreateScenarioPage {
 	public void resetPPS() throws IOException, InterruptedException {
 		try {
 			waitForElement(arca_csc_estimatedImpact);
+
 		} catch (Exception ee) {
 			waitForElement(arca_csc_estimatedImpact);
+//			waitForElement(arca_csc_estimatedImpactError);
 		}
 		// waits for the reset simulation button of PPS
 		WebElement csc_resetSimulationBtnPPS = waitForElement(arca_csc_resetSimulationBtnPPS);
 		csc_resetSimulationBtnPPS.click();
 		System.out.println("=> The Reset Simulation of Pre Programmed Scenario is clicked and the widget is reloaded");
 		try {
+			waitForElement(arca_csc_estimatedImpact);
 			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_createScenarioBtnPPS);
 		} catch (Exception e) {
 			waitForElement(arca_csc_estimatedImpact);
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_createScenarioBtnPPS);
 
 		}
 
@@ -508,13 +513,14 @@ public class ARCA_CreateScenarioPage {
 		// Sales
 		waitForElement(arca_csc_preProgrammedScenario);
 		waitForElement(arca_csc_estimatedImpact);
+		Thread.sleep(5000);
 		WebElement csc_silderSSCS = waitForElement(arca_csc_silderSSCS);
 		actions.moveToElement(csc_silderSSCS, -10, 0).clickAndHold().moveByOffset(90, 0).release().perform();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		// waits for the % Change in Order $ Sales - Current Sales (Before Simulation)
 		WebElement csc_silderCusrrentSales = waitForElement(arca_csc_silderCusrrentSales);
 		actions.moveToElement(csc_silderCusrrentSales, -10, 0).perform();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 	}
 
 	// Clicks on the reset simulation button of Estimated Impact widget (EI)
@@ -534,6 +540,7 @@ public class ARCA_CreateScenarioPage {
 			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_createScenarioBtnPPS);
 		} catch (Exception e) {
+			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_estimatedImpact);
 
 		}
@@ -543,23 +550,32 @@ public class ARCA_CreateScenarioPage {
 	// Enter the value to the slider component
 	public void enterValueSales() throws IOException, InterruptedException {
 		// waits for the input field to enter the value
+		try {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
 
+		} catch (Exception e) {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		}
+		Thread.sleep(3000);
 		WebElement csc_numericValueSales = waitForElement(arca_csc_numericValueSales);
 		csc_numericValueSales.click();
 		csc_numericValueSales.sendKeys(Keys.CONTROL + "a");
 		csc_numericValueSales.sendKeys(Keys.BACK_SPACE);
 		// Enter the value
 		csc_numericValueSales.sendKeys("40");
-		// Hovers on the slider
+
 		waitForElement(arca_csc_preProgrammedScenario);
 		waitForElement(arca_csc_estimatedImpact);
+		Thread.sleep(5000); // Hovers on the slider
 		WebElement csc_silderSSCS = waitForElement(arca_csc_silderSSCS);
 		actions.moveToElement(csc_silderSSCS, -10, 0).perform();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		// waits for the % Change in Order $ Sales - Current Sales (Before Simulation)
 		WebElement csc_silderCusrrentSales = waitForElement(arca_csc_silderCusrrentSales);
 		actions.moveToElement(csc_silderCusrrentSales, -10, 0).perform();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
 	}
 
@@ -735,7 +751,7 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(2000);
 		int result = createScenarioBtn();
 
-		if (result == 1) {
+		if (result == 0) {
 			System.out.println("=> SUCCESS: The Scenario has been created by entering the %Sales value: "
 					+ String.format("%.2f", salesValue)
 					+ " and selecting the Enforce Per Order charge simulation is selected.");
@@ -753,11 +769,13 @@ public class ARCA_CreateScenarioPage {
 
 			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_simulationEPOC);
+			waitForElement(arca_csc_estimatedImpact);
 
 		} catch (Exception e) {
 
 			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_simulationEPOC);
+			waitForElement(arca_csc_estimatedImpact);
 		}
 		// waits for the Simulation - Text
 		waitForElement(arca_csc_flatInputEPOC);
@@ -853,6 +871,13 @@ public class ARCA_CreateScenarioPage {
 			System.out.println(
 					"=> ERROR: The Scenario has been created without selecting the Enforce Per Return Surcharge simulation.");
 		}
+
+		try {
+			waitForElement(arca_csc_estimatedImpact);
+		} catch (Exception e) {
+			waitForElement(arca_csc_estimatedImpact);
+		}
+		Thread.sleep(1000);
 	}
 
 	// Selects and enter both the value
@@ -924,7 +949,7 @@ public class ARCA_CreateScenarioPage {
 		Double salesValue = 20.5;
 		csc_salesInputEPRS.sendKeys(String.valueOf(salesValue));
 		waitForElement(arca_csc_salesInputEPOC);
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		int result = createScenarioBtn();
 
 		if (result == 1) {
@@ -942,6 +967,17 @@ public class ARCA_CreateScenarioPage {
 	// simulation
 	// simulation
 	public void enterSalesValueWithSelectingEPRS() throws IOException, InterruptedException {
+		try {
+			waitForElement(arca_csc_estimatedImpact);
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_simulationEPRS);
+
+		} catch (Exception e) {
+			waitForElement(arca_csc_estimatedImpact);
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_simulationEPRS);
+			waitForElement(arca_csc_estimatedImpact);
+		}
 		// waits for the simulation
 		WebElement csc_simulationEPRS = waitForElement(arca_csc_simulationEPRS);
 		csc_simulationEPRS.click();
@@ -970,16 +1006,17 @@ public class ARCA_CreateScenarioPage {
 	// Enters Flat$ value and clicks create scenario button without selecting the
 	// simulation
 	public void enterFlatValueWithoutSelectingEPRS() throws IOException, InterruptedException {
-
 		try {
 
 			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_simulationEPRS);
+			waitForElement(arca_csc_estimatedImpact);
 
 		} catch (Exception e) {
 
 			waitForElement(arca_csc_preProgrammedScenario);
 			waitForElement(arca_csc_simulationEPRS);
+			waitForElement(arca_csc_estimatedImpact);
 		}
 		// waits for the simulation
 		waitForElement(arca_csc_simulationEPRS);
@@ -1091,6 +1128,12 @@ public class ARCA_CreateScenarioPage {
 		csc_createScenarioBtnPPS.click();
 		Thread.sleep(1000);
 		errorToasterMessage();
+		try {
+			waitForElement(arca_csc_estimatedImpact);
+		} catch (Exception e) {
+			waitForElement(arca_csc_estimatedImpactError);
+		}
+		Thread.sleep(7000);
 		System.out.println(
 				"=> SUCCESS: The Scenario has not been created as the Simulation using Eliminate System Pricing Overrides Surcharge - Toggle is not clicked ");
 	}
@@ -1196,6 +1239,7 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(1000);
 		try {
 			waitForElement(arca_csc_estimatedImpact);
+			
 			waitForElement(arca_csc_afterSimulationChart);
 
 		} catch (Exception e) {

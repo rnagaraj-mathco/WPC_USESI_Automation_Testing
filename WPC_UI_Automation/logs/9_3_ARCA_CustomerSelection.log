@@ -1,0 +1,2 @@
+2025-07-29 17:08:34.235 [main] INFO  ▶  Logger initialized for feature: 9_3_ARCA_CustomerSelection
+2025-07-29 17:10:04.675 [main] INFO  ▶ ✅ Scenario PASSED: Verify whether the user is able to select or multiselect the commodity code from the Select Root Cause Product for Simulation for the selected customer table

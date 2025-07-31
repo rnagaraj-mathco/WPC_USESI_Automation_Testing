@@ -146,8 +146,8 @@ public class ARCA_OverviewSteps {
 		arca_overviewPage.deleteDropdownSSS();
 	}
 
-	@When("the user clicks on the delete icon of the Saved Scenario Simulations table without selecting Delete option from the dropdown, an error message should be displayed")
-	public void the_user_clicks_on_the_delete_icon_of_the_saved_scenario_simulations_table_without_selecting_delete_option_from_the_dropdown_an_error_message_should_be_displaye()
+	@When("the user clicks on the delete icon of the Saved Scenario Simulations table without selecting Delete option from the dropdown, an error message should be displayed in the popup")
+	public void the_user_clicks_on_the_delete_icon_of_the_saved_scenario_simulations_table_without_selecting_delete_option_from_the_dropdown_an_error_message_should_be_displayed_in_the_popup()
 			throws IOException, InterruptedException {
 		arca_overviewPage.deleteIconSSS();
 	}

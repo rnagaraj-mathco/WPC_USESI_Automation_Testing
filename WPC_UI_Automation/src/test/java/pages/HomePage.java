@@ -72,7 +72,7 @@ public class HomePage {
 		WebElement profileHover = waitForElement(ProfileIcon);
 		// Hovers on the profile Icon
 		new Actions(driver).moveToElement(profileHover).perform();
-		System.out.println("--- Hovered Successfully on the Profile Icon!");
+		System.out.println(" Hovered Successfully on the Profile Icon!");
 
 		// Take Screenshot of the Profile Hover
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -86,7 +86,7 @@ public class HomePage {
 	public void customerPeerAnalysisCardClick() throws IOException, InterruptedException {
 		WebElement customerPeerAnalysisCard = waitForElement(CustomerPeerAnalysisCard);
 		customerPeerAnalysisCard.click();
-		System.out.println("---Clicked Customer Peer Analysis card.");
+		System.out.println(" Clicked Customer Peer Analysis card.");
 
 		// Verify whether it landed on the Customer Peer Analysis Card - Overview screen
 		String currentUrl = driver.getCurrentUrl();
@@ -94,8 +94,7 @@ public class HomePage {
 
 		if (!currentUrl.equalsIgnoreCase(expectedCustomerOverviewUrl)) {
 			throw new AssertionError(
-					"--- Customer Peer Analysis Card - Unexpected redirection :( !Current URL you're on: "
-							+ currentUrl);
+					" Customer Peer Analysis Card - Unexpected redirection :( !Current URL you're on: " + currentUrl);
 		}
 
 		Thread.sleep(10000);
@@ -113,7 +112,7 @@ public class HomePage {
 	public void autoRootCauseAnalysisCardClick() throws IOException, InterruptedException {
 		WebElement autoRootCauseAnalysisCard = waitForElement(AutoRootCauseAnalysisCard);
 		autoRootCauseAnalysisCard.click();
-		System.out.println("---Clicked Auto Root Cause Analysis card.");
+		System.out.println(" Clicked Auto Root Cause Analysis card.");
 
 		// Verify whether it landed on the Auto Root Cause Analysis Card - Overview
 		// screen
@@ -122,8 +121,7 @@ public class HomePage {
 
 		if (!currentUrl.equalsIgnoreCase(expectedAutoRootCauseUrl)) {
 			throw new AssertionError(
-					"--- Auto Root Cause Analysis Card - Unexpected redirection :( !Current URL you're on: "
-							+ currentUrl);
+					" Auto Root Cause Analysis Card - Unexpected redirection :( !Current URL you're on: " + currentUrl);
 		}
 
 		Thread.sleep(10000);
@@ -149,8 +147,7 @@ public class HomePage {
 		FileHandler.copy(sourcefile, screenshotPath);
 
 		if (!currentUrl.equalsIgnoreCase(expectedUrl)) {
-			throw new AssertionError(
-					"--- homescreen - Unexpected redirection :( !Current URL you're on: " + currentUrl);
+			throw new AssertionError(" Unexpected redirection - !Current URL you're on: " + currentUrl);
 		}
 	}
 
@@ -163,7 +160,7 @@ public class HomePage {
 		// Thread.sleep(1000);
 		new Actions(driver).moveToElement(customerPeerAnalysisSideNav).click().perform();
 
-		System.out.println("--- Customer Peer Analysis Side Navigation is clicked!");
+		System.out.println(" Customer Peer Analysis Side Navigation is clicked!");
 
 		// Verify whether it landed on the Customer Peer Analysis Side NavBar - Overview
 		// screen
@@ -172,7 +169,7 @@ public class HomePage {
 
 		if (!currentUrl.equalsIgnoreCase(expectedCustomerOverviewUrl)) {
 			throw new AssertionError(
-					"--- Customer Peer Analysis Side NavBar - Unexpected redirection :( !Current URL you're on: "
+					" Customer Peer Analysis Side NavBar - Unexpected redirection :( !Current URL you're on: "
 							+ currentUrl);
 		}
 		Thread.sleep(2000);
@@ -181,7 +178,7 @@ public class HomePage {
 		List<WebElement> customerSubOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
 				"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/a")));
 
-		System.out.println("--- Found " + customerSubOptions.size() + " options under Customer Peer Analysis.");
+		System.out.println(" Found " + customerSubOptions.size() + " options under Customer Peer Analysis.");
 		for (WebElement option : customerSubOptions) {
 			new Actions(driver).moveToElement(option).perform();
 			System.out.println("--- Hovered: " + option.getText());
@@ -207,7 +204,7 @@ public class HomePage {
 		WebElement autoRootSidebar = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='125464']")));
 		new Actions(driver).moveToElement(autoRootSidebar).click().perform();
-		System.out.println("--- Auto Root Cause Analysis Side Navigation is clicked!");
+		System.out.println(" Auto Root Cause Analysis Side Navigation is clicked!");
 		// Verify whether it landed on the Auto Root Cause Analysis Side NavBar -
 		// Overview screen
 		String currentUrl = driver.getCurrentUrl();
@@ -215,7 +212,7 @@ public class HomePage {
 
 		if (!currentUrl.equalsIgnoreCase(expectedAutoRootCauseUrl)) {
 			throw new AssertionError(
-					"--- Auto Root Cause Analysis Side NavBar - Unexpected redirection :( !Current URL you're on: "
+					" Auto Root Cause Analysis Side NavBar - Unexpected redirection :( !Current URL you're on: "
 							+ currentUrl);
 		}
 
@@ -225,10 +222,10 @@ public class HomePage {
 		List<WebElement> autoRootSubOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(
 				"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/a")));
 
-		System.out.println("Found " + autoRootSubOptions.size() + " options under Auto Root Cause Analysis.");
+		System.out.println(" Found " + autoRootSubOptions.size() + " options under Auto Root Cause Analysis.");
 		for (WebElement option : autoRootSubOptions) {
 			new Actions(driver).moveToElement(option).perform();
-			System.out.println("Hovered: " + option.getText());
+			System.out.println(" Hovered: " + option.getText());
 			Thread.sleep(2000);
 			// Takes Screenshot of the Auto Root Cause Analysis Side NavBar click
 			TakesScreenshot screenshot = (TakesScreenshot) driver;

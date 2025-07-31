@@ -1,0 +1,3 @@
+2025-07-30 15:58:09.209 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
+2025-07-30 15:59:38.104 [main] ERROR ▶ ❌ Scenario FAILED: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
+2025-07-30 15:59:38.104 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

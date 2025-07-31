@@ -15,8 +15,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import config.ConfigReader;
+import hooks.Hooks;
 
 public class CPA_ViewScenarioImpactPage {
 	WebDriver driver;
@@ -34,6 +37,8 @@ public class CPA_ViewScenarioImpactPage {
 	private WebElement waitForElement(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+
+	public static final Logger logger = LoggerFactory.getLogger(CPA_ViewScenarioImpactPage.class);
 
 	// Locators
 	// xapth of the Filters btn
@@ -147,8 +152,8 @@ public class CPA_ViewScenarioImpactPage {
 			throw new AssertionError(
 					"=> Unexpected Redirection and landed on wrong screen - The Current URL you're on: " + currentUrl);
 		}
-		System.out.println(
-				"=> Successfully landed on the Scenario screen with the sliders required to simulate the scenario");
+		Hooks.logger
+				.info(" Successfully landed on the Scenario screen with the sliders required to simulate the scenario");
 
 	}
 
@@ -178,7 +183,7 @@ public class CPA_ViewScenarioImpactPage {
 			waitForElement(cpa_vsi_filterOptionValue01);
 		}
 
-		System.out.println("=> The Filter was clicked and selected a Customer + Scenario name: " + filterOptionValue02
+		Hooks.logger.info(" The Filter was clicked and selected a Customer + Scenario name: " + filterOptionValue02
 				+ "  and then selected the :" + filterOptionValue01);
 		// waits for the Filters - Cancel button
 		WebElement vsi_filtersCancelBtn = waitForElement(cpa_vsi_filtersCancelBtn);
@@ -203,7 +208,7 @@ public class CPA_ViewScenarioImpactPage {
 		WebElement vsi_backBtn = waitForElement(cpa_vsi_backBtn);
 		actions.moveToElement(vsi_backBtn, 0, 0).click().perform();
 		System.out.println(customerId);
-		System.out.println("=> The Back button was clicked and redirected to the Create Scenario screen");
+		Hooks.logger.info(" The Back button was clicked and redirected to the Create Scenario screen");
 		Thread.sleep(3000);
 		// Validating the Filter of create scenario
 		// waits for the Create Scenario - Filter
@@ -224,8 +229,8 @@ public class CPA_ViewScenarioImpactPage {
 			throw new AssertionError("=> Mismatch in the Customer Id | View Scenario Impact = [" + customerId
 					+ "] vs Create Scenario  = [" + createScenarioCustomerId + "]");
 		}
-		System.out.println(
-				"=> The Customer ID  matched and confirms that the redirection is of the same customer records");
+		Hooks.logger
+				.info(" The Customer ID  matched and confirms that the redirection is of the same customer records");
 
 		// waits for the Filter - Cancel
 		WebElement csc_filterCancelBtn = waitForElement(cpa_csc_filterCancelBtn);
@@ -268,11 +273,11 @@ public class CPA_ViewScenarioImpactPage {
 		WebElement csc_valueEPTextAfter = waitForElement(cpa_csc_valueEPTextAfter);
 		String enterpriseValueAfter = csc_valueEPTextAfter.getText().trim();
 		if (!enterpriseValueAfter.equalsIgnoreCase(enterpriseValueBefore)) {
-			System.out.println(
-					"=> Simulation: The Enterprise Profit value is not matched, which means it confirms that simulation has happened");
+			Hooks.logger.info(
+					" Simulation: The Enterprise Profit value is not matched, which means it confirms that simulation has happened");
 		} else {
-			System.out.println(
-					"=> No Simulation: The Enterprise Profit value is matched, which means there was no simulation happened");
+			Hooks.logger.warn(
+					" No Simulation: The Enterprise Profit value is matched, which means there was no simulation happened");
 		}
 		// waits for the chart
 		try {
@@ -317,11 +322,11 @@ public class CPA_ViewScenarioImpactPage {
 				double afterValue = Double.parseDouble(afterText);
 
 				if (beforeValue != afterValue) {
-					System.out.println("=> The Scenario has been created as there is difference between the values of "
+					Hooks.logger.info(" The Scenario has been created as there is difference between the values of "
 							+ targetMetric + " : Before = " + beforeValue + " and After = " + afterValue);
 				} else {
-					System.out.println(
-							"=> The Scenario has NOT created because there is NO difference between the values of "
+					Hooks.logger
+							.info(" The Scenario has NOT created because there is NO difference between the values of "
 									+ targetMetric + ": Before = After = " + beforeValue);
 				}
 				return;
@@ -373,8 +378,8 @@ public class CPA_ViewScenarioImpactPage {
 		} catch (Exception e) {
 			waitForElement(cpa_csc_comparisonBtnTable);
 		}
-		System.out.println(
-				"=> The download icon of the Comparison table was clicked and downloaded the table records as an excel file");
+		Hooks.logger.info(
+				" The download icon of the Comparison table was clicked and downloaded the table records as an excel file");
 
 	}
 
@@ -397,8 +402,8 @@ public class CPA_ViewScenarioImpactPage {
 			throw new AssertionError(
 					"=> Unexpected Redirection and landed on wrong screen - The Current URL you're on: " + currentUrl);
 		}
-		System.out.println(
-				"=> Successfully landed on the Branch/Customer Selection screen by clicking the Reset button of the View Imapct Screen");
+		Hooks.logger.info(
+				" Successfully! landed on the Branch/Customer Selection screen by clicking the Reset button of the View Imapct Screen");
 
 	}
 

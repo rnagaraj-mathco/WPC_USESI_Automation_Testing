@@ -13,8 +13,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import config.ConfigReader;
+import hooks.Hooks;
 
 public class ARCA_ProfitBridgePage {
 	WebDriver driver;
@@ -32,6 +35,7 @@ public class ARCA_ProfitBridgePage {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
+	public static final Logger logger = LoggerFactory.getLogger(ARCA_ProfitBridgePage.class);
 	// Locator
 	// xpath of the profit bridge chart
 	By arca_pb_chart = By.xpath(
@@ -111,8 +115,10 @@ public class ARCA_ProfitBridgePage {
 		waitForElement(arca_pb_chart);
 		// waits for the Go to Simulator button
 		waitForElement(arca_pb_goToSimulator);
-		System.out.println(
-				"=> The Profit Bridge screen is loaded with the Pricing (Actual vs System %) and Profit Bridge (Gross Profit to Enterprise Profit) chart");
+		// logger
+		Hooks.logger.info(
+				"The Profit Bridge screen is loaded with the Pricing (Actual vs System %) and Profit Bridge (Gross Profit to Enterprise Profit) chart");
+
 		Thread.sleep(1000);
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -131,7 +137,7 @@ public class ARCA_ProfitBridgePage {
 			throw new AssertionError(
 					"=> Unexpected Redirection and landed on wrong screen - The Current URL you're on: " + currentUrl);
 		}
-		System.out.println("=> Successfully!, Landed on the Profit Bridge Screen");
+		Hooks.logger.info(" Successfully!, Landed on the Profit Bridge Screen");
 	}
 
 	public String customerDetails, customerProductDetails;
@@ -169,8 +175,8 @@ public class ARCA_ProfitBridgePage {
 			throw new AssertionError("=> Mismatch in the Customer deatils | Selected = [" + customerDetails
 					+ "] vs Filter = [" + custmerDetailsHeaderText + "]");
 		}
-		System.out.println(
-				"=> The Customer details matched and confirms the chart is of the Selected Customer and Product Combinations");
+		Hooks.logger.info(
+				" The Customer details matched and confirms the chart is of the Selected Customer and Product Combinations");
 		Thread.sleep(2000);
 	}
 
@@ -179,7 +185,7 @@ public class ARCA_ProfitBridgePage {
 		// waits for the camera icon
 		WebElement pb_downloadIcon = waitForElement(arca_pb_downloadIcon);
 		pb_downloadIcon.click();
-		System.out.println("=> The Download Icon of the chart is clicked and downloaded the chart");
+		Hooks.logger.info(" The Download Icon of the chart is clicked and downloaded the chart");
 		Thread.sleep(2000);
 		waitForElement(arca_pb_chart);
 	}
@@ -199,7 +205,7 @@ public class ARCA_ProfitBridgePage {
 			throw new AssertionError("=> Mismatch in the Customer ID | Profit Bridge screen = [" + customerId
 					+ "] vs Customer Selection screen = [" + customerIdSOC + "]");
 		}
-		System.out.println("=> The Customer ID's matched and confirms that the redirection is as expected");
+		Hooks.logger.info(" The Customer ID's matched and confirms that the redirection is as expected");
 		Thread.sleep(2000);
 		// redirecting to the create scenario screen
 		driver.get(ConfigReader.arca_profitBridge());
@@ -239,8 +245,8 @@ public class ARCA_ProfitBridgePage {
 					"=> Mismatch in Customer and Product Combination: Profit Bridge = [" + customerProductDetails
 							+ "] vs Filter of Create Scenario = [" + filterCustomerProductCombinationOptionValue + "]");
 		}
-		System.out.println(
-				"=> The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  "
+		Hooks.logger.info(
+				" The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  "
 						+ customerProductDetails + " == " + filterCustomerProductCombinationOptionValue);
 
 		// Validates the URL after redirection
@@ -251,7 +257,7 @@ public class ARCA_ProfitBridgePage {
 			throw new AssertionError(
 					"=> Unexpected Redirection and landed on wrong screen - The Current URL you're on: " + currentUrl);
 		}
-		System.out.println("=> Successfully redirected to the Create Scenario screen");
+		Hooks.logger.info(" Successfully! redirected to the Create Scenario screen");
 
 		Thread.sleep(1000);
 

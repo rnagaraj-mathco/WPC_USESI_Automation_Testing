@@ -30,9 +30,15 @@ public class LoginPage {
 	}
 
 	// private By username = By.id("username");
-	By username = By.xpath("//*[@id=\"username\"]");
-	By password = By.xpath("//*[@id=\"password\"]");
-	By loginBtn = By.xpath("//*[@id=\"loginEmail\"]");
+//	By username = By.xpath("//*[@id=\"username\"]");
+	By username = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1]");
+//	By password = By.xpath("//*[@id=\"password\"]");
+	By password = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/input[1]");
+//	By loginBtn = By.xpath("//*[@id=\"loginEmail\"]");
+	By loginBtn = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/button[1]/span[1]");
 
 	// SSO Login button
 	By SSOLogin_Btn = By
@@ -48,18 +54,20 @@ public class LoginPage {
 	By welcomeTextLocator = By
 			.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/span[1]");
 
+	//
 	public void navigateTo() throws IOException {
 		driver.get(ConfigReader.getAppUrl());
-
 		// Wait for login page to load by waiting for a known visible element (like the
 		// username field)
-		waitForElement(username); // waits until user name is visible
+		// waitForElement(username); // waits until user name is visible
+//		waitForElement(loginBtn);
 
 		// Now take screenshot only after page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
 		File screenshotPath = new File("src/test/resources/screenshots/login/loginpage.png");
 		FileHandler.copy(sourcefile, screenshotPath);
+
 	}
 
 	public void loginTo() throws InterruptedException {
@@ -78,12 +86,13 @@ public class LoginPage {
 		WebElement usernameField = waitForElement(username);
 		usernameField.clear();
 		usernameField.sendKeys(ConfigReader.userEmailId());
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 
 		WebElement passwordField = waitForElement(password);
 		passwordField.clear();
 		passwordField.sendKeys(ConfigReader.password());
-		Thread.sleep(1000);
+		waitForElement(password);
+		Thread.sleep(2000);
 	}
 
 	public void loginBtn() throws IOException, InterruptedException {
@@ -96,15 +105,15 @@ public class LoginPage {
 		String actualUrl = driver.getCurrentUrl();
 		String expectedUrl = ConfigReader.getProperty("expected.home.url");
 
-		System.out.println("--- The Current URL: " + actualUrl);
-		System.out.println("---  The Expected URL: " + expectedUrl);
+		System.out.println(" The Current URL: " + actualUrl);
+		System.out.println(" The Expected URL: " + expectedUrl);
 
 		if (!actualUrl.equalsIgnoreCase(expectedUrl)) {
 			throw new AssertionError(
-					"! Mismatch: Landed on wrong page. Expected: " + expectedUrl + " but was: " + actualUrl);
+					" Mismatch: Landed on wrong page. Expected: " + expectedUrl + " but was: " + actualUrl);
 		}
 
-		System.out.println("--- URL verification successful: You landed on the correct page.");
+		System.out.println(" The URL verification was successful: You landed on the correct page.");
 
 		By homeScreen = By.xpath("//*[@id=\"bodyContent\"]/div[2]/div[2]");
 		waitForElement(homeScreen);
@@ -116,7 +125,7 @@ public class LoginPage {
 		new Actions(driver).moveToElement(profileHover).perform();
 		Thread.sleep(2000);
 		System.out.println(
-				"--- Successfully hovered over the profile icon, and the displayed username confirms a valid login");
+				" Successfully hovered over the profile icon, and the displayed username confirms a valid login");
 		// This is to click on the screen to skip the hovering
 //		Actions actions = new Actions(driver);
 //		actions.moveByOffset(10, 10).click().build().perform();
@@ -137,7 +146,7 @@ public class LoginPage {
 		File screenshotPath = new File("src/test/resources/screenshots/login/LoginSuccess_HomeScreenLoad.png");
 		FileHandler.copy(sourcefile, screenshotPath);
 		Thread.sleep(1500);
-		System.out.println("--- Home screen loaded fully.");
+		System.out.println(" Home screen loaded fully.");
 
 	}
 
@@ -160,7 +169,7 @@ public class LoginPage {
 		File screenshotPath = new File("src/test/resources/screenshots/login/LoginFails_InvalidCredentials.png");
 		FileHandler.copy(sourcefile, screenshotPath);
 
-		System.out.println("\n --- Invalid Credentials was entered!");
+		System.out.println(" Invalid Credentials was entered!");
 
 	}
 
@@ -180,7 +189,7 @@ public class LoginPage {
 		FileHandler.copy(sourcefile, screenshotPath);
 
 		if (!currentUrl.equalsIgnoreCase(expectedUrl)) {
-			throw new AssertionError("--- Unexpected redirection :( !Current URL your in:  " + currentUrl);
+			throw new AssertionError("=> Unexpected redirection :( !Current URL your in:  " + currentUrl);
 
 		}
 	}

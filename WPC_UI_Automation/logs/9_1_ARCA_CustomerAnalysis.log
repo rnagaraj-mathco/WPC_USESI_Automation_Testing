@@ -1,0 +1,2 @@
+2025-07-29 15:00:05.402 [main] INFO  ▶  Logger initialized for feature: 9_1_ARCA_CustomerAnalysis
+2025-07-29 15:03:37.729 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to interact with filters and select customers from the plot and save the selection

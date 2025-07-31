@@ -293,7 +293,7 @@ public class ARCA_CustomerAnalysisPage {
 	By tooltipText = By.xpath("//*[name()='g' and @class='hoverlayer']//*[name()='text']");
 
 	public List<String> rootCauseCustomerSelectionPlot() throws IOException {
-		List<String> targetCustomerIds = Arrays.asList("143140", "37435", "48614", "67311", "427567");
+		List<String> targetCustomerIds = Arrays.asList("143140", "448646", "48614", "67311", "47745");
 		List<String> clickedIds = new ArrayList<>();
 		System.out
 				.println("=> Target Customer ID's to select from the Root Cause Customer for the Selected Cost Metric: "

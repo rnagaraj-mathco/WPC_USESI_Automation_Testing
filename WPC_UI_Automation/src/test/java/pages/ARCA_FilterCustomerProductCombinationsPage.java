@@ -135,15 +135,15 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 
 	// xpath of the checkbox of VRCA table for selecting the customer - 01
 	By arca_cs_tableVRCACheckbox1 = By.xpath(
-			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[1]/div[1]");
+			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]/div[1]");
 
 	// xpath of the checkbox of VRCA table for selecting the customer - 02
 	By arca_cs_tableVRCACheckbox2 = By.xpath(
-			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[5]/td[1]/div[1]");
+			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[1]/div[1]");
 
 	// xpath of the checkbox of VRCA table for selecting the customer - 03
 	By arca_cs_tableVRCACheckbox3 = By.xpath(
-			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[9]/td[1]/div[1]");
+			"/html[1]/body[1]/div[5]/div[3]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[1]/div[1]");
 
 	// xpath of the download icon of VRCA table
 	By arca_fcp_downloadIconVRCA = By.xpath(
@@ -231,6 +231,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		} catch (Exception e) {
 			waitForElement(arca_fcp_treeMap);
 		}
+		Thread.sleep(2000);
 	}
 
 	// Clicks the Reset Button
@@ -246,6 +247,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		} catch (Exception e) {
 			waitForElement(arca_fcp_treeMap);
 		}
+		Thread.sleep(2000);
 	}
 
 	// Clicks the Select All Commodity checkbox

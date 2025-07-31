@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false"> <!-- 🚫 Turn off Logback internal logs -->
+
+    <!-- ✅ Console appender only -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- ✅ Your custom creative pattern remains unchanged -->
+            <pattern>%d{HH:mm:ss.SSS} 💡 %-5level ▶ %logger{36} ▶ %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 🚫 Removed unnecessary default rolling FILE appender -->
+
+    <!-- ✅ Root logger logs only to console -->
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>

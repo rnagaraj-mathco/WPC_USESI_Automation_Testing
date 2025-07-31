@@ -86,6 +86,14 @@ public class CPA_OverviewPage {
 	By cpa_csc_backBtn = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/button[1]");
 
+	// xpath of the Peer Selection 1 - STC table
+	By cpa_ps1_tableSTC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]");
+
+	// Select Customer Button
+	By cpa_ps1_selectCustomerBtnSTC = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/button[1]");
+
 	// xpath of the Peer Selection - 02 - Set Peer Matching Criteria
 	By cpa_ps2_setPeerMatchingCriteriaBtn = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/button[1]");
@@ -117,6 +125,13 @@ public class CPA_OverviewPage {
 	By cpa_ps2_customerIdCPGS = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[6]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[2]");
 
+	// xpath of the PS-2 CPGS table
+	By cpa_ps2_comparativePeerGroupSelectionTable = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]");
+
+	// Back button of PS-2
+	By cpa_ps2_backBtnCPGS = By.xpath("//button[.//span[text()='Back'] and contains(@class, 'MuiButton-root')]");
+
 	// Back btn -01 - Select a Target Customer for Peer Matching (STCP) (Peer
 	// Selection -01) (This is the btn of
 	// the screen where user lands when Edit btn clicked from overview screen
@@ -139,6 +154,9 @@ public class CPA_OverviewPage {
 	By cpa_deleteIconSCPS = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/button[1]");
 
+	// Error message - Delete Icon - SCPS
+	By cpa_errorMessageDeleteIconSCPS = By
+			.xpath("//h4[contains(text(),'Please update at least one peer selection dropdown')]");
 	// Download Icon - SCPS
 	By cpa_downloadIconSCPS = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/div[1]");
@@ -148,6 +166,8 @@ public class CPA_OverviewPage {
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/button[2]/span[1]/*[name()='svg'][1]");
 	// Error Message - SCS
 	By cpa_errorToasterMessage = By.xpath("//h4[normalize-space()='Please select a record to create scenario !']");
+
+	// Delete button in the toaster message
 
 	// Saved Sensitivity Scenario Simulation table - SSS
 	// Search Keyword - SSS
@@ -288,7 +308,7 @@ public class CPA_OverviewPage {
 		searchBarSCPS.click();
 		searchBarSCPS.sendKeys(Keys.CONTROL + "a");
 		searchBarSCPS.sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("=> The Saved Customer Peer Selection for the Customer Id: " + searchRecord
 				+ " was searched successfully!");
 
@@ -318,8 +338,20 @@ public class CPA_OverviewPage {
 
 		// Clicks the Create Sensitivity Scenario button with selection
 		CreateSensitivityScenarioBtn.click();
+
 		// Create Scenario validations
 		waitForElement(cpa_csc_scenarioSlider);
+		// Verify whether it landed on the Customer Peer Analysis Card - Scenario
+		// Builder - Create Scenario using assertion
+		String currentUrl = driver.getCurrentUrl();
+		String expectedCreateScenarioUrl = ConfigReader.cpa_createScenario();
+
+		if (!currentUrl.equalsIgnoreCase(expectedCreateScenarioUrl)) {
+			throw new AssertionError("=> Unexpected redirection!, Current URL you're on: " + currentUrl);
+		}
+		System.out.println(
+				"=> Successfully!, Redirected to the Create Scenario from the Overview screen by selecting the customer record and clicking on the Create Sensitivity Scenario Button");
+		Thread.sleep(2000);
 		WebElement csc_filter = waitForElement(cpa_csc_filtersBtn);
 		csc_filter.click();
 		Thread.sleep(3000);
@@ -353,23 +385,21 @@ public class CPA_OverviewPage {
 		WebElement csc_filterCancelBtn = waitForElement(cpa_csc_filterCancelBtn);
 		csc_filterCancelBtn.click();
 
-		// Verify whether it landed on the Customer Peer Analysis Card - Scenario
-		// Builder - Create Scenario using assertion
-		String currentUrl = driver.getCurrentUrl();
-		String expectedCreateScenarioUrl = ConfigReader.cpa_createScenario();
-
-		if (!currentUrl.equalsIgnoreCase(expectedCreateScenarioUrl)) {
-			throw new AssertionError("=> Unexpected redirection!, Current URL you're on: " + currentUrl);
-		}
-		System.out.println(
-				"=> Successfully!, Redirected to the Create Scenario from the Overview screen by selecting the customer record and clicking on the Create Sensitivity Scenario Button");
-		Thread.sleep(4000);
-
 		// Navigating back to overview screen only by back button
 		// Waits for the Create Scenario - Back button cpa_csc_backBtn
 		waitForElement(cpa_csc_scenarioSlider);
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
 		csc_backBtn.click();
+		try {
+			waitForElement(cpa_ps1_tableSTC);
+			waitForElement(cpa_ps1_selectCustomerBtnSTC);
+			waitForElement(cpa_ps_BackBtnSTCP);
+		} catch (Exception e) {
+			waitForElement(cpa_ps1_tableSTC);
+			waitForElement(cpa_ps1_selectCustomerBtnSTC);
+			waitForElement(cpa_ps_BackBtnSTCP);
+		}
+		Thread.sleep(3000);
 		// Waits for the Peer selection -02 - Button
 //		waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
 //		// Waits for the Peer Selection - 02 - Back button
@@ -380,17 +410,30 @@ public class CPA_OverviewPage {
 		// Select Target Customer for Peer Matching
 		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
 		ps_BackBtnSTCP.click();
-		Thread.sleep(7000);
-		// waits for the Geographical map
-		waitForElement(cpa_geographicalMap);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		try {
+			// waits for the Geographical map
+			waitForElement(cpa_geographicalMap);
+		} catch (Exception e) {
+			// waits for the Geographical map
+			waitForElement(cpa_geographicalMap);
+		}
+
+		Thread.sleep(1000);
 		// Redirection to the Overview screen
 		driver.get(ConfigReader.cpa_overview());
 		System.out.println("=> Successfully!, Navigated back to the Overview screen from Create Scenario");
-		waitForElement(cpa_startNewPeerAnalysisBtn);
+		try {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+			waitForElement(cpa_createSensitivityScenarioBtnSCPS);
+		} catch (Exception e) {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+			waitForElement(cpa_createSensitivityScenarioBtnSCPS);
+		}
+
 		// temporary but need to code for the flow till creation of scenario
 //		driver.navigate().back(); 
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 
 	}
 
@@ -444,7 +487,17 @@ public class CPA_OverviewPage {
 		// Clicks the Edit button - SCPS
 		editbtnSCPS.click();
 		System.out.println("=> Clicked the Edit Button of Saved Customer Peer Selection table");
-		waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
+		try {
+			waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
+			waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
+			waitForElement(cpa_ps2_backBtnCPGS);
+		} catch (Exception e) {
+			waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
+			waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
+			waitForElement(cpa_ps2_backBtnCPGS);
+
+		}
+
 		Thread.sleep(4000);
 
 		// Validting the Customer Id present in the Comparative Peer Group Selection
@@ -483,6 +536,7 @@ public class CPA_OverviewPage {
 		// Select Target Customer for Peer Matching
 		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
 		// Validates the BILL To ID in Peer Selection:01
+		// by looping through all the BILL To ID column
 		// Basically the BILL To ID of Peer Selection:02 is searched in the
 		// Peer Selection:02 table and validated
 		List<WebElement> customerIdCells = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
@@ -492,7 +546,7 @@ public class CPA_OverviewPage {
 			String actualCustomerId = cell.getText().trim();
 			if (actualCustomerId.equalsIgnoreCase(customerIdCPGS)) {
 				System.out.println(
-						"=> By clicking the Back button in Peer Selection - Comparative Peer Group Selection screen it redirected to Peer Selection - Select a Target Customer for Peer Matching and validated by the BILL To ID:"
+						" => By clicking the Back button in Peer Selection - Comparative Peer Group Selection screen it redirected to Peer Selection - Select a Target Customer for Peer Matching and validated by the BILL To ID:"
 								+ actualCustomerId);
 				matchFound = true;
 				break;
@@ -504,16 +558,26 @@ public class CPA_OverviewPage {
 		}
 
 		ps_BackBtnSTCP.click();
-		Thread.sleep(5000);
-		// waits for the Geographical map
-		waitForElement(cpa_geographicalMap);
-		Thread.sleep(4000);
+		try {
+			// waits for the Geographical map
+			waitForElement(cpa_geographicalMap);
+		} catch (Exception e) {
+			// waits for the Geographical map
+			waitForElement(cpa_geographicalMap);
+		}
+		Thread.sleep(2000);
 		// Redirection to the Overview screen
 		driver.get(ConfigReader.cpa_overview());
 		System.out.println(
 				"=> Successfully!, Navigated back to the Overview screen from Peer Selection - Comparative Peer Group Selection screen");
-		waitForElement(cpa_startNewPeerAnalysisBtn);
-		Thread.sleep(5000);
+		try {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+			waitForElement(cpa_createSensitivityScenarioBtnSCPS);
+		} catch (Exception e) {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+			waitForElement(cpa_createSensitivityScenarioBtnSCPS);
+		}
+		Thread.sleep(2000);
 	}
 
 	// Deleting the records
@@ -539,7 +603,7 @@ public class CPA_OverviewPage {
 		// Waits for Delete Icon and clicks it
 		WebElement DeleteIconSCPS = waitForElement(cpa_deleteIconSCPS);
 		DeleteIconSCPS.click();
-		System.out.println("=> The record of the Customer Id: " + customerId_SCPS
+		System.out.println(" The record of the Customer Id: " + customerId_SCPS
 				+ " was Deleted from the Saved Customer Peer Selection table");
 		Thread.sleep(2000);
 
@@ -551,15 +615,39 @@ public class CPA_OverviewPage {
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSCPS = waitForElement(cpa_deleteIconSCPS);
 		deleteIconSCPS.click();
+//		errorMessageDeleteIconSCPS();
+		WebElement errorMessageDeleteIconSCPS = waitForElement(cpa_errorMessageDeleteIconSCPS);
+		String actualMsg = errorMessageDeleteIconSCPS.getText();
+		String expectedMsg = "Please update at least one peer selection dropdown value before clicking the Delete button to proceed with record deletion.";
+		Assert.assertEquals("=> The Error Toaster message validation for the Delete Icon - SCPS has failed!",
+				expectedMsg, actualMsg);
+
 		System.out.println(
 				"=> The Delete Icon of Saved Customer Peer Selection table is clicked without setting to delete option in the dropdown due to which an error message popped");
-		Thread.sleep(5000);
+		Thread.sleep(4000);
 		// Take screenshot of the delete icon selection
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
 		File screenshotPath = new File(
 				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteIconSCPS.png");
 		FileHandler.copy(sourcefile, screenshotPath);
+		try {
+			waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
+			waitForElement(cpa_downloadIconSCPS);
+		} catch (Exception e) {
+			waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
+			waitForElement(cpa_downloadIconSCPS);
+		}
+
+	}
+
+	// Validating the eror message of delete icon
+	public void errorMessageDeleteIconSCPS() {
+		WebElement errorMessageDeleteIconSCPS = waitForElement(cpa_errorMessageDeleteIconSCPS);
+		String actualMsg = errorMessageDeleteIconSCPS.getText();
+		String expectedMsg = "Please update at least one peer selection dropdown value before clicking the Delete button to proceed with record deletion.";
+		Assert.assertEquals("=> The Error Toaster message validation for the Delete Icon - SCPS has failed!",
+				expectedMsg, actualMsg);
 
 	}
 
@@ -864,6 +952,7 @@ public class CPA_OverviewPage {
 		// Waits for the Create Scenario - Back button cpa_csc_backBtn
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
 		csc_backBtn.click();
+		Thread.sleep(5000);
 		// Waits for the Peer selection -02 - Button
 //		waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
 //		// Waits for the Peer Selection - 02 - Back button
@@ -924,7 +1013,7 @@ public class CPA_OverviewPage {
 		deleteIconSSS.click();
 		System.out.println(
 				"The Delete Icon of Saved Sensitivity Simulation table is clicked without setting to delete option in the dropdown due to which an error message popped");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		// Take screenshot of the delete icon selection
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
