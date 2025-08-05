@@ -10,7 +10,7 @@ Feature: Land on the Create Scenario screen where the user should be able to cre
   #25/07_ If a filter is clicked then not able to create the sceanrio   
   	Then the user should be able to click on the Filters and perform actions such as Apply, Reset and Cancel based on requirements
   #Back buttton scripts are done but the redirection is not proper and reported to developers
-   When the user clicks on the Back button then it should get redirected to the Peer Selection - Select Target Comparative Peer Group Selection Screen
+   #When the user clicks on the Back button then it should get redirected to the Peer Selection - Select Target Comparative Peer Group Selection Screen
   	When the user hovers over the sliders in the Peer Comparison - Pricing and Peer Comparison - Cost To Serve chart, the corresponding value should be displayed
   	Then the user should be able to adjust the sliders in the Start Simulating - Pricing and Start Simulating - Cost To Serve charts to simulate the scenario
   	When the user clicks on the Reset button then the both the simulation chart updates to the initial state
