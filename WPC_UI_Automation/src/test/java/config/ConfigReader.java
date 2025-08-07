@@ -95,4 +95,12 @@ public class ConfigReader {
 		return properties.getProperty("arca_createScenario");
 	}
 
+	public static String searchBranchName() {
+		return properties.getProperty("searchBranchName");
+	}
+
+	public static String customerSelectionPlotID() {
+		return properties.getProperty("customerSelectionPlotID");
+	}
+
 }

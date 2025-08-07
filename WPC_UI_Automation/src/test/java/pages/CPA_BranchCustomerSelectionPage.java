@@ -1,6 +1,5 @@
 package pages;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -13,28 +12,28 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class CPA_BranchCustomerSelectionPage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public CPA_BranchCustomerSelectionPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // ✅ wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -123,14 +122,19 @@ public class CPA_BranchCustomerSelectionPage {
 		driver.get(ConfigReader.cpa_branchCustomerSelection());
 		// Function waits till the Entire is loaded
 		waitForElement(cpa_bc_geographicalMap);
+		try {
+			waitForElement(cpa_bc_geographicalMap);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_geographicalMap);
+		}
 		System.out.println("=> The Branch/Customer Screen is Loaded with the Geographical map");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/BranchCustomerSelectionScreen.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/BranchCustomerSelectionScreen.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		// Verify whether it landed on the Customer Peer Analysis Card - Selections
 		// -Branch/Customer Selection
 		String currentUrl = driver.getCurrentUrl();
@@ -155,14 +159,21 @@ public class CPA_BranchCustomerSelectionPage {
 		this.bubbleCountInit = initialBubbleCount;
 		// Xpath for the Filters button
 		WebElement FiltersCustomerPeerSelections = waitForElement(cpa_bc_filters);
-		FiltersCustomerPeerSelections.click();
+//		FiltersCustomerPeerSelections.click();
+		helper.safeClick(FiltersCustomerPeerSelections);
 		System.out.println("=> The Filters button is clicked");
 		Thread.sleep(2000);
 		// Xpath for the Filters Regions options
 		WebElement FitlersRegionsCustomerPeerSelections = waitForElement(cpa_bc_filtersOptionsRegions);
-		FitlersRegionsCustomerPeerSelections.click();
+//		FitlersRegionsCustomerPeerSelections.click();
+		helper.safeClick(FitlersRegionsCustomerPeerSelections);
 		System.out.println("=> The Filters - Region option is clicked");
-		Thread.sleep(7000);
+		Thread.sleep(4000);
+		try {
+			waitForElement(cpa_bc_filtersOptionsRegions);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_filtersOptionsRegions);
+		}
 		waitForElement(cpa_bc_filtersOptionsRegions);
 		// Specifying the regions options
 		// For Region-02
@@ -171,6 +182,7 @@ public class CPA_BranchCustomerSelectionPage {
 //		WebElement FiltersRegions_12 = waitForElement(cpa_bc_filtersOptionsRegionsValue02);
 //		Thread.sleep(8000);
 //		FiltersRegions_12.click();
+//		helper.safeClick(FiltersRegions_12);
 //		System.out.println("=> The Filters - Regions options is clicked and selected the option 12");
 //		waitForElement(cpa_bc_filtersOptionsRegionsValue02);
 //		Thread.sleep(8000);
@@ -179,6 +191,7 @@ public class CPA_BranchCustomerSelectionPage {
 		// This will navigate to the Order Channel Filter
 		actions.moveToElement(FiltersOrderChannelCustomerPeerSelections).click().perform();
 //		FiltersOrderChannelCustomerPeerSelections.click();
+//		helper.safeClick(FiltersOrderChannelCustomerPeerSelections);
 		System.out.println("=> The Filters - Order Channel option is clicked");
 		waitForElement(cpa_bc_filtersOptionsOrderChannel);
 		Thread.sleep(8000);
@@ -199,19 +212,27 @@ public class CPA_BranchCustomerSelectionPage {
 //		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("jss1267")));
 		// Click the Apply button
 		WebElement Filters_ApplyBtn = waitForElement(cpa_bc_filtersApplyBtn);
-		Filters_ApplyBtn.click();
+//		Filters_ApplyBtn.click();
+		helper.safeClick(Filters_ApplyBtn);
 		System.out.println(
 				"=> The Apply button of the Filters is clicked and if any changes then it will be reflected in the map");
-		Thread.sleep(9000);
+		Thread.sleep(1000);
+		try {
+			waitForElement(cpa_bc_geographicalMap);
+			waitForElement(cpa_bc_selectMetricDropdown);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_geographicalMap);
+			waitForElement(cpa_bc_selectMetricDropdown);
+		}
 		waitForElement(cpa_bc_geographicalMap);
 		waitForElement(cpa_bc_selectMetricDropdown);
 
-		// Screenshot of the Filter - Regions - Options
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Filters_Options.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		// Screenshot of the Filter - Regions - Options
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Filters_Options.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		bubbleCountAfterFilter();
 
 	}
@@ -244,9 +265,10 @@ public class CPA_BranchCustomerSelectionPage {
 	public void selectMetric() throws IOException, InterruptedException {
 		// Clicking the Select Metric Dropdown
 		WebElement SelectMetric_Dropdown = waitForElement(cpa_bc_selectMetricDropdown);
-		SelectMetric_Dropdown.click();
+//		SelectMetric_Dropdown.click();
+		helper.safeClick(SelectMetric_Dropdown);
 //		System.out.println("=> The Select Metric Dropdown was clicked");
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		// Clicking the Metric options
 		WebElement SelectMetric_Dropdown_Options = waitForElement(cpa_bc_selectMetricDropdownOptions);
 		String SelectMetricDropdown_Options = SelectMetric_Dropdown_Options.getText();
@@ -257,12 +279,17 @@ public class CPA_BranchCustomerSelectionPage {
 				+ " from the options");
 		Thread.sleep(5000);
 		// Screenshot of the Select Metric options
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Metric_Options.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Metric_Options.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		bubbleCountAfterFilter();
+		try {
+			waitForElement(cpa_bc_geographicalMap);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_geographicalMap);
+		}
 		waitForElement(cpa_bc_geographicalMap);
 //		// Get bubble count AFTER applying filters and metric
 //		List<WebElement> bubblesAfterFilter = driver.findElements(By.xpath(
@@ -298,7 +325,11 @@ public class CPA_BranchCustomerSelectionPage {
 		// ✅ Store only branches actually found and clicked
 		List<String> clickedBranches = new ArrayList<>();
 
-		waitForElement(cpa_bc_geographicalMap);
+		try {
+			waitForElement(cpa_bc_geographicalMap);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_geographicalMap);
+		}
 
 		// Get total bubbles count once
 		int totalBubbles = driver.findElements(By.xpath(
@@ -320,7 +351,7 @@ public class CPA_BranchCustomerSelectionPage {
 
 			// Hover
 			actions.moveToElement(point).perform();
-			Thread.sleep(500); // Let tooltip show
+			Thread.sleep(250); // Let tooltip show
 
 			// Extract tooltip text
 			List<WebElement> hoverTexts = driver
@@ -334,7 +365,7 @@ public class CPA_BranchCustomerSelectionPage {
 //					System.out.println("=> The branches are found & clicked: " + target);
 					actions.keyDown(Keys.CONTROL).click(point).keyUp(Keys.CONTROL).build().perform();
 					clickedBranches.add(target);
-					Thread.sleep(3000);
+					Thread.sleep(2000);
 					break;
 				}
 			}
@@ -345,8 +376,12 @@ public class CPA_BranchCustomerSelectionPage {
 		for (String b : clickedBranches) {
 			System.out.println(" - " + b);
 		}
-		waitForElement(cpa_bc_geographicalMap);
-		Thread.sleep(3000); // Optional wait after all clicks
+		try {
+			waitForElement(cpa_bc_geographicalMap);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_geographicalMap);
+		}
+		Thread.sleep(2000); // Optional wait after all clicks
 	}
 
 	// Select Branch Dropdown -- Scenario
@@ -355,34 +390,38 @@ public class CPA_BranchCustomerSelectionPage {
 
 		// Select Branch from Dropdown
 		WebElement SelectBranch_Dropdown = waitForElement(cpa_bc_selectBranchDropdown);
-		SelectBranch_Dropdown.click();
-
+//		SelectBranch_Dropdown.click();
+		helper.safeClick(SelectBranch_Dropdown);
 		Thread.sleep(2000);
 		// Select Branch - Dropdown Options - BRIS
 		WebElement selectBranchDropdownOption01 = waitForElement(cpa_bc_selectBranchDropdownOption01);
 		selectBranchDropdownOptions.add(selectBranchDropdownOption01.getText());
-		selectBranchDropdownOption01.click();
+//		selectBranchDropdownOption01.click();
+		helper.safeClick(selectBranchDropdownOption01);
 		Thread.sleep(3000);
 		// Select Branch - Dropdown Options - ENRG
 		WebElement selectBranchDropdownOption02 = waitForElement(cpa_bc_selectBranchDropdownOption02);
 		selectBranchDropdownOptions.add(selectBranchDropdownOption02.getText());
 //		actions.moveToElement(SelectBranch_Dropdown_Options_ENRG).click().perform();
 
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight",
-				selectBranchDropdownOption02);
-		selectBranchDropdownOption02.click();
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight",
+//				selectBranchDropdownOption02);
+//		selectBranchDropdownOption02.click();
+		helper.scrollToElement(selectBranchDropdownOption02);
 
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 		// Select Branch - Dropdown - Search bar
 		WebElement SelectBranch_Dropdown_Searchbar = waitForElement(cpa_bc_selectBranchDropdownSearchbar);
 		SelectBranch_Dropdown_Searchbar.click();
 		SelectBranch_Dropdown_Searchbar.clear();
 		// Searching the Branch by Branch ID C243
-		SelectBranch_Dropdown_Searchbar.sendKeys("C243");
-		Thread.sleep(4000);
+//		SelectBranch_Dropdown_Searchbar.sendKeys("C243");
+		SelectBranch_Dropdown_Searchbar.sendKeys(ConfigReader.searchBranchName());
+		Thread.sleep(2000);
 		WebElement selectBranchDropdownSearchbarValue01 = waitForElement(cpa_bc_selectBranchDropdownSearchbarValue01);
 		selectBranchDropdownOptions.add(selectBranchDropdownSearchbarValue01.getText());
-		selectBranchDropdownSearchbarValue01.click();
+//		selectBranchDropdownSearchbarValue01.click();
+		helper.safeClick(selectBranchDropdownSearchbarValue01);
 		System.out.println("=> The Select Branch dropdown was clicked and selected the branch(es) such as: "
 				+ selectBranchDropdownOptions);
 		Thread.sleep(4000);
@@ -396,23 +435,29 @@ public class CPA_BranchCustomerSelectionPage {
 		actions.moveToElement(bc_selectBranchText).click().perform();
 		Thread.sleep(5000);
 		// Screenshot of the Metric options
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Branch_Dropdown_Options.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/Branch_Dropdown_Options.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 	}
 
 	// Click the Analyze button
 	public void clickAnalyze() throws IOException, InterruptedException {
 		// Analyze button
 		WebElement AnalyzeBtn = waitForElement(cpa_bc_AnalyzeBtn);
-		AnalyzeBtn.click();
+//		AnalyzeBtn.click();
+		helper.safeClick(AnalyzeBtn);
 		System.out.println(
 				"=> The Analyze button is clicked and redirecting to the Customer Selection Plot pop-up screen");
 		// waits for the Customers Plot
+		try {
+			waitForElement(cpa_bc_customerSelectionPlot);
+		} catch (Exception e) {
+			waitForElement(cpa_bc_customerSelectionPlot);
+		}
 		waitForElement(cpa_bc_customerSelectionPlot);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 	}
 
 	// Selects Customers from the Dropdown and Plot
@@ -421,7 +466,8 @@ public class CPA_BranchCustomerSelectionPage {
 		List<String> selectedBillToID = new ArrayList<>();
 		// Customer Selection Plot - Dropdown
 		WebElement CustomerSelectionPlot_Dropdown = waitForElement(cpa_bc_customerSelectionPlotDropdown);
-		CustomerSelectionPlot_Dropdown.click();
+//		CustomerSelectionPlot_Dropdown.click();
+		helper.safeClick(CustomerSelectionPlot_Dropdown);
 //		System.out.println("=> The Customer Selection Dropdown was clicked");
 		Thread.sleep(2000);
 		// CustomerSelectionPlot_Dropdown_Options_100966
@@ -436,45 +482,49 @@ public class CPA_BranchCustomerSelectionPage {
 				cpa_bc_customerSelectionPlotDropdownOptions02);
 		// Stores the BILL To ID - 129932
 		selectedBillToID.add(customerSelectionPlotDropdownOptions02.getText().split("_")[0]);
-		customerSelectionPlotDropdownOptions02.click();
+//		customerSelectionPlotDropdownOptions02.click();
+		helper.safeClick(customerSelectionPlotDropdownOptions02);
 		Thread.sleep(3000);
 		// CustomerSelectionPlot_Dropdown_Options_138999
 		WebElement customerSelectionPlotDropdownOptions03 = waitForElement(
 				cpa_bc_customerSelectionPlotDropdownOptions03);
 		// Stores the BILL To ID - 138999
 		selectedBillToID.add(customerSelectionPlotDropdownOptions03.getText().split("_")[0]);
-		customerSelectionPlotDropdownOptions03.click();
+//		customerSelectionPlotDropdownOptions03.click();
+		helper.safeClick(customerSelectionPlotDropdownOptions03);
 		Thread.sleep(3000);
 		// CustomerSelectionPlot_SearchBar
 		WebElement CustomerSelectionPlot_Searchbar = waitForElement(cpa_bc_customerSelectionPlotSearchbar);
 		CustomerSelectionPlot_Searchbar.click();
 		CustomerSelectionPlot_Searchbar.clear();
 		// Searching the Customer by Customer ID 105097
-		CustomerSelectionPlot_Searchbar.sendKeys("105097");
+		CustomerSelectionPlot_Searchbar.sendKeys(ConfigReader.customerSelectionPlotID());
 		Thread.sleep(3000);
 		WebElement customerSelectionPlotSearchbarValue = waitForElement(cpa_bc_customerSelectionPlotSearchbarValue);
 		// Stores the BILL To ID - 105097
 		selectedBillToID.add(customerSelectionPlotSearchbarValue.getText().split("_")[0]);
-		customerSelectionPlotSearchbarValue.click();
+//		customerSelectionPlotSearchbarValue.click();
+		helper.safeClick(customerSelectionPlotSearchbarValue);
 
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		CustomerSelectionPlot_Searchbar.clear();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		// This is used to come out of the dropdown overlay effect and click the next
 		// locators
 		Actions actions = new Actions(driver);
 		actions.moveByOffset(10, 10).click().build().perform();
 		Thread.sleep(3000);
 		// Screenshot of the Customer Selection Plot Options
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		// CustomerSelectionPlot_SaveCustomersBtn
 		WebElement CustomerSelectionPlot_SaveCustomersBtn = waitForElement(
 				cpa_bc_customerSelectionPlotSaveCustomersBtn);
-		CustomerSelectionPlot_SaveCustomersBtn.click();
+//		CustomerSelectionPlot_SaveCustomersBtn.click();
+		helper.safeClick(CustomerSelectionPlot_SaveCustomersBtn);
 		try {
 			waitForElement(cpa_ps_TableRow);
 		} catch (Exception e) {
@@ -632,9 +682,15 @@ public class CPA_BranchCustomerSelectionPage {
 		// CustomerSelectionPlot_SaveCustomersBtn
 		WebElement CustomerSelectionPlot_SaveCustomersBtn = waitForElement(
 				cpa_bc_customerSelectionPlotSaveCustomersBtn);
-		CustomerSelectionPlot_SaveCustomersBtn.click();
+//		CustomerSelectionPlot_SaveCustomersBtn.click();
+		helper.safeClick(CustomerSelectionPlot_SaveCustomersBtn);
+		try {
+			waitForElement(cpa_ps_TableRow);
+		} catch (Exception e) {
+			waitForElement(cpa_ps_TableRow);
+		}
 		waitForElement(cpa_ps_TableRow);
-		Thread.sleep(8000);
+		Thread.sleep(2000);
 		// Verify whether it landed on the Customer Peer Analysis Card - Selections -
 		// Peer Selection Screen
 		String currentUrl = driver.getCurrentUrl();
@@ -656,7 +712,8 @@ public class CPA_BranchCustomerSelectionPage {
 
 		// Customer Selection Plot - Dropdown
 		WebElement CustomerSelectionPlot_Dropdown = waitForElement(cpa_bc_customerSelectionPlotDropdown);
-		CustomerSelectionPlot_Dropdown.click();
+//		CustomerSelectionPlot_Dropdown.click();
+		helper.safeClick(CustomerSelectionPlot_Dropdown);
 //		System.out.println("=> The Customer Selection Dropdown was clicked");
 		Thread.sleep(2000);
 		// CustomerSelectionPlot_Dropdown_Options_100966
@@ -668,37 +725,41 @@ public class CPA_BranchCustomerSelectionPage {
 																								// ID from the
 																								// entire
 																								// customer name
-		customerSelectionPlotDropdownOptions01.click();
+//		customerSelectionPlotDropdownOptions01.click();
+		helper.safeClick(customerSelectionPlotDropdownOptions01);
 		Thread.sleep(3000);
 		// CustomerSelectionPlot_Dropdown_Options_129932
 		WebElement customerSelectionPlotDropdownOptions02 = waitForElement(
 				cpa_bc_customerSelectionPlotDropdownOptions02);
 		// Stores the BILL To ID - 129932
 		selectedBillToID.add(customerSelectionPlotDropdownOptions02.getText().split("_")[0]);
-		customerSelectionPlotDropdownOptions02.click();
+//		customerSelectionPlotDropdownOptions02.click();
+		helper.safeClick(customerSelectionPlotDropdownOptions02);
 		Thread.sleep(3000);
 		// CustomerSelectionPlot_Dropdown_Options_138999
 		WebElement customerSelectionPlotDropdownOptions03 = waitForElement(
 				cpa_bc_customerSelectionPlotDropdownOptions03);
 		// Stores the BILL To ID - 138999
 		selectedBillToID.add(customerSelectionPlotDropdownOptions03.getText().split("_")[0]);
-		customerSelectionPlotDropdownOptions03.click();
+//		customerSelectionPlotDropdownOptions03.click();
+		helper.safeClick(customerSelectionPlotDropdownOptions03);
 		Thread.sleep(3000);
 		// CustomerSelectionPlot_SearchBar
 		WebElement CustomerSelectionPlot_Searchbar = waitForElement(cpa_bc_customerSelectionPlotSearchbar);
 		CustomerSelectionPlot_Searchbar.click();
 		CustomerSelectionPlot_Searchbar.clear();
 		// Searching the Customer by Customer ID 105097
-		CustomerSelectionPlot_Searchbar.sendKeys("105097");
+		CustomerSelectionPlot_Searchbar.sendKeys(ConfigReader.customerSelectionPlotID());
 		Thread.sleep(3000);
 		WebElement customerSelectionPlotSearchbarValue = waitForElement(cpa_bc_customerSelectionPlotSearchbarValue);
 		// Stores the BILL To ID - 105097
 		selectedBillToID.add(customerSelectionPlotSearchbarValue.getText().split("_")[0]);
-		customerSelectionPlotSearchbarValue.click();
+//		customerSelectionPlotSearchbarValue.click();
+		helper.safeClick(customerSelectionPlotSearchbarValue);
 
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		CustomerSelectionPlot_Searchbar.clear();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		// This is used to come out of the dropdown overlay effect and click the next
 		// locators
 		Actions actions = new Actions(driver);
@@ -708,12 +769,13 @@ public class CPA_BranchCustomerSelectionPage {
 //		customerSelectionPlot();
 		// add the customer from plots
 //		selectedBillToID.addAll(plotSelectedIds);
+
 		// Screenshot of the Customer Selection Plot Options
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		// Stored BILL To ID's
 		System.out.println(
 				"=> The Select Customers Dropdown was clicked and the selected customers are: " + selectedBillToID);
@@ -830,7 +892,8 @@ public class CPA_BranchCustomerSelectionPage {
 		// CustomerSelectionPlot_SaveCustomersBtn
 		WebElement CustomerSelectionPlot_SaveCustomersBtn = waitForElement(
 				cpa_bc_customerSelectionPlotSaveCustomersBtn);
-		CustomerSelectionPlot_SaveCustomersBtn.click();
+//		CustomerSelectionPlot_SaveCustomersBtn.click();
+		helper.safeClick(CustomerSelectionPlot_SaveCustomersBtn);
 		try {
 			waitForElement(cpa_ps_TableRow);
 

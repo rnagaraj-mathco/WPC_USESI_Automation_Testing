@@ -1,0 +1,6 @@
+2025-08-06 16:18:08.723 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection screen
+2025-08-06 16:19:55.495 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection screen
+2025-08-06 16:19:55.496 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-06 16:19:56.976 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
+2025-08-06 16:23:34.744 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
+2025-08-06 16:23:34.745 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

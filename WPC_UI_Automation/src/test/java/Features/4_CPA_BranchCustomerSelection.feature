@@ -4,14 +4,14 @@ Feature: Lands on the Branch/Customer Selection where the user should be able to
          
 #DONE - But the filter operation is pending 
   #Branch Selection - Map | Customer selection - dropdown
-  #Scenario: Verify that the user can select a branch from the geographical map and select customers from the dropdown
-    #Given the user is on the Branch/Customer Selection screen
-    #Then the user clicks on Filters and selects options based on requirements
-    #And the user selects a metric from the metrics dropdown
+  Scenario: Verify that the user can select a branch from the geographical map and select customers from the dropdown
+    Given the user is on the Branch/Customer Selection screen
+    Then the user clicks on Filters and selects options based on requirements
+    And the user selects a metric from the metrics dropdown
     #--And the user should be able to zoom in and out of the map using the + and - icons on the zoom slider
-    #When the map is updated, the user clicks on bubbles and select the branches on the geographical map
-    #And the user clicks the Analyze button, which redirects to the Customer Selection dialog screen
-    #Then the user selects customers from the dropdown, clicks Save Customers, and is redirected to the Peer Selection screen
+    When the map is updated, the user clicks on bubbles and select the branches on the geographical map
+    And the user clicks the Analyze button, which redirects to the Customer Selection dialog screen
+    Then the user selects customers from the dropdown, clicks Save Customers, and is redirected to the Peer Selection screen
 #
 #DONE - Filter operation is pending
   #Branch Selection - Dropdown | Customer selection - dropdown

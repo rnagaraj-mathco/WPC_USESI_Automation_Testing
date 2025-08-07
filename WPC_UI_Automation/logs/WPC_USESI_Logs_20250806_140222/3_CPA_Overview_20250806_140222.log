@@ -1,0 +1,3 @@
+2025-08-06 14:02:22.993 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can interact with the Saved Customer Peer Selection table by selecting a Peer Selection record from the table and performing various actions
+2025-08-06 14:04:21.481 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user can interact with the Saved Customer Peer Selection table by selecting a Peer Selection record from the table and performing various actions
+2025-08-06 14:04:21.483 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

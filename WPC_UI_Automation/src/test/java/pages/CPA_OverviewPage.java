@@ -1,6 +1,5 @@
 package pages;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
@@ -9,33 +8,39 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class CPA_OverviewPage {
 
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public CPA_OverviewPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(100)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
 	private WebElement waitForElement(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+
+	// Wait for element to be clickable (Visibility + Clickability)
+	public WebElement waitForClickableElement(By locator) {
+		return new WebDriverWait(driver, Duration.ofSeconds(10))
+				.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 
 	private String customerId_SCPS;
@@ -159,7 +164,7 @@ public class CPA_OverviewPage {
 			.xpath("//h4[contains(text(),'Please update at least one peer selection dropdown')]");
 	// Download Icon - SCPS
 	By cpa_downloadIconSCPS = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/div[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/div[1]/button[1]");
 
 	// Pagination - SCPS
 	By cpa_paginationSCPS = By.xpath(
@@ -242,30 +247,46 @@ public class CPA_OverviewPage {
 	By cpa_downloadIconSSS = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[8]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[9]/div[1]");
 
+	// Delete Error message - SSS
+	By cpa_errorMessageDeleteIconSSS = By
+			.xpath("//h4[contains(text(),'Please update at least one senstivity scenario dro')]");
+
 	// Navigating the Overview screen
 	public void navigateTo() throws IOException, InterruptedException {
 		driver.get(ConfigReader.cpa_overview());
 		// Waits for Start New Peer Analysis btn
 		waitForElement(cpa_startNewPeerAnalysisBtn);
-		Thread.sleep(3000);
+		try {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+		} catch (Exception e) {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+		}
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/OverviewScreen.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/OverviewScreen.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 	}
 
 	// Start New Peer Analysis button
 	public void startnewpeeranalysisbtn() throws IOException, InterruptedException {
 		// Waits for Start New Peer Analysis btn
 		WebElement startNewPeerAnalysisBtn = waitForElement(cpa_startNewPeerAnalysisBtn);
-		startNewPeerAnalysisBtn.click();
+//		startNewPeerAnalysisBtn.click();
+		helper.safeClick(startNewPeerAnalysisBtn);
 		System.out.println(
 				"=> The Start New Peer Analysis button was clicked and redirected to the Branch/Customer Selection");
 		// Waits for the geographical map
 		waitForElement(cpa_geographicalMap);
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
+		try {
+			waitForElement(cpa_geographicalMap);
+			waitForElement(cpa_geographicalMap);
+		} catch (Exception e) {
+			waitForElement(cpa_geographicalMap);
+			waitForElement(cpa_geographicalMap);
+		}
 
 		// Verify whether it landed on the Customer Peer Analysis Card - Selections
 		// -Branch/Customer Selection screen
@@ -276,15 +297,19 @@ public class CPA_OverviewPage {
 			throw new AssertionError("=> Unexpected redirection! - Current URL you're on: " + currentUrl);
 		}
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/StarteNewPeerAnalysisBtn.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/StarteNewPeerAnalysisBtn.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		// navigating back to overview screen
 		driver.navigate().back();
-		Thread.sleep(1000);
+		try {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+		} catch (Exception e) {
+			waitForElement(cpa_startNewPeerAnalysisBtn);
+		}
 
 	}
 
@@ -299,11 +324,11 @@ public class CPA_OverviewPage {
 		searchBarSCPS.sendKeys(searchRecord);
 		Thread.sleep(1000);
 		// Take screenshot after the keyword is searched
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/SearchKeywordSCPS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/SearchKeywordSCPS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		// Clearing the Search Keyword
 		searchBarSCPS.click();
 		searchBarSCPS.sendKeys(Keys.CONTROL + "a");
@@ -320,7 +345,8 @@ public class CPA_OverviewPage {
 		WebElement tableFirstRowSCPS = waitForElement(cpa_tableFirstRowSCPS);
 		// waits for the Create Sensitivity scenario btn to get load
 		WebElement CreateSensitivityScenarioBtn = waitForElement(cpa_createSensitivityScenarioBtnSCPS);
-		tableFirstRowSCPS.click();
+//		tableFirstRowSCPS.click();
+		helper.safeClick(tableFirstRowSCPS);
 		// Validating whether the landed screen also has the same record
 		// Waits for the customer name of table first row - SCPS
 		WebElement customerNameFirstRowSCPS = waitForElement(cpa_customerNameFirstRowSCPS);
@@ -337,7 +363,8 @@ public class CPA_OverviewPage {
 						+ customerPeerSelectionName);
 
 		// Clicks the Create Sensitivity Scenario button with selection
-		CreateSensitivityScenarioBtn.click();
+//		CreateSensitivityScenarioBtn.click();
+		helper.safeClick(CreateSensitivityScenarioBtn);
 
 		// Create Scenario validations
 		waitForElement(cpa_csc_scenarioSlider);
@@ -362,11 +389,11 @@ public class CPA_OverviewPage {
 		WebElement csc_filterCustomerPeerGroupOptionValue = waitForElement(cpa_csc_filterCustomerPeerGroupOptionValue);
 		// Take screenshot of the Create Scenario - Filter - Customer+Peer Selection
 		// name - Value
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/CreateSensitivityScenarioBtnWithSelection.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/CreateSensitivityScenarioBtnWithSelection.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		Thread.sleep(3000);
 		String filterCustomerPeerGroupOptionValue = csc_filterCustomerPeerGroupOptionValue.getText().trim();
@@ -383,13 +410,14 @@ public class CPA_OverviewPage {
 						+ customerPeerSelectionName + " == " + filterCustomerPeerGroupOptionValue);
 
 		WebElement csc_filterCancelBtn = waitForElement(cpa_csc_filterCancelBtn);
-		csc_filterCancelBtn.click();
-
+//		csc_filterCancelBtn.click();
+		helper.safeClick(csc_filterCancelBtn);
 		// Navigating back to overview screen only by back button
 		// Waits for the Create Scenario - Back button cpa_csc_backBtn
 		waitForElement(cpa_csc_scenarioSlider);
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
-		csc_backBtn.click();
+//		csc_backBtn.click();
+		helper.safeClick(csc_backBtn);
 		try {
 			waitForElement(cpa_ps1_tableSTC);
 			waitForElement(cpa_ps1_selectCustomerBtnSTC);
@@ -409,7 +437,8 @@ public class CPA_OverviewPage {
 		// Waits for the Peer selection -01 - Back button
 		// Select Target Customer for Peer Matching
 		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
-		ps_BackBtnSTCP.click();
+//		ps_BackBtnSTCP.click();
+		helper.safeClick(ps_BackBtnSTCP);
 		Thread.sleep(2000);
 		try {
 			// waits for the Geographical map
@@ -442,7 +471,8 @@ public class CPA_OverviewPage {
 		// waits for the Create Sensitivity scenario btn to get load
 		WebElement createSensitivityScenarioBtnSCPS = waitForElement(cpa_createSensitivityScenarioBtnSCPS);
 		// Clicks the Create Sensitivity Scenario button
-		createSensitivityScenarioBtnSCPS.click();
+//		createSensitivityScenarioBtnSCPS.click();/
+		helper.safeClick(createSensitivityScenarioBtnSCPS);
 		System.out.println(
 				"=> The Create Sensitivity Scenario Button was clicked without selecting a record due to which an error message was popped");
 		Thread.sleep(3000);
@@ -456,12 +486,12 @@ public class CPA_OverviewPage {
 				expectedMsg, actualMsg);
 
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/CreateSensitivityScenarioBtnWithOutSelection.png");
-		FileHandler.copy(sourcefile, screenshotPath);
-		Thread.sleep(3000);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/CreateSensitivityScenarioBtnWithOutSelection.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+		Thread.sleep(2000);
 	}
 
 	// Error Message tracker
@@ -485,7 +515,8 @@ public class CPA_OverviewPage {
 		String customerIdSCPS = customerIDFirstRowSCPS.getText();
 		this.customerId_SCPS = customerIdSCPS;
 		// Clicks the Edit button - SCPS
-		editbtnSCPS.click();
+//		editbtnSCPS.click();
+		helper.safeClick(editbtnSCPS);
 		System.out.println("=> Clicked the Edit Button of Saved Customer Peer Selection table");
 		try {
 			waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
@@ -513,10 +544,10 @@ public class CPA_OverviewPage {
 			throw new AssertionError("=> Unexpected redirection!, Current URL you're on: " + currentUrl);
 		}
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/CustomerPeerAnalysis/Overview/EditBtnSCPS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/CustomerPeerAnalysis/Overview/EditBtnSCPS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		// Assertion to validate selected and filtered customer and product combination
 		// names
@@ -530,11 +561,12 @@ public class CPA_OverviewPage {
 		Thread.sleep(4000);
 		// Comparative peer group selection table
 		WebElement ps_BackBtnCPGS = waitForElement(cpa_ps_BackBtnCPGS);
-		ps_BackBtnCPGS.click();
+//		ps_BackBtnCPGS.click();
+		helper.safeClick(ps_BackBtnCPGS);
 		Thread.sleep(3000);
 		// Waits for the Peer selection -01 - Back button
 		// Select Target Customer for Peer Matching
-		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
+		waitForElement(cpa_ps_BackBtnSTCP);
 		// Validates the BILL To ID in Peer Selection:01
 		// by looping through all the BILL To ID column
 		// Basically the BILL To ID of Peer Selection:02 is searched in the
@@ -557,12 +589,16 @@ public class CPA_OverviewPage {
 			System.out.println("=> The BILL To ID not found in Select a Target Customer for Peer Matching table.");
 		}
 
-		ps_BackBtnSTCP.click();
+//		ps_BackBtnSTCP.click();
+		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
+		helper.safeClick(ps_BackBtnSTCP);
 		try {
 			// waits for the Geographical map
 			waitForElement(cpa_geographicalMap);
+			waitForElement(cpa_geographicalMap);
 		} catch (Exception e) {
 			// waits for the Geographical map
+			waitForElement(cpa_geographicalMap);
 			waitForElement(cpa_geographicalMap);
 		}
 		Thread.sleep(2000);
@@ -585,24 +621,27 @@ public class CPA_OverviewPage {
 	public void deleteDropdownPeerSelections() throws IOException, InterruptedException {
 		// Waits for the Delete Dropdown and clicks
 		WebElement DeleteDropdownSCPS = waitForElement(cpa_DeleteDropdownSCPS);
-		DeleteDropdownSCPS.click();
+//		DeleteDropdownSCPS.click();
+		helper.safeClick(cpa_DeleteDropdownSCPS);
 //		System.out.println("=> The Delete Dropdown of Saved Customer Peer Selection table was clicked");
 		Thread.sleep(3000);
 		// Waits for the delete option in the dropdown and clicks
 		WebElement deleteOptionsSCPS = waitForElement(cpa_deleteOptionsSCPS);
-		deleteOptionsSCPS.click();
+//		deleteOptionsSCPS.click();
+		helper.safeClick(deleteOptionsSCPS);
 //		System.out.println("=> The Delete options of Saved Customer Peer Selection table is selected");
 		Thread.sleep(1000);
 		// Take screenshot of the delete option selection
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteOption_SCPS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteOption_SCPS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		// Waits for Delete Icon and clicks it
 		WebElement DeleteIconSCPS = waitForElement(cpa_deleteIconSCPS);
-		DeleteIconSCPS.click();
+//		DeleteIconSCPS.click();
+		helper.safeClick(DeleteIconSCPS);
 		System.out.println(" The record of the Customer Id: " + customerId_SCPS
 				+ " was Deleted from the Saved Customer Peer Selection table");
 		Thread.sleep(2000);
@@ -614,28 +653,29 @@ public class CPA_OverviewPage {
 	public void deleteIconPeerSelections() throws IOException, InterruptedException {
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSCPS = waitForElement(cpa_deleteIconSCPS);
-		deleteIconSCPS.click();
-//		errorMessageDeleteIconSCPS();
-		WebElement errorMessageDeleteIconSCPS = waitForElement(cpa_errorMessageDeleteIconSCPS);
-		String actualMsg = errorMessageDeleteIconSCPS.getText();
-		String expectedMsg = "Please update at least one peer selection dropdown value before clicking the Delete button to proceed with record deletion.";
-		Assert.assertEquals("=> The Error Toaster message validation for the Delete Icon - SCPS has failed!",
-				expectedMsg, actualMsg);
+//		deleteIconSCPS.click();
+		helper.safeClick(deleteIconSCPS);
+		errorMessageDeleteIconSCPS();
+//		WebElement errorMessageDeleteIconSCPS = waitForElement(cpa_errorMessageDeleteIconSCPS);
+//		String actualMsg = errorMessageDeleteIconSCPS.getText();
+//		String expectedMsg = "Please update at least one peer selection dropdown value before clicking the Delete button to proceed with record deletion.";
+//		Assert.assertEquals("=> The Error Toaster message validation for the Delete Icon - SCPS has failed!",
+//				expectedMsg, actualMsg);
 
 		System.out.println(
 				"=> The Delete Icon of Saved Customer Peer Selection table is clicked without setting to delete option in the dropdown due to which an error message popped");
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
 		// Take screenshot of the delete icon selection
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteIconSCPS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteIconSCPS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		try {
-			waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
+			waitForElement(cpa_tableFirstRowSCPS);
 			waitForElement(cpa_downloadIconSCPS);
 		} catch (Exception e) {
-			waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
+			waitForElement(cpa_tableFirstRowSCPS);
 			waitForElement(cpa_downloadIconSCPS);
 		}
 
@@ -652,20 +692,44 @@ public class CPA_OverviewPage {
 	}
 
 	// Download Icon of Saved Customer Peer Selection table
-	public void downloadIconPeerSelections() throws IOException, InterruptedException {
-		// Waits for Delete Icon and clicks it
-		WebElement downloadIconSCPS = waitForElement(cpa_downloadIconSCPS);
-		downloadIconSCPS.click();
-		System.out.println(
-				"=> The Download Icon of Saved Customer Peer Selection table was clicked and then table records donwloaded as an Excel file");
-		Thread.sleep(3000);
-		// Take screenshot of the delete icon selection
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DownloadIconSCPS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//	public void downloadIconPeerSelections() throws IOException, InterruptedException {
+//		// Waits for Delete Icon and clicks it
+//		WebElement downloadIconSCPS = waitForClickableElement(cpa_downloadIconSCPS);
+////		downloadIconSCPS.click();
+//		helper.safeClick(downloadIconSCPS);
+//		System.out.println(
+//				"=> The Download Icon of Saved Customer Peer Selection table was clicked and then table records donwloaded as an Excel file");
+//		Thread.sleep(3000);
+//		// Take screenshot of the delete icon selection
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DownloadIconSCPS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+//
+//	}
 
+	public void downloadIconPeerSelections() throws IOException, InterruptedException {
+		// Ensure overlays are gone first (if any)
+		helper.waitForOverlaysToDisappear();
+
+		// Wait for the element to be clickable and then perform the click
+		WebElement downloadIconSCPS = waitForClickableElement(cpa_downloadIconSCPS);
+		helper.safeClick(downloadIconSCPS);
+
+		// Screenshot after click
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DownloadIconSCPS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+		try {
+			waitForElement(cpa_tableFirstRowSCPS);
+			waitForElement(cpa_downloadIconSCPS);
+		} catch (Exception e) {
+			waitForElement(cpa_tableFirstRowSCPS);
+			waitForElement(cpa_downloadIconSCPS);
+		}
 	}
 
 	// Pagination is a least priority
@@ -704,7 +768,8 @@ public class CPA_OverviewPage {
 	public void searchForKeywordSSS() throws IOException, InterruptedException {
 		WebElement searchBarSSS = waitForElement(cpa_searchBarSSS);
 		// Scrolls to the Table
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", searchBarSSS);
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", searchBarSSS);
+		helper.scrollToElement(searchBarSSS);
 		Thread.sleep(2000);
 		searchBarSSS.click();
 		searchBarSSS.clear();
@@ -715,11 +780,11 @@ public class CPA_OverviewPage {
 		searchBarSSS.sendKeys(searchRecord);
 		Thread.sleep(2000);
 		// Take screenshot after the keyword is searched
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/SearchKeywordSavedSensitivitySimulationScenario.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/SearchKeywordSavedSensitivitySimulationScenario.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		// Clearing the Search Keyword
 		searchBarSSS.click();
@@ -737,10 +802,12 @@ public class CPA_OverviewPage {
 		WebElement tableFirstRowSSS = waitForElement(cpa_tableFirstRowSSS);
 		// waits for the View Impact btn to get load
 		WebElement ViewImpactBtn = waitForElement(cpa_viewImpactBtnSSS);
-		tableFirstRowSSS.click();
+//		tableFirstRowSSS.click();
+		helper.safeClick(tableFirstRowSSS);
 		// Scrolls to the View Impact button
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight",
-				ViewImpactBtn);
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight",
+//				ViewImpactBtn);
+		helper.scrollToElement(ViewImpactBtn);
 		Thread.sleep(3000);
 		// Validating whether the landed screen also has the same record
 		// Waits for the customer name of table first row - SSS
@@ -758,25 +825,28 @@ public class CPA_OverviewPage {
 						+ customerSensitivityScenarioName);
 
 		// Clicks the View Impact button with selection
-		ViewImpactBtn.click();
+//		ViewImpactBtn.click();
+		helper.safeClick(ViewImpactBtn);
 		Thread.sleep(5000);
 		// Create Scenario validations
 		waitForElement(cpa_vsi_widgetThree);
 		WebElement vsi_filter = waitForElement(cpa_vsi_filterBtn);
-		vsi_filter.click();
+//		vsi_filter.click();
+		helper.safeClick(vsi_filter);
 		Thread.sleep(3000);
 		// Waits for the Filter - Options
 		WebElement vsi_filterCustomerScenarioOption = waitForElement(cpa_vsi_filterCustomerScenarioOption);
-		vsi_filterCustomerScenarioOption.click();
+//		vsi_filterCustomerScenarioOption.click();
+		helper.safeClick(vsi_filterCustomerScenarioOption);
 		// Waits for the Filter - Options - Value
 		WebElement vsi_filterCustomerScenarioOptionValue = waitForElement(cpa_vsi_filterCustomerScenarioOptionValue);
 		// Take screenshot of the Create Scenario - Filter - Customer+Peer Selection
 		// name - Value
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/ViewImpactBtnWithSelection.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/ViewImpactBtnWithSelection.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		Thread.sleep(3000);
 		String filterCustomerPeerGroupOptionValue = vsi_filterCustomerScenarioOptionValue.getText().trim();
@@ -794,7 +864,8 @@ public class CPA_OverviewPage {
 						+ customerSensitivityScenarioName + " == " + filterCustomerPeerGroupOptionValue);
 
 		WebElement vsi_filterCancelBtn = waitForElement(cpa_vsi_filterCancelBtn);
-		vsi_filterCancelBtn.click();
+//		vsi_filterCancelBtn.click();
+		helper.safeClick(vsi_filterCancelBtn);
 		// Verify whether it landed on the Customer Peer Analysis Card - Scenario
 		// Builder - Create Scenario
 		String currentUrl = driver.getCurrentUrl();
@@ -819,7 +890,8 @@ public class CPA_OverviewPage {
 		waitForElement(cpa_csc_scenarioSlider);
 		Thread.sleep(2000);
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
-		csc_backBtn.click();
+//		csc_backBtn.click();
+		helper.safeClick(csc_backBtn);
 		Thread.sleep(5000);
 		// Waits for the Peer selection -02 - Button
 //		waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
@@ -830,7 +902,8 @@ public class CPA_OverviewPage {
 		// Waits for the Peer selection -01 - Back button
 		// Select Target Customer for Peer Matching
 		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
-		ps_BackBtnSTCP.click();
+//		ps_BackBtnSTCP.click();
+		helper.safeClick(ps_BackBtnSTCP);
 		Thread.sleep(7000);
 		// waits for the Geographical map
 		waitForElement(cpa_geographicalMap);
@@ -854,18 +927,19 @@ public class CPA_OverviewPage {
 //				viewImpactBtnSSS);
 
 		// Clicks the View Scenario Impact button without selecting the record
-		viewImpactBtnSSS.click();
+//		viewImpactBtnSSS.click();
+		helper.safeClick(viewImpactBtnSSS);
 
 		System.out.println(
 				"=> The View Impact Button was clicked without selecting a record due to which an error message was popped");
 
 //		errorToasterMessage();
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/ViewImpactWithOutSelection.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/ViewImpactWithOutSelection.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 	}
 
 	public void errorToasterMessage() {
@@ -899,24 +973,27 @@ public class CPA_OverviewPage {
 						+ customerPeerSelectionNameSSS);
 
 		// Clicks the Edit button
-		editbtnSSS.click();
+//		editbtnSSS.click();
+		helper.safeClick(editbtnSSS);
 		Thread.sleep(3000);
 		// Create Scenario validations
 		waitForElement(cpa_csc_scenarioSlider);
 		WebElement csc_filter = waitForElement(cpa_csc_filtersBtn);
-		csc_filter.click();
+//		csc_filter.click();
+		helper.safeClick(csc_filter);
 		Thread.sleep(3000);
 		// Waits for the Filter - Options
 		WebElement csc_filterCustomerPeerGroupOption = waitForElement(cpa_csc_filterCustomerPeerGroupOption);
-		csc_filterCustomerPeerGroupOption.click();
+//		csc_filterCustomerPeerGroupOption.click();
+		helper.safeClick(csc_filterCustomerPeerGroupOption);
 		// Waits for the Filter - Options - Value
 		WebElement csc_filterCustomerPeerGroupOptionValue = waitForElement(cpa_csc_filterCustomerPeerGroupOptionValue);
 		// Take screenshot of the Create Scenario - Filter - Customer+Peer Selection
 		// name - Value
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/CustomerPeerAnalysis/Overview/EditBtnSSS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/CustomerPeerAnalysis/Overview/EditBtnSSS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		Thread.sleep(3000);
 		String filterCustomerPeerGroupOptionValue = csc_filterCustomerPeerGroupOptionValue.getText().trim();
@@ -934,7 +1011,8 @@ public class CPA_OverviewPage {
 						+ customerPeerSelectionNameSSS + " == " + filterCustomerPeerGroupOptionValue);
 
 		WebElement csc_filterCancelBtn = waitForElement(cpa_csc_filterCancelBtn);
-		csc_filterCancelBtn.click();
+//		csc_filterCancelBtn.click();
+		helper.safeClick(csc_filterCancelBtn);
 
 		// Verify whether it landed on the Customer Peer Analysis Card - Scenario
 		// Builder - Create Scenario using assertion
@@ -951,7 +1029,8 @@ public class CPA_OverviewPage {
 		// Navigating back to overview screen only by back button
 		// Waits for the Create Scenario - Back button cpa_csc_backBtn
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
-		csc_backBtn.click();
+//		csc_backBtn.click();
+		helper.safeClick(csc_backBtn);
 		Thread.sleep(5000);
 		// Waits for the Peer selection -02 - Button
 //		waitForElement(cpa_ps2_setPeerMatchingCriteriaBtn);
@@ -962,8 +1041,16 @@ public class CPA_OverviewPage {
 		// Waits for the Peer selection -01 - Back button
 		// Select Target Customer for Peer Matching
 		WebElement ps_BackBtnSTCP = waitForElement(cpa_ps_BackBtnSTCP);
-		ps_BackBtnSTCP.click();
-		Thread.sleep(7000);
+//		ps_BackBtnSTCP.click();
+		helper.safeClick(ps_BackBtnSTCP);
+//		Thread.sleep(7000);
+		try {
+			waitForElement(cpa_geographicalMap);
+			waitForElement(cpa_geographicalMap);
+		} catch (Exception e) {
+			waitForElement(cpa_geographicalMap);
+			waitForElement(cpa_geographicalMap);
+		}
 		// waits for the Geographical map
 		waitForElement(cpa_geographicalMap);
 		Thread.sleep(3000);
@@ -982,24 +1069,27 @@ public class CPA_OverviewPage {
 	public void deleteDropdownScenarioSelections() throws IOException, InterruptedException {
 		// Waits for the Delete Dropdown and clicks
 		WebElement deleteDropdownSSS = waitForElement(cpa_deleteDropdownSSS);
-		deleteDropdownSSS.click();
+//		deleteDropdownSSS.click();
+		helper.safeClick(deleteDropdownSSS);
 		System.out.println("--- Clicked: Delete Dropdown of Saved Sensitivity Simulation Scenario table");
 		Thread.sleep(3000);
 		// Waits for the delete option in the dropdown and clicks
 		WebElement deleteOptionsSSS = waitForElement(cpa_deleteOptionsSSS);
-		deleteOptionsSSS.click();
+//		deleteOptionsSSS.click();
+		helper.safeClick(deleteOptionsSSS);
 		System.out.println("--- Clicked: Delete options of Saved Sensitivity Simulation Scenario table");
 		Thread.sleep(1000);
 		// Take screenshot of the delete option selection
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteOption_SavedSenstivitiySimulationScenario.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteOption_SavedSenstivitiySimulationScenario.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		// Waits for Delete Icon and clicks it
 		WebElement DeleteIconSSS = waitForElement(cpa_deleteIconSSS);
-		DeleteIconSSS.click();
+//		DeleteIconSSS.click();
+		helper.safeClick(DeleteIconSSS);
 		System.out.println("=> The Saved Sensitivity Simulation Scenario record is Deleted");
 		Thread.sleep(2000);
 
@@ -1010,33 +1100,59 @@ public class CPA_OverviewPage {
 	public void deleteIconScenarioSelections() throws IOException, InterruptedException {
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSSS = waitForElement(cpa_deleteIconSSS);
-		deleteIconSSS.click();
+//		deleteIconSSS.click();
+		helper.safeClick(deleteIconSSS);
+		errorMessageDeleteIconSSS();
 		System.out.println(
 				"The Delete Icon of Saved Sensitivity Simulation table is clicked without setting to delete option in the dropdown due to which an error message popped");
 		Thread.sleep(5000);
 		// Take screenshot of the delete icon selection
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteIconSSS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DeleteIconSSS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+		try {
+			waitForElement(cpa_tableFirstRowSSS);
+			waitForElement(cpa_downloadIconSSS);
+		} catch (Exception e) {
+			waitForElement(cpa_tableFirstRowSSS);
+			waitForElement(cpa_downloadIconSSS);
+		}
 
+	}
+
+	public void errorMessageDeleteIconSSS() {
+		WebElement errorMessageDeleteIconSSS = waitForElement(cpa_errorMessageDeleteIconSSS);
+		String actualMsg = errorMessageDeleteIconSSS.getText();
+		String expectedMsg = "Please update at least one senstivity scenario dropdown value before clicking the Delete button to proceed with record deletion.";
+		Assert.assertEquals("=> The Error Toaster message validation for the Delete Icon - SCPS has failed!",
+				expectedMsg, actualMsg);
 	}
 
 	// Download Icon of Saved Sensitivity Simulation Scenario table
 	public void downloadIconScenarioSelections() throws IOException, InterruptedException {
+		helper.waitForOverlaysToDisappear();
 		// Waits for Download Icon and clicks it
 		WebElement downloadIconSSS = waitForElement(cpa_downloadIconSSS);
-		downloadIconSSS.click();
+//		downloadIconSSS.click();
+		helper.safeClick(downloadIconSSS);
 		System.out.println(
 				"The Download Icon of Saved Sensitivity Simulation Scenario table was clicked and then table records donwloaded as an Excel file");
 		Thread.sleep(2000);
 		// Take screenshot of the delete icon selection
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DownloadIconSS.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/Overview/DownloadIconSS.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+		try {
+			waitForElement(cpa_tableFirstRowSSS);
+			waitForElement(cpa_downloadIconSSS);
+		} catch (Exception e) {
+			waitForElement(cpa_tableFirstRowSSS);
+			waitForElement(cpa_downloadIconSSS);
+		}
 
 	}
 
@@ -1054,6 +1170,7 @@ public class CPA_OverviewPage {
 		// Scrolls to the Table
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", Scroller,
 				searchRecordSSS);
+
 		Thread.sleep(3000);
 
 		// Waits for the Customer ID from the first row of table
