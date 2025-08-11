@@ -1,5 +1,6 @@
 package pages;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -12,10 +13,13 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -69,8 +73,8 @@ public class CPA_BranchCustomerSelectionPage {
 	By cpa_bc_filtersApplyBtn = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]");
 	// Select Metric - Dropdown
-	By cpa_bc_selectMetricDropdown = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]");
+	By cpa_bc_selectMetricDropdown = By
+			.xpath("(//div[contains(@class, 'MuiSelect-root') and contains(@class, 'MuiSelect-select')])[1]");
 	// Select Metric - Dropdown Option selection - Returns (Handling)
 	By cpa_bc_selectMetricDropdownOptions = By.xpath("/html[1]/body[1]/div[5]/div[3]/ul[1]/li[4]/div[1]");
 	// Select branch (bubble) from the Geographical Map
@@ -194,7 +198,7 @@ public class CPA_BranchCustomerSelectionPage {
 //		helper.safeClick(FiltersOrderChannelCustomerPeerSelections);
 		System.out.println("=> The Filters - Order Channel option is clicked");
 		waitForElement(cpa_bc_filtersOptionsOrderChannel);
-		Thread.sleep(8000);
+		Thread.sleep(4000);
 		// Un-checking the ALL option so the user can select other options
 //		WebElement FilterOrderChannel_All = waitForElement(cpa_bc_filtersOptionsOrderChannelValue01);
 //		FilterOrderChannel_All.click();
@@ -268,12 +272,13 @@ public class CPA_BranchCustomerSelectionPage {
 //		SelectMetric_Dropdown.click();
 		helper.safeClick(SelectMetric_Dropdown);
 //		System.out.println("=> The Select Metric Dropdown was clicked");
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		// Clicking the Metric options
 		WebElement SelectMetric_Dropdown_Options = waitForElement(cpa_bc_selectMetricDropdownOptions);
 		String SelectMetricDropdown_Options = SelectMetric_Dropdown_Options.getText();
-		actions.moveToElement(SelectMetric_Dropdown_Options).click().perform(); // This line is added for
-																				// the hovering effect
+		helper.safeClick(SelectMetric_Dropdown_Options);
+//		actions.moveToElement(SelectMetric_Dropdown_Options).click().perform(); // This line is added for
+		// the hovering effect
 
 		System.out.println("=> The Select Metric Dropdown was clicked and Selected the " + SelectMetricDropdown_Options
 				+ " from the options");
@@ -476,6 +481,7 @@ public class CPA_BranchCustomerSelectionPage {
 		// Stores the BILL To ID - 100966
 		// Extracts the ID
 		selectedBillToID.add(customerSelectionPlotDropdownOptions01.getText().split("_")[0]);
+		helper.safeClick(customerSelectionPlotDropdownOptions01);
 		Thread.sleep(3000);
 		// CustomerSelectionPlot_Dropdown_Options_129932
 		WebElement customerSelectionPlotDropdownOptions02 = waitForElement(
@@ -515,11 +521,11 @@ public class CPA_BranchCustomerSelectionPage {
 		actions.moveByOffset(10, 10).click().build().perform();
 		Thread.sleep(3000);
 		// Screenshot of the Customer Selection Plot Options
-//		TakesScreenshot screenshot = (TakesScreenshot) driver;
-//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-//		File screenshotPath = new File(
-//				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
-//		FileHandler.copy(sourcefile, screenshotPath);
+		TakesScreenshot screenshot = (TakesScreenshot) driver;
+		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+		File screenshotPath = new File(
+				"src/test/resources/screenshots/CustomerPeerAnalysis/Selections/BranchCustomerSelections/CustomerSelectionPlot_Dropdown_Options.png");
+		FileHandler.copy(sourcefile, screenshotPath);
 		// CustomerSelectionPlot_SaveCustomersBtn
 		WebElement CustomerSelectionPlot_SaveCustomersBtn = waitForElement(
 				cpa_bc_customerSelectionPlotSaveCustomersBtn);

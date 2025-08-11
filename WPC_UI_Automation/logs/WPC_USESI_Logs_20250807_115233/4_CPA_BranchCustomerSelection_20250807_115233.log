@@ -1,0 +1,2 @@
+2025-08-07 11:52:33.256 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can select a branch from the geographical map and select customers from the dropdown
+2025-08-07 11:56:03.786 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can select a branch initially from the geographical map and then Select Branch(es) dropdown and select customers from both the scatter plot and dropdown

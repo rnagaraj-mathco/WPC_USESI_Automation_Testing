@@ -1,33 +1,32 @@
 package pages;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class CPA_CreateScenarioPage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public CPA_CreateScenarioPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -205,15 +204,21 @@ public class CPA_CreateScenarioPage {
 		// This gets the URL of the Overview screen
 		driver.get(ConfigReader.cpa_createScenario());
 		// waits till the silder component is loaded
+		try {
+			waitForElement(cpa_csc_scenarioSlider);
+			waitForElement(cpa_csc_saveAndShowImpactBtn);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_scenarioSlider);
+			waitForElement(cpa_csc_saveAndShowImpactBtn);
+		}
 		waitForElement(cpa_csc_scenarioSlider);
-		Thread.sleep(2000);
 		waitForElement(cpa_csc_saveAndShowImpactBtn);
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/ScenarioBuilder/CreateScenario/CreateScenarioScreen.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/ScenarioBuilder/CreateScenario/CreateScenarioScreen.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		// Verify whether it landed on the Auto Root Cause Analysis - Overview screen
 		String currentUrl = driver.getCurrentUrl();
 		String expectedUrl = ConfigReader.cpa_createScenario();
@@ -224,24 +229,38 @@ public class CPA_CreateScenarioPage {
 		}
 		System.out.println(
 				"=> Successfully landed on the Scenario screen with the sliders required to simulate the scenario");
-
+		try {
+			waitForElement(cpa_csc_scenarioSlider);
+			waitForElement(cpa_csc_saveAndShowImpactBtn);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_scenarioSlider);
+			waitForElement(cpa_csc_saveAndShowImpactBtn);
+		}
 	}
 
 	// clicks the save and show impact button without entering the scenario name
 	public void saveAndShowImpactBtnWithoutName() throws IOException, InterruptedException {
 		// waits for the Save and Show Impact button
 		WebElement csc_saveAndShowImpactBtn = waitForElement(cpa_csc_saveAndShowImpactBtn);
-		csc_saveAndShowImpactBtn.click();
+//		csc_saveAndShowImpactBtn.click();
+		helper.safeClick(csc_saveAndShowImpactBtn);
 		errorMessage();
 		Thread.sleep(1000);
-		waitForElement(cpa_csc_scenarioSlider);
+		try {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		}
+
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/ScenarioBuilder/CreateScenario/SaveAndShowImpactBtnWithOutSelection.png");
-		FileHandler.copy(sourcefile, screenshotPath);
-		Thread.sleep(3000);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/ScenarioBuilder/CreateScenario/SaveAndShowImpactBtnWithOutSelection.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
+		Thread.sleep(1000);
 	}
 
 	// This is to validate the error message
@@ -272,11 +291,13 @@ public class CPA_CreateScenarioPage {
 	public void filters() throws IOException, InterruptedException {
 		// waits for the filter button
 		WebElement csc_filter = waitForElement(cpa_csc_filtersBtn);
-		csc_filter.click();
+//		csc_filter.click();
+		helper.safeClick(csc_filter);
 		Thread.sleep(3000);
 		// Waits for the Filter - Options
 		WebElement csc_filterCustomerPeerGroupOption = waitForElement(cpa_csc_filterCustomerPeerGroupOption);
-		csc_filterCustomerPeerGroupOption.click();
+//		csc_filterCustomerPeerGroupOption.click();
+		helper.safeClick(csc_filterCustomerPeerGroupOption);
 		// Waits for the Filter - Options - Value01
 		WebElement csc_filterCustomerPeerGroupOptionValue01 = waitForElement(
 				cpa_csc_filterCustomerPeerGroupOptionValue01);
@@ -291,21 +312,30 @@ public class CPA_CreateScenarioPage {
 //		String filterCustomerPeerGroupOptionValue02 = csc_filterCustomerPeerGroupOptionValue02.getText().trim();
 		// clicks on the apply button
 		WebElement csc_filterApplyBtn = waitForElement(cpa_csc_filterApplyBtn);
-		csc_filterApplyBtn.click();
+//		csc_filterApplyBtn.click();
+		helper.safeClick(csc_filterApplyBtn);
 		System.out.println("=> The Customer + Peer Group Name: " + filterCustomerPeerGroupOptionValue01
 				+ " was clicked and slider is loaded to simulate the scenario");
-		waitForElement(cpa_csc_scenarioSlider);
-		Thread.sleep(3000);
+		try {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		}
+		Thread.sleep(1000);
 	}
 
 	// Extracts the Filter - Customer and Product Combination - Value 01
 	public void filtersOptionValue01() throws InterruptedException {
 		WebElement csc_filter = waitForElement(cpa_csc_filtersBtn);
-		csc_filter.click();
-		Thread.sleep(3000);
+//		csc_filter.click();
+		helper.safeClick(csc_filter);
+		Thread.sleep(2000);
 		// Waits for the Filter - Options
 		WebElement csc_filterCustomerPeerGroupOption = waitForElement(cpa_csc_filterCustomerPeerGroupOption);
-		csc_filterCustomerPeerGroupOption.click();
+//		csc_filterCustomerPeerGroupOption.click();
+		helper.safeClick(csc_filterCustomerPeerGroupOption);
 
 		// Waits for the Filter - Options - Value01
 		WebElement csc_filterCustomerPeerGroupOptionValue01 = waitForElement(
@@ -314,7 +344,8 @@ public class CPA_CreateScenarioPage {
 		this.filterCustomerPeerGroupOptionValue01 = csc_filterCustomerPeerGroupOptionValue01.getText().trim();
 		Thread.sleep(2000);
 		// clicks on the cancel button
-		waitForElement(cpa_csc_filterCancelBtn).click();
+		WebElement csc_filterCancelBtn = waitForElement(cpa_csc_filterCancelBtn);
+		helper.safeClick(csc_filterCancelBtn);
 
 	}
 
@@ -330,13 +361,14 @@ public class CPA_CreateScenarioPage {
 		this.customerId = customerDetails.split("_")[0].trim();
 		// waits for the back button
 		WebElement csc_backBtn = waitForElement(cpa_csc_backBtn);
-		csc_backBtn.click();
+//		csc_backBtn.click();
+		helper.safeClick(csc_backBtn);
 		System.out.println(customerId);
 		System.out.println(
 				"=> The Back button was clicked and redirected to the Peer Selection - Select Comparative Peer Group table screen");
 		// This is pending due to wrong navigation ---------------------------
 //		waitForElement(cpa_ps2_comparativePeerGroupSelectionTable);
-//		// Extracts the BILL To ID - Table first row
+		// Extracts the BILL To ID - Table first row
 //		WebElement ps2_TableFirstRowBillToIdCPGS = waitForElement(cpa_ps2_TableFirstRowBillToIdCPGS);
 //		String customerIdCPGS = ps2_TableFirstRowBillToIdCPGS.getText().trim();
 //		// Validating the Customer details
@@ -346,8 +378,8 @@ public class CPA_CreateScenarioPage {
 //		}
 //		System.out.println(
 //				"=> The Customer ID  matched and confirms that the redirection is of the same customer records");
-		// redirecting to the create scenario screen for now
-		Thread.sleep(3000);
+//		// redirecting to the create scenario screen for now
+//		Thread.sleep(2000);
 		driver.get(ConfigReader.cpa_createScenario());
 		Thread.sleep(2000);
 
@@ -363,7 +395,8 @@ public class CPA_CreateScenarioPage {
 		Thread.sleep(1000);
 		WebElement csc_customerRangeText = waitForElement(cpa_csc_customerRangeText);
 
-		actions.moveToElement(csc_customerRangeText).click().perform();
+//		actions.moveToElement(csc_customerRangeText).click().perform();
+		helper.safeClick(csc_customerRangeText);
 		System.out.println("=> Hovered on the Customer Peer Average of Peer Comparison Pricing dot");
 //		Thread.sleep(1000);
 		// Not getting the exact xpath and the xpath of the bar are updating dynamically
@@ -386,7 +419,8 @@ public class CPA_CreateScenarioPage {
 		Thread.sleep(2000);
 		actions.moveToElement(csc_customerNewAverageSSP, 10, 0).perform();
 		WebElement csc_customerNewAverageTextSSP = waitForElement(cpa_csc_customerNewAverageTextSSP);
-		actions.moveToElement(csc_customerNewAverageTextSSP).click().perform();
+//		actions.moveToElement(csc_customerNewAverageTextSSP).click().perform();
+		helper.safeClick(csc_customerNewAverageTextSSP);
 //		actions.clickAndHold(csc_customerPeerAverageSSP).moveByOffset(40, 0).release().perform();
 		Thread.sleep(4000);
 		System.out.println("=> Hovered on the Customer New Average of Start Simulating Here - Pricing");
@@ -396,25 +430,30 @@ public class CPA_CreateScenarioPage {
 		Thread.sleep(1000);
 		actions.moveToElement(csc_customerAveragePC, -10, 0).perform();
 		WebElement csc_customerAverageTextPC = waitForElement(cpa_csc_customerAverageTextPC);
-		actions.moveToElement(csc_customerAverageTextPC).click().perform();
+//		actions.moveToElement(csc_customerAverageTextPC).click().perform();
+		helper.safeClick(csc_customerAverageTextPC);
 		System.out.println("=> Hovered on the Customer Average of Peer Comparison - Cost To Serve chart");
 		Thread.sleep(4000);
 
 		// waits for the Peer Comparison - Cost To Serve - Peer Average
 		WebElement csc_peerAveragePC = waitForElement(cpa_csc_peerAveragePC);
 		Thread.sleep(1000);
-		actions.moveToElement(csc_peerAveragePC).perform();
+//		actions.moveToElement(csc_peerAveragePC).perform();
+		helper.safeClick(csc_peerAveragePC);
 		WebElement csc_peerAverageTextPC = waitForElement(cpa_csc_peerAverageTextPC);
-		actions.moveToElement(csc_peerAverageTextPC).click().perform();
+//		actions.moveToElement(csc_peerAverageTextPC).click().perform();
+		helper.safeClick(csc_peerAverageTextPC);
 		System.out.println("=> Hovered on the Peer Average of Peer Comparison - Cost To Serve chart");
 
 		// waits for the Peer Comparison - Cost To Serve - Peer
 		WebElement csc_peerPC = waitForElement(cpa_csc_peerPC);
 		Thread.sleep(1000);
-		actions.moveToElement(csc_peerPC).perform();
+//		actions.moveToElement(csc_peerPC).perform();
+		helper.safeClick(csc_peerPC);
 		WebElement csc_peerTextPC = waitForElement(cpa_csc_peerTextPC);
-		actions.moveToElement(csc_peerTextPC).click().perform();
-		Thread.sleep(5000);
+//		actions.moveToElement(csc_peerTextPC).click().perform();
+		helper.safeClick(csc_peerTextPC);
+		Thread.sleep(3000);
 		System.out.println("=> Hovered on the Peer of Peer Comparison - Cost To Serve chart");
 
 	}
@@ -443,19 +482,22 @@ public class CPA_CreateScenarioPage {
 				.release().perform();
 		// waits for the Inbound Frieght - Customer Average Text
 		WebElement csc_customerAverageTextSSCS = waitForElement(cpa_csc_customerAverageTextSSCS);
-		actions.moveToElement(csc_customerAverageTextSSCS).click().perform();
+//		actions.moveToElement(csc_customerAverageTextSSCS).click().perform();
+		helper.safeClick(csc_customerAverageTextSSCS);
 		// Moves the slider
-//		actions.clickAndHold(csc_inboundFrieghtCustomerAverageSSCS).moveByOffset(70, 0).release().perform();
+		actions.clickAndHold(csc_inboundFrieghtCustomerAverageSSCS).moveByOffset(70, 0).release().perform();
 		Thread.sleep(2000);
 		System.out.println("=> Hovered and moved the Customer Average of Start Simulating Here - Pricing");
 
 		// waits for the Inbound Frieght - Peer Average
 		WebElement csc_inboundFrieghtPeerAverageSSCS = waitForElement(cpa_csc_inboundFrieghtPeerAverageSSCS);
 		Thread.sleep(1000);
-		actions.moveToElement(csc_inboundFrieghtPeerAverageSSCS).click().perform();
+//		actions.moveToElement(csc_inboundFrieghtPeerAverageSSCS).click().perform();
+		helper.safeClick(csc_inboundFrieghtPeerAverageSSCS);
 		Thread.sleep(2000);
 		WebElement csc_peerAverageTextSSCS = waitForElement(cpa_csc_peerAverageTextSSCS);
-		actions.moveToElement(csc_peerAverageTextSSCS).click().perform();
+//		actions.moveToElement(csc_peerAverageTextSSCS).click().perform();
+		helper.safeClick(csc_peerAverageTextSSCS);
 		Thread.sleep(2000);
 		System.out.println("=> Hovered on the Peer Average of Start Simulating Here - Pricing");
 
@@ -463,23 +505,37 @@ public class CPA_CreateScenarioPage {
 
 	// clicks on the Reset buttton
 	public void resetBtn() throws IOException, InterruptedException {
+		try {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		}
 		// waits for the reset button
 		WebElement csc_resetBtn = waitForElement(cpa_csc_resetBtn);
-		csc_resetBtn.click();
+//		csc_resetBtn.click();
+		helper.safeClick(csc_resetBtn);
 		// waits till the slider component is loaded
-		waitForElement(cpa_csc_scenarioSlider);
-		Thread.sleep(2000);
+		try {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		}
 		waitForElement(cpa_csc_saveAndShowImpactBtn);
 		System.out.println("=> The Reset button was clicked which reloaded the entire screen");
-		Thread.sleep(2000);
+
 	}
 
 	// Enter the numeric value to metric for simulation
 	public void numericValues() throws IOException, InterruptedException {
 		// waits for the input field of Order Handling Costs
 		WebElement csc_inputFieldOHC = waitForElement(cpa_csc_inputFieldOHC);
-		actions.moveToElement(csc_inputFieldOHC).click().perform();
-		Thread.sleep(3000);
+//		actions.moveToElement(csc_inputFieldOHC).click().perform();
+		helper.safeClick(csc_inputFieldOHC);
+		Thread.sleep(1000);
 		csc_inputFieldOHC.clear();
 		csc_inputFieldOHC.sendKeys(Keys.CONTROL + "a");
 		csc_inputFieldOHC.sendKeys(Keys.BACK_SPACE);
@@ -503,27 +559,37 @@ public class CPA_CreateScenarioPage {
 		} catch (Exception e) {
 			System.out.println("=> Error: In fetching the maximum value from the slider");
 		}
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 
 	private String scenarioName, vsi_customerDetails;
 
 	// Enter the scenario name and clicks the Save and Show Impact
 	public void saveAndShowImpactBtnWithName() throws IOException, InterruptedException {
+		try {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		} catch (Exception e) {
+			waitForElement(cpa_csc_peerTextPC);
+			waitForElement(cpa_csc_scenarioSlider);
+		}
 		// waits for the input field of scenario name
 		WebElement csc_enterScenarioName = waitForElement(cpa_csc_enterScenarioName);
-		csc_enterScenarioName.click();
+//		csc_enterScenarioName.click();
+		helper.safeClick(csc_enterScenarioName);
 		csc_enterScenarioName.clear();
 		this.scenarioName = customerId + "_Scenario";
 		csc_enterScenarioName.sendKeys(scenarioName);
 		Thread.sleep(1000);
 		// Customer + Scenario concatenation
-		String csc_cutsomerAndScenarioName = customerDetails + scenarioName;
+		String csc_cutsomerAndScenarioName = customerDetails + "+" + scenarioName;
 //		waitForElement(cpa_csc_scenarioSlider);
 		// waits for the Save and Show Impact button
 		WebElement csc_saveAndShowImpactBtn = waitForElement(cpa_csc_saveAndShowImpactBtn);
-		csc_saveAndShowImpactBtn.click();
+//		csc_saveAndShowImpactBtn.click();
+		helper.safeClick(csc_saveAndShowImpactBtn);
 //		successMessage();
+		helper.waitForOverlaysToDisappear();
 		// waiting for the component loading
 		try {
 			waitForElement(cpa_vsi_allThreewidgets);
@@ -535,10 +601,12 @@ public class CPA_CreateScenarioPage {
 		waitForElement(cpa_vsi_allThreewidgets);
 		// Validating the Customer + Scenario name in the View Scenario Impact screen
 		WebElement vsi_filters = waitForElement(cpa_vsi_filters);
-		vsi_filters.click();
+//		vsi_filters.click();
+		helper.safeClick(vsi_filters);
 		// Filters - Customer + Scenario Name
 		WebElement vsi_filtersCustomerScenarioOption = waitForElement(cpa_vsi_filtersCustomerScenarioOption);
-		vsi_filtersCustomerScenarioOption.click();
+//		vsi_filtersCustomerScenarioOption.click();
+		helper.safeClick(vsi_filtersCustomerScenarioOption);
 		// waits for the Filters - Customer + Scenario Name - Value 01
 		WebElement vsi_filterOptionValue01 = waitForElement(cpa_vsi_filterOptionValue01);
 		// extracts the value 01 for the validation
@@ -552,7 +620,8 @@ public class CPA_CreateScenarioPage {
 				"=> The Customer + Scenario name is matched, which means the View Scenario Impact is loaded with the created scenario");
 		// waits for the Filters - Cancel button
 		WebElement vsi_filtersCancelBtn = waitForElement(cpa_vsi_filtersCancelBtn);
-		vsi_filtersCancelBtn.click();
+//		vsi_filtersCancelBtn.click();
+		helper.safeClick(vsi_filtersCancelBtn);
 		try {
 			waitForElement(cpa_vsi_allThreewidgets);
 			waitForElement(cpa_vsi_chartComponent);

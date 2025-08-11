@@ -85,7 +85,7 @@ public class ElementHelper {
 	public void waitForOverlaysToDisappear() {
 		try {
 			By overlayLocator = By.cssSelector(".MuiBackdrop-root"); // Example CSS selector for overlays
-			new WebDriverWait(driver, Duration.ofSeconds(7))
+			new WebDriverWait(driver, Duration.ofSeconds(10))
 					.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
 			System.out.println("✅ Overlays disappeared.");
 		} catch (Exception e) {

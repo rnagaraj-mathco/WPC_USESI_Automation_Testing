@@ -4,31 +4,31 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
 
 #DONE - Checked!
   #Peer Selection 01 - Select Target Customer for Peer Matching - Customer Selection by clicking on the records of the table
-  #Scenario: Verify that the user is able to select a customer from the Select Target Customer for Peer Matching table
-    #Given the user is on the Peer Selection page of the Customer Peer Analysis
-    #Then the user should be able to search for a keyword in the Select Target Customer for Peer Matching table
-    #And the user should be able to click the Back button, which then redirects to the Branch/Customer Selection page
-    #And the user should be able to click on the Download icon present in the Select Target Customer for Peer Matching table header, which downloads the table records as an Excel file
+  Scenario: Verify that the user is able to select a customer from the Select Target Customer for Peer Matching table
+    Given the user is on the Peer Selection page of the Customer Peer Analysis
+    Then the user should be able to search for a keyword in the Select Target Customer for Peer Matching table
+    And the user should be able to click the Back button, which then redirects to the Branch/Customer Selection page
+    And the user should be able to click on the Download icon present in the Select Target Customer for Peer Matching table header, which downloads the table records as an Excel file
      #--And the user should be able to zoom in and zoom out of the Select Target Customer for Peer Matching table using the + and - icons
      #--And the user should be able to click on the column filter icon to select which columns should be displayed in the Select Target Customer for Peer Matching table
-    #When the user clicks on the Select Customer button without selecting any records, an error message should be displayed
-    #And the user should be able to select a customer record from the Select Target Customer for Peer Matching table and click the Select Customer button, which redirects to the Peers Selection screen only if one record is selected
-    #And the user should be able to click the Back button, which then redirects to the Peer Selection - Select Target Customer for Peer Matching screen
+    When the user clicks on the Select Customer button without selecting any records, an error message should be displayed
+    And the user should be able to select a customer record from the Select Target Customer for Peer Matching table and click the Select Customer button, which redirects to the Peers Selection screen only if one record is selected
+    And the user should be able to click the Back button, which then redirects to the Peer Selection - Select Target Customer for Peer Matching screen
      #--Then user should be able to interact with the Rows per page dropdown of the Select Target Customer for Peer Matching table and select a value, which updates the visible records
 	
 #DONE - Checked!
 #PENDING -But Reset is pending - Back button of PS2 is not failing but works in previous scenario
  #Peer Selection 01 - Select Target Customer for Peer Matching - Customer Selection by Searching and Selecting the the record
-  #Scenario: Verify that the user is able to select a customer by searching the record from the Select Target Customer for Peer Matching table
-    #Given the user is on the Peer Selection page of the Customer Peer Analysis
-    #Then the user should be able to search for a keyword in the Select Target Customer for Peer Matching table
-    #And the user should be able to click the Back button, which then redirects to the Branch/Customer Selection page
-    #And the user should be able to click on the Download icon present in the Select Target Customer for Peer Matching table header, which downloads the table records as an Excel file
+  Scenario: Verify that the user is able to select a customer by searching the record from the Select Target Customer for Peer Matching table
+    Given the user is on the Peer Selection page of the Customer Peer Analysis
+    Then the user should be able to search for a keyword in the Select Target Customer for Peer Matching table
+    And the user should be able to click the Back button, which then redirects to the Branch/Customer Selection page
+    And the user should be able to click on the Download icon present in the Select Target Customer for Peer Matching table header, which downloads the table records as an Excel file
      #--And the user should be able to zoom in and zoom out of the Select Target Customer for Peer Matching table using the + and - icons
      #--And the user should be able to click on the column filter icon to select which columns should be displayed in the Select Target Customer for Peer Matching table
-    #When the user clicks on the Select Customer button without selecting any records, an error message should be displayed
-    #And the user should be able to search for a customer record and select it from the Select Target Customer for Peer Matching table and click on the Select Customer button, which redirects to the Peers Selection screen only if one record is selected
-    #And the user should be able to click the Back button, which then redirects to the Peer Selection - Select Target Customer for Peer Matching screen
+    When the user clicks on the Select Customer button without selecting any records, an error message should be displayed
+    And the user should be able to search for a customer record and select it from the Select Target Customer for Peer Matching table and click on the Select Customer button, which redirects to the Peers Selection screen only if one record is selected
+    And the user should be able to click the Back button, which then redirects to the Peer Selection - Select Target Customer for Peer Matching screen
     #--Then user should be able to interact with the Rows per page dropdown of the Select Target Customer for Peer Matching table and select a value, which updates the visible records
 
 #DONE - Checked!
@@ -77,7 +77,7 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
      #--And the user should be able to click on the column filter icon to select which columns should be displayed in the Select Comparative Peer Group table
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
     
-#DONE - Checked! - 
+#DONE - Checked! - If a peer is searched and de-selected then if a compare peer btn is clicked then not getting the enter the name input field
  #Peer Selection 02 Comparative Peer Group Selection - SPMC - Table - Buttons
   #Scenario: Verify that the user is able to select the peers by clicking on the Select Peer Matching Crieteria button and 
 #	          selecting peer from the Select Comparative Peer Group table for the Selected Target Customer
@@ -98,7 +98,8 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
     #Then the user should be able to select the peers by clicking on the checkbox of each peer record
     #And the user should be able to deselect the peers by clicking on the checkbox of each peer record
     #And the user should be able to search for the peers records and select the peers
-    #And the user should be able to search for the peers records and deselect the peers
+    #This deselect is a bug in app and informed
+    #--And the user should be able to search for the peers records and deselect the peers
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
     
 #DONE - 
@@ -123,10 +124,10 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
    #Then the user should be able to select the peers by clicking on the checkbox of each peer record
     #And the user should be able to deselect the peers by clicking on the checkbox of each peer record
     #And the user should be able to search for the peers records and select the peers
-    #And the user should be able to search for the peers records and deselect the peers
+    #This deselect is a bug in app and informed
+    #--And the user should be able to search for the peers records and deselect the peers
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
-    #Then the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version
-
+#
 #Done - but reset is pending
  #Peer Selection 02 Comparative Peer Group Selection - SPMC(View) - Table - Buttons
 #	Scenario: Verify that the user is able to click on the Set Peer Matching Crieteria button and view the Model selected and Threshold value and then
@@ -149,9 +150,10 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
     #Then the user should be able to select the peers by clicking on the checkbox of each peer record
     #And the user should be able to deselect the peers by clicking on the checkbox of each peer record
     #And the user should be able to search for the peers records and select the peers
-    #And the user should be able to search for the peers records and deselect the peers
+    #This deselect is a bug in app and informed
+    #--And the user should be able to search for the peers records and deselect the peers
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
-    #
+    
 #Done - but reset and back btn is pending
  #Peer Selection 02 Comparative Peer Group Selection - SPMC(View) - Peer Dropdown - Table - Back button
 #	Scenario: Verify that the user is able to click on the Set Peer Matching Crieteria button and view the Model selected and the Threshold value and 
@@ -165,7 +167,8 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
     #And the user should be able to select a customer record from the Select Target Customer for Peer Matching table and click the Select Customer button, which redirects to the Peers Selection screen only if one record is selected
   #	#SPMC(View) - Peer Dropdown - Table - Back button
     #Then the user should be able to click on the Reset button which then resets the peer selections and updates the table to older version
-    
+    #Then the user should be able to click on the Back button which then redirects the user to the Peer Selection - Target Customer Selection Screen
+   #
     #Then the user is on the Peer Selection - Comparative Peer Group Selection screen, where the user should be able to click on the Set Peer Matching Criteria button and view the threshold value and the model selected
     #And the user should be able to search for a keyword in the Select Comparative Peer Group table 
     #Then the user should be able to click on the Select Peers Dropdown and choose the desired peers count
@@ -175,10 +178,10 @@ Feature: Land on the Peer Selection screen where the user should be able to sele
     #Then the user should be able to select the peers by clicking on the checkbox of each peer record
     #And the user should be able to deselect the peers by clicking on the checkbox of each peer record
     #And the user should be able to search for the peers records and select the peers
-    #And the user should be able to search for the peers records and deselect the peers
+    #This deselect is a bug in app and informed
+    #--And the user should be able to search for the peers records and deselect the peers
     #Then the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections
-    #Then the user should be able to click on the Back button which then redirects the user to the Peer Selection - Target Customer Selection Screen
-   
+  
     
       
     

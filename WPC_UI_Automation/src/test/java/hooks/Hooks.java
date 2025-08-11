@@ -1,7 +1,10 @@
+//
 //package hooks;
 //
 //import java.io.File;
 //import java.io.IOException;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 //import java.util.Map;
@@ -55,7 +58,6 @@
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
 //		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
 //		logsFolderTimestamp = sdf.format(new Date());
-//
 //		new File("logs/WPC_USESI_Logs_" + logsFolderTimestamp).mkdirs();
 //	}
 //
@@ -106,10 +108,18 @@
 //
 //			if (scenario.isFailed()) {
 //				String screenshotPath = ScreenshotUtil.takeScreenshot(driver, scenario.getName());
+//
+//				// ✅ Attach screenshot to Extent Report
 //				if (test != null && screenshotPath != null) {
-//					test.fail("Scenario Failed: " + scenario.getName(),
-//							MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+//					test.fail("Step Failed", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 //				}
+//
+//				// ✅ Attach screenshot to Cucumber report
+//				if (screenshotPath != null) {
+//					byte[] screenshotBytes = Files.readAllBytes(Paths.get(screenshotPath));
+//					scenario.attach(screenshotBytes, "image/png", "Failure Screenshot");
+//				}
+//
 //				logger.error("❌ Scenario FAILED: {}", scenario.getName());
 //			} else {
 //				if (test != null) {
@@ -118,7 +128,6 @@
 //				logger.info("✅ Scenario PASSED: {}", scenario.getName());
 //			}
 //
-//			// Summary
 //			StringBuilder summary = scenarioStepSummary.get();
 //			if (test != null && summary != null) {
 //				test.info("----- Scenario Summary -----\n" + summary.toString());

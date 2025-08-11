@@ -257,9 +257,13 @@ public class CPA_OverviewPage {
 		// Waits for Start New Peer Analysis btn
 		waitForElement(cpa_startNewPeerAnalysisBtn);
 		try {
-			waitForElement(cpa_startNewPeerAnalysisBtn);
+			waitForElement(cpa_tableFirstRowSCPS);
+			waitForElement(cpa_customerIDFirstRowSCPS);
+
 		} catch (Exception e) {
-			waitForElement(cpa_startNewPeerAnalysisBtn);
+			waitForElement(cpa_tableFirstRowSCPS);
+			waitForElement(cpa_customerIDFirstRowSCPS);
+
 		}
 		// Take screenshot after the page is fully ready
 //		TakesScreenshot screenshot = (TakesScreenshot) driver;

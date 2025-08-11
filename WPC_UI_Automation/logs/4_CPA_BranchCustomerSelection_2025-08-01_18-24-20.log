@@ -1,3 +1,0 @@
-2025-08-01 18:24:20.218 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can select a branch initially from the geographical map and then Select Branch(es) dropdown and select customers from both the scatter plot and dropdown
-2025-08-01 18:44:38.988 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user can select a branch initially from the geographical map and then Select Branch(es) dropdown and select customers from both the scatter plot and dropdown
-2025-08-01 18:44:38.989 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

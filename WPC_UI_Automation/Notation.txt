@@ -1,0 +1,47 @@
+Use Case: 01  | Customer Peer Analysis
+
+1.  cpa   - Customer Peer Analysis
+2.  SCPS  - Saved Customer Peer Selections - Overview
+3.  SSS   - Saved Sensitivity Simulation Scenario - Overview
+4.  csc   - Create Scenario screen
+5.  STCP  - Select Target Customer table for Peer Matching - Peer Selection:01
+6.  ps1   - Peer Selection screen - 01 (Customer Selection)
+7.  ps2   - Peer Selection screen - 02 (Peers Selection)
+8.  CPGS  - Comparative Peer Group Selection - Peer Selection:02
+9.  vsi   - View Scenario Impact screen
+10. bc    - Branch/Customer selection screen
+11. SPMC  - Set Peer Matching Criteria button  -  Peer Selection:02
+12. SPD   - Select Peers Dropdown - Peer Selection:02
+13. PCP   - Peer Comparison Pricing - Simulator - Create Scenario
+14. SSP   - Start Simulating Here - Pricing - Simulator - Create Scenario
+15. PC    - Peer Comparison - Cost to Serve Simulator - Create Scenario
+16. SSSC  - Start Simulating Here - Cost To Serve - Create Scenario
+17. OHC   - Order Handling costs
+18. EP    - Enterprise Profit - Chart Metric - View Scenario Impact
+
+Use Case: 02  | Auto Root Cause Analysis
+
+1.  arca   - Auto Root Cause Analaysis
+2.  SCPC   - Saved Customer Product Combinations table - Overview
+3.  SOC    - Select One Customer Simulation table - Customer Selection
+4.  cs     - Customer Selection screen
+5.  csc    - Create Scenario screen
+6.  SSS    - Saved Scenario Simulation - table - Overview
+7.  ca     - Customer Analysis screen
+8.  fcp    - Filter Customer Product Combination screen
+9.  SRCP   - Select Root Cause Products for Simulation - table - Customer Selection
+10. ctm    - Customer Tree Map - Filter Customer Product Combination screen
+11. VRCA   - View Root Cause Analysis - table -  View Root Cause Analysis table
+12. pb     - Profit Bridge screen
+12. PPS    - Pre Programmed Scenario - Create Scenario screen
+13. SCPC   - Selected Customers and Products Combination - Create Scenario screen
+14. STS    - Selected Target for Simulation - Create Scenario screen
+15. STC    - Selected Target for Simulation - Create Scenario screen
+16. SPRCA  - Selected Product for Root Cause Analysis  - Create Scenario screen
+17. EI     - Estimate Imapact - Metric - Create Scenario screen
+18. SSCS   - Slider to Simulator Changes in Sales - Create Scenario screen
+19. EP     - Enterprise Profit - Chart Metric - Create Scenario screen
+20. EPOC   - Enforce Per Order Charge simulation - Create Scenario screen
+21. EPRS   - Enforce Per Return Surcharge - Create Scenario screen
+22. ESPO   - Eliminate System Pricing Overrides - Create Scenario screen
+23. MNCPC  - Move To A New Customer Price Class - Create Scenario screen

@@ -1,6 +1,0 @@
-2025-08-06 14:09:40.607 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection screen
-2025-08-06 14:10:53.901 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection screen
-2025-08-06 14:10:53.902 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
-2025-08-06 14:10:55.231 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can interact with the Saved Customer Peer Selection table by selecting a Peer Selection record from the table and performing various actions
-2025-08-06 14:13:49.128 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user can interact with the Saved Customer Peer Selection table by selecting a Peer Selection record from the table and performing various actions
-2025-08-06 14:13:49.128 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
