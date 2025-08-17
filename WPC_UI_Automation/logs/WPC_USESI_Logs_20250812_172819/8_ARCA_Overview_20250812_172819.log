@@ -1,0 +1,154 @@
+2025-08-12 17:28:19.914 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to choose a Metric and click on View Saved Scenario button, which then updates the screen with
+2025-08-12 17:29:23.194 [main] INFO  ▶  The Auto-Root Cause: Overview Screen is loaded with the neccessary Cost Metric options
+2025-08-12 17:29:23.383 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:29:23.569 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:29:28.780 [main] INFO  ▶  The Create New Root Cause Analysis Button was clicked and redirecting to the Customer Analysis screen
+2025-08-12 17:29:34.872 [main] INFO  ▶  Successfully, redirected to the Customer Analysis screen
+2025-08-12 17:29:38.414 [main] INFO  ▶  Customer Analysis: The Filter button was clicked
+2025-08-12 17:29:41.917 [main] INFO  ▶  Customer Analysis: The Filter - Cost Metric Option was clicked
+2025-08-12 17:29:47.012 [main] INFO  ▶  Customer Analysis: The Filter - Cost Metric Option - Selected value is extracted
+2025-08-12 17:29:47.013 [main] INFO  ▶  The Customer Analysis screen is loaded based on the metric selected in the Overview screen 
+   => Cost Metric Match Successful: Returns Handling and Freight Costs == Returns Handling and Freight Costs
+2025-08-12 17:29:47.023 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to choose a Metric and click on View Saved Scenario button, which then updates the screen with
+2025-08-12 17:29:47.025 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 17:29:48.100 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Customer Product Combinations table and perform various actions
+2025-08-12 17:30:17.514 [main] INFO  ▶  The Auto-Root Cause: Overview Screen is loaded with the neccessary Cost Metric options
+2025-08-12 17:30:17.727 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:30:17.937 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:30:23.481 [main] INFO  ▶  SCPC: The Customer ID present in the Saved Customer Product Combinations table first row is extracted to search
+2025-08-12 17:30:23.574 [main] INFO  ▶  SCPC: The Customer and Product Combination record of the Customer ID: 183261 was searched
+2025-08-12 17:30:27.993 [main] INFO  ▶  SCPC: The Searched bar has been cleared
+2025-08-12 17:30:28.210 [main] INFO  ▶  The Create New Scenario button was clicked without selecting a record
+2025-08-12 17:30:28.210 [main] INFO  ▶  The Create New Scenario button error message validation method is called
+2025-08-12 17:30:34.646 [main] INFO  ▶  SCPC: The Customer ID of the first row is extracted
+2025-08-12 17:30:34.851 [main] INFO  ▶  SCPC: The Edit Button of the first row is clicked
+2025-08-12 17:30:38.090 [main] INFO  ▶  Successfully, redirected to the Customer Selections screen
+2025-08-12 17:30:41.201 [main] INFO  ▶  The Customer ID present in the first row of the Select One Customer for Simulation table was extracted
+2025-08-12 17:30:41.201 [main] INFO  ▶  The Customer ID's matched successfully and this validates that edit button of the Saved Customer Product Combinations table redirects as intended 183261 == 183261
+2025-08-12 17:30:41.550 [main] INFO  ▶  Navigated back to the Overview screen from Customer Selection screen
+2025-08-12 17:30:49.779 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:30:50.001 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:30:54.485 [main] INFO  ▶  The Overview screen is reloaded with View Saved Scenario's for the selected metric: Returns Handling and Freight Costs
+2025-08-12 17:30:54.698 [main] INFO  ▶  SCPC: The first row record is selected 
+2025-08-12 17:30:56.753 [main] INFO  ▶  The Customer and Product Combination name of the first row is extracted
+2025-08-12 17:30:59.120 [main] INFO  ▶  SCPC: The Create New Scenario button was clicked after selecting the record and redirected to Create Scenario Screen where the screen is loaded with selected Customer and Product Combination: 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:30:59.137 [main] ERROR ▶  Unexpected Redirection and landed on wrong screen - The Current URL you're on: https://nuclios-demo.mathco.com/app/2082/auto-root-cause-analysis/overview
+2025-08-12 17:30:59.137 [main] INFO  ▶  Successfully, redirected to the Create Scenario screen
+2025-08-12 17:31:13.300 [main] INFO  ▶  Create Scenario: The Filter button was clicked
+2025-08-12 17:31:16.486 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination option was clicked
+2025-08-12 17:31:21.565 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination - Selected values was extracted
+2025-08-12 17:31:21.567 [main] INFO  ▶  The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  183261_CommodityCodeCombination_20250812_162926 == 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:31:21.792 [main] INFO  ▶  Create Scenario: The Filter - Cancel button was clicked
+2025-08-12 17:31:23.160 [main] INFO  ▶  Navigated back to the Overview screen from Create Scenario
+2025-08-12 17:31:30.675 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:31:30.871 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:31:35.466 [main] INFO  ▶  The Overview screen is reloaded with View Saved Scenario's for the selected metric: Returns Handling and Freight Costs
+2025-08-12 17:31:35.723 [main] INFO  ▶  SCPC: The Delete icon is clicked without setting to the Delete option in the table record
+2025-08-12 17:31:39.319 [main] INFO  ▶  SCPC: The Download Icon present in the row is clicked
+2025-08-12 17:31:39.517 [main] INFO  ▶  SCPC: The Saved Customer and Product combination record was downloaded
+2025-08-12 17:31:39.587 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Customer Product Combinations table and perform various actions
+2025-08-12 17:31:39.588 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 17:31:40.180 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Customer Product Combinations table and perform various actions
+2025-08-12 17:32:09.529 [main] INFO  ▶  The Auto-Root Cause: Overview Screen is loaded with the neccessary Cost Metric options
+2025-08-12 17:32:09.707 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:32:09.923 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:32:14.909 [main] INFO  ▶  SCPC: The Customer ID of the first row is extracted
+2025-08-12 17:32:15.219 [main] INFO  ▶  SCPC: The Edit Button of the first row is clicked
+2025-08-12 17:32:18.480 [main] INFO  ▶  Successfully, redirected to the Customer Selections screen
+2025-08-12 17:32:21.578 [main] INFO  ▶  The Customer ID present in the first row of the Select One Customer for Simulation table was extracted
+2025-08-12 17:32:21.580 [main] INFO  ▶  The Customer ID's matched successfully and this validates that edit button of the Saved Customer Product Combinations table redirects as intended 183261 == 183261
+2025-08-12 17:32:21.958 [main] INFO  ▶  Navigated back to the Overview screen from Customer Selection screen
+2025-08-12 17:32:29.220 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:32:29.403 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:32:33.930 [main] INFO  ▶  The Overview screen is reloaded with View Saved Scenario's for the selected metric: Returns Handling and Freight Costs
+2025-08-12 17:32:34.100 [main] INFO  ▶  The Create New Scenario button was clicked without selecting a record
+2025-08-12 17:32:34.101 [main] INFO  ▶  The Create New Scenario button error message validation method is called
+2025-08-12 17:32:40.653 [main] INFO  ▶  SCPC: The Customer ID present in the Saved Customer Product Combinations table first row is extracted to search
+2025-08-12 17:32:40.731 [main] INFO  ▶  SCPC: The Customer and Product Combination record of the Customer ID: 183261 was searched
+2025-08-12 17:32:42.919 [main] INFO  ▶  SCPC: The record of the searched Customer ID: 183261 is selected
+2025-08-12 17:32:47.413 [main] INFO  ▶  SCPC: The first row record is selected 
+2025-08-12 17:32:49.467 [main] INFO  ▶  The Customer and Product Combination name of the first row is extracted
+2025-08-12 17:32:51.794 [main] INFO  ▶  SCPC: The Create New Scenario button was clicked after selecting the record and redirected to Create Scenario Screen where the screen is loaded with selected Customer and Product Combination: 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:32:51.809 [main] ERROR ▶  Unexpected Redirection and landed on wrong screen - The Current URL you're on: https://nuclios-demo.mathco.com/app/2082/auto-root-cause-analysis/overview
+2025-08-12 17:32:51.810 [main] INFO  ▶  Successfully, redirected to the Create Scenario screen
+2025-08-12 17:33:16.564 [main] INFO  ▶  Create Scenario: The Filter button was clicked
+2025-08-12 17:33:19.795 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination option was clicked
+2025-08-12 17:33:24.894 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination - Selected values was extracted
+2025-08-12 17:33:24.894 [main] INFO  ▶  The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  183261_CommodityCodeCombination_20250812_162926 == 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:33:25.154 [main] INFO  ▶  Create Scenario: The Filter - Cancel button was clicked
+2025-08-12 17:33:26.590 [main] INFO  ▶  Navigated back to the Overview screen from Create Scenario
+2025-08-12 17:33:34.628 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:33:34.826 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:33:39.490 [main] INFO  ▶  The Overview screen is reloaded with View Saved Scenario's for the selected metric: Returns Handling and Freight Costs
+2025-08-12 17:33:39.712 [main] INFO  ▶  SCPC: The Delete icon is clicked without setting to the Delete option in the table record
+2025-08-12 17:33:43.199 [main] INFO  ▶  SCPC: The Download Icon present in the row is clicked
+2025-08-12 17:33:43.458 [main] INFO  ▶  SCPC: The Saved Customer and Product combination record was downloaded
+2025-08-12 17:33:43.503 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Customer Product Combinations table and perform various actions
+2025-08-12 17:33:43.503 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 17:33:44.122 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Scenario Simulations table and perform various actions
+2025-08-12 17:34:15.366 [main] INFO  ▶  The Auto-Root Cause: Overview Screen is loaded with the neccessary Cost Metric options
+2025-08-12 17:34:15.518 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:34:15.706 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:34:20.691 [main] INFO  ▶  SSS: The scenario name present in the pop-up is extracted
+2025-08-12 17:34:21.256 [main] INFO  ▶  SSS: The Error messsage in the pop-up was diaplayed
+2025-08-12 17:34:21.548 [main] INFO  ▶  SSS: The Cancel icon of the pop-up is clicked
+2025-08-12 17:34:23.671 [main] INFO  ▶  SSS: The Customer and Product Combination name of first row record is extracted
+2025-08-12 17:34:23.851 [main] INFO  ▶  The Edit button of the Customer ID: 183261 is clicked whose Customer and Product Combination name is: 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:34:24.063 [main] INFO  ▶  SSS: The Edit button is clicked
+2025-08-12 17:34:28.030 [main] INFO  ▶  Successfully, redirected to the Create Scenario screen
+2025-08-12 17:34:29.236 [main] INFO  ▶  Create Scenario: The Filter button was clicked
+2025-08-12 17:34:32.594 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination option was clicked
+2025-08-12 17:34:37.672 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination - Selected values was extracted
+2025-08-12 17:34:37.673 [main] INFO  ▶  The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  183261_CommodityCodeCombination_20250812_162926 == 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:34:37.896 [main] INFO  ▶  Create Scenario: The Filter - Cancel button was clicked
+2025-08-12 17:34:39.348 [main] INFO  ▶  Navigated back to the Overview screen from Create Scenario
+2025-08-12 17:34:47.305 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:34:47.549 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:34:52.182 [main] INFO  ▶  The Overview screen is reloaded with View Saved Scenario's for the selected metric: Returns Handling and Freight Costs
+2025-08-12 17:34:52.448 [main] INFO  ▶  SSS: The first row record is selected 
+2025-08-12 17:34:52.531 [main] INFO  ▶  SSS: The Sensitivity Scenario name of the first row is extracted
+2025-08-12 17:34:52.750 [main] INFO  ▶  SSS: The View Impact button was clicked after selecting the record
+2025-08-12 17:34:55.595 [main] INFO  ▶  SSS: The scenario name present in the pop-up is extracted
+2025-08-12 17:34:55.596 [main] INFO  ▶  SSS: The scenario names matched successfully with the Sensitivity Scenario name,
+ and this validates that pop-up is loaded with impact of the selected record:  183261 Scenario == 183261 Scenario
+2025-08-12 17:34:55.792 [main] INFO  ▶  SSS: The Cancel icon of the pop-up is clicked
+2025-08-12 17:34:58.021 [main] INFO  ▶  SSS: The Delete icon is clicked without setting to the Delete option in the table record
+2025-08-12 17:35:05.582 [main] INFO  ▶  SSS: The Download Icon present in the row is clicked
+2025-08-12 17:35:07.999 [main] INFO  ▶  SSS: The Saved Customer and Product combination record was downloaded
+2025-08-12 17:35:08.039 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Scenario Simulations table and perform various actions
+2025-08-12 17:35:08.040 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 17:35:08.567 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Scenario Simulations table and perform various actions
+2025-08-12 17:35:40.713 [main] INFO  ▶  The Auto-Root Cause: Overview Screen is loaded with the neccessary Cost Metric options
+2025-08-12 17:35:40.896 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:35:41.130 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:35:46.056 [main] INFO  ▶  SSS: The Customer and Product Combination name of first row record is extracted
+2025-08-12 17:35:46.323 [main] INFO  ▶  The Edit button of the Customer ID: 183261 is clicked whose Customer and Product Combination name is: 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:35:46.626 [main] INFO  ▶  SSS: The Edit button is clicked
+2025-08-12 17:35:50.595 [main] INFO  ▶  Successfully, redirected to the Create Scenario screen
+2025-08-12 17:35:51.873 [main] INFO  ▶  Create Scenario: The Filter button was clicked
+2025-08-12 17:35:55.182 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination option was clicked
+2025-08-12 17:36:00.259 [main] INFO  ▶  Create Scenario: The Filter - Customer and Product Combination - Selected values was extracted
+2025-08-12 17:36:00.259 [main] INFO  ▶  The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  183261_CommodityCodeCombination_20250812_162926 == 183261_CommodityCodeCombination_20250812_162926
+2025-08-12 17:36:00.469 [main] INFO  ▶  Create Scenario: The Filter - Cancel button was clicked
+2025-08-12 17:36:01.789 [main] INFO  ▶  Navigated back to the Overview screen from Create Scenario
+2025-08-12 17:36:09.159 [main] INFO  ▶  The Cost Metric:  Returns Handling and Freight Costs is clicked
+2025-08-12 17:36:09.310 [main] INFO  ▶  The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded
+2025-08-12 17:36:13.888 [main] INFO  ▶  The Overview screen is reloaded with View Saved Scenario's for the selected metric: Returns Handling and Freight Costs
+2025-08-12 17:36:14.161 [main] INFO  ▶  SSS: The scenario name present in the pop-up is extracted
+2025-08-12 17:36:14.741 [main] INFO  ▶  SSS: The Error messsage in the pop-up was diaplayed
+2025-08-12 17:36:15.064 [main] INFO  ▶  SSS: The Cancel icon of the pop-up is clicked
+2025-08-12 17:36:17.503 [main] INFO  ▶  SSS: The Customer ID present in the Saved Scenario Simulations table first row is extracted to search
+2025-08-12 17:36:17.617 [main] INFO  ▶  SSS: The Saved Scenario Simulations of the Customer ID: 183261 was searched
+2025-08-12 17:36:19.901 [main] INFO  ▶  SSS: The record of the searched Customer ID: 183261 is selected
+2025-08-12 17:36:26.580 [main] INFO  ▶  SSS: The first row record is selected 
+2025-08-12 17:36:26.670 [main] INFO  ▶  SSS: The Sensitivity Scenario name of the first row is extracted
+2025-08-12 17:36:26.960 [main] INFO  ▶  SSS: The View Impact button was clicked after selecting the record
+2025-08-12 17:36:29.269 [main] INFO  ▶  SSS: The scenario name present in the pop-up is extracted
+2025-08-12 17:36:29.270 [main] INFO  ▶  SSS: The scenario names matched successfully with the Sensitivity Scenario name,
+ and this validates that pop-up is loaded with impact of the selected record:  183261 Scenario == 183261 Scenario
+2025-08-12 17:36:29.552 [main] INFO  ▶  SSS: The Cancel icon of the pop-up is clicked
+2025-08-12 17:36:31.847 [main] INFO  ▶  SSS: The Delete icon is clicked without setting to the Delete option in the table record
+2025-08-12 17:36:40.189 [main] INFO  ▶  SSS: The Download Icon present in the row is clicked
+2025-08-12 17:36:42.551 [main] INFO  ▶  SSS: The Saved Customer and Product combination record was downloaded
+2025-08-12 17:36:42.600 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Scenario Simulations table and perform various actions
+2025-08-12 17:36:42.602 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

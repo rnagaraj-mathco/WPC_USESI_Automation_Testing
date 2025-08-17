@@ -117,7 +117,7 @@ Feature: Land on the Create Scenario screen where the user will be able to creat
   
   #DONE - Checked!
  #	#--->Create Scenario - Simulation using Eliminate System Pricing Overrides Surcharge
-  #Scenario: Verify that the user is able to create a scenario using the Eliminate System Pricing Overrides simulation
+ #Scenario: Verify that the user is able to create a scenario using the Eliminate System Pricing Overrides simulation
   #Given the user is on the Create Scenario screen
   #Then the user clicks on the Filter and perform action such as Apply, Reset and Cancel on the Customer and Product combinations option
   #When the user clicks on the Customer Details button, a popup should appear titled Select Customer and Products Combination containing Selected Target Customer for Simulation and Selected Product for Root Cause Analysis table
@@ -140,7 +140,7 @@ Feature: Land on the Create Scenario screen where the user will be able to creat
 #----------------------------* Move to A New Price Class *---------------------------
  #DONE - Checked!
  #	#--->Create Scenario - Simulation using Move To A New Customer Price Class
-  Scenario: Verify that the user is able to create a scenario using the Move To A New Customer Price Class simulation
+ Scenario: Verify that the user is able to create a scenario using the Move To A New Customer Price Class simulation
   Given the user is on the Create Scenario screen
   Then the user clicks on the Filter and perform action such as Apply, Reset and Cancel on the Customer and Product combinations option
   When the user clicks on the Customer Details button, a popup should appear titled Select Customer and Products Combination containing Selected Target Customer for Simulation and Selected Product for Root Cause Analysis table

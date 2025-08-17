@@ -1,5 +1,39 @@
-C:\Users\NagarajR\OneDrive - TheMathCompany Private Limited\Desktop\WPC\WPC_UI_Automation\WPC_UI_Automation\WPC_UI_Automation\src\test\java\hooks\Hooks.java
-C:\Users\NagarajR\OneDrive - TheMathCompany Private Limited\Desktop\WPC\WPC_UI_Automation\WPC_UI_Automation\WPC_UI_Automation\src\test\java\runners\TestRunner.java
-C:\Users\NagarajR\OneDrive - TheMathCompany Private Limited\Desktop\WPC\WPC_UI_Automation\WPC_UI_Automation\WPC_UI_Automation\src\test\java\stepdefinitions\DashboardSteps.java
-C:\Users\NagarajR\OneDrive - TheMathCompany Private Limited\Desktop\WPC\WPC_UI_Automation\WPC_UI_Automation\WPC_UI_Automation\src\test\java\stepdefinitions\LoginSteps.java
-C:\Users\NagarajR\OneDrive - TheMathCompany Private Limited\Desktop\WPC\WPC_UI_Automation\WPC_UI_Automation\WPC_UI_Automation\src\test\java\stepdefinitions\CPA_OverviewSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\core\BaseTest.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\HomePage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\CPA_BranchCustomerSelectionSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\CPA_CreateScenarioSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\CPA_PeerSelectionPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\HomeSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\CPA_PeerSelectionSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\ARCA_CustomerAnalysisPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\ARCA_OverviewPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\CPA_ViewScenarioImpactSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\DriverManager\PageObjectManager.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\ARCA_CustomerSelectionPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\CPA_OverviewSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\utils\Helper.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\ARCA_CreateScenarioSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\hooks\Hooks.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\ARCA_FilterCustomerProductCombinationsPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\hooks\StepReporter.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\ARCA_ProfitBridgeSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\CPA_CreateScenarioPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\CPA_OverviewPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\LoginPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\utils\ScreenshotUtil.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\LoginSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\DriverManager\DriverFactory.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\config\ConfigReader.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\utils\ElementHelper.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\utils\ExtentReporter.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\utils\ExtendedReports.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\CPA_BranchCustomerSelectionPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\ARCA_OverviewSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\ARCA_ProfitBridgePage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\ARCA_FilterCustomerProductCombinationsSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\ARCA_CreateScenarioPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\ARCA_CustomerSelectionSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\utils\CommonSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\pages\CPA_ViewScenarioImpactPage.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\stepdefinitions\ARCA_CustomerAnalysisSteps.java
+C:\Users\NagarajR\git\WPC_USESI_Automation_Testing\WPC_UI_Automation\src\test\java\runners\TestRunner.java

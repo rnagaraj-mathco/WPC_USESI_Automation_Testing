@@ -1,0 +1,16 @@
+2025-08-13 19:54:33.904 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario without any simulations
+2025-08-13 19:56:03.264 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario without any simulations
+2025-08-13 19:56:03.266 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-13 19:56:04.986 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario using the % Order change in Order $ Sales simulator
+2025-08-13 19:58:28.988 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario using the % Order change in Order $ Sales simulator
+2025-08-13 19:58:28.989 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-13 19:58:29.737 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario using the Enforce Per Order Charge simulation
+2025-08-13 20:00:40.997 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario using the Enforce Per Order Charge simulation
+2025-08-13 20:00:40.998 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-13 20:00:41.694 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario using the Enforce Per Return Surcharge simulation
+2025-08-13 20:02:24.251 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario using the Eliminate System Pricing Overrides simulation
+2025-08-13 20:04:01.219 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario using the Eliminate System Pricing Overrides simulation
+2025-08-13 20:04:01.220 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-13 20:04:01.974 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario using the Move To A New Customer Price Class simulation
+2025-08-13 20:05:29.251 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario using the Move To A New Customer Price Class simulation
+2025-08-13 20:05:29.253 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

@@ -15,14 +15,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class LoginPage {
 	WebDriver driver;
 	WebDriverWait wait;
+	ElementHelper helper;
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // wait initialized once
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // wait initialized once
+		this.helper = new ElementHelper(driver);
 	}
 
 	private WebElement waitForElement(By locator) {
@@ -59,14 +62,14 @@ public class LoginPage {
 		driver.get(ConfigReader.getAppUrl());
 		// Wait for login page to load by waiting for a known visible element (like the
 		// username field)
-		// waitForElement(username); // waits until user name is visible
+		waitForElement(username); // waits until user name is visible
 //		waitForElement(loginBtn);
 
 		// Now take screenshot only after page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/login/loginpage.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/login/loginpage.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 	}
 
@@ -84,11 +87,13 @@ public class LoginPage {
 
 		// Entering Credentials manually
 		WebElement usernameField = waitForElement(username);
+		helper.safeClick(usernameField);
 		usernameField.clear();
 		usernameField.sendKeys(ConfigReader.userEmailId());
 		Thread.sleep(2000);
 
 		WebElement passwordField = waitForElement(password);
+		helper.safeClick(passwordField);
 		passwordField.clear();
 		passwordField.sendKeys(ConfigReader.password());
 		waitForElement(password);
@@ -97,7 +102,8 @@ public class LoginPage {
 
 	public void loginBtn() throws IOException, InterruptedException {
 		WebElement loginButton = waitForElement(loginBtn);
-		loginButton.click();
+//		loginButton.click();
+		helper.safeClick(loginButton);
 		Thread.sleep(1000);
 	}
 
@@ -140,11 +146,11 @@ public class LoginPage {
 		}
 
 		System.out.println("User login validated: " + actualUserName);
-		// Takes screenshot of the Dashboard Screen
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/login/LoginSuccess_HomeScreenLoad.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		// Takes screenshot of the Dashboard Screen
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/login/LoginSuccess_HomeScreenLoad.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		Thread.sleep(1500);
 		System.out.println(" Home screen loaded fully.");
 

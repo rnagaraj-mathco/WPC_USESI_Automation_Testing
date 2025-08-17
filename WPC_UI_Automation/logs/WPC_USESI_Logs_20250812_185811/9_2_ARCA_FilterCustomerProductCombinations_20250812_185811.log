@@ -1,0 +1,7 @@
+2025-08-12 18:58:11.732 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to click on the Select All Customer or Select All Commodity Codes checkbox, which then selects all tiles in the tree map
+2025-08-12 19:03:45.795 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to click on the Select All Customer or Select All Commodity Codes checkbox, which then selects all tiles in the tree map
+2025-08-12 19:03:45.796 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 19:03:47.112 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to select the customer and corresponding commodity codes from the tree map
+2025-08-12 19:05:07.832 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to select the customer and corresponding commodity codes from the tree map
+2025-08-12 19:05:07.833 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 19:05:08.364 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to click the Customer Details button and select customers, which are then reflected in the tree map

@@ -46,7 +46,7 @@ Feature: Land on the Overview screen of the Customer Peer Analysis and perform a
 	#DONE - Checked!
   #Saved Sensitivity Simulation Scenario  - SSS
   #Selecting a Sensitivity Simulation Scenario record from the table | Done - Edit is failng due to filter issue when redirected to create scenario
-	Scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
+	Scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table by selecting a Scenario record from the table and performing various actions
 	  Given the user is on the Overview page of the Customer Peer Analysis
 	  Then the user should be able to search for a keyword in the Saved Sensitivity Simulation Scenario table
 	  Then the user should be able to click on the View Impact button and get redirected to the View Scenario Impact screen only if any one record from the Saved Sensitivity Simulation scenario table is selected
@@ -64,7 +64,7 @@ Feature: Land on the Overview screen of the Customer Peer Analysis and perform a
 
 
  #Search and Select the Peer Selection record  | Delete dropdownn and pagination is pending and Edit failing due to filters issues and back naviagtion failing due to absence of the back button
-	Scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions
+	Scenario: Verify that the user can interact with the Saved Sensitivity Simulation Scenario table by searching for a Scenario record, selecting it and performing various actions
 	  Given the user is on the Overview page of the Customer Peer Analysis
 	  Then the user should be able to search for a record and select it in the Saved Sensitivity Simulation Scenario table
 	  Then the user should be able to click on the View Impact button and get redirected to the View Scenario Impact screen only if any one record from the Saved Sensitivity Simulation scenario table is selected

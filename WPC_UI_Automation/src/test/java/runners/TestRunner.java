@@ -1,21 +1,21 @@
-////package runners;
-////
-////import org.junit.runner.RunWith;
-////
-////import io.cucumber.junit.Cucumber;
-////import io.cucumber.junit.CucumberOptions;
-////
-////@RunWith(Cucumber.class)
-////@CucumberOptions(features = "src/test/java/Features", glue = { "stepdefinitions", "hooks" }, plugin = { "pretty",
-////		"json:target/cucumber.json", "html:target/cucumber-html-report",
-////		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", "hooks.StepReporter" // ✅ This must
-////																										// match the
-////																										// full class
-////																										// name
-////}, monochrome = true)
-////public class TestRunner {
-////}
+//package runners;
 //
+//import org.junit.runner.RunWith;
+//
+//import io.cucumber.junit.Cucumber;
+//import io.cucumber.testng.CucumberOptions;
+//
+//@RunWith(Cucumber.class)
+//@CucumberOptions(features = "src/test/java/Features", glue = { "stepdefinitions", "hooks" }, plugin = { "pretty",
+//		"json:target/cucumber.json", "html:target/cucumber-html-report",
+//		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", "hooks.StepReporter" // ✅ This must
+//																										// match the
+//																										// full class
+//																										// name
+//}, monochrome = true)
+//public class TestRunner {
+//}
+
 //package runners;
 //
 //import org.testng.annotations.DataProvider;
@@ -33,6 +33,7 @@
 //		return super.scenarios();
 //	}
 //}
+
 package runners;
 
 import org.testng.annotations.DataProvider;

@@ -20,17 +20,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class ARCA_CreateScenarioPage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public ARCA_CreateScenarioPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -229,9 +232,16 @@ public class ARCA_CreateScenarioPage {
 	public void navigateTo() throws IOException, InterruptedException {
 		// This gets the URL of the Create Scenario screen
 		driver.get(ConfigReader.arca_createScenario());
+		try {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		} catch (Exception e) {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		}
 		// waits for the Pre-programmed Scenario widget
 		waitForElement(arca_csc_preProgrammedScenario);
-		Thread.sleep(2000);
+
 		waitForElement(arca_csc_estimatedImpact);
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -257,10 +267,12 @@ public class ARCA_CreateScenarioPage {
 	public void filters() throws IOException, InterruptedException {
 		// waits for the Filters btn
 		WebElement csc_filtersBtn = waitForElement(arca_csc_filtersBtn);
-		csc_filtersBtn.click();
+//		csc_filtersBtn.click();
+		helper.safeClick(csc_filtersBtn);
 		// waits for the Filters - Customer Product combination option
 		WebElement csc_filtersOptions = waitForElement(arca_csc_filtersOptions);
-		csc_filtersOptions.click();
+//		csc_filtersOptions.click();
+		helper.safeClick(csc_filtersOptions);
 		WebElement csc_filterOptionsValue = waitForElement(arca_csc_filterOptionsValue);
 		String filterOptionsValue = csc_filterOptionsValue.getText().trim();
 		// stores only the Customer Id from the filter
@@ -283,10 +295,17 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(2000);
 		// waits for the Filter - Cancel btn
 		WebElement csc_filterCancel = waitForElement(arca_csc_filterCancel);
-		csc_filterCancel.click();
+//		csc_filterCancel.click();
+		helper.safeClick(csc_filterCancel);
 		// waits for the Pre-programmed Scenario widget
+		try {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		} catch (Exception e) {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		}
 		waitForElement(arca_csc_preProgrammedScenario);
-		Thread.sleep(2000);
 		waitForElement(arca_csc_estimatedImpact);
 	}
 
@@ -294,7 +313,8 @@ public class ARCA_CreateScenarioPage {
 	public void customerDetailsBtn() throws IOException, InterruptedException {
 		// waits for the Customer Details btn
 		WebElement csc_customerDetailsBtn = waitForElement(arca_csc_customerDetailsBtn);
-		csc_customerDetailsBtn.click();
+//		csc_customerDetailsBtn.click();
+		helper.safeClick(csc_customerDetailsBtn);
 		// waits for the Select Target Customer for Simulation - Table First Row -
 		// Customer ID
 		WebElement csc_firstRowCustomerIdSTS = waitForElement(arca_csc_firstRowCustomerIdSTS);
@@ -309,20 +329,28 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(2000);
 		// waits for the Selected Target for Simulation - Download icon
 		WebElement csc_downloadIconSTC = waitForElement(arca_csc_downloadIconSTC);
-		csc_downloadIconSTC.click();
+//		csc_downloadIconSTC.click();
+		helper.safeClick(csc_downloadIconSTC);
 		Thread.sleep(1000);
 		// waits for the Selected Product for Root Cause Analysis (SPRCA) - Download
 		// icon
 		WebElement csc_downloadIconSPRCA = waitForElement(arca_csc_downloadIconSPRCA);
-		csc_downloadIconSPRCA.click();
+//		csc_downloadIconSPRCA.click();
+		helper.safeClick(csc_downloadIconSPRCA);
 		System.out.println("=> Downloaded the table records of both table");
 		// wait for the close icon of the pop-up
 		WebElement csc_closeIconSTS = waitForElement(arca_csc_closeIconSTS);
-		csc_closeIconSTS.click();
+//		csc_closeIconSTS.click();
+		helper.safeClick(csc_closeIconSTS);
 		Thread.sleep(1000);
-		// waits for the Pre-programmed Scenario widget
+		try {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		} catch (Exception e) {
+			waitForElement(arca_csc_preProgrammedScenario);
+			waitForElement(arca_csc_estimatedImpact);
+		}
 		waitForElement(arca_csc_preProgrammedScenario);
-		Thread.sleep(2000);
 		waitForElement(arca_csc_estimatedImpact);
 	}
 
@@ -333,7 +361,8 @@ public class ARCA_CreateScenarioPage {
 		waitForElement(arca_csc_preProgrammedScenario);
 		// waits for the create scenario button
 		WebElement csc_createScenarioBtnPPS = waitForElement(arca_csc_createScenarioBtnPPS);
-		csc_createScenarioBtnPPS.click();
+//		csc_createScenarioBtnPPS.click();
+		helper.safeClick(csc_createScenarioBtnPPS);
 //		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", csc_createScenarioBtnPPS);
 
 		Thread.sleep(1000);
@@ -364,14 +393,16 @@ public class ARCA_CreateScenarioPage {
 
 				// waits for the Before Simulation - Enterprise Profit - Text
 				WebElement csc_beforeSimulationEPText = waitForElement(arca_csc_beforeSimulationEPText);
-				actions.moveToElement(csc_beforeSimulationEPText).click().perform();
+//				actions.moveToElement(csc_beforeSimulationEPText).click().perform();
+				helper.safeClick(csc_beforeSimulationEPText);
 				String beforeSimulationEPText = csc_beforeSimulationEPText.getText().trim();
 				System.out.println(beforeSimulationEPText);
 
 				// waits for the After Simulation - Enterprise Profit - Text
 				waitForElement(arca_csc_afterSimulationChart);
 				WebElement csc_afterSimulationEPText = waitForElement(arca_csc_afterSimulationEPText);
-				actions.moveToElement(csc_afterSimulationEPText).click().perform();
+//				actions.moveToElement(csc_afterSimulationEPText).click().perform();
+				helper.safeClick(csc_afterSimulationEPText);
 				String afterSimulationEPText = csc_afterSimulationEPText.getText().trim();
 				System.out.println(afterSimulationEPText);
 				// Check if both are same or not
@@ -409,7 +440,8 @@ public class ARCA_CreateScenarioPage {
 
 		waitForElement(arca_csc_estimatedImpact);
 		WebElement csc_saveScenarioEI = waitForElement(arca_csc_saveScenarioEI);
-		actions.moveToElement(csc_saveScenarioEI).click().perform();
+//		actions.moveToElement(csc_saveScenarioEI).click().perform();
+		helper.safeClick(csc_saveScenarioEI);
 
 		// Function to validate the error message
 		errorMessageSaveScenario();
@@ -453,7 +485,8 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(1000);
 		// waits for the save scenario button
 		WebElement csc_saveScenarioEI = waitForElement(arca_csc_saveScenarioEI);
-		actions.moveToElement(csc_saveScenarioEI).click().perform();
+//		actions.moveToElement(csc_saveScenarioEI).click().perform();
+		helper.safeClick(csc_saveScenarioEI);
 		successMessageSaveScenario();
 		System.out.println("=> Successfully, The Scenario has been created and named as: " + scenarioName);
 		try {
@@ -492,7 +525,8 @@ public class ARCA_CreateScenarioPage {
 		}
 		// waits for the reset simulation button of PPS
 		WebElement csc_resetSimulationBtnPPS = waitForElement(arca_csc_resetSimulationBtnPPS);
-		csc_resetSimulationBtnPPS.click();
+//		csc_resetSimulationBtnPPS.click();
+		helper.safeClick(csc_resetSimulationBtnPPS);
 		System.out.println("=> The Reset Simulation of Pre Programmed Scenario is clicked and the widget is reloaded");
 		try {
 			waitForElement(arca_csc_estimatedImpact);
@@ -533,7 +567,8 @@ public class ARCA_CreateScenarioPage {
 		}
 
 		WebElement csc_resetSimulationBtnEI = waitForElement(arca_csc_resetSimulationBtnEI);
-		csc_resetSimulationBtnEI.click();
+//		csc_resetSimulationBtnEI.click();
+		helper.safeClick(csc_resetSimulationBtnEI);
 		System.out.println("=> The Reset Simulation of Estimated Impact is clicked and the widget is reloaded");
 
 		try {
@@ -560,7 +595,8 @@ public class ARCA_CreateScenarioPage {
 		}
 		Thread.sleep(3000);
 		WebElement csc_numericValueSales = waitForElement(arca_csc_numericValueSales);
-		csc_numericValueSales.click();
+//		csc_numericValueSales.click();
+		helper.safeClick(csc_numericValueSales);
 		csc_numericValueSales.sendKeys(Keys.CONTROL + "a");
 		csc_numericValueSales.sendKeys(Keys.BACK_SPACE);
 		// Enter the value
@@ -586,7 +622,8 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(4000);
 		// waits for the download icon of before simulation
 		WebElement csc_downloadBefore = waitForElement(arca_csc_downloadBefore);
-		csc_downloadBefore.click();
+//		csc_downloadBefore.click();
+		helper.safeClick(csc_downloadBefore);
 		System.out.println("=> The Before Simulation chart was downloaded");
 	}
 
@@ -597,7 +634,8 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(4000);
 		// waits for the download icon of before simulation
 		WebElement csc_downloadAfter = waitForElement(arca_csc_downloadAfter);
-		csc_downloadAfter.click();
+//		csc_downloadAfter.click();
+		helper.safeClick(csc_downloadAfter);
 		System.out.println("=> The Before Simulation chart was downloaded");
 	}
 
@@ -616,7 +654,8 @@ public class ARCA_CreateScenarioPage {
 		// waits for the Sales Input
 		System.out.println("----------------------------* Enforce Per Order Charge *---------------------------");
 		WebElement csc_salesInputEPOC = waitForElement(arca_csc_salesInputEPOC);
-		csc_salesInputEPOC.click();
+//		csc_salesInputEPOC.click();
+		helper.safeClick(csc_salesInputEPOC);
 		csc_salesInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -627,7 +666,8 @@ public class ARCA_CreateScenarioPage {
 		// waits for the flat input
 
 		WebElement csc_flatInputEPOC = waitForElement(arca_csc_flatInputEPOC);
-		csc_flatInputEPOC.click();
+//		csc_flatInputEPOC.click();
+		helper.safeClick(csc_flatInputEPOC);
 		csc_flatInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -651,11 +691,13 @@ public class ARCA_CreateScenarioPage {
 	// Enters %Sale and Flat $ value by also selecting the simulation
 	public void selectAndenterBothValueEPOC() throws IOException, InterruptedException {
 		WebElement csc_simulationEPOC = waitForElement(arca_csc_simulationEPOC);
-		csc_simulationEPOC.click();
+//		csc_simulationEPOC.click();
+		helper.safeClick(csc_simulationEPOC);
 		// waits for the Sales Input
 
 		WebElement csc_salesInputEPOC = waitForElement(arca_csc_salesInputEPOC);
-		csc_salesInputEPOC.click();
+//		csc_salesInputEPOC.click();
+		helper.safeClick(csc_salesInputEPOC);
 		csc_salesInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -666,7 +708,8 @@ public class ARCA_CreateScenarioPage {
 		// waits for the flat input
 
 		WebElement csc_flatInputEPOC = waitForElement(arca_csc_flatInputEPOC);
-		csc_flatInputEPOC.click();
+//		csc_flatInputEPOC.click();
+		helper.safeClick(csc_flatInputEPOC);
 		csc_flatInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -705,7 +748,8 @@ public class ARCA_CreateScenarioPage {
 		// waits for the Sales Input
 
 		WebElement csc_salesInputEPOC = waitForElement(arca_csc_salesInputEPOC);
-		csc_salesInputEPOC.click();
+//		csc_salesInputEPOC.click();
+		helper.safeClick(csc_salesInputEPOC);
 		csc_salesInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -739,10 +783,12 @@ public class ARCA_CreateScenarioPage {
 		}
 		// waits for the simulation
 		WebElement csc_simulationEPOC = waitForElement(arca_csc_simulationEPOC);
-		csc_simulationEPOC.click();
+//		csc_simulationEPOC.click();
+		helper.safeClick(csc_simulationEPOC);
 		// waits for the Sales Input
 		WebElement csc_salesInputEPOC = waitForElement(arca_csc_salesInputEPOC);
-		csc_salesInputEPOC.click();
+//		csc_salesInputEPOC.click();
+		helper.safeClick(csc_salesInputEPOC);
 		csc_salesInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -781,7 +827,8 @@ public class ARCA_CreateScenarioPage {
 		waitForElement(arca_csc_flatInputEPOC);
 		// waits for the flat input
 		WebElement csc_flatInputEPOC = waitForElement(arca_csc_flatInputEPOC);
-		csc_flatInputEPOC.click();
+//		csc_flatInputEPOC.click();
+		helper.safeClick(csc_flatInputEPOC);
 		csc_flatInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -806,10 +853,12 @@ public class ARCA_CreateScenarioPage {
 	public void enterFlatValueWithSelectingEPOC() throws IOException, InterruptedException {
 		// waits for the simulation
 		WebElement csc_simulationEPOC = waitForElement(arca_csc_simulationEPOC);
-		csc_simulationEPOC.click();
+//		csc_simulationEPOC.click();
+		helper.safeClick(csc_simulationEPOC);
 		// waits for the flat input
 		WebElement csc_flatInputEPOC = waitForElement(arca_csc_flatInputEPOC);
-		csc_flatInputEPOC.click();
+//		csc_flatInputEPOC.click();
+		helper.safeClick(csc_flatInputEPOC);
 		csc_flatInputEPOC.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPOC.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -843,7 +892,8 @@ public class ARCA_CreateScenarioPage {
 		}
 		// waits for the Sales input
 		WebElement csc_salesInputEPRS = waitForElement(arca_csc_salesInputEPRS);
-		csc_salesInputEPRS.click();
+//		csc_salesInputEPRS.click();
+		helper.safeClick(csc_salesInputEPRS);
 		csc_salesInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -853,7 +903,8 @@ public class ARCA_CreateScenarioPage {
 
 		// waits for the flat input
 		WebElement csc_flatInputEPRS = waitForElement(arca_csc_flatInputEPRS);
-		csc_flatInputEPRS.click();
+//		csc_flatInputEPRS.click();
+		helper.safeClick(csc_flatInputEPRS);
 		csc_flatInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -891,10 +942,12 @@ public class ARCA_CreateScenarioPage {
 		}
 		// waits for the EPRS Simulation text
 		WebElement csc_simulationEPRS = waitForElement(arca_csc_simulationEPRS);
-		csc_simulationEPRS.click();
+//		csc_simulationEPRS.click();
+		helper.safeClick(csc_simulationEPRS);
 		//
 		WebElement csc_salesInputEPRS = waitForElement(arca_csc_salesInputEPRS);
-		csc_salesInputEPRS.click();
+//		csc_salesInputEPRS.click();
+		helper.safeClick(csc_salesInputEPRS);
 		csc_salesInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -904,7 +957,8 @@ public class ARCA_CreateScenarioPage {
 
 		// waits for the flat input
 		WebElement csc_flatInputEPRS = waitForElement(arca_csc_flatInputEPRS);
-		csc_flatInputEPRS.click();
+//		csc_flatInputEPRS.click();
+		helper.safeClick(csc_flatInputEPRS);
 		csc_flatInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -943,7 +997,8 @@ public class ARCA_CreateScenarioPage {
 		// waits for the Sales Input
 
 		WebElement csc_salesInputEPRS = waitForElement(arca_csc_salesInputEPRS);
-		csc_salesInputEPRS.click();
+//		csc_salesInputEPRS.click();
+		helper.safeClick(csc_salesInputEPRS);
 		csc_salesInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -980,11 +1035,13 @@ public class ARCA_CreateScenarioPage {
 		}
 		// waits for the simulation
 		WebElement csc_simulationEPRS = waitForElement(arca_csc_simulationEPRS);
-		csc_simulationEPRS.click();
+//		csc_simulationEPRS.click();
+		helper.safeClick(csc_simulationEPRS);
 		// waits for the Sales Input
 
 		WebElement csc_salesInputEPRS = waitForElement(arca_csc_salesInputEPRS);
-		csc_salesInputEPRS.click();
+//		csc_salesInputEPRS.click();
+		helper.safeClick(csc_salesInputEPRS);
 		csc_salesInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_salesInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double salesValue = 20.5;
@@ -1022,7 +1079,8 @@ public class ARCA_CreateScenarioPage {
 		waitForElement(arca_csc_simulationEPRS);
 		// waits for the flat input
 		WebElement csc_flatInputEPRS = waitForElement(arca_csc_flatInputEPRS);
-		csc_flatInputEPRS.click();
+//		csc_flatInputEPRS.click();
+		helper.safeClick(csc_flatInputEPRS);
 		csc_flatInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -1047,10 +1105,12 @@ public class ARCA_CreateScenarioPage {
 	public void enterFlatValueWithSelectingEPRS() throws IOException, InterruptedException {
 		// waits for the simulation
 		WebElement csc_simulationEPRS = waitForElement(arca_csc_simulationEPRS);
-		csc_simulationEPRS.click();
+//		csc_simulationEPRS.click();
+		helper.safeClick(csc_simulationEPRS);
 		// waits for the flat input
 		WebElement csc_flatInputEPRS = waitForElement(arca_csc_flatInputEPRS);
-		csc_flatInputEPRS.click();
+//		csc_flatInputEPRS.click();
+		helper.safeClick(csc_flatInputEPRS);
 		csc_flatInputEPRS.sendKeys(Keys.CONTROL + "a");
 		csc_flatInputEPRS.sendKeys(Keys.BACK_SPACE);
 		Double flatValue = 23.0;
@@ -1115,7 +1175,8 @@ public class ARCA_CreateScenarioPage {
 			waitForElement(arca_csc_estimatedImpactError);
 
 		}
-		csc_simulationESPO.click();
+//		csc_simulationESPO.click();
+		helper.safeClick(csc_simulationESPO);
 		// waits for the toggle button of ESPO
 //		WebElement csc_toggleESPO = waitForElement(arca_csc_toggleESPO);
 //		((JavascriptExecutor) driver).executeScript("arguments[0].click();", csc_toggleESPO);
@@ -1125,7 +1186,8 @@ public class ARCA_CreateScenarioPage {
 		Thread.sleep(1000);
 		// create scenario
 		WebElement csc_createScenarioBtnPPS = waitForElement(arca_csc_createScenarioBtnPPS);
-		csc_createScenarioBtnPPS.click();
+//		csc_createScenarioBtnPPS.click();
+		helper.safeClick(csc_createScenarioBtnPPS);
 		Thread.sleep(1000);
 		errorToasterMessage();
 		try {
@@ -1166,7 +1228,8 @@ public class ARCA_CreateScenarioPage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", csc_toggleESPO);
 		// waits for the simulation to get selected
 		WebElement csc_simulationESPO = waitForElement(arca_csc_simulationESPO);
-		csc_simulationESPO.click();
+//		csc_simulationESPO.click();
+		helper.safeClick(csc_simulationESPO);
 		// create scenario
 		int result = createScenarioBtn();
 
@@ -1196,7 +1259,8 @@ public class ARCA_CreateScenarioPage {
 		}
 		// waits for the dropdown and click
 		WebElement csc_priceClassDropdownMNCPC = waitForElement(arca_csc_priceClassDropdownMNCPC);
-		csc_priceClassDropdownMNCPC.click();
+//		csc_priceClassDropdownMNCPC.click();
+		helper.safeClick(csc_priceClassDropdownMNCPC);
 		// waits for the dropdown - values
 		try {
 			WebElement csc_priceClassDropdownValueMNCPC = waitForElement(arca_csc_priceClassDropdownValueMNCPC);
@@ -1235,11 +1299,12 @@ public class ARCA_CreateScenarioPage {
 	public void selectMNCPC() throws IOException, InterruptedException {
 		// waits for the simulation
 		WebElement csc_simulationMNCPC = waitForElement(arca_csc_simulationMNCPC);
-		csc_simulationMNCPC.click();
+//		csc_simulationMNCPC.click();
+		helper.safeClick(csc_simulationMNCPC);
 		Thread.sleep(1000);
 		try {
 			waitForElement(arca_csc_estimatedImpact);
-			
+
 			waitForElement(arca_csc_afterSimulationChart);
 
 		} catch (Exception e) {
@@ -1248,7 +1313,8 @@ public class ARCA_CreateScenarioPage {
 
 		// create scenario
 		WebElement csc_createScenarioBtnPPS = waitForElement(arca_csc_createScenarioBtnPPS);
-		csc_createScenarioBtnPPS.click();
+//		csc_createScenarioBtnPPS.click();
+		helper.safeClick(csc_createScenarioBtnPPS);
 		errorToasterMessage();
 		System.out.println(
 				"=> SUCCESS: The Scenario has not been created as the Simulation Move To A New Customer Price Class - Price Class from dropdown was not clicked ");
@@ -1258,10 +1324,12 @@ public class ARCA_CreateScenarioPage {
 	public void selectAndDropdownMNCPC() throws IOException, InterruptedException {
 		// waits for the simulation
 		WebElement csc_simulationMNCPC = waitForElement(arca_csc_simulationMNCPC);
-		csc_simulationMNCPC.click();
+//		csc_simulationMNCPC.click();
+		helper.safeClick(csc_simulationMNCPC);
 		waitForElement(arca_csc_simulationMNCPC);
 		WebElement csc_priceClassDropdownMNCPC = waitForElement(arca_csc_priceClassDropdownMNCPC);
-		csc_priceClassDropdownMNCPC.click();
+//		csc_priceClassDropdownMNCPC.click();
+		helper.safeClick(csc_priceClassDropdownMNCPC);
 		// waits for the dropdown - values
 		try {
 			WebElement csc_priceClassDropdownValueMNCPC = waitForElement(arca_csc_priceClassDropdownValueMNCPC);

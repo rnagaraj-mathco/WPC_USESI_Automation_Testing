@@ -1,0 +1,7 @@
+2025-08-12 15:43:16.914 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to select a customer from the Select Target Customer for Peer Matching table
+2025-08-12 15:45:03.202 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to select a customer from the Select Target Customer for Peer Matching table
+2025-08-12 15:45:03.202 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 15:45:03.978 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to select a customer by searching the record from the Select Target Customer for Peer Matching table
+2025-08-12 15:46:26.819 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to select a customer by searching the record from the Select Target Customer for Peer Matching table
+2025-08-12 15:46:26.819 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 15:46:27.419 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to select the peers by clicking on the Select Peer Matching Criteria button and

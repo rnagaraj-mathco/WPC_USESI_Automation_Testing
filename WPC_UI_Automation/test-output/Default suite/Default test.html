@@ -1,0 +1,438 @@
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>19/9/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Aug 12 15:19:01 IST 2025</td>
+</tr>
+<tr><td>Total time:</td><td>4677 seconds (4677399 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify user logs in to the WPC - USESI application with valid credentials", "Login to WPC - USESI application"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1] (tried for 90 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58167}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58167/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 8bd7ae8909cf7e39c53b224678ed270b
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.LoginPage.waitForElement(LoginPage.java:32)
+	at pages.LoginPage.navigateTo(LoginPage.java:65)
+	at stepdefinitions.LoginSteps.the_user_is_on_the_login_page(LoginSteps.java:28)
+	at ✽.the user is on the login page(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/9_6_Login.feature:5)
+</pre></div><a href='#' onClick='toggleBox("stack-trace904698446", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace904698446'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1] (tried for 90 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58167}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58167/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 8bd7ae8909cf7e39c53b224678ed270b
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.LoginPage.waitForElement(LoginPage.java:32)
+	at pages.LoginPage.navigateTo(LoginPage.java:65)
+	at stepdefinitions.LoginSteps.the_user_is_on_the_login_page(LoginSteps.java:28)
+	at ✽.the user is on the login page(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/9_6_Login.feature:5)
+</pre></div></td>
+<td>115</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Customer Product Combinations table and perform various actions", "Land on the Overview screen of the Auto Root Cause Analysis and perform actions such as choosing a Metric, and interacting with Saved Customer Product Combinations and Saved Scenario Simulations table"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1] (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55345}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55345/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: bb582b89e7d60fca830e408c6daff1f1
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.ARCA_OverviewPage.waitForElement(ARCA_OverviewPage.java:42)
+	at pages.ARCA_OverviewPage.createNewScnearioBtnWithSelection(ARCA_OverviewPage.java:555)
+	at stepdefinitions.ARCA_OverviewSteps.the_user_should_be_able_to_click_the_create_new_scenario_button_and_get_redirected_to_the_create_scenario_screen_only_if_one_record_from_the_saved_customer_product_combinations_table_is_selected(ARCA_OverviewSteps.java:70)
+	at ✽.the user should be able to click the Create New Scenario button and get redirected to the Create Scenario screen only if one record from the Saved Customer Product Combinations table is selected(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/8_ARCA_Overview.feature:44)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1235308962", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1235308962'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1] (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55345}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55345/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: bb582b89e7d60fca830e408c6daff1f1
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.ARCA_OverviewPage.waitForElement(ARCA_OverviewPage.java:42)
+	at pages.ARCA_OverviewPage.createNewScnearioBtnWithSelection(ARCA_OverviewPage.java:555)
+	at stepdefinitions.ARCA_OverviewSteps.the_user_should_be_able_to_click_the_create_new_scenario_button_and_get_redirected_to_the_create_scenario_screen_only_if_one_record_from_the_saved_customer_product_combinations_table_is_selected(ARCA_OverviewSteps.java:70)
+	at ✽.the user should be able to click the Create New Scenario button and get redirected to the Create Scenario screen only if one record from the Saved Customer Product Combinations table is selected(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/8_ARCA_Overview.feature:44)
+</pre></div></td>
+<td>211</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify user login fails to the WPC - USESI application with invalid credentials", "Login to WPC - USESI application"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1] (tried for 90 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58355}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58355/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 441cdfc6181f5056098a5014d57ac65f
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.LoginPage.waitForElement(LoginPage.java:32)
+	at pages.LoginPage.navigateTo(LoginPage.java:65)
+	at stepdefinitions.LoginSteps.the_user_is_on_the_login_page(LoginSteps.java:28)
+	at ✽.the user is on the login page(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/9_6_Login.feature:12)
+</pre></div><a href='#' onClick='toggleBox("stack-trace461584859", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace461584859'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/input[1] (tried for 90 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58355}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58355/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 441cdfc6181f5056098a5014d57ac65f
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.LoginPage.waitForElement(LoginPage.java:32)
+	at pages.LoginPage.navigateTo(LoginPage.java:65)
+	at stepdefinitions.LoginSteps.the_user_is_on_the_login_page(LoginSteps.java:28)
+	at ✽.the user is on the login page(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/9_6_Login.feature:12)
+</pre></div></td>
+<td>117</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can create a scenario by adjusting the simulation sliders of the charts", "Land on the Create Scenario screen where the user should be able to create a scenario to the Selected Target Customer and its"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1] (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53526}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53526/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c9f41b6c57a6a6814b2f2cae826080bc
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CPA_CreateScenarioPage.waitForElement(CPA_CreateScenarioPage.java:34)
+	at pages.CPA_CreateScenarioPage.saveAndShowImpactBtnWithName(CPA_CreateScenarioPage.java:599)
+	at stepdefinitions.CPA_CreateScenarioSteps.the_user_should_be_able_to_enter_a_scenario_name_in_the_scenario_name_field_and_click_the_save_and_show_impact_button_which_should_redirect_to_the_view_scenario_impact_screen_only_if_a_name_is_entered(CPA_CreateScenarioSteps.java:74)
+	at ✽.the user should be able to enter a scenario name in the Scenario Name field and click the Save and Show Impact button, which should redirect to the View Scenario Impact screen only if a name is entered(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/6_CPA_CreateScenario.feature:19)
+</pre></div><a href='#' onClick='toggleBox("stack-trace2100957251", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2100957251'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1] (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:53526}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:53526/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c9f41b6c57a6a6814b2f2cae826080bc
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CPA_CreateScenarioPage.waitForElement(CPA_CreateScenarioPage.java:34)
+	at pages.CPA_CreateScenarioPage.saveAndShowImpactBtnWithName(CPA_CreateScenarioPage.java:599)
+	at stepdefinitions.CPA_CreateScenarioSteps.the_user_should_be_able_to_enter_a_scenario_name_in_the_scenario_name_field_and_click_the_save_and_show_impact_button_which_should_redirect_to_the_view_scenario_impact_screen_only_if_a_name_is_entered(CPA_CreateScenarioSteps.java:74)
+	at ✽.the user should be able to enter a scenario name in the Scenario Name field and click the Save and Show Impact button, which should redirect to the View Scenario Impact screen only if a name is entered(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/6_CPA_CreateScenario.feature:19)
+</pre></div></td>
+<td>272</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can interact with the Saved Customer Peer Selection table by searching for a Peer Selection record, selecting it and performing various actions", "Land on the Overview screen of the Customer Peer Analysis and perform actions on starting new peer analysis button, saved customer peer selections and saved sensitivity simulation scenario table"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/button[1] (tried for 100 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63169}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63169/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 53ddcf9c84d40f33a2678e290e19b053
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CPA_OverviewPage.waitForElement(CPA_OverviewPage.java:37)
+	at pages.CPA_OverviewPage.createSensitivityScenarioBtnWithSelection(CPA_OverviewPage.java:463)
+	at stepdefinitions.CPA_OverviewSteps.the_user_should_be_able_to_click_on_the_create_sensitivity_scenario_button_and_get_redirected_to_the_create_scenario_screen_only_if_one_record_from_the_saved_customer_peer_selection_table_is_selected(CPA_OverviewSteps.java:50)
+	at ✽.the user should be able to click on the Create Sensitivity Scenario button and get redirected to the Create Scenario screen only if one record from the Saved Customer Peer Selection table is selected(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/3_CPA_Overview.feature:34)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1721186460", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1721186460'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]/div[1]/div[1]/button[1] (tried for 100 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:63169}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:63169/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 53ddcf9c84d40f33a2678e290e19b053
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CPA_OverviewPage.waitForElement(CPA_OverviewPage.java:37)
+	at pages.CPA_OverviewPage.createSensitivityScenarioBtnWithSelection(CPA_OverviewPage.java:463)
+	at stepdefinitions.CPA_OverviewSteps.the_user_should_be_able_to_click_on_the_create_sensitivity_scenario_button_and_get_redirected_to_the_create_scenario_screen_only_if_one_record_from_the_saved_customer_peer_selection_table_is_selected(CPA_OverviewSteps.java:50)
+	at ✽.the user should be able to click on the Create Sensitivity Scenario button and get redirected to the Create Scenario screen only if one record from the Saved Customer Peer Selection table is selected(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/3_CPA_Overview.feature:34)
+</pre></div></td>
+<td>300</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Customer Product Combinations table and perform various actions", "Land on the Overview screen of the Auto Root Cause Analysis and perform actions such as choosing a Metric, and interacting with Saved Customer Product Combinations and Saved Scenario Simulations table"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[3]/div/div/div[1]/form/div (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55129}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55129/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 92fbcd473660097ba86489b6b351f03d
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.ARCA_OverviewPage.waitForElement(ARCA_OverviewPage.java:42)
+	at pages.ARCA_OverviewPage.navigateTo(ARCA_OverviewPage.java:253)
+	at stepdefinitions.ARCA_OverviewSteps.the_user_is_on_the_overview_screen_of_the_auto_root_cause_analysis(ARCA_OverviewSteps.java:27)
+	at ✽.the user is on the Overview screen of the Auto Root Cause Analysis(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/8_ARCA_Overview.feature:17)
+</pre></div><a href='#' onClick='toggleBox("stack-trace668181688", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace668181688'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html/body/div[1]/div/div/div/div[2]/div[1]/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[3]/div/div/div[1]/form/div (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55129}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55129/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 92fbcd473660097ba86489b6b351f03d
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.ARCA_OverviewPage.waitForElement(ARCA_OverviewPage.java:42)
+	at pages.ARCA_OverviewPage.navigateTo(ARCA_OverviewPage.java:253)
+	at stepdefinitions.ARCA_OverviewSteps.the_user_is_on_the_overview_screen_of_the_auto_root_cause_analysis(ARCA_OverviewSteps.java:27)
+	at ✽.the user is on the Overview screen of the Auto Root Cause Analysis(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/8_ARCA_Overview.feature:17)
+</pre></div></td>
+<td>87</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can create a scenario without performing simulation in the charts", "Land on the Create Scenario screen where the user should be able to create a scenario to the Selected Target Customer and its"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1] (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54116}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54116/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: dd6715fb90738521265cbac6f8a508c4
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CPA_CreateScenarioPage.waitForElement(CPA_CreateScenarioPage.java:34)
+	at pages.CPA_CreateScenarioPage.saveAndShowImpactBtnWithName(CPA_CreateScenarioPage.java:599)
+	at stepdefinitions.CPA_CreateScenarioSteps.the_user_should_be_able_to_enter_a_scenario_name_in_the_scenario_name_field_and_click_the_save_and_show_impact_button_which_should_redirect_to_the_view_scenario_impact_screen_only_if_a_name_is_entered(CPA_CreateScenarioSteps.java:74)
+	at ✽.the user should be able to enter a scenario name in the Scenario Name field and click the Save and Show Impact button, which should redirect to the View Scenario Impact screen only if a name is entered(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/6_CPA_CreateScenario.feature:30)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1457890057", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1457890057'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1] (tried for 60 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54116}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54116/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: dd6715fb90738521265cbac6f8a508c4
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.CPA_CreateScenarioPage.waitForElement(CPA_CreateScenarioPage.java:34)
+	at pages.CPA_CreateScenarioPage.saveAndShowImpactBtnWithName(CPA_CreateScenarioPage.java:599)
+	at stepdefinitions.CPA_CreateScenarioSteps.the_user_should_be_able_to_enter_a_scenario_name_in_the_scenario_name_field_and_click_the_save_and_show_impact_button_which_should_redirect_to_the_view_scenario_impact_screen_only_if_a_name_is_entered(CPA_CreateScenarioSteps.java:74)
+	at ✽.the user should be able to enter a scenario name in the Scenario Name field and click the Save and Show Impact button, which should redirect to the View Scenario Impact screen only if a name is entered(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/6_CPA_CreateScenario.feature:30)
+</pre></div></td>
+<td>284</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to interact with filters and select customers from the plot and save the selection", "Land on the Customer Analysis screen where the user should be able to interact with filters and select the customer from the plot"</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[1]/span[2]/div[1]/span[2] (tried for 100 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56146}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56146/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: cfebc05ffcbe1834e2f70c7b286f002c
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.ARCA_CustomerAnalysisPage.waitForElement(ARCA_CustomerAnalysisPage.java:43)
+	at pages.ARCA_CustomerAnalysisPage.filtersTo(ARCA_CustomerAnalysisPage.java:308)
+	at stepdefinitions.ARCA_CustomerAnalysisSteps.the_user_clicks_on_filters_and_select_options_based_on_the_requirements(ARCA_CustomerAnalysisSteps.java:30)
+	at ✽.the user clicks on Filters and select options based on the requirements(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/9_1_ARCA_CustomerAnalysis.feature:9)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1165386714", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1165386714'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/fieldset[1]/div[2]/label[1]/span[2]/div[1]/span[2] (tried for 100 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.19.0&apos;, revision: &apos;5f9cec8963&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.184, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\NagarajR\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56146}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56146/devtoo..., se:cdpVersion: 138.0.7204.184, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: cfebc05ffcbe1834e2f70c7b286f002c
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at pages.ARCA_CustomerAnalysisPage.waitForElement(ARCA_CustomerAnalysisPage.java:43)
+	at pages.ARCA_CustomerAnalysisPage.filtersTo(ARCA_CustomerAnalysisPage.java:308)
+	at stepdefinitions.ARCA_CustomerAnalysisSteps.the_user_clicks_on_filters_and_select_options_based_on_the_requirements(ARCA_CustomerAnalysisSteps.java:30)
+	at ✽.the user clicks on Filters and select options based on the requirements(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/9_1_ARCA_CustomerAnalysis.feature:9)
+</pre></div></td>
+<td>212</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to select the peers by clicking on the Select Peer Matching Criteria button and", "Land on the Peer Selection screen where the user should be able to select a customer from the set of customers chosen on the"</td>
+<td><div><pre>java.lang.IllegalArgumentException: Keys to send should be a not null CharSequence
+	at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:96)
+	at pages.CPA_PeerSelectionPage.comparePeersBtn(CPA_PeerSelectionPage.java:1131)
+	at stepdefinitions.CPA_PeerSelectionSteps.the_user_should_be_able_to_click_on_the_compare_peers_button_which_then_opens_up_the_dialog_box_to_enter_the_name_and_save_the_peer_selections(CPA_PeerSelectionSteps.java:161)
+	at ✽.the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/5_CPA_PeerSelection.feature:57)
+</pre></div><a href='#' onClick='toggleBox("stack-trace23989619", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace23989619'><pre>java.lang.IllegalArgumentException: Keys to send should be a not null CharSequence
+	at org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:96)
+	at pages.CPA_PeerSelectionPage.comparePeersBtn(CPA_PeerSelectionPage.java:1131)
+	at stepdefinitions.CPA_PeerSelectionSteps.the_user_should_be_able_to_click_on_the_compare_peers_button_which_then_opens_up_the_dialog_box_to_enter_the_name_and_save_the_peer_selections(CPA_PeerSelectionSteps.java:161)
+	at ✽.the user should be able to click on the Compare Peers button which then opens up the dialog box to enter the name and save the peer selections(file:///C:/Users/NagarajR/git/WPC_USESI_Automation_Testing/WPC_UI_Automation/src/test/java/Features/5_CPA_PeerSelection.feature:57)
+</pre></div></td>
+<td>760</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify whether the user is able to select the customer from the Select One Customer for Simulation table", "Land on the Customer Selection screen where the user should be able to select the customer and the corresponding commodity code for the simulation"</td>
+<td></td>
+<td>87</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify whether the user is able to select or multiselect the commodity code from the Select Root Cause Product for Simulation for the selected customer table", "Land on the Customer Selection screen where the user should be able to select the customer and the corresponding commodity code for the simulation"</td>
+<td></td>
+<td>96</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can select a branch from the geographical map and select customers from the dropdown", "Lands on the Branch/Customer Selection where the user should be able to select the branch(es) based on the metric and"</td>
+<td></td>
+<td>142</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions", "Land on the Overview screen of the Customer Peer Analysis and perform actions on starting new peer analysis button, saved customer peer selections and saved sensitivity simulation scenario table"</td>
+<td></td>
+<td>219</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to select a customer from the Select Target Customer for Peer Matching table", "Land on the Peer Selection screen where the user should be able to select a customer from the set of customers chosen on the"</td>
+<td></td>
+<td>107</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can interact with the Saved Customer Peer Selection table by selecting a Peer Selection record from the table and performing various actions", "Land on the Overview screen of the Customer Peer Analysis and perform actions on starting new peer analysis button, saved customer peer selections and saved sensitivity simulation scenario table"</td>
+<td></td>
+<td>180</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to click on the Start New Peer Analysis button and get redirected to the Branch/Customer Selection screen", "Land on the Overview screen of the Customer Peer Analysis and perform actions on starting new peer analysis button, saved customer peer selections and saved sensitivity simulation scenario table"</td>
+<td></td>
+<td>60</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can interact with the Saved Sensitivity Simulation Scenario table and perform various actions", "Land on the Overview screen of the Customer Peer Analysis and perform actions on starting new peer analysis button, saved customer peer selections and saved sensitivity simulation scenario table"</td>
+<td></td>
+<td>238</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user can view the impact of the created scenario and compare it with the default scenario", "Land on the View Scenario Impact Screen where the user should be able to view the Important Metric values and the scenario chart"</td>
+<td></td>
+<td>88</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Scenario Simulations table and perform various actions", "Land on the Overview screen of the Auto Root Cause Analysis and perform actions such as choosing a Metric, and interacting with Saved Customer Product Combinations and Saved Scenario Simulations table"</td>
+<td></td>
+<td>109</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that user lands on the Home screen and interacts with the top bar and the cards", "Land on the Home screen after login and perform actions on the cards, top bar and the side navigation bar"</td>
+<td></td>
+<td>63</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify whether the user is able to search and select the customer from the Select One Customer for Simulation table", "Land on the Customer Selection screen where the user should be able to select the customer and the corresponding commodity code for the simulation"</td>
+<td></td>
+<td>82</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to select a customer by searching the record from the Select Target Customer for Peer Matching table", "Land on the Peer Selection screen where the user should be able to select a customer from the set of customers chosen on the"</td>
+<td></td>
+<td>83</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to create a scenario using the Move To A New Customer Price Class simulation", "Land on the Create Scenario screen where the user will be able to create the scenario based on the simulation options"</td>
+<td></td>
+<td>104</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to choose a metric and click the View Saved Scenario button, which then updates the screen with Saved Scenario Simulations table and perform various actions", "Land on the Overview screen of the Auto Root Cause Analysis and perform actions such as choosing a Metric, and interacting with Saved Customer Product Combinations and Saved Scenario Simulations table"</td>
+<td></td>
+<td>136</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to select the customer and corresponding commodity codes from the tree map", "Land on the Filter Customer and Product Combinations screen where the user should be able to select customers and their associated commodity codes"</td>
+<td></td>
+<td>92</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user is able to choose a Metric and click on View Saved Scenario button, which then updates the screen with", "Land on the Overview screen of the Auto Root Cause Analysis and perform actions such as choosing a Metric, and interacting with Saved Customer Product Combinations and Saved Scenario Simulations table"</td>
+<td></td>
+<td>64</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify whether the user is able to view the Pricing and Profit Bridge chart for the selected Customer - Commodity code combination and create a scenario simulation", "Land on the Profit Bridge screen where the user should be able to view the Pricing and Profit Bridge chart for the created customer - commodity code combination"</td>
+<td></td>
+<td>107</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+<tr>
+<td title='runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Verify that the user land on the Home screen and interacts with the side navigation bar", "Land on the Home screen after login and perform actions on the cards, top bar and the side navigation bar"</td>
+<td></td>
+<td>246</td>
+<td>runners.TestRunner@5b12b668</td></tr>
+</table><p>
+</body>
+</html>

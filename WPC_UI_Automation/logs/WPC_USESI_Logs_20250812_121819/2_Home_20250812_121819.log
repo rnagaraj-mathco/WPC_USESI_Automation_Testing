@@ -1,0 +1,6 @@
+2025-08-12 12:18:19.680 [main] INFO  ▶ 🔄 Starting scenario: Verify that user lands on the Home screen and interacts with the top bar and the cards
+2025-08-12 12:19:19.481 [main] INFO  ▶ ✅ Scenario PASSED: Verify that user lands on the Home screen and interacts with the top bar and the cards
+2025-08-12 12:19:19.483 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 12:19:20.748 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user land on the Home screen and interacts with the side navigation bar
+2025-08-12 12:20:19.378 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user land on the Home screen and interacts with the side navigation bar
+2025-08-12 12:20:19.379 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

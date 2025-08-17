@@ -22,17 +22,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class ARCA_FilterCustomerProductCombinationsPage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public ARCA_FilterCustomerProductCombinationsPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -193,7 +196,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void saveCombinationsWithoutSelections() throws IOException, InterruptedException {
 		// waits for the save combination button
 		WebElement fcp_saveCombinationBtn = waitForElement(arca_fcp_saveCombinationBtn);
-		fcp_saveCombinationBtn.click();
+//		fcp_saveCombinationBtn.click();
+		helper.safeClick(fcp_saveCombinationBtn);
 		System.out.println(
 				"=> The Save Combination button was clicked without selecting any customers or commodity codes, which displayed an error message.");
 		errorMessage();
@@ -221,7 +225,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void selectAllCustomer() throws IOException, InterruptedException {
 		// Waits for the Select All Customer Checkbox
 		WebElement fcp_selectAllCustomersCheckbox = waitForElement(arca_fcp_selectAllCustomersCheckbox);
-		fcp_selectAllCustomersCheckbox.click();
+//		fcp_selectAllCustomersCheckbox.click();
+		helper.safeClick(fcp_selectAllCustomersCheckbox);
 		System.out.println(
 				"=> The Select All Customer checkbox was clicked which then selected the entire customers in the tree map");
 		Thread.sleep(2000);
@@ -238,7 +243,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void resetBtn() throws IOException, InterruptedException {
 		// Waits for the Reset button
 		WebElement fcp_resetBtn = waitForElement(arca_fcp_resetBtn);
-		fcp_resetBtn.click();
+//		fcp_resetBtn.click();
+		helper.safeClick(fcp_resetBtn);
 		System.out.println("=> The Reset button was clicked which restored the tree map to its previous state");
 		Thread.sleep(2000);
 		// Waits for the Tree Map updation
@@ -255,7 +261,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		waitForElement(arca_fcp_treeMap);
 		// Waits for the Select All Commodity Code checkbox
 		WebElement fcp_selectAllCommodityCodeCheckbox = waitForElement(arca_fcp_selectAllCommodityCodeCheckbox);
-		fcp_selectAllCommodityCodeCheckbox.click();
+//		fcp_selectAllCommodityCodeCheckbox.click();
+		helper.safeClick(fcp_selectAllCommodityCodeCheckbox);
 		System.out.println(
 				"=> The Select All Commodity Codes checkbox was clicked which then selected the entire customers and commodities in the tree map");
 
@@ -314,14 +321,16 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void customerDetailsBtn() throws IOException, InterruptedException {
 		// Open Customer Details popup
 		WebElement fcp_customerDetailsBtn = waitForElement(arca_fcp_customerDetailsBtn);
-		fcp_customerDetailsBtn.click();
+//		fcp_customerDetailsBtn.click();
+		helper.safeClick(fcp_customerDetailsBtn);
 		System.out.println("=> The Customer Details button was clicked");
 		waitForElement(arca_fcp_customerDetailsBtnPopUp);
 		waitForElement(arca_fcp_tableVRCA);
 
 		// Download icon
 		WebElement fcp_tableDownloadIcon = waitForElement(arca_fcp_tableDownloadIcon);
-		fcp_tableDownloadIcon.click();
+//		fcp_tableDownloadIcon.click();
+		helper.safeClick(fcp_tableDownloadIcon);
 		System.out.println("=> Clicked the download icon of the View Root Cause Analysis table");
 		Thread.sleep(3000);
 
@@ -350,7 +359,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 			if (isDisabled != null && (isDisabled.equals("true") || isDisabled.equals("disabled"))) {
 				break;
 			}
-			nextButton.click();
+//			nextButton.click();
+			helper.safeClick(nextButton);
 			Thread.sleep(1000); // slight wait for pagination to load
 		}
 
@@ -360,7 +370,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 
 		// Waits for the Cancel button
 		WebElement fcp_cancelBtn = waitForElement(arca_fcp_cancelBtn);
-		fcp_cancelBtn.click();
+//		fcp_cancelBtn.click();
+		helper.safeClick(fcp_cancelBtn);
 
 		waitForElement(arca_fcp_treeMap);
 		Thread.sleep(3000);
@@ -445,7 +456,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 
 		try {
 			// Attempt normal click
-			fcp_saveCombinationBtn.click();
+			helper.safeClick(fcp_saveCombinationBtn);
 			System.out.println("=> Clicked the Save Combinations Button and redirected to the Customer Screen");
 		} catch (Exception e) {
 			System.out.println("=> Intercepted! Clicking via JS...");
@@ -487,7 +498,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 				break;
 			}
 
-			nextButton.click();
+			helper.safeClick(nextButton);
 			Thread.sleep(1000); // allow table to load
 		}
 
@@ -495,14 +506,17 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 				"=> The Customer Ids present in the Select One Customer for Simulations table are: " + customerIdSOC);
 
 		// === Final Validation ===
+
+		// Convert both lists to sets for comparison without considering order
 		Set<Double> selectedSet = new HashSet<>(selectedCustomerIds);
 		Set<Double> socSet = new HashSet<>(customerIdSOC);
 
+		// Find missing and extra items
 		Set<Double> missingInSOC = new HashSet<>(selectedSet);
-		missingInSOC.removeAll(socSet);
+		missingInSOC.removeAll(socSet); // Elements in selected but not in SOC
 
 		Set<Double> extraInSOC = new HashSet<>(socSet);
-		extraInSOC.removeAll(selectedSet);
+		extraInSOC.removeAll(selectedSet); // Elements in SOC but not in selected
 
 		if (missingInSOC.isEmpty() && extraInSOC.isEmpty()) {
 			System.out.println("=> All selected customer IDs are correctly reflected in the SOC table.");
@@ -511,7 +525,7 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 			if (!missingInSOC.isEmpty())
 				System.out.println("=> Missing in SOC: " + missingInSOC);
 			if (!extraInSOC.isEmpty())
-				System.out.println("=>  Unexpected in SOC: " + extraInSOC);
+				System.out.println("=> Unexpected in SOC: " + extraInSOC);
 
 			throw new AssertionError("=> Customer ID mismatch between Customer Details and SOC tables.");
 		}
@@ -523,7 +537,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void customerSelection() throws IOException, InterruptedException {
 		// Waits for the Select All Customers checkbox
 		WebElement fcp_selectAllCustomersCheckbox = waitForElement(arca_fcp_selectAllCustomersCheckbox);
-		fcp_selectAllCustomersCheckbox.click();
+//		fcp_selectAllCustomersCheckbox.click();
+		helper.safeClick(fcp_selectAllCustomersCheckbox);
 		System.out.println(
 				"=> The Select All Customers checkbox was clicked which then selected the entire customers and commodities in the tree map");
 
@@ -549,13 +564,16 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 
 		// Ctrl + Click multiple tiles to preserve selections
 		WebElement fcp_ctm_commodityCodeTile1 = waitForElement(arca_fcp_ctm_commodityCodeTile1);
-		fcp_ctm_commodityCodeTile1.click();
+//		fcp_ctm_commodityCodeTile1.click();
+		helper.safeClick(fcp_ctm_commodityCodeTile1);
 		Thread.sleep(2000);
 		WebElement fcp_ctm_commodityCodeTile2 = waitForElement(arca_fcp_ctm_commodityCodeTile2);
-		fcp_ctm_commodityCodeTile2.click();
+//		fcp_ctm_commodityCodeTile2.click();
+		helper.safeClick(fcp_ctm_commodityCodeTile2);
 		Thread.sleep(2000);
 		WebElement fcp_ctm_commodityCodeTile3 = waitForElement(arca_fcp_ctm_commodityCodeTile3);
-		fcp_ctm_commodityCodeTile3.click();
+//		fcp_ctm_commodityCodeTile3.click();
+		helper.safeClick(fcp_ctm_commodityCodeTile3);
 		Thread.sleep(2000);
 
 		waitForElement(arca_fcp_treeMap);
@@ -571,19 +589,30 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		}
 		// Open Customer Details popup
 		WebElement fcp_customerDetailsBtn = waitForElement(arca_fcp_customerDetailsBtn);
-		fcp_customerDetailsBtn.click();
+//		fcp_customerDetailsBtn.click();
+		helper.safeClick(fcp_customerDetailsBtn);
 		System.out.println("=> The Customer Details button was clicked");
+		try {
+			waitForElement(arca_fcp_customerDetailsBtnPopUp);
+			waitForElement(arca_fcp_tableVRCA);
+		} catch (Exception e) {
+			waitForElement(arca_fcp_customerDetailsBtnPopUp);
+			waitForElement(arca_fcp_tableVRCA);
+		}
 		waitForElement(arca_fcp_customerDetailsBtnPopUp);
 		waitForElement(arca_fcp_tableVRCA);
 		// Waits for the checkbox of the customer: 01
 		WebElement cs_tableVRCACheckbox1 = waitForElement(arca_cs_tableVRCACheckbox1);
-		cs_tableVRCACheckbox1.click();
-		// Waits for the checkbox of the customer: 01
+//		cs_tableVRCACheckbox1.click();
+		helper.safeClick(cs_tableVRCACheckbox1);
+		// Waits for the checkbox of the customer: 02
 		WebElement cs_tableVRCACheckbox2 = waitForElement(arca_cs_tableVRCACheckbox2);
-		cs_tableVRCACheckbox2.click();
-		// Waits for the checkbox of the customer: 01
+//		cs_tableVRCACheckbox2.click();
+		helper.safeClick(cs_tableVRCACheckbox2);
+		// Waits for the checkbox of the customer: 03
 		WebElement cs_tableVRCACheckbox3 = waitForElement(arca_cs_tableVRCACheckbox3);
-		cs_tableVRCACheckbox3.click();
+//		cs_tableVRCACheckbox3.click();
+		helper.safeClick(cs_tableVRCACheckbox3);
 		Thread.sleep(1000);
 		try {
 			waitForElement(arca_fcp_treeMap);
@@ -597,7 +626,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void downloadIconVRCA() throws IOException, InterruptedException {
 		// Waits for the download icon of the VRCA table
 		WebElement fcp_downloadIconVRCA = waitForElement(arca_fcp_downloadIconVRCA);
-		fcp_downloadIconVRCA.click();
+//		fcp_downloadIconVRCA.click();
+		helper.safeClick(fcp_downloadIconVRCA);
 		System.out.println("=> Clicked the Download Icon of the View Root Cause detailssss table");
 		Thread.sleep(5000);
 //		waitForElement(arca_fcp_tableVRCA);
@@ -608,7 +638,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 	public void applyBtnVRCA() throws IOException, InterruptedException {
 		// Waits for the Apply button
 		WebElement fcp_tableVRCAapplyBtn = waitForElement(arca_fcp_tableVRCAapplyBtn);
-		fcp_tableVRCAapplyBtn.click();
+//		fcp_tableVRCAapplyBtn.click();
+		helper.safeClick(fcp_tableVRCAapplyBtn);
 		System.out.println(
 				"=> Clicked the Apply button of the View Root Cause details table which then updates the tree map with new selections");
 		waitForElement(arca_fcp_treeMap);
@@ -620,7 +651,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		// Waits for the Search bar
 		WebElement fcp_searchBarVRCA = waitForElement(arca_fcp_searchBarVRCA);
 
-		fcp_searchBarVRCA.click();
+//		fcp_searchBarVRCA.click();
+		helper.safeClick(fcp_searchBarVRCA);
 		fcp_searchBarVRCA.clear();
 		// Waits for the Customer ID from the first row of table
 		WebElement fcp_searchRecordVRCA = waitForElement(arca_fcp_searchRecordVRCA);
@@ -635,11 +667,13 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 		String radioXPath = "//table//tr[td[2][normalize-space()='" + searchRecord
 				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
 		WebElement radioButton = waitForElement(By.xpath(radioXPath));
-		actions.moveToElement(radioButton).click().perform();
+		helper.safeClick(radioButton);
+//		actions.moveToElement(radioButton).click().perform();
 		System.out.println("=> Selected the searched record of the Customer ID: " + searchRecord);
 		Thread.sleep(1000);
 		// Clearing the Search Keyword
-		fcp_searchBarVRCA.click();
+//		fcp_searchBarVRCA.click();
+		helper.safeClick(fcp_searchBarVRCA);
 		fcp_searchBarVRCA.sendKeys(Keys.CONTROL + "a");
 		fcp_searchBarVRCA.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(3000);
@@ -668,7 +702,8 @@ public class ARCA_FilterCustomerProductCombinationsPage {
 			if (isDisabled != null && (isDisabled.equals("true") || isDisabled.equals("disabled"))) {
 				break;
 			}
-			nextButton.click();
+//			nextButton.click();
+			helper.safeClick(nextButton);
 			Thread.sleep(1000); // slight wait for pagination to load
 		}
 

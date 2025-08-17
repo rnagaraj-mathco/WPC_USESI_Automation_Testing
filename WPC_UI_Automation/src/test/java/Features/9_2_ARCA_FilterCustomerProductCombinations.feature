@@ -3,14 +3,14 @@ Feature: Land on the Filter Customer and Product Combinations screen where the u
 
 #DONE - Checked! ---Extracting the customer id from tree map and validation is pending 
   #Selecting the customer and commodity codes using the "Select All" options
-  #Scenario: Verify that the user is able to click on the Select All Customer or Select All Commodity Codes checkbox, which then selects all tiles in the tree map
-   #Given the user is on the Filter Customer and Product Combinations screen
-   #When the user clicks the Save Combination button without selecting any customers or commodity codes from the tree map, an error message should be displayed
-   #Then the user should be able to click on the Select All Customer checkbox, which selects all tiles in the tree map
-   #Then the user should be able to click on the Reset button, which restores the screen to its previous state
-   #When the user clicks on the Select All Commodity Codes checkbox, which selects all tiles in the tree map
-   #Then the user clicks on the Customer Details button, which opens a select customers for analysis dialog box containing all selected customer details
-   #Then the user clicks on the Save Combination button, which redirects to the Customer Selection screen with the selected customer details
+  Scenario: Verify that the user is able to click on the Select All Customer or Select All Commodity Codes checkbox, which then selects all tiles in the tree map
+   Given the user is on the Filter Customer and Product Combinations screen
+   When the user clicks the Save Combination button without selecting any customers or commodity codes from the tree map, an error message should be displayed
+   Then the user should be able to click on the Select All Customer checkbox, which selects all tiles in the tree map
+   Then the user should be able to click on the Reset button, which restores the screen to its previous state
+   When the user clicks on the Select All Commodity Codes checkbox, which selects all tiles in the tree map
+   Then the user clicks on the Customer Details button, which opens a select customers for analysis dialog box containing all selected customer details
+   Then the user clicks on the Save Combination button, which redirects to the Customer Selection screen with the selected customer details
  #
  #DONE - Checked!
  #Selecting the Customer and Commodity code by interacting with tree map
@@ -25,6 +25,7 @@ Feature: Land on the Filter Customer and Product Combinations screen where the u
 
 #Done - But facing issue in the flow where if ccustomer are selected and also searched and selected but the selected one are not reflecting in map
 				#due to which the scenario is failing
+				#Also there is a mismatch in customer ID of SOC table even though values are same but issue is with index order of the customer ID and the value are same
  #Clicking on the customer details button and perform selections
  #Scenario: Verify that the user is able to click the Customer Details button and select customers, which are then reflected in the tree map
   #Given the user is on the Filter Customer and Product Combinations screen

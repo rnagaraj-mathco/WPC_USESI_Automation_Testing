@@ -1,0 +1,10 @@
+2025-08-13 12:40:52.811 [main] INFO  ▶ 🔄 Starting scenario: Verify whether the user is able to view the Pricing and Profit Bridge chart for the selected Customer - Commodity code combination and create a scenario simulation
+2025-08-13 12:41:35.457 [main] INFO  ▶ The Profit Bridge screen is loaded with the Pricing (Actual vs System %) and Profit Bridge (Gross Profit to Enterprise Profit) chart
+2025-08-13 12:41:36.084 [main] INFO  ▶  Successfully!, Landed on the Profit Bridge Screen
+2025-08-13 12:41:38.803 [main] INFO  ▶  The Customer details matched and confirms the chart is of the Selected Customer and Product Combinations
+2025-08-13 12:41:41.413 [main] INFO  ▶  The Download Icon of the chart is clicked and downloaded the chart
+2025-08-13 12:41:49.005 [main] INFO  ▶  The Customer ID's matched and confirms that the redirection is as expected
+2025-08-13 12:42:25.069 [main] INFO  ▶  The Customer and Product Combination names matched successfully and this validates that selected record is loaded in the Create Scenario Screen:  48614_CommodityCodeCombination_20250813_123706 == 48614_CommodityCodeCombination_20250813_123706
+2025-08-13 12:42:25.108 [main] INFO  ▶  Successfully! redirected to the Create Scenario screen
+2025-08-13 12:42:26.122 [main] INFO  ▶ ✅ Scenario PASSED: Verify whether the user is able to view the Pricing and Profit Bridge chart for the selected Customer - Commodity code combination and create a scenario simulation
+2025-08-13 12:42:26.124 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

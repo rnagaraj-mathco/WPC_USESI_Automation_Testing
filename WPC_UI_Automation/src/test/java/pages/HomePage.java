@@ -1,30 +1,29 @@
 package pages;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class HomePage {
 	WebDriver driver;
 	WebDriverWait wait;
+	ElementHelper helper;
 
 	// Gets the Driver Status
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(100)); // ✅ wait initialized once
+		this.helper = new ElementHelper(driver);
 	}
 
 	private WebElement waitForElement(By locator) {
@@ -58,12 +57,19 @@ public class HomePage {
 		// This gets the URL of the homescreen Screen
 		driver.get(ConfigReader.homeScreenUrl());
 		// Wait for homescreen page to load by checking known visible element
-		waitForElement(CustomerPeerAnalysisCard);
+		try {
+			waitForElement(CustomerPeerAnalysisCard);
+			waitForElement(AutoRootCauseAnalysisCard);
+		} catch (Exception e) {
+			waitForElement(CustomerPeerAnalysisCard);
+			waitForElement(AutoRootCauseAnalysisCard);
+		}
+
 		// Take screenshot after the page is fully loaded
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/homescreenScreen.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/homescreenScreen.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 	}
 
 	// Gets the Profile Icon and Hovers on it
@@ -75,18 +81,19 @@ public class HomePage {
 		System.out.println(" Hovered Successfully on the Profile Icon!");
 
 		// Take Screenshot of the Profile Hover
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/ProfileIconHover.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/ProfileIconHover.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		Thread.sleep(500);
 	}
 
 	// Customer Peer Analysis - Card
 	public void customerPeerAnalysisCardClick() throws IOException, InterruptedException {
 		WebElement customerPeerAnalysisCard = waitForElement(CustomerPeerAnalysisCard);
-		customerPeerAnalysisCard.click();
-		System.out.println(" Clicked Customer Peer Analysis card.");
+//		customerPeerAnalysisCard.click();
+		helper.safeClick(customerPeerAnalysisCard);
+		System.out.println(" Clicked Customer Peer Analysis card");
 
 		// Verify whether it landed on the Customer Peer Analysis Card - Overview screen
 		String currentUrl = driver.getCurrentUrl();
@@ -99,10 +106,10 @@ public class HomePage {
 
 		Thread.sleep(10000);
 
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/CustomerPeerAnalysisCardClick.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/CustomerPeerAnalysisCardClick.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		driver.navigate().back();
 		Thread.sleep(2000);
@@ -111,7 +118,8 @@ public class HomePage {
 	// Auto Root Cause Analysis - Card
 	public void autoRootCauseAnalysisCardClick() throws IOException, InterruptedException {
 		WebElement autoRootCauseAnalysisCard = waitForElement(AutoRootCauseAnalysisCard);
-		autoRootCauseAnalysisCard.click();
+//		autoRootCauseAnalysisCard.click();
+		helper.safeClick(autoRootCauseAnalysisCard);
 		System.out.println(" Clicked Auto Root Cause Analysis card.");
 
 		// Verify whether it landed on the Auto Root Cause Analysis Card - Overview
@@ -125,11 +133,11 @@ public class HomePage {
 		}
 
 		Thread.sleep(10000);
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/HomeScreen/AutomatedRootCauseAnalysisCardClick.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/HomeScreen/AutomatedRootCauseAnalysisCardClick.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		// This goes back to the homescreen screen
 		driver.navigate().back();
@@ -141,10 +149,10 @@ public class HomePage {
 		String currentUrl = driver.getCurrentUrl();
 		String expectedUrl = ConfigReader.homeScreenUrl();
 		// Screenshot
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/StaysOnhomescreenScreen.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File("src/test/resources/screenshots/HomeScreen/StaysOnhomescreenScreen.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 
 		if (!currentUrl.equalsIgnoreCase(expectedUrl)) {
 			throw new AssertionError(" Unexpected redirection - !Current URL you're on: " + currentUrl);
@@ -158,7 +166,8 @@ public class HomePage {
 		// driver).executeScript("arguments[0].scrollIntoView(true);",
 		// customerPeerAnalysis);
 		// Thread.sleep(1000);
-		new Actions(driver).moveToElement(customerPeerAnalysisSideNav).click().perform();
+		helper.safeClick(customerPeerAnalysisSideNav);
+//		new Actions(driver).moveToElement(customerPeerAnalysisSideNav).click().perform();
 
 		System.out.println(" Customer Peer Analysis Side Navigation is clicked!");
 
@@ -184,11 +193,11 @@ public class HomePage {
 			System.out.println("--- Hovered: " + option.getText());
 			Thread.sleep(2000);
 			// Takes Screenshot of the Customer Peer Analysis Side NavBar click
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-			File screenshotPath = new File(
-					"src/test/resources/screenshots/HomeScreen/CustomerPeerAnalysisSideNavBar.png");
-			FileHandler.copy(sourcefile, screenshotPath);
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//			File screenshotPath = new File(
+//					"src/test/resources/screenshots/HomeScreen/CustomerPeerAnalysisSideNavBar.png");
+//			FileHandler.copy(sourcefile, screenshotPath);
 
 		}
 		// Move back to main
@@ -203,7 +212,8 @@ public class HomePage {
 		// TODO Auto-generated method stub
 		WebElement autoRootSidebar = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='125464']")));
-		new Actions(driver).moveToElement(autoRootSidebar).click().perform();
+		helper.safeClick(autoRootSidebar);
+//		new Actions(driver).moveToElement(autoRootSidebar).click().perform();
 		System.out.println(" Auto Root Cause Analysis Side Navigation is clicked!");
 		// Verify whether it landed on the Auto Root Cause Analysis Side NavBar -
 		// Overview screen
@@ -228,11 +238,11 @@ public class HomePage {
 			System.out.println(" Hovered: " + option.getText());
 			Thread.sleep(2000);
 			// Takes Screenshot of the Auto Root Cause Analysis Side NavBar click
-			TakesScreenshot screenshot = (TakesScreenshot) driver;
-			File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-			File screenshotPath = new File(
-					"src/test/resources/screenshots/HomeScreen/AutoRootCauseAnalysisSideNavBar.png");
-			FileHandler.copy(sourcefile, screenshotPath);
+//			TakesScreenshot screenshot = (TakesScreenshot) driver;
+//			File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//			File screenshotPath = new File(
+//					"src/test/resources/screenshots/HomeScreen/AutoRootCauseAnalysisSideNavBar.png");
+//			FileHandler.copy(sourcefile, screenshotPath);
 		}
 
 		// Move back to homescreen screen

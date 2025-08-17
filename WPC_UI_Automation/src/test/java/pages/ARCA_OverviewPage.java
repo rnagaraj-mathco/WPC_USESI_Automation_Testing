@@ -20,18 +20,21 @@ import org.slf4j.LoggerFactory;
 
 import config.ConfigReader;
 import hooks.Hooks;
+import utils.ElementHelper;
 
 public class ARCA_OverviewPage {
 
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public ARCA_OverviewPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -68,6 +71,9 @@ public class ARCA_OverviewPage {
 	// Customer Analysis
 	By arca_ca_rootCauseCustomerPlot = By.xpath(
 			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[2]");
+// xpath of the Save Customer Btn - Customer Analysis
+	By arca_ca_saveCustomerBtn = By.xpath(
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[5]/div[1]/div[1]/button[1]/span[1]");
 
 	// xpath of the Filter
 	By arca_ca_filter = By.xpath(
@@ -277,7 +283,8 @@ public class ARCA_OverviewPage {
 		this.selectedMetricName = metricName; // Store it for use in second method
 		By arca_costMetricSelection = By.xpath(String.format(ARCA_COST_METRIC_SELECTION_XPATH, metricName));
 		WebElement metricRadio = waitForElement(arca_costMetricSelection);
-		metricRadio.click();
+//		metricRadio.click();
+		helper.safeClick(metricRadio);
 		Hooks.logger.info(" The Cost Metric:  " + metricName + " is clicked");
 
 	}
@@ -286,7 +293,8 @@ public class ARCA_OverviewPage {
 	public void viewSavedScenarioBtn() throws IOException, InterruptedException {
 		// Waits for the View Saved Scenario button
 		WebElement viewSavedScenarioBtn = waitForElement(arca_viewSavedScenarioBtn);
-		viewSavedScenarioBtn.click();
+//		viewSavedScenarioBtn.click();
+		helper.safeClick(viewSavedScenarioBtn);
 		Hooks.logger.info(
 				" The View Saved Scenario Button was clicked and the Saved Customer Product Combinations and Saved Scenario Simulations tables loaded");
 		try {
@@ -302,11 +310,21 @@ public class ARCA_OverviewPage {
 	public void createNewRootCauseAnalysisBtn() throws IOException, InterruptedException {
 		// Waits for the View Saved Scenario button
 		WebElement createNewRootCauseAnalysisBtn = waitForElement(arca_createNewRootCauseAnalysisBtn);
-		createNewRootCauseAnalysisBtn.click();
+//		createNewRootCauseAnalysisBtn.click();
+		helper.safeClick(createNewRootCauseAnalysisBtn);
 
 		Hooks.logger.info(
 				" The Create New Root Cause Analysis Button was clicked and redirecting to the Customer Analysis screen");
+		helper.waitForOverlaysToDisappear();
+		try {
+			waitForElement(arca_ca_saveCustomerBtn);
+			waitForElement(arca_ca_rootCauseCustomerPlot);
+		} catch (Exception e) {
+			waitForElement(arca_ca_saveCustomerBtn);
+			waitForElement(arca_ca_rootCauseCustomerPlot);
+		}
 		waitForElement(arca_ca_rootCauseCustomerPlot);
+		waitForElement(arca_ca_saveCustomerBtn);
 		// Verify whether it landed on the Auto Root Cause Analysis - Customer Analysis
 		// screen
 		String currentUrl = driver.getCurrentUrl();
@@ -323,11 +341,13 @@ public class ARCA_OverviewPage {
 		// Validating whether the Customer Analysis has the content based on the Cost
 		// Metric selected
 		WebElement ca_filter = waitForElement(arca_ca_filter);
-		ca_filter.click();
+//		ca_filter.click();
+		helper.safeClick(ca_filter);
 		Hooks.logger.info(" Customer Analysis: The Filter button was clicked");
 		Thread.sleep(3000);
 		WebElement ca_filterCostMetric = waitForElement(arca_ca_filterCostMetric);
-		ca_filterCostMetric.click();
+//		ca_filterCostMetric.click();
+		helper.safeClick(ca_filterCostMetric);
 		Hooks.logger.info(" Customer Analysis: The Filter - Cost Metric Option was clicked");
 		WebElement ca_filterCostMetricValue = waitForElement(arca_ca_filterCostMetricValue);
 		Thread.sleep(5000);
@@ -353,7 +373,8 @@ public class ARCA_OverviewPage {
 		// Waits for the Search bar of table
 		WebElement searchBarSCPC = waitForElement(arca_searchBarSCPC);
 
-		searchBarSCPC.click();
+//		searchBarSCPC.click();
+		helper.safeClick(searchBarSCPC);
 		searchBarSCPC.clear();
 		// Waits for the Customer ID from the first row of table
 		WebElement searchRecordSCPC = waitForElement(arca_searchRecordSCPC);
@@ -372,7 +393,8 @@ public class ARCA_OverviewPage {
 		FileHandler.copy(sourcefile, screenshotPath);
 
 		// Clearing the Search Keyword
-		searchBarSCPC.click();
+//		searchBarSCPC.click();
+		helper.safeClick(searchBarSCPC);
 		searchBarSCPC.sendKeys(Keys.CONTROL + "a");
 		searchBarSCPC.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(2000);
@@ -383,7 +405,8 @@ public class ARCA_OverviewPage {
 	public void createNewScnearioBtnWithoutSelection() throws IOException, InterruptedException {
 		// Waits for the button
 		WebElement createNewScenrioBtnSCPC = waitForElement(arca_createNewScenrioBtnSCPC);
-		createNewScenrioBtnSCPC.click();
+//		createNewScenrioBtnSCPC.click();
+		helper.safeClick(createNewScenrioBtnSCPC);
 		Hooks.logger.info(" The Create New Scenario button was clicked without selecting a record");
 		// Validates the error message
 		errorCreateScenarioBtn();
@@ -395,6 +418,13 @@ public class ARCA_OverviewPage {
 		File screenshotPath = new File(
 				"src/test/resources/screenshots/AutoRootCauseAnalysis/Overview/CreateNewScnearioBtnWithOutSelection.png");
 		FileHandler.copy(sourcefile, screenshotPath);
+		try {
+			waitForElement(arca_savedCustomerProductCombinationsTable);
+			waitForElement(arca_savedScenarioSimulationsTable);
+		} catch (Exception e) {
+			waitForElement(arca_savedCustomerProductCombinationsTable);
+			waitForElement(arca_savedScenarioSimulationsTable);
+		}
 		waitForElement(arca_savedCustomerProductCombinationsTable);
 		Thread.sleep(2000);
 
@@ -417,7 +447,8 @@ public class ARCA_OverviewPage {
 		Hooks.logger.info(" SCPC: The Customer ID of the first row is extracted");
 		// Waits for the Edit button
 		WebElement editBtnSCPC = waitForElement(arca_editBtnSCPC);
-		editBtnSCPC.click();
+//		editBtnSCPC.click();
+		helper.safeClick(editBtnSCPC);
 		Hooks.logger.info(" SCPC: The Edit Button of the first row is clicked");
 		waitForElement(arca_cs_selectRootCauseProductsTable);
 		// Verify whether it landed on the Auto Root Cause Analysis -
@@ -480,7 +511,8 @@ public class ARCA_OverviewPage {
 	public void createNewScnearioBtnWithSelection() throws IOException, InterruptedException {
 		// Waits for the first row of the table
 		WebElement tableFirstRowSCPC = waitForElement(arca_tableFirstRowSCPC);
-		tableFirstRowSCPC.click();
+//		tableFirstRowSCPC.click();
+		helper.safeClick(tableFirstRowSCPC);
 		Hooks.logger.info(" SCPC: The first row record is selected ");
 		Thread.sleep(2000);
 		// Verify whether it landed on the Auto Root Cause Analysis -
@@ -498,7 +530,8 @@ public class ARCA_OverviewPage {
 		Thread.sleep(2000);
 		// Waits for the button
 		WebElement createNewScenrioBtnSCPC = waitForElement(arca_createNewScenrioBtnSCPC);
-		createNewScenrioBtnSCPC.click();
+//		createNewScenrioBtnSCPC.click();
+		helper.safeClick(createNewScenrioBtnSCPC);
 		Hooks.logger.info(
 				" SCPC: The Create New Scenario button was clicked after selecting the record and redirected to Create Scenario Screen where the screen is loaded with selected Customer and Product Combination: "
 						+ customerProductCombinationName);
@@ -525,13 +558,15 @@ public class ARCA_OverviewPage {
 		// Validating based on the Customer and Product Combination name from the filter
 		// on Create Scenario
 		WebElement csc_filter = waitForElement(arca_csc_filter);
-		csc_filter.click();
+//		csc_filter.click();
+		helper.safeClick(csc_filter);
 		Hooks.logger.info(" Create Scenario: The Filter button was clicked");
 		Thread.sleep(3000);
 		// Waits for the Filter - Options
 		WebElement csc_filterCustomerProductCombinationOption = waitForElement(
 				arca_csc_filterCustomerProductCombinationOption);
-		csc_filterCustomerProductCombinationOption.click();
+//		csc_filterCustomerProductCombinationOption.click();
+		helper.safeClick(csc_filterCustomerProductCombinationOption);
 		Hooks.logger.info(" Create Scenario: The Filter - Customer and Product Combination option was clicked");
 		// Waits for the Filter - Options - Value
 		WebElement csc_filterCustomerProductCombinationOptionValue = waitForElement(
@@ -558,7 +593,8 @@ public class ARCA_OverviewPage {
 
 		// Waits for the Filter - Cancel button
 		WebElement ca_filterCancelBtn = waitForElement(arca_ca_filterCancelBtn);
-		ca_filterCancelBtn.click();
+//		ca_filterCancelBtn.click();
+		helper.safeClick(ca_filterCancelBtn);
 		Hooks.logger.info(" Create Scenario: The Filter - Cancel button was clicked");
 		waitForElement(arca_csc_filter);
 		Thread.sleep(1000);
@@ -590,7 +626,8 @@ public class ARCA_OverviewPage {
 		waitForElement(arca_savedCustomerProductCombinationsTable);
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSCPC = waitForElement(arca_deleteIconSCPC);
-		deleteIconSCPC.click();
+//		deleteIconSCPC.click();
+		helper.safeClick(deleteIconSCPC);
 		Hooks.logger.info(" SCPC: The Delete icon is clicked without setting to the Delete option in the table record");
 		// Error message validation
 		errorMessageDeleteIconSCPC();
@@ -636,7 +673,8 @@ public class ARCA_OverviewPage {
 		waitForElement(arca_savedCustomerProductCombinationsTable);
 		// Waits for Download Icon and clicks it
 		WebElement downloadIconSCPC = waitForElement(arca_downloadIconSCPC);
-		downloadIconSCPC.click();
+//		downloadIconSCPC.click();
+		helper.safeClick(downloadIconSCPC);
 		Hooks.logger.info(" SCPC: The Download Icon present in the row is clicked");
 		// Take screenshot of the downloading
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -657,13 +695,15 @@ public class ARCA_OverviewPage {
 	public void deleteDropdownSCPC() throws IOException, InterruptedException {
 		// Waits for the Delete Dropdown and clicks
 		WebElement deleteDropdownSCPC = waitForElement(arca_deleteDropdownSCPC);
-		deleteDropdownSCPC.click();
+//		deleteDropdownSCPC.click();
+		helper.safeClick(deleteDropdownSCPC);
 		Hooks.logger.info(
 				" SCPC: The Delete Dropdown present in the table is clicked which has options Do not Delete and Delete");
 		Thread.sleep(3000);
 		// Waits for the delete option in the dropdown and clicks
 		WebElement deleteDropdownOptionSCPC = waitForElement(arca_deleteDropdownOptionSCPC);
-		deleteDropdownOptionSCPC.click();
+//		deleteDropdownOptionSCPC.click();
+		helper.safeClick(deleteDropdownOptionSCPC);
 		Hooks.logger.info(" SCPC: The Delete option is selected");
 
 		Thread.sleep(2000);
@@ -677,7 +717,8 @@ public class ARCA_OverviewPage {
 
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSCPC = waitForElement(arca_deleteIconSCPC);
-		deleteIconSCPC.click();
+//		deleteIconSCPC.click();
+		helper.safeClick(deleteIconSCPC);
 		Hooks.logger.info(
 				" The Delete Icon of Saved Customer Peer Selection table is clicked and the record has been deleted");
 		Thread.sleep(2000);
@@ -688,7 +729,8 @@ public class ARCA_OverviewPage {
 		// Waits for the Search bar
 		WebElement searchBarSCPC = waitForElement(arca_searchBarSCPC);
 
-		searchBarSCPC.click();
+//		searchBarSCPC.click();
+		helper.safeClick(searchBarSCPC);
 		searchBarSCPC.clear();
 		// Waits for the Customer ID from the first row of table
 		WebElement searchRecordSCPC = waitForElement(arca_searchRecordSCPC);
@@ -704,11 +746,13 @@ public class ARCA_OverviewPage {
 		String radioXPath = "//table//tr[td[2][normalize-space()='" + searchRecord
 				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
 		WebElement radioButton = waitForElement(By.xpath(radioXPath));
-		actions.moveToElement(radioButton).click().perform();
+		helper.safeClick(radioButton);
+//		actions.moveToElement(radioButton).click().perform();
 		Hooks.logger.info(" SCPC: The record of the searched Customer ID: " + searchRecord + " is selected");
 		Thread.sleep(1000);
 		// Clearing the Search Keyword
-		searchBarSCPC.click();
+//		searchBarSCPC.click();
+		helper.safeClick(searchBarSCPC);
 		searchBarSCPC.sendKeys(Keys.CONTROL + "a");
 		searchBarSCPC.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(3000);
@@ -723,7 +767,8 @@ public class ARCA_OverviewPage {
 	public void searchKeywordSSS() throws IOException, InterruptedException {
 		// Waits for the Search bar of table
 		WebElement searchBarSSS = waitForElement(arca_searchBarSSS);
-		searchBarSSS.click();
+//		searchBarSSS.click();
+		helper.safeClick(searchBarSSS);
 		searchBarSSS.clear();
 		// Waits for the Customer ID from the first row of table
 		WebElement searchRecordSSS = waitForElement(arca_searchRecordSSS);
@@ -735,7 +780,8 @@ public class ARCA_OverviewPage {
 		Thread.sleep(2000);
 
 		// Clearing the Search Keyword
-		searchBarSSS.click();
+//		searchBarSSS.click();
+		helper.safeClick(searchRecordSSS);
 		searchBarSSS.sendKeys(Keys.CONTROL + "a");
 		searchBarSSS.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(3000);
@@ -746,7 +792,8 @@ public class ARCA_OverviewPage {
 	public void viewImapctWithSelection() throws IOException, InterruptedException {
 		// Waits for the first row of table
 		WebElement tableFirstRowSSS = waitForElement(arca_tableFirstRowSSS);
-		tableFirstRowSSS.click();
+//		tableFirstRowSSS.click();
+		helper.safeClick(tableFirstRowSSS);
 		Hooks.logger.info(" SSS: The first row record is selected ");
 
 		// Waits for the scenario name value of the table
@@ -755,7 +802,8 @@ public class ARCA_OverviewPage {
 		Hooks.logger.info(" SSS: The Sensitivity Scenario name of the first row is extracted");
 		// Waits for the View Impact button
 		WebElement viewImpactBtnSSS = waitForElement(arca_viewImpactBtnSSS);
-		viewImpactBtnSSS.click();
+//		viewImpactBtnSSS.click();
+		helper.safeClick(viewImpactBtnSSS);
 		Hooks.logger.info(" SSS: The View Impact button was clicked after selecting the record");
 		waitForElement(arca_scenarioSimulationPopUpSSS);
 		Thread.sleep(2000);
@@ -781,7 +829,8 @@ public class ARCA_OverviewPage {
 
 		// Waits for the View Impact button - Cancel button
 		WebElement viewImpactBtnSSSCancelIcon = waitForElement(arca_viewImpactBtnSSSCancelIcon);
-		viewImpactBtnSSSCancelIcon.click();
+//		viewImpactBtnSSSCancelIcon.click();
+		helper.safeClick(viewImpactBtnSSSCancelIcon);
 		Hooks.logger.info(" SSS: The Cancel icon of the pop-up is clicked");
 		waitForElement(arca_savedScenarioSimulationsTable);
 		Thread.sleep(2000);
@@ -791,7 +840,8 @@ public class ARCA_OverviewPage {
 	public void viewImapctWithOutSelection() throws IOException, InterruptedException {
 		// Waits for the View Impact button
 		WebElement viewImpactBtnSSS = waitForElement(arca_viewImpactBtnSSS);
-		viewImpactBtnSSS.click();
+//		viewImpactBtnSSS.click();
+		helper.safeClick(viewImpactBtnSSS);
 		Hooks.logger.info(" SSS: The scenario name present in the pop-up is extracted");
 		waitForElement(arca_viewImpactBtnSSSError);
 		Hooks.logger.info(" SSS: The Error messsage in the pop-up was diaplayed");
@@ -803,7 +853,8 @@ public class ARCA_OverviewPage {
 		FileHandler.copy(sourcefile, screenshotPath);
 		// Waits for the View Impact button - Cancel button
 		WebElement viewImpactBtnSSSCancelIcon = waitForElement(arca_viewImpactBtnSSSCancelIcon);
-		viewImpactBtnSSSCancelIcon.click();
+//		viewImpactBtnSSSCancelIcon.click();
+		helper.safeClick(viewImpactBtnSSSCancelIcon);
 		Hooks.logger.info(" SSS: The Cancel icon of the pop-up is clicked");
 		waitForElement(arca_savedScenarioSimulationsTable);
 		Thread.sleep(2000);
@@ -819,12 +870,14 @@ public class ARCA_OverviewPage {
 		String radioXPath = "//table//tr[td[normalize-space()='" + customerProductCombinationName + "']]/td[2]";
 		WebElement radioButton = waitForElement(By.xpath(radioXPath));
 		String customerId = radioButton.getText().trim();
-		actions.moveToElement(radioButton).click().perform();
+		helper.safeClick(radioButton);
+//		actions.moveToElement(radioButton).click().perform();
 		Hooks.logger.info(" The Edit button of the Customer ID: " + customerId
 				+ " is clicked whose Customer and Product Combination name is: " + customerProductCombinationName);
 		// Waits for the Edit button
 		WebElement editBtnSSS = waitForElement(arca_editBtnSSS);
-		editBtnSSS.click();
+//		editBtnSSS.click();
+		helper.safeClick(editBtnSSS);
 		Hooks.logger.info(" SSS: The Edit button is clicked");
 		try {
 			waitForElement(arca_csc_preProgrammedScenario);
@@ -852,14 +905,16 @@ public class ARCA_OverviewPage {
 		// Validating based on the Customer and Product Combination name from the filter
 		// on Create Scenario
 		WebElement csc_filter = waitForElement(arca_csc_filter);
-		csc_filter.click();
+//		csc_filter.click();
+		helper.safeClick(csc_filter);
 		Hooks.logger.info(" Create Scenario: The Filter button was clicked");
 		Thread.sleep(3000);
 
 		// Waits for the Filter - Options
 		WebElement csc_filterCustomerProductCombinationOption = waitForElement(
 				arca_csc_filterCustomerProductCombinationOption);
-		csc_filterCustomerProductCombinationOption.click();
+//		csc_filterCustomerProductCombinationOption.click();
+		helper.safeClick(csc_filterCustomerProductCombinationOption);
 		Hooks.logger.info(" Create Scenario: The Filter - Customer and Product Combination option was clicked");
 		// Waits for the Filter - Options - Value
 		WebElement csc_filterCustomerProductCombinationOptionValue = waitForElement(
@@ -887,7 +942,8 @@ public class ARCA_OverviewPage {
 
 		// Waits for the Filter - Cancel button
 		WebElement ca_filterCancelBtn = waitForElement(arca_ca_filterCancelBtn);
-		ca_filterCancelBtn.click();
+//		ca_filterCancelBtn.click();
+		helper.safeClick(ca_filterCancelBtn);
 		Hooks.logger.info(" Create Scenario: The Filter - Cancel button was clicked");
 		waitForElement(arca_csc_filter);
 		Thread.sleep(1000);
@@ -915,13 +971,15 @@ public class ARCA_OverviewPage {
 	public void deleteDropdownSSS() throws IOException, InterruptedException {
 		// Waits for the Delete Dropdown and clicks
 		WebElement deleteDropdownSSS = waitForElement(arca_deleteDropdownSSS);
-		deleteDropdownSSS.click();
+//		deleteDropdownSSS.click();
+		helper.safeClick(deleteDropdownSSS);
 		Hooks.logger.info(
 				" SSS: The Delete Dropdown present in the table is clicked which has options Do not Delete and Delete");
 		Thread.sleep(3000);
 		// Waits for the delete option in the dropdown and clicks
 		WebElement deleteDropdownOptionSSS = waitForElement(arca_deleteDropdownOptionSSS);
-		deleteDropdownOptionSSS.click();
+//		deleteDropdownOptionSSS.click();
+		helper.safeClick(deleteDropdownOptionSSS);
 		Hooks.logger.info(" SSS: The Delete option is selected");
 		waitForElement(arca_savedScenarioSimulationsTable);
 		Thread.sleep(1000);
@@ -934,7 +992,8 @@ public class ARCA_OverviewPage {
 
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSSS = waitForElement(arca_deleteIconSSS);
-		deleteIconSSS.click();
+//		deleteIconSSS.click();
+		helper.safeClick(deleteIconSSS);
 		Hooks.logger.info(
 				" SSS: The Delete Icon of Saved Scenario Simulation table is clicked and the record has been deleted");
 		Thread.sleep(2000);
@@ -945,7 +1004,8 @@ public class ARCA_OverviewPage {
 	public void deleteIconSSS() throws IOException, InterruptedException {
 		// Waits for Delete Icon and clicks it
 		WebElement deleteIconSSS = waitForElement(arca_deleteIconSSS);
-		deleteIconSSS.click();
+//		deleteIconSSS.click();
+		helper.safeClick(deleteIconSSS);
 		Hooks.logger.info(" SSS: The Delete icon is clicked without setting to the Delete option in the table record");
 		Thread.sleep(1000);
 //		WebElement errorCancel = waitForElement(arca_errorCancel);
@@ -991,7 +1051,8 @@ public class ARCA_OverviewPage {
 		Thread.sleep(2000);
 		// Waits for Download Icon and clicks it
 		WebElement downloadIconSSS = waitForElement(arca_downloadIconSSS);
-		downloadIconSSS.click();
+//		downloadIconSSS.click();
+		helper.safeClick(downloadIconSSS);
 		Hooks.logger.info(" SSS: The Download Icon present in the row is clicked");
 		waitForElement(arca_savedScenarioSimulationsTable);
 		Thread.sleep(2000);
@@ -1013,7 +1074,8 @@ public class ARCA_OverviewPage {
 	public void searchForRecord_SSS() throws IOException, InterruptedException {
 		// Waits for the Search bar of table
 		WebElement searchBarSSS = waitForElement(arca_searchBarSSS);
-		searchBarSSS.click();
+//		searchBarSSS.click();
+		helper.safeClick(searchBarSSS);
 		searchBarSSS.clear();
 		// Waits for the Customer ID from the first row of table
 		// Waits for the Customer ID from the first row of table
@@ -1030,11 +1092,13 @@ public class ARCA_OverviewPage {
 				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
 
 		WebElement radioButton = waitForElement(By.xpath(radioXPath));
-		actions.moveToElement(radioButton).click().perform();
+		helper.safeClick(radioButton);
+//		actions.moveToElement(radioButton).click().perform();
 		Hooks.logger.info(" SSS: The record of the searched Customer ID: " + searchRecord + " is selected");
 		Thread.sleep(3000);
 		// Clearing the Search Keyword
-		searchBarSSS.click();
+//		searchBarSSS.click();
+		helper.safeClick(searchBarSSS);
 		searchBarSSS.sendKeys(Keys.CONTROL + "a");
 		searchBarSSS.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(3000);

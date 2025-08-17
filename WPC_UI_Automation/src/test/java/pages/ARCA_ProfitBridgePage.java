@@ -18,17 +18,20 @@ import org.slf4j.LoggerFactory;
 
 import config.ConfigReader;
 import hooks.Hooks;
+import utils.ElementHelper;
 
 public class ARCA_ProfitBridgePage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public ARCA_ProfitBridgePage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(100)); // ✅ wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	private WebElement waitForElement(By locator) {
@@ -111,6 +114,17 @@ public class ARCA_ProfitBridgePage {
 	public void navigateTo() throws IOException, InterruptedException {
 		// This gets the URL of the Profit Bridge screen
 		driver.get(ConfigReader.arca_profitBridge());
+		try {
+			// waits for the profit bridge chart
+			waitForElement(arca_pb_chart);
+			// waits for the Go to Simulator button
+			waitForElement(arca_pb_goToSimulator);
+		} catch (Exception e) {
+			// waits for the profit bridge chart
+			waitForElement(arca_pb_chart);
+			// waits for the Go to Simulator button
+			waitForElement(arca_pb_goToSimulator);
+		}
 		// waits for the profit bridge chart
 		waitForElement(arca_pb_chart);
 		// waits for the Go to Simulator button
@@ -119,7 +133,6 @@ public class ARCA_ProfitBridgePage {
 		Hooks.logger.info(
 				"The Profit Bridge screen is loaded with the Pricing (Actual vs System %) and Profit Bridge (Gross Profit to Enterprise Profit) chart");
 
-		Thread.sleep(1000);
 		// Take screenshot after the page is fully ready
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
@@ -146,13 +159,15 @@ public class ARCA_ProfitBridgePage {
 	public void filters() throws IOException, InterruptedException {
 		// waits for the filter button
 		WebElement pb_filterBtn = waitForElement(arca_pb_filterBtn);
-		pb_filterBtn.click();
-		// waits for the Filter - Selected Cost Metric
+//		pb_filterBtn.click();
+		helper.safeClick(pb_filterBtn); // waits for the Filter - Selected Cost Metric
 		WebElement pb_filterOption01 = waitForElement(arca_pb_filterOption01);
-		pb_filterOption01.click();
+//		pb_filterOption01.click();
+		helper.safeClick(pb_filterOption01);
 		// waits for the Filter - Customer and Product Combinations
 		WebElement pb_filterOption02 = waitForElement(arca_pb_filterOption02);
-		pb_filterOption02.click();
+//		pb_filterOption02.click();
+		helper.safeClick(pb_filterOption02);
 		// waits for the Filter - Customer and Product Combinations - Value -- This
 		// This extracts the value of filter option
 		WebElement pb_filterOption02Value = waitForElement(arca_pb_filterOption02Value);
@@ -162,7 +177,8 @@ public class ARCA_ProfitBridgePage {
 		this.customerProductDetails = filterOption02Value.split("\\+")[1].trim();
 		// waits for the Filter - Cancel button
 		WebElement pb_filterCancelBtn = waitForElement(arca_pb_filterCancelBtn);
-		pb_filterCancelBtn.click();
+//		pb_filterCancelBtn.click();
+		helper.safeClick(pb_filterCancelBtn);
 		// waits for the chart
 		waitForElement(arca_pb_chart);
 		// waits for the chart header text
@@ -184,7 +200,8 @@ public class ARCA_ProfitBridgePage {
 	public void downloadIcon() throws IOException, InterruptedException {
 		// waits for the camera icon
 		WebElement pb_downloadIcon = waitForElement(arca_pb_downloadIcon);
-		pb_downloadIcon.click();
+//		pb_downloadIcon.click();
+		helper.safeClick(pb_downloadIcon);
 		Hooks.logger.info(" The Download Icon of the chart is clicked and downloaded the chart");
 		Thread.sleep(2000);
 		waitForElement(arca_pb_chart);
@@ -194,7 +211,8 @@ public class ARCA_ProfitBridgePage {
 	public void backBtn() throws IOException, InterruptedException {
 		// waits for the back button
 		WebElement pb_backBtn = waitForElement(arca_pb_backBtn);
-		pb_backBtn.click();
+//		pb_backBtn.click();
+		helper.safeClick(pb_backBtn);
 		// extracts the customer id from the filter that is upto underscore
 		String customerId = customerDetails.split("_")[0];
 		waitForElement(arca_cs_selectCustomerBtnSOC);
@@ -220,17 +238,20 @@ public class ARCA_ProfitBridgePage {
 		Thread.sleep(2000);
 		// waits for the Go To Simulator button
 		WebElement pb_goToSimulator = waitForElement(arca_pb_goToSimulator);
-		pb_goToSimulator.click();
+//		pb_goToSimulator.click();
+		helper.safeClick(pb_goToSimulator);
 		Thread.sleep(2000);
 		waitForElement(arca_csc_customerDetailsBtn);
-		// Validating based the redirection via URL and filterss
+		// Validating based the redirection via URL and filters
 		WebElement csc_filter = waitForElement(arca_csc_filter);
-		csc_filter.click();
+//		csc_filter.click();
+		helper.safeClick(csc_filter);
 		Thread.sleep(1000);
 		// Waits for the Filter - Options
 		WebElement csc_filterCustomerProductCombinationOption = waitForElement(
 				arca_csc_filterCustomerProductCombinationOption);
-		csc_filterCustomerProductCombinationOption.click();
+//		csc_filterCustomerProductCombinationOption.click();
+		helper.safeClick(csc_filterCustomerProductCombinationOption);
 		// Waits for the Filter - Options - Value
 		WebElement csc_filterCustomerProductCombinationOptionValue = waitForElement(
 				arca_csc_filterCustomerProductCombinationOptionValue);

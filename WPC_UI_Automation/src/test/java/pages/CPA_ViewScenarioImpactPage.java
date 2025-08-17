@@ -1,18 +1,14 @@
 package pages;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -20,17 +16,20 @@ import org.slf4j.LoggerFactory;
 
 import config.ConfigReader;
 import hooks.Hooks;
+import utils.ElementHelper;
 
 public class CPA_ViewScenarioImpactPage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public CPA_ViewScenarioImpactPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -134,16 +133,22 @@ public class CPA_ViewScenarioImpactPage {
 	public void navigateTo() throws IOException, InterruptedException {
 		// This gets the URL of the View Scenario Impact screen
 		driver.get(ConfigReader.cpa_viewScenarioImapct());
-		// waits till the silder component is loaded
-//		waitForElement(cpa_csc_scenarioSlider);
-		Thread.sleep(2000);
-//		waitForElement(cpa_csc_saveAndShowImpactBtn);
+		try {
+			waitForElement(cpa_vsi_chartComponent);
+			waitForElement(cpa_vsi_backBtn);
+			waitForElement(cpa_vsi_filters);
+		} catch (Exception e) {
+			waitForElement(cpa_vsi_chartComponent);
+			waitForElement(cpa_vsi_backBtn);
+			waitForElement(cpa_vsi_filters);
+		}
+
 		// Take screenshot after the page is fully ready
-		TakesScreenshot screenshot = (TakesScreenshot) driver;
-		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
-		File screenshotPath = new File(
-				"src/test/resources/screenshots/CustomerPeerAnalysis/ScenarioBuilder/ViewScenarioImpact/ViewScenarioImpactScreen.png");
-		FileHandler.copy(sourcefile, screenshotPath);
+//		TakesScreenshot screenshot = (TakesScreenshot) driver;
+//		File sourcefile = screenshot.getScreenshotAs(OutputType.FILE);
+//		File screenshotPath = new File(
+//				"src/test/resources/screenshots/CustomerPeerAnalysis/ScenarioBuilder/ViewScenarioImpact/ViewScenarioImpactScreen.png");
+//		FileHandler.copy(sourcefile, screenshotPath);
 		// Verify whether it landed on the Scenario builder - View Scenario Impact
 		String currentUrl = driver.getCurrentUrl();
 		String expectedUrl = ConfigReader.cpa_viewScenarioImapct();
@@ -163,10 +168,12 @@ public class CPA_ViewScenarioImpactPage {
 	public void filtersTo() throws IOException, InterruptedException {
 		// waits for the Filter btn
 		WebElement vsi_filters = waitForElement(cpa_vsi_filters);
-		vsi_filters.click();
+//		vsi_filters.click();
+		helper.safeClick(vsi_filters);
 		// Filters - Customer + Scenario Name
 		WebElement vsi_filtersCustomerScenarioOption = waitForElement(cpa_vsi_filtersCustomerScenarioOption);
-		vsi_filtersCustomerScenarioOption.click();
+//		vsi_filtersCustomerScenarioOption.click();
+		helper.safeClick(vsi_filtersCustomerScenarioOption);
 		// waits for the Filters - Customer + Scenario Name - Value 01
 		WebElement vsi_filterOptionValue01 = waitForElement(cpa_vsi_filterOptionValue01);
 		// extracts the value 01 for the validation
@@ -174,9 +181,11 @@ public class CPA_ViewScenarioImpactPage {
 		// waits for the Filters - Customer + Scenario Name - Value 02
 		WebElement vsi_filterOptionValue02 = waitForElement(cpa_vsi_filterOptionValue02);
 		String filterOptionValue02 = vsi_filterOptionValue02.getText().trim();
-		vsi_filterOptionValue02.click();
+//		vsi_filterOptionValue02.click();
+		helper.safeClick(vsi_filterOptionValue02);
 		// Now clicking again the Filters - Customer + Scenario Name - Value 01
-		vsi_filterOptionValue01.click();
+//		vsi_filterOptionValue01.click();
+		helper.safeClick(vsi_filterOptionValue01);
 		try {
 			waitForElement(cpa_vsi_filterOptionValue01);
 		} catch (Exception e) {
@@ -187,11 +196,14 @@ public class CPA_ViewScenarioImpactPage {
 				+ "  and then selected the :" + filterOptionValue01);
 		// waits for the Filters - Cancel button
 		WebElement vsi_filtersCancelBtn = waitForElement(cpa_vsi_filtersCancelBtn);
-		vsi_filtersCancelBtn.click();
+//		vsi_filtersCancelBtn.click();
+		helper.safeClick(vsi_filtersCancelBtn);
 		try {
 			waitForElement(cpa_vsi_chartComponent);
+			waitForElement(cpa_vsi_backBtn);
 		} catch (Exception e) {
 			waitForElement(cpa_vsi_chartComponent);
+			waitForElement(cpa_vsi_backBtn);
 		}
 		Thread.sleep(2000);
 
@@ -206,18 +218,20 @@ public class CPA_ViewScenarioImpactPage {
 		this.customerId = customerDetails.split("_")[0].trim();
 		// waits for the back button
 		WebElement vsi_backBtn = waitForElement(cpa_vsi_backBtn);
-		actions.moveToElement(vsi_backBtn, 0, 0).click().perform();
+		helper.safeClick(vsi_backBtn);
+//		actions.moveToElement(vsi_backBtn, 0, 0).click().perform();
 		System.out.println(customerId);
 		Hooks.logger.info(" The Back button was clicked and redirected to the Create Scenario screen");
 		Thread.sleep(3000);
 		// Validating the Filter of create scenario
 		// waits for the Create Scenario - Filter
 		WebElement csc_filtersBtn = waitForElement(cpa_csc_filtersBtn);
-		csc_filtersBtn.click();
-
+//		csc_filtersBtn.click();
+		helper.safeClick(csc_filtersBtn);
 		// waits for the Create Scenario - Filter - Options
 		WebElement csc_filterCustomerPeerGroupOption = waitForElement(cpa_csc_filterCustomerPeerGroupOption);
-		csc_filterCustomerPeerGroupOption.click();
+//		csc_filterCustomerPeerGroupOption.click();
+		helper.safeClick(csc_filterCustomerPeerGroupOption);
 		// waits for the Create Scenario - Filter - Options Value
 		WebElement csc_filterCustomerPeerGroupOptionValue01 = waitForElement(
 				cpa_csc_filterCustomerPeerGroupOptionValue01);
@@ -234,7 +248,8 @@ public class CPA_ViewScenarioImpactPage {
 
 		// waits for the Filter - Cancel
 		WebElement csc_filterCancelBtn = waitForElement(cpa_csc_filterCancelBtn);
-		csc_filterCancelBtn.click();
+//		csc_filterCancelBtn.click();
+		helper.safeClick(csc_filterCancelBtn);
 		try {
 			waitForElement(cpa_csc_filtersBtn);
 		} catch (Exception e) {
@@ -260,7 +275,8 @@ public class CPA_ViewScenarioImpactPage {
 	public void afterBtn() throws IOException, InterruptedException {
 		// waits for the After button
 		WebElement csc_afterBtn = waitForElement(cpa_csc_afterBtn);
-		csc_afterBtn.click();
+//		csc_afterBtn.click();
+		helper.safeClick(csc_afterBtn);
 		// waits for the chart
 		try {
 			waitForElement(cpa_vsi_chartComponent);
@@ -293,7 +309,8 @@ public class CPA_ViewScenarioImpactPage {
 	public void comparisonBtn() throws IOException, InterruptedException {
 		// waits for the compare button
 		WebElement csc_comparisonBtn = waitForElement(cpa_csc_comparisonBtn);
-		csc_comparisonBtn.click();
+//		csc_comparisonBtn.click();
+		helper.safeClick(csc_comparisonBtn);
 		try {
 			waitForElement(cpa_csc_comparisonBtnTable);
 		} catch (Exception e) {
@@ -343,7 +360,8 @@ public class CPA_ViewScenarioImpactPage {
 		waitForElement(cpa_csc_comparisonBtnTable);
 		// waits for the search bar of the comparison table
 		WebElement csc_comparisonBtnTableSearchBar = waitForElement(cpa_csc_comparisonBtnTableSearchBar);
-		csc_comparisonBtnTableSearchBar.click();
+//		csc_comparisonBtnTableSearchBar.click();
+		helper.safeClick(csc_comparisonBtnTableSearchBar);
 		csc_comparisonBtnTableSearchBar.clear();
 		// waits for the first row of the table
 		WebElement csc_comparisonBtnTableFirstRow = waitForElement(cpa_csc_comparisonBtnTableSearchRecord);
@@ -353,7 +371,8 @@ public class CPA_ViewScenarioImpactPage {
 
 		// clearing the search
 		// Clearing the Search Keyword
-		csc_comparisonBtnTableSearchBar.click();
+//		csc_comparisonBtnTableSearchBar.click();
+		helper.safeClick(csc_comparisonBtnTableSearchBar);
 		csc_comparisonBtnTableSearchBar.sendKeys(Keys.CONTROL + "a");
 		csc_comparisonBtnTableSearchBar.sendKeys(Keys.BACK_SPACE);
 		System.out.println("=> The keyword was searched in the Comparison table");
@@ -372,7 +391,8 @@ public class CPA_ViewScenarioImpactPage {
 
 		// waits for the download icon of the table
 		WebElement csc_comparisonBtnTableDownload = waitForElement(cpa_csc_comparisonBtnTableDownload);
-		csc_comparisonBtnTableDownload.click();
+//		csc_comparisonBtnTableDownload.click();
+		helper.safeClick(csc_comparisonBtnTableDownload);
 		try {
 			waitForElement(cpa_csc_comparisonBtnTable);
 		} catch (Exception e) {
@@ -387,7 +407,8 @@ public class CPA_ViewScenarioImpactPage {
 	public void resetBtn() throws IOException, InterruptedException {
 		// waits for the Reset button
 		WebElement csc_resetBtn = waitForElement(cpa_csc_resetBtn);
-		csc_resetBtn.click();
+//		csc_resetBtn.click();
+		helper.safeClick(csc_resetBtn);
 		try {
 			waitForElement(cpa_geographicalMap);
 		} catch (Exception e) {

@@ -1,0 +1,11 @@
+2025-08-12 16:08:24.818 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user can view the impact of the created scenario and compare it with the default scenario
+2025-08-12 16:09:07.162 [main] INFO  ▶  Successfully landed on the Scenario screen with the sliders required to simulate the scenario
+2025-08-12 16:09:09.580 [main] INFO  ▶  The Filter was clicked and selected a Customer + Scenario name: 135763_JK ENERGY SOLUTIONS LLC + 135763_Scenario  and then selected the :135763_JK ENERGY SOLUTIONS LLC + 13573_Scenario
+2025-08-12 16:09:12.541 [main] INFO  ▶  The Back button was clicked and redirected to the Create Scenario screen
+2025-08-12 16:09:21.435 [main] INFO  ▶  The Customer ID  matched and confirms that the redirection is of the same customer records
+2025-08-12 16:09:32.314 [main] INFO  ▶  Simulation: The Enterprise Profit value is not matched, which means it confirms that simulation has happened
+2025-08-12 16:09:35.065 [main] INFO  ▶  The Scenario has been created as there is difference between the values of Enterprise Profit : Before = 314797.05 and After = 314789.99
+2025-08-12 16:09:37.595 [main] INFO  ▶  The download icon of the Comparison table was clicked and downloaded the table records as an excel file
+2025-08-12 16:09:52.617 [main] INFO  ▶  Successfully! landed on the Branch/Customer Selection screen by clicking the Reset button of the View Imapct Screen
+2025-08-12 16:09:52.619 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user can view the impact of the created scenario and compare it with the default scenario
+2025-08-12 16:09:52.619 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

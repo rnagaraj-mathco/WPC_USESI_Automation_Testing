@@ -18,17 +18,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import config.ConfigReader;
+import utils.ElementHelper;
 
 public class ARCA_CustomerSelectionPage {
 	WebDriver driver;
 	WebDriverWait wait;
 	Actions actions;
+	ElementHelper helper;
 
 	// gets driver status
 	public ARCA_CustomerSelectionPage(WebDriver driver) {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // wait initialized once
 		actions = new Actions(driver);
+		this.helper = new ElementHelper(driver);
 	}
 
 	// Waits for the specified element by locator
@@ -129,27 +132,27 @@ public class ARCA_CustomerSelectionPage {
 
 	// xpath of the Commodity code - 01 - SRCP (2nd row)
 	By arca_cs_commodityCodeSRCP_01 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[1]");
 
 	// xpath of the Commodity code - 02 - SRCP (5th row)
 	By arca_cs_commodityCodeSRCP_02 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[5]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[1]");
 
 	// xpath of the Commodity code - 03 - SRCP (7th row)
 	By arca_cs_commodityCodeSRCP_03 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[7]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[1]");
 
 	// xpath of the Commodity code - 04 - SRCP (8th row)
 	By arca_cs_commodityCodeSRCP_04 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[9]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[4]/td[1]");
 
 	// xpath of the Commodity code - 05 - SRCP (11th row)
 	By arca_cs_commodityCodeSRCP_05 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[11]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[5]/td[1]");
 
 	// xpath of the Commodity code - 06 - SRCP (13th row)
 	By arca_cs_commodityCodeSRCP_06 = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[13]/td[1]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[7]/td[1]");
 
 	// xpath of the enter name input of save and proceed pop-up SRCP
 	By arca_cs_nameInputSaveSRCP = By.xpath(
@@ -173,7 +176,7 @@ public class ARCA_CustomerSelectionPage {
 
 	// xpath of the searched record - SRCP
 	By arca_cs_searchedRecordSRCP = By.xpath(
-			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[2]");
+			"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[6]/td[2]");
 
 	// Navigating to the Customer Selection Screen
 	public void navigateTo() throws IOException, InterruptedException {
@@ -207,7 +210,8 @@ public class ARCA_CustomerSelectionPage {
 	public void selectCustomerBtnWithoutSelection() throws IOException, InterruptedException {
 		// waits for the Select Customer button
 		WebElement cs_selectCustomerBtnSOC = waitForElement(arca_cs_selectCustomerBtnSOC);
-		cs_selectCustomerBtnSOC.click();
+//		cs_selectCustomerBtnSOC.click();
+		helper.safeClick(cs_selectCustomerBtnSOC);
 		System.out.println(
 				"=> The Select Customer Button was clicked without selecting a record in Select One Customer for Simulation table, an error message popped");
 		Thread.sleep(5000);
@@ -220,7 +224,8 @@ public class ARCA_CustomerSelectionPage {
 	public void selectForKeywordSOC() throws IOException, InterruptedException {
 		// waits for the Search bar of SOC table
 		WebElement cs_searchBarSOC = waitForElement(arca_cs_searchBarSOC);
-		cs_searchBarSOC.click();
+//		cs_searchBarSOC.click();
+		helper.safeClick(cs_searchBarSOC);
 		cs_searchBarSOC.clear();
 		// Waits for the First row table customer Id
 		WebElement cs_searchRecordSOC = waitForElement(arca_cs_searchRecordSOC);
@@ -237,7 +242,8 @@ public class ARCA_CustomerSelectionPage {
 		FileHandler.copy(sourcefile, screenshotPath);
 
 		// Clearing the Search Keyword
-		cs_searchBarSOC.click();
+//		cs_searchBarSOC.click();
+		helper.safeClick(cs_searchBarSOC);
 		cs_searchBarSOC.sendKeys(Keys.CONTROL + "a");
 		cs_searchBarSOC.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(2000);
@@ -247,7 +253,8 @@ public class ARCA_CustomerSelectionPage {
 	public void downloadIconSOC() throws IOException, InterruptedException {
 		// waits for the SOC - Download Icon
 		WebElement cs_downloadIconSOC = waitForElement(arca_cs_downloadIconSOC);
-		cs_downloadIconSOC.click();
+//		cs_downloadIconSOC.click();
+		helper.safeClick(cs_downloadIconSOC);
 		Thread.sleep(3000);
 		System.out.println(
 				"=> The download icon of Select One Customer for Simulation table is clicked and downloaded the table records as an excel file");
@@ -260,7 +267,8 @@ public class ARCA_CustomerSelectionPage {
 	public void selectCustomerSOC() throws IOException, InterruptedException {
 		// waits for the SOC table first row radio button
 		WebElement cs_tableFirstRowRadioSOC = waitForElement(arca_cs_tableFirstRowRadioSOC);
-		cs_tableFirstRowRadioSOC.click();
+//		cs_tableFirstRowRadioSOC.click();
+		helper.safeClick(cs_tableFirstRowRadioSOC);
 		waitForElement(arca_cs_tableSOC);
 		System.out.println("=> Selected the record of Select One Customer for Simulation table");
 		Thread.sleep(2000);
@@ -279,7 +287,8 @@ public class ARCA_CustomerSelectionPage {
 	public void selectCustomerBtnWithSelection() throws IOException, InterruptedException {
 		// waits for the Select Customer button
 		WebElement cs_selectCustomerBtnSOC = waitForElement(arca_cs_selectCustomerBtnSOC);
-		cs_selectCustomerBtnSOC.click();
+//		cs_selectCustomerBtnSOC.click();
+		helper.safeClick(cs_selectCustomerBtnSOC);
 		System.out.println(
 				"=> The Select Customer Button of Select One Customer for Simulation table was clicked which then loads the Select Root Cause Products for Simulation table");
 		Thread.sleep(3000);
@@ -291,7 +300,8 @@ public class ARCA_CustomerSelectionPage {
 	public void backBtnSOC() throws IOException, InterruptedException {
 		// waits for the SOC - Back button
 		WebElement cs_backBtnSOC = waitForElement(arca_cs_backBtnSOC);
-		cs_backBtnSOC.click();
+//		cs_backBtnSOC.click();
+		helper.safeClick(cs_backBtnSOC);
 		System.out.println(
 				"=> The Back button of the Select One Customer for Simulation table was clicked and redirected to the Filter Customer and Product Combinations screens");
 		Thread.sleep(2000);
@@ -317,7 +327,8 @@ public class ARCA_CustomerSelectionPage {
 	public void searchAndSelectRecordSOC() throws IOException, InterruptedException {
 		// waits for the Search bar of SOC table
 		WebElement cs_searchBarSOC = waitForElement(arca_cs_searchBarSOC);
-		cs_searchBarSOC.click();
+//		cs_searchBarSOC.click();
+		helper.safeClick(cs_searchBarSOC);
 		cs_searchBarSOC.clear();
 		// Waits for the First row table customer Id
 		WebElement cs_searchRecordSOC = waitForElement(arca_cs_searchRecordSOC);
@@ -331,12 +342,14 @@ public class ARCA_CustomerSelectionPage {
 		String radioXPath = "//table//tr[td[2][normalize-space()='" + searchRecordSOC
 				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
 		WebElement radioButton = waitForElement(By.xpath(radioXPath));
-		actions.moveToElement(radioButton).click().perform();
+		helper.safeClick(radioButton);
+//		actions.moveToElement(radioButton).click().perform();
 		System.out.println("=> Selected the searched record of the Customer ID: " + searchRecordSOC);
 		Thread.sleep(3000);
 		// Clearing the Search Keyword
 		// Clearing the Search Keyword
-		cs_searchBarSOC.click();
+//		cs_searchBarSOC.click();
+		helper.safeClick(cs_searchBarSOC);
 		cs_searchBarSOC.sendKeys(Keys.CONTROL + "a");
 		cs_searchBarSOC.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(2000);
@@ -348,13 +361,15 @@ public class ARCA_CustomerSelectionPage {
 	public void saveAndAnalyzeBtnWithoutSelectionSRCP() throws IOException, InterruptedException {
 		// waits for the Save and Analyze button - SRCP
 		WebElement cs_saveAndAnalyzeBtnSRCP = waitForElement(arca_cs_saveAndAnalyzeBtnSRCP);
-		cs_saveAndAnalyzeBtnSRCP.click();
+//		cs_saveAndAnalyzeBtnSRCP.click();
+		helper.safeClick(cs_saveAndAnalyzeBtnSRCP);
 
 		// waits for the Save and Analyze button - SRCP - Error Message
 		waitForElement(arca_cs_PopUpErrorSRCP);
 		// waits for the Save and Analyze button - SRCP - PopUp - Cancel
 		WebElement cs_PopUpCancelSRCP = waitForElement(arca_cs_PopUpCancelSRCP);
-		cs_PopUpCancelSRCP.click();
+//		cs_PopUpCancelSRCP.click();
+		helper.safeClick(cs_PopUpCancelSRCP);
 		Thread.sleep(2000);
 	}
 
@@ -362,7 +377,8 @@ public class ARCA_CustomerSelectionPage {
 	public void saveAndAnalyzeBtnSRCP() throws IOException, InterruptedException {
 		// waits for the Save and Analyze button - SRCP
 		WebElement cs_saveAndAnalyzeBtnSRCP = waitForElement(arca_cs_saveAndAnalyzeBtnSRCP);
-		cs_saveAndAnalyzeBtnSRCP.click();
+//		cs_saveAndAnalyzeBtnSRCP.click();
+		helper.safeClick(cs_saveAndAnalyzeBtnSRCP);
 		// waits for the name input field
 		WebElement cs_nameInputSaveSRCP = waitForElement(arca_cs_nameInputSaveSRCP);
 		cs_nameInputSaveSRCP.sendKeys(cs_customerId_SOC + "_CommodityCodeCombination");
@@ -373,7 +389,8 @@ public class ARCA_CustomerSelectionPage {
 //		cs_PopUpCancelSRCP.click();
 		// waits for the Proceed button
 		WebElement cs_proceedBtn = waitForElement(arca_cs_proceedBtn);
-		cs_proceedBtn.click();
+//		cs_proceedBtn.click();
+		helper.safeClick(cs_proceedBtn);
 		waitForElement(arca_pb_goToSimulator);
 		Thread.sleep(2000);
 	}
@@ -382,7 +399,8 @@ public class ARCA_CustomerSelectionPage {
 	public void backBtnSRCP() throws IOException, InterruptedException {
 		// waits for the SRCP - Back button
 		WebElement cs_backBtnSRCP = waitForElement(arca_cs_backBtnSRCP);
-		cs_backBtnSRCP.click();
+//		cs_backBtnSRCP.click();
+		helper.safeClick(cs_backBtnSRCP);
 		// waits for the SOC Table
 		waitForElement(arca_cs_tableSOC);
 		selectCustomerSOC();
@@ -396,7 +414,8 @@ public class ARCA_CustomerSelectionPage {
 	public void selectAllCheckboxSRCP() throws IOException, InterruptedException {
 		// waits for the SRCP - Select All Checkbox
 		WebElement cs_selectAllCheckboxSRCP = waitForElement(arca_cs_selectAllCheckboxSRCP);
-		cs_selectAllCheckboxSRCP.click();
+//		cs_selectAllCheckboxSRCP.click();
+		helper.safeClick(cs_selectAllCheckboxSRCP);
 		waitForElement(arca_cs_tableSRCP);
 		Thread.sleep(1000);
 
@@ -406,7 +425,8 @@ public class ARCA_CustomerSelectionPage {
 	public void resetBtnSRCP() throws IOException, InterruptedException {
 		// waits for the SRCP - Select All Checkbox
 		WebElement cs_resetBtnSRCP = waitForElement(arca_cs_resetBtnSRCP);
-		cs_resetBtnSRCP.click();
+//		cs_resetBtnSRCP.click();
+		helper.safeClick(cs_resetBtnSRCP);
 		waitForElement(arca_cs_tableSRCP);
 		Thread.sleep(1000);
 
@@ -422,32 +442,38 @@ public class ARCA_CustomerSelectionPage {
 		WebElement cs_commodityCodeSRCP_01 = waitForElement(arca_cs_commodityCodeSRCP_01);
 		String commodityCodeSRCP_01 = cs_commodityCodeSRCP_01.getText().trim();
 		selectedCommodityCode.add(commodityCodeSRCP_01);
-		cs_commodityCodeSRCP_01.click();
+//		cs_commodityCodeSRCP_01.click();
+		helper.safeClick(cs_commodityCodeSRCP_01);
 		Thread.sleep(1000);
 		WebElement cs_commodityCodeSRCP_02 = waitForElement(arca_cs_commodityCodeSRCP_02);
 		String commodityCodeSRCP_02 = cs_commodityCodeSRCP_02.getText().trim();
 		selectedCommodityCode.add(commodityCodeSRCP_02);
-		cs_commodityCodeSRCP_02.click();
+//		cs_commodityCodeSRCP_02.click();
+		helper.safeClick(cs_commodityCodeSRCP_02);
 		Thread.sleep(1000);
 		WebElement cs_commodityCodeSRCP_03 = waitForElement(arca_cs_commodityCodeSRCP_03);
 		String commodityCodeSRCP_03 = cs_commodityCodeSRCP_03.getText().trim();
 		selectedCommodityCode.add(commodityCodeSRCP_03);
-		cs_commodityCodeSRCP_03.click();
+//		cs_commodityCodeSRCP_03.click();
+		helper.safeClick(cs_commodityCodeSRCP_03);
 		Thread.sleep(1000);
 		WebElement cs_commodityCodeSRCP_04 = waitForElement(arca_cs_commodityCodeSRCP_04);
 		String commodityCodeSRCP_04 = cs_commodityCodeSRCP_04.getText().trim();
 		selectedCommodityCode.add(commodityCodeSRCP_04);
-		cs_commodityCodeSRCP_04.click();
+//		cs_commodityCodeSRCP_04.click();
+		helper.safeClick(cs_commodityCodeSRCP_04);
 		Thread.sleep(1000);
 		WebElement cs_commodityCodeSRCP_05 = waitForElement(arca_cs_commodityCodeSRCP_05);
 		String commodityCodeSRCP_05 = cs_commodityCodeSRCP_05.getText().trim();
 		selectedCommodityCode.add(commodityCodeSRCP_05);
-		cs_commodityCodeSRCP_05.click();
+//		cs_commodityCodeSRCP_05.click();
+		helper.safeClick(cs_commodityCodeSRCP_05);
 		Thread.sleep(1000);
 		WebElement cs_commodityCodeSRCP_06 = waitForElement(arca_cs_commodityCodeSRCP_06);
 		String commodityCodeSRCP_06 = cs_commodityCodeSRCP_06.getText().trim();
 		selectedCommodityCode.add(commodityCodeSRCP_06);
-		cs_commodityCodeSRCP_06.click();
+//		cs_commodityCodeSRCP_06.click();
+		helper.safeClick(cs_commodityCodeSRCP_06);
 		Thread.sleep(1000);
 //		System.out.println("=> The Commodity code selected from the Select Root Cause Products for Simulation is: "
 //				+ selectedCommodityCode);
@@ -463,12 +489,14 @@ public class ARCA_CustomerSelectionPage {
 		WebElement cs_commodityCodeSRCP_02 = waitForElement(arca_cs_commodityCodeSRCP_02);
 		String commodityCodeSRCP_02 = cs_commodityCodeSRCP_02.getText().trim();
 		deSelectedCommodityCode.add(commodityCodeSRCP_02);
-		cs_commodityCodeSRCP_02.click();
+//		cs_commodityCodeSRCP_02.click();
+		helper.safeClick(cs_commodityCodeSRCP_02);
 		Thread.sleep(1000);
 		WebElement cs_commodityCodeSRCP_03 = waitForElement(arca_cs_commodityCodeSRCP_03);
 		String commodityCodeSRCP_03 = cs_commodityCodeSRCP_03.getText().trim();
 		deSelectedCommodityCode.add(commodityCodeSRCP_03);
-		cs_commodityCodeSRCP_03.click();
+//		cs_commodityCodeSRCP_03.click();
+		helper.safeClick(cs_commodityCodeSRCP_03);
 		Thread.sleep(1000);
 
 	}
@@ -479,7 +507,8 @@ public class ARCA_CustomerSelectionPage {
 		waitForElement(arca_cs_tableSRCP);
 		// waits for the download icon
 		WebElement cs_downloadIconSRCP = waitForElement(arca_cs_downloadIconSRCP);
-		cs_downloadIconSRCP.click();
+//		cs_downloadIconSRCP.click();
+		helper.safeClick(cs_downloadIconSRCP);
 		try {
 			waitForElement(arca_cs_tableSRCP);
 		} catch (Exception e) {
@@ -494,7 +523,8 @@ public class ARCA_CustomerSelectionPage {
 		waitForElement(arca_cs_tableSRCP);
 		// waits for the search bar of the SRCP
 		WebElement cs_searchBarSRCP = waitForElement(arca_cs_searchBarSRCP);
-		cs_searchBarSRCP.click();
+//		cs_searchBarSRCP.click();
+		helper.safeClick(cs_searchBarSRCP);
 		cs_searchBarSRCP.clear();
 		// waits for the search
 		WebElement cs_searchedRecordSRCP = waitForElement(arca_cs_searchedRecordSRCP);
@@ -502,11 +532,13 @@ public class ARCA_CustomerSelectionPage {
 		cs_searchBarSRCP.sendKeys(searchedRecordSRCP);
 		String checkboxXPath01 = "//table//tr[td[2][normalize-space()='" + searchedRecordSRCP
 				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		WebElement radioButton01 = waitForElement(By.xpath(checkboxXPath01));
-		actions.moveToElement(radioButton01).click().perform();
+		helper.safeClick(radioButton01);
+//		actions.moveToElement(radioButton01).click().perform();
 		Thread.sleep(1000);
-		cs_searchBarSRCP.click();
+//		cs_searchBarSRCP.click();
+		helper.safeClick(cs_searchBarSRCP);
 		cs_searchBarSRCP.sendKeys(Keys.CONTROL + "a");
 		cs_searchBarSRCP.sendKeys(Keys.BACK_SPACE);
 
@@ -518,7 +550,8 @@ public class ARCA_CustomerSelectionPage {
 		waitForElement(arca_cs_tableSRCP);
 		// waits for the search bar of the SRCP
 		WebElement cs_searchBarSRCP = waitForElement(arca_cs_searchBarSRCP);
-		cs_searchBarSRCP.click();
+//		cs_searchBarSRCP.click();
+		helper.safeClick(cs_searchBarSRCP);
 		cs_searchBarSRCP.clear();
 		// waits for the search
 		WebElement cs_searchedRecordSRCP = waitForElement(arca_cs_searchedRecordSRCP);
@@ -528,9 +561,11 @@ public class ARCA_CustomerSelectionPage {
 				+ "']]//td[1]//span[contains(@class, 'MuiButtonBase-root')]";
 		Thread.sleep(1000);
 		WebElement radioButton01 = waitForElement(By.xpath(checkboxXPath01));
-		actions.moveToElement(radioButton01).click().perform();
+		helper.safeClick(radioButton01);
+//		actions.moveToElement(radioButton01).click().perform();
 		Thread.sleep(1000);
-		cs_searchBarSRCP.click();
+//		cs_searchBarSRCP.click();
+		helper.safeClick(cs_searchBarSRCP);
 		cs_searchBarSRCP.sendKeys(Keys.CONTROL + "a");
 		cs_searchBarSRCP.sendKeys(Keys.BACK_SPACE);
 

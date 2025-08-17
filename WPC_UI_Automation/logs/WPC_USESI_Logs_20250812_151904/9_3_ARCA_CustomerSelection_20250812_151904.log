@@ -1,0 +1,9 @@
+2025-08-12 16:25:07.747 [main] INFO  ▶ 🔄 Starting scenario: Verify whether the user is able to select the customer from the Select One Customer for Simulation table
+2025-08-12 16:26:34.032 [main] INFO  ▶ ✅ Scenario PASSED: Verify whether the user is able to select the customer from the Select One Customer for Simulation table
+2025-08-12 16:26:34.032 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 16:26:34.851 [main] INFO  ▶ 🔄 Starting scenario: Verify whether the user is able to search and select the customer from the Select One Customer for Simulation table
+2025-08-12 16:27:56.248 [main] INFO  ▶ ✅ Scenario PASSED: Verify whether the user is able to search and select the customer from the Select One Customer for Simulation table
+2025-08-12 16:27:56.249 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-12 16:27:56.934 [main] INFO  ▶ 🔄 Starting scenario: Verify whether the user is able to select or multiselect the commodity code from the Select Root Cause Product for Simulation for the selected customer table
+2025-08-12 16:29:32.560 [main] INFO  ▶ ✅ Scenario PASSED: Verify whether the user is able to select or multiselect the commodity code from the Select Root Cause Product for Simulation for the selected customer table
+2025-08-12 16:29:32.561 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────

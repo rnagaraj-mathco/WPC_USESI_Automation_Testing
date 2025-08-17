@@ -1,0 +1,6 @@
+2025-08-13 12:51:10.854 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario without any simulations
+2025-08-13 12:52:28.285 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario without any simulations
+2025-08-13 12:52:28.287 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
+2025-08-13 12:52:29.891 [main] INFO  ▶ 🔄 Starting scenario: Verify that the user is able to create a scenario using the % Order change in Order $ Sales simulator
+2025-08-13 12:55:16.120 [main] INFO  ▶ ✅ Scenario PASSED: Verify that the user is able to create a scenario using the % Order change in Order $ Sales simulator
+2025-08-13 12:55:16.121 [main] INFO  ▶ ─────────────────────────────── End of Scenario ───────────────────────────────
