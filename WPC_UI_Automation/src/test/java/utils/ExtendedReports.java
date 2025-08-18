@@ -99,7 +99,7 @@ public class ExtendedReports {
 			configuration.addClassifications("Platform", "Windows");
 			configuration.addClassifications("Browser", "Chrome");
 			configuration.addClassifications("Version", "v1.0");
-			configuration.addClassifications("Environment", "Test");
+			configuration.addClassifications("Environment", "Demo");
 
 			// Generate the report
 			ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);

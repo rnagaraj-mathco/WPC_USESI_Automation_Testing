@@ -81,7 +81,7 @@ public class ExtentReporter {
 
 			spark.config().setTheme(Theme.DARK);
 			spark.config().setReportName("WPC - US ELECTRICALS INC - AUTOMATION TESTING REPORT");
-			spark.config().setDocumentTitle("Execution Report");
+			spark.config().setDocumentTitle("WPC - USESI Extent Report");
 			spark.config().setEncoding("utf-8");
 			spark.config().setTimelineEnabled(true);
 
@@ -89,7 +89,7 @@ public class ExtentReporter {
 			extent.attachReporter(spark);
 
 			extent.setSystemInfo("Executed By", System.getProperty("user.name"));
-			extent.setSystemInfo("Environment", "QA");
+			extent.setSystemInfo("Environment", "Demo - 2082");
 			extent.setSystemInfo("OS", System.getProperty("os.name"));
 		}
 		return extent;

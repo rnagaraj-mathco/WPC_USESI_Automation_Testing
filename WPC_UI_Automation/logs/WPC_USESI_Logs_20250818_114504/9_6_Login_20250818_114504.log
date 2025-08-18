@@ -1,0 +1,2 @@
+2025-08-18 11:45:04.809 [main] INFO  ▶ 🔄 Starting scenario: Verify user logs in to the WPC - USESI application with valid credentials
+2025-08-18 11:47:04.738 [main] INFO  ▶ 🔄 Starting scenario: Verify user login fails to the WPC - USESI application with invalid credentials
