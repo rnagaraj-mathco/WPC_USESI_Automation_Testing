@@ -1,0 +1,151 @@
+name: wpc-usesi-automation
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - wpc-usesi-automation
+  trigger: none  
+
+schedules:
+  - cron: "30 2 * * 1"  # 8:00 AM IST on Monday (IST = UTC+5:30, so 2:30 UTC)
+    displayName: Run Weekly UI Automation
+    branches:
+      include:
+        - wpc-usesi-Automation
+    always: true  # run even if no code change
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+# variables:
+#   MAVEN_OPTS: "-Xmx1024m"
+#   TZ: "Asia/Kolkata"  # ✅ Set IST timezone
+
+# jobs:
+#   - job: Automation_Testing
+#     displayName: 'Run Automation Testing Job'
+#     timeoutInMinutes: 240  # ✅ Increase timeout if needed
+#     steps:
+
+#       # ✅ Step 1: Checkout code
+#       - checkout: self
+
+#       # ✅ Step 2: Run UI Automation with Maven
+#       - task: Maven@3
+#         displayName: 'Run UI Automation Tests'
+#         inputs:
+#           mavenPomFile: 'pom.xml'
+#           goals: 'test'
+#           javaHomeOption: 'JDKVersion'
+#           jdkVersionOption: '1.11'
+variables:
+- group: WPC-automation-variable-group
+- name: MAVEN_OPTS
+  value: "-Xmx1024m"
+- name: TZ
+  value: "Asia/Kolkata"
+
+jobs:
+  - job: Automation_Testing
+    displayName: 'Run Automation Testing Job'
+    timeoutInMinutes: 240  # ✅ Increase timeout if needed
+    steps:
+    # ✅ Step 1: Checkout code
+      - checkout: self
+
+      # - script: |
+      #     echo "emailid=$(emailId)" > src/test/resources/config.properties
+      #     echo "password=$(password)" >> src/test/resources/config.properties
+      #   displayName: " Generate config.properties from Key Vault secrets"
+      - script: |
+          sed -i "s/^emailid=.*/emailid=$(emailId)/" src/test/resources/config.properties
+          sed -i "s/^password=.*/password=$(password)/" src/test/resources/config.properties
+        displayName: " Update emailid & password in config.properties"
+
+      # ✅ Step 2: Run UI Automation with Maven
+      - task: Maven@3
+        displayName: 'Run UI Automation Tests'
+        inputs:
+          mavenPomFile: 'pom.xml'
+          goals: 'test'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+
+      # ✅ Step 3: Publish JUnit XML Results (for Azure test reporting)
+      - task: PublishTestResults@2
+        displayName: 'Publish JUnit Test Results'
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/target/surefire-reports/TEST-*.xml'
+          failTaskOnFailedTests: true
+
+      # ✅ Step 4: Publish Cucumber HTML + JSON (if present in target/)
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Cucumber Report (target/)'
+        condition: always()
+        inputs:
+          PathtoPublish: 'target'
+          ArtifactName: 'wpc-usesi-automation-TestResults'
+          publishLocation: 'Container'
+
+      # ✅ Step 5:  ✅ Identify latest created folders, zip and upload ExtentReport & Logs
+      - script: |
+          mkdir -p artifact_output
+          
+          echo "Finding latest created folders..."
+          
+          # Find latest ExtentReport folder
+          latest_extent_dir=$(ls -td reports/WPC_USESI_ExtentReport_* | head -1)
+          if [ -z "$latest_extent_dir" ]; then
+            echo "❗ No ExtentReport folder found"
+            latest_extent_dir="reports"
+          fi
+          
+          # Find latest Logs folder
+          latest_logs_dir=$(ls -td logs/WPC_USESI_Logs* | head -1)
+          if [ -z "$latest_logs_dir" ]; then
+            echo "❗ No Logs folder found"
+            latest_logs_dir="logs"
+          fi
+          
+          # Get timestamp from folder name or use current time
+          if [[ "$latest_extent_dir" =~ WPC_USESI_ExtentReport_([0-9_]+) ]]; then
+            TIMESTAMP="${BASH_REMATCH[1]}"
+          else
+            TIMESTAMP=$(TZ=Asia/Kolkata date +'%Y%m%d_%H%M%S')
+          fi
+          
+          echo "Latest ExtentReport folder: $latest_extent_dir"
+          echo "Latest Logs folder: $latest_logs_dir"
+          echo "Using timestamp: $TIMESTAMP"
+          
+          # Zip the latest folders
+          if [ -d "$latest_extent_dir" ] && [ "$(ls -A $latest_extent_dir)" ]; then
+            echo "📦 Zipping latest Extent Report..."
+            zip -r "artifact_output/WPC_USESI_ExtentReport_${TIMESTAMP}.zip" "$latest_extent_dir"
+          else
+            echo "❗ No files found in latest Extent Report folder"
+          fi
+          
+          if [ -d "$latest_logs_dir" ] && [ "$(ls -A $latest_logs_dir)" ]; then
+            echo "Zipping latest Logs..."
+            zip -r "artifact_output/WPC_USESI_Logs${TIMESTAMP}.zip" "$latest_logs_dir"
+          else
+            echo "❗ No files found in latest Logs folder"
+          fi
+        displayName: ' Zip Latest ExtentReport & Logs Folders'
+        condition: always()
+ 
+
+      # ✅ Step 6: Upload ExtentReport + Logs as artifact
+      - task: PublishPipelineArtifact@1
+        displayName: 'Upload Extent Report + Logs'
+        condition: always()
+        inputs:
+          targetPath: 'artifact_output'
+          artifact: 'WPC_Artifacts'
+          publishLocation: 'pipeline'
+
